@@ -8,6 +8,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
 <style>
   :root{
     --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
@@ -26,7 +35,7 @@
   a{text-decoration:none}
   p{margin:0}
 
-  /* type scale — matches the Agent First design system's tokens.json exactly */
+  /* type scale: matches the Agent First design system's tokens.json exactly */
   .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
   .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
   .ds-body{font-size:16px;line-height:1.55;font-weight:400}
@@ -80,7 +89,10 @@
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
     </div>
-    <a href="#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Get in touch</a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="pricing.html" class="ds-body-sm" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Get in touch</a>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -88,11 +100,11 @@
     <div style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:22px;">
       <div class="ds-label eyebrow-c">Real-time operational copilot for outsourced contact centers</div>
       <h1 class="ds-display" style="color:#fff;">Keep the human.<br>Upgrade the agent.</h1>
-      <div class="ds-heading" style="color:#e7eaf3;font-weight:650;max-width:620px;">Every client's rules, followed correctly, on every call, by every agent.</div>
-      <p class="ds-body" style="color:#c7cce0;max-width:600px;">Agent First tells agents exactly what to do on a live call, so they never have to guess a client's rules from memory.</p>
+      <div class="ds-heading" style="color:#e7eaf3;font-weight:650;max-width:620px;">Your agents can't memorize every client's rules. They shouldn't have to.</div>
+      <p class="ds-body" style="color:#c7cce0;max-width:600px;">Agent First gives every agent, on every account, the exact right answer the moment a customer asks, so you stop losing time, consistency, and clients to a rule nobody remembered correctly.</p>
       <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
         <a href="#contact" class="btn btn-primary">Get in touch</a>
-        <a href="#proof" class="btn btn-ghost-dark">See where it stands</a>
+        <a href="#how-it-works" class="btn btn-ghost-dark">See how it works</a>
       </div>
     </div>
   </div>
@@ -103,7 +115,7 @@
       <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
         <div class="ds-label eyebrow-v">The problem</div>
         <h2 class="ds-hero">Outsourced call centers lose agents faster than they can train them.</h2>
-        <p class="ds-body" style="color:var(--muted);">A new agent is asked to correctly represent several different businesses, sometimes switching between them call to call. A folder of policy documents does not fix this. It tells an agent where a rule lives. It does not tell them what that rule means for the customer on the phone right now.</p>
+        <p class="ds-body" style="color:var(--muted);">A new agent is asked to correctly represent several different businesses at once, sometimes switching between them call to call. A folder of policy documents does not fix this. It tells an agent where a rule lives. It does not tell them what that rule means for the customer on the phone right now. Every guess costs something: a frustrated customer, a mistake that has to be fixed, or an agent who burns out and leaves before they were ever fully trained.</p>
       </div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
         <div class="card">
@@ -127,8 +139,21 @@
     </div>
   </div>
 
+  <!-- GUIDE / FOUNDER STORY -->
+  <div class="section" style="background:var(--purplebg);">
+    <div class="wrap" style="display:flex;justify-content:center;">
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:18px;">
+        <div class="ds-label eyebrow-v">Why I'm building this</div>
+        <p class="ds-heading" style="font-weight:650;">I'm not trying to replace the agent on the call. I'm trying to make sure they never have to guess.</p>
+        <p class="ds-body" style="color:var(--ink);">I did not start with a platform in mind. I started by watching a new agent get handed a folder of client policies on day one, then get judged on how well they had memorized it by week two. I watched a good agent give a customer the wrong answer, not because they didn't care, but because the right answer was buried three documents deep and the customer was still on the line.</p>
+        <p class="ds-body" style="color:var(--ink);">A folder tells an agent where a rule lives. It does not tell them what that rule means for the person on the phone right now. That gap is what Agent First closes: not a smarter voice on the line instead of theirs, but the right answer in their hands the moment they need it. It runs live today, built and rebuilt against real calls and more than a dozen real client profiles, not a demo built to look finished.</p>
+        <p class="ds-body" style="color:var(--ink);font-weight:650;">I am currently looking for pilot partners: outsourcers and multi-client operations ready to test it against their own rules and their own calls.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- HOW IT WORKS -->
-  <div class="section" style="background:var(--soft);">
+  <div id="how-it-works" class="section" style="background:var(--soft);">
     <div class="wrap" style="display:flex;flex-direction:column;gap:40px;">
       <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
         <div class="ds-label eyebrow-v">How it works</div>
@@ -151,6 +176,56 @@
           <div class="ds-body-sm" style="color:var(--muted);">Agent First hands back a clear decision, plus the exact words to say. The agent still decides. It is not a chatbot and it does not talk to the customer.</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- CENTRAL BENEFIT -->
+  <div class="section" style="background:var(--purplebg);padding:72px 48px;">
+    <div style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;">
+      <div class="ds-label eyebrow-v">What's in it for you</div>
+      <div class="ds-stat" style="color:var(--ink);line-height:1.45;">Every agent gets the right answer instantly, so you can grow without retraining your whole team every time you add a client.</div>
+      <div class="ds-body" style="color:var(--muted);">Adding a client becomes a quick setup, not a company-wide retraining project.</div>
+    </div>
+  </div>
+
+  <!-- BENEFITS -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:40px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">What changes</div>
+        <h2 class="ds-hero">What changes once every agent has this.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div class="card-dark">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--coral);">The same client experience, every agent, every shift</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Every agent pulls from the same configured rules, so what a customer hears never depends on who happened to pick up. The client does not have to hope this week's agent remembers last month's training.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Far less to memorize</div>
+          <div class="ds-body-sm" style="color:var(--muted);">An agent's job shifts from remembering every client's rulebook to asking a clear question and getting a clear answer back.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Policy changes land instantly</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One person updates the Client Profile, and every agent sees the new rule on their very next call. No retraining, no lag.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Fewer mistakes that come back to bite you</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Every call follows the same checked rules in real time, so problems get caught in the moment, not weeks later in a review.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">The agent still decides</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First hands back a decision and the exact words to use. The agent reads it and still decides what to say. Nothing here talks to the customer or takes the call away from a person.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MID CTA -->
+  <div class="section" style="background:var(--grad-navy);padding:72px 48px;">
+    <div style="width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
+      <div class="ds-label eyebrow-c">Ready when you are</div>
+      <div class="ds-stat" style="color:#fff;line-height:1.45;">See Agent First run against your own rules, not a demo built to look finished.</div>
+      <a href="#contact" class="btn btn-primary" style="margin-top:6px;">Become a pilot partner</a>
     </div>
   </div>
 
@@ -192,58 +267,13 @@
     </div>
   </div>
 
-  <!-- CENTRAL BENEFIT -->
-  <div class="section" style="background:var(--purplebg);padding:72px 48px;">
-    <div style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px;">
-      <div class="ds-label eyebrow-v">The central benefit</div>
-      <div class="ds-stat" style="color:var(--ink);line-height:1.45;">An outsourcer can take on more clients in the industry it already knows, and eventually more industries, without training its whole agent pool from scratch every time.</div>
-      <div class="ds-body" style="color:var(--muted);">Configuring a new client replaces training as the cost of growing.</div>
-    </div>
-  </div>
-
-  <!-- BENEFITS -->
-  <div class="section" style="background:#fff;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:40px;">
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
-        <div class="ds-label eyebrow-v">What changes</div>
-        <h2 class="ds-hero">For the agent, the outsourcer, and the client on the account.</h2>
-      </div>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Far less to memorize</div>
-          <div class="ds-body-sm" style="color:var(--muted);">An agent's job shifts from remembering every client's rulebook to asking a clear question and getting a clear answer back.</div>
-        </div>
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">A game agents actually want to play</div>
-          <div class="ds-body-sm" style="color:var(--muted);">A built-in practice mode lets an agent test their knowledge against the same live rules running in production, racing the clock and comparing scores with teammates.</div>
-        </div>
-        <div class="card-dark">
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--coral);">One standard, every agent and shift</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Every agent pulls from the same configured rules, so what a customer hears does not depend on which agent happens to answer.</div>
-        </div>
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Policy changes land instantly</div>
-          <div class="ds-body-sm" style="color:var(--muted);">One person updates the Client Profile, and every agent sees the new rule on their very next call. No retraining, no lag.</div>
-        </div>
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">A client's policies, followed correctly</div>
-          <div class="ds-body-sm" style="color:var(--muted);">No matter who picks up the phone. The client does not have to hope the agent on their account today remembers last month's training.</div>
-        </div>
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">A clearer audit trail</div>
-          <div class="ds-body-sm" style="color:var(--muted);">Every decision is logged: which rule applied, what the system told the agent to do, and what the agent actually did.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- INDUSTRY EXAMPLES -->
   <div class="section" style="background:var(--soft);">
     <div class="wrap" style="display:flex;flex-direction:column;gap:36px;">
       <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
         <div class="ds-label eyebrow-v">What this could look like elsewhere</div>
-        <h2 class="ds-hero">Same question, same engine, two different clients, two different correct answers.</h2>
-        <p class="ds-body" style="color:var(--muted);">The four examples below are illustrative. The companies are not real and the rules are not verified against how these industries actually operate today. They exist to show what a second industry could look like, not to claim it has already been built.</p>
+        <h2 class="ds-hero">Same question, same engine, a different correct answer for every client.</h2>
+        <p class="ds-body" style="color:var(--muted);">The four examples below are illustrative. The companies are not real and the rules are not verified against how these industries actually operate today. They exist to show what a new industry could look like, not to claim it has already been built.</p>
       </div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
         <div class="card">
@@ -270,134 +300,6 @@
     </div>
   </div>
 
-  <!-- PROOF -->
-  <div id="proof" class="section" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:32px;">
-      <div class="ds-label eyebrow-c">Where things stand</div>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
-        <div>
-          <div class="ds-score" style="color:#fff;">Live in production</div>
-          <div class="ds-body-sm" style="color:#b9c2da;margin-top:6px;">Running today with a real client, with active pilot work underway beyond that.</div>
-        </div>
-        <div>
-          <div class="ds-score" style="color:#fff;">12+ Client Profiles</div>
-          <div class="ds-body-sm" style="color:#b9c2da;margin-top:6px;">Built and tested, each one a real, structured rule set an agent relies on.</div>
-        </div>
-        <div>
-          <div class="ds-score" style="color:#fff;">5-industry demo</div>
-          <div class="ds-body-sm" style="color:#b9c2da;margin-top:6px;">A sales and explanatory tool showing the architecture's reach, not a claim that one outsourcer runs all five industries at once today.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ROADMAP -->
-  <div class="section" style="background:var(--soft);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:40px;">
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
-        <div class="ds-label eyebrow-v">The roadmap</div>
-        <h2 class="ds-hero">A three-stage plan. Stage one is live today.</h2>
-      </div>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
-        <div class="card">
-          <div class="ds-label" style="color:var(--green);margin-bottom:10px;">Live today</div>
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">V1: The Copilot</div>
-          <div class="ds-body-sm" style="color:var(--muted);">A real-time system that takes in what the agent tells it about the call and gives back a clear decision and the exact words to say.</div>
-        </div>
-        <div class="card">
-          <div class="ds-label" style="color:var(--violet);margin-bottom:10px;">Next</div>
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">V2: The Connected Copilot</div>
-          <div class="ds-body-sm" style="color:var(--muted);">Connects directly to Five9 and a client's scheduling software, so the agent stops re-typing the same information twice.</div>
-        </div>
-        <div class="card">
-          <div class="ds-label" style="color:var(--muted);margin-bottom:10px;">Future</div>
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">V3: The Listening Copilot</div>
-          <div class="ds-body-sm" style="color:var(--muted);">Listens to the live call itself and proposes the decision. The agent still sees it, and still decides.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- MARKET -->
-  <div class="section" style="background:#fff;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;">
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
-        <div class="ds-label eyebrow-v">The market</div>
-        <h2 class="ds-hero">A real market, and a position nobody else is taking.</h2>
-        <p class="ds-body" style="color:var(--muted);">Call-center AI software is headed from roughly $2 billion to $7 billion by 2030, inside a global outsourcing industry worth over $300 billion. Cresta and Observe.AI keep a human on the call, but for a single brand. Decagon and Sierra go fully autonomous. Agent First is built for both at once: a human stays on the call, for a workforce that switches between many unrelated clients.</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRICING -->
-  <div class="section" style="background:var(--purplebg);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:40px;">
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
-        <div class="ds-label eyebrow-v">Pricing</div>
-        <h2 class="ds-hero">Seat-based, plus a one-time setup fee per client.</h2>
-      </div>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;color:var(--violet);">Starter</div>
-          <div class="ds-score" style="margin:10px 0;">$79<span class="ds-body-sm" style="color:var(--muted);font-weight:400;"> / agent / mo</span></div>
-          <div class="ds-body-sm" style="color:var(--muted);">A single-client pilot</div>
-        </div>
-        <div class="card">
-          <div class="ds-body" style="font-weight:750;color:var(--violet);">Growth</div>
-          <div class="ds-score" style="margin:10px 0;">$59<span class="ds-body-sm" style="color:var(--muted);font-weight:400;"> / agent / mo</span></div>
-          <div class="ds-body-sm" style="color:var(--muted);">Volume pricing as a BPO adds seats and accounts</div>
-        </div>
-        <div class="card-dark">
-          <div class="ds-body" style="font-weight:750;color:var(--coral);">Enterprise</div>
-          <div class="ds-score" style="margin:10px 0;color:#fff;">Custom</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Negotiated for the largest multi-client operations</div>
-        </div>
-      </div>
-      <div class="ds-body-sm" style="color:var(--muted);">Plus a one-time $2,500 setup fee per newly onboarded client account, covering the initial Client Profile build-out.</div>
-    </div>
-  </div>
-
-  <!-- DESIGN PHILOSOPHY -->
-  <div class="section" style="background:#fff;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:32px;">
-      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
-        <div class="ds-label eyebrow-v">How it's built</div>
-        <h2 class="ds-hero">A small number of firm rules, not a pile of features.</h2>
-      </div>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
-        <div>
-          <div class="ds-body-sm" style="font-weight:750;color:var(--ink);margin-bottom:6px;">Configure, never hard-code</div>
-          <div class="ds-body-sm" style="color:var(--muted);">Adding a client looks like filling out a form, not commissioning new software.</div>
-        </div>
-        <div>
-          <div class="ds-body-sm" style="font-weight:750;color:var(--ink);margin-bottom:6px;">Fail loud, never fail quiet</div>
-          <div class="ds-body-sm" style="color:var(--muted);">A system that guesses is worse than one that says "ask a supervisor."</div>
-        </div>
-        <div>
-          <div class="ds-body-sm" style="font-weight:750;color:var(--ink);margin-bottom:6px;">The agent has the final word</div>
-          <div class="ds-body-sm" style="color:var(--muted);">At every stage of the roadmap, a person can see the reasoning and overturn it.</div>
-        </div>
-        <div>
-          <div class="ds-body-sm" style="font-weight:750;color:var(--ink);margin-bottom:6px;">Built against real use, not a demo</div>
-          <div class="ds-body-sm" style="color:var(--muted);">An automated test suite and real production data check every change before it reaches a real call.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOUNDER STORY -->
-  <div class="section" style="background:var(--purplebg);">
-    <div class="wrap" style="display:flex;justify-content:center;">
-      <div style="max-width:680px;display:flex;flex-direction:column;gap:18px;">
-        <div class="ds-label eyebrow-v">Why I'm building this</div>
-        <p class="ds-heading" style="font-weight:650;">I'm building Agent First alongside a full-time job in the contact center industry, while finishing an MBA, nights and weekends.</p>
-        <p class="ds-body" style="color:var(--ink);">I did not start with a platform in mind. I started by watching a new agent get handed a folder of client policies on day one, then get judged on how well they had memorized it by week two. I watched a good agent give a customer the wrong answer, not because they didn't care, but because the right answer was buried three documents deep and the customer was still on the line.</p>
-        <p class="ds-body" style="color:var(--ink);">A folder tells an agent where a rule lives. It does not tell them what that rule means for the person on the phone right now. That gap is what Agent First closes. It is live today with a real client, built and rebuilt against real calls, not a demo built to look finished.</p>
-        <p class="ds-body" style="color:var(--ink);font-weight:650;">I am currently looking for pilot partners: outsourcers and multi-client operations ready to test it against their own rules and their own calls.</p>
-      </div>
-    </div>
-  </div>
-
   <!-- FAQ -->
   <div class="section" style="background:#fff;">
     <div class="wrap" style="display:flex;flex-direction:column;gap:32px;">
@@ -419,12 +321,12 @@
           <div class="ds-body-sm" style="color:var(--muted);">Each client's Client Profile is its own configuration. One client's rules are never visible in another client's calls, even when the same agent works both.</div>
         </div>
         <div>
-          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Does this work outside the industry it's live in today?</div>
-          <div class="ds-body-sm" style="color:var(--muted);">The architecture is built to extend across industries, and the examples above show what that could look like. Today, the proven decision logic runs live in one industry. Reaching that same depth in a new industry is the direction, not a finished claim.</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What happens after I reach out?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Pilot spots are accepted in small numbers, and every inquiry gets a direct, personal follow-up, not an automated reply.</div>
         </div>
         <div>
           <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Are you looking for pilot partners?</div>
-          <div class="ds-body-sm" style="color:var(--muted);">Yes. The Starter tier above is built for exactly that: a single-client pilot to test Agent First against real rules and real calls before deciding whether to expand further.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Yes. The Starter tier above is built for exactly that: a pilot to test Agent First against real rules and real calls before deciding whether to expand further.</div>
         </div>
         <div>
           <div class="ds-body" style="font-weight:750;margin-bottom:8px;">How is this different from a script or a knowledge base?</div>
@@ -440,9 +342,10 @@
       <div class="ds-label eyebrow-c">Now recruiting pilot partners</div>
       <h2 class="ds-hero" style="color:#fff;">Let's talk about a pilot for your contact center.</h2>
       <p class="ds-body" style="color:#c7cce0;">Agent First is looking for a small number of pilot partners ready to run it against real rules and real calls. Fill this out and I will follow up directly.</p>
+      <a href="pilot-program.html" class="ds-body-sm" style="color:#c7cce0;text-decoration:underline;">See exactly what the pilot includes &rarr;</a>
 
       <form id="af-contact-form" style="width:100%;margin-top:20px;display:flex;flex-direction:column;gap:16px;text-align:left;">
-        <input type="hidden" name="access_key" value="WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
         <input type="hidden" name="subject" value="New pilot partner inquiry, Agent First">
         <input type="hidden" name="from_name" value="Agent First website">
         <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -493,8 +396,9 @@
           form.reset();
           form.style.display = 'none';
           status.style.color = '#a8f0c6';
-          status.textContent = "Thanks. I'll follow up soon.";
+          status.textContent = "Thanks. Taking you to the pilot program details...";
           status.style.display = 'block';
+          setTimeout(function(){ window.location.href = 'pilot-program.html'; }, 900);
         } else {
           btn.disabled = false;
           btn.textContent = originalLabel;
@@ -525,4 +429,3 @@
 </div>
 </body>
 </html>
-
