@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First Labs</title>
+<meta name="description" content="Free tools for multi-client contact-center operators: experience the problem, quantify what it costs, then see what the solution would look like with your own rules.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .tool-num{flex:0 0 auto;width:36px;height:36px;border-radius:var(--radius-full);background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}
+  .arrow{color:var(--muted);font-size:22px;flex:0 0 auto;display:flex;align-items:center;}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+    .arrow{transform:rotate(90deg);}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="pricing.html" class="ds-body-sm" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Get in touch</a>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:820px;">
+      <div class="ds-label eyebrow-c">Agent First Labs</div>
+      <h1 class="ds-display" style="color:#fff;">Free tools for multi-client contact-center operators.</h1>
+      <p class="ds-body" style="color:#c7cce0;">Not another PDF. Three small, working tools that show you the exact problem Agent First solves, using your own numbers and your own rules, not an invented statistic. Try any of them, no email required to start.</p>
+    </div>
+  </div>
+
+  <!-- THE THREE TOOLS -->
+  <div class="section" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;">
+      <div class="ds-label eyebrow-v">Three tools, one story</div>
+
+      <div style="display:flex;align-items:stretch;gap:16px;flex-wrap:wrap;">
+        <div class="card" style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">1</div>
+          <div class="ds-body" style="font-weight:900;">Can your agents handle it?</div>
+          <div class="ds-heading">Agent Challenge</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Play a multi-client agent for two minutes. Three fictional clients, three rulebooks, real questions against the clock.</div>
+          <a href="agent-challenge.html" class="btn btn-primary" style="justify-content:center;">Take the Challenge</a>
+        </div>
+
+        <div class="arrow">&rarr;</div>
+
+        <div class="card" style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">2</div>
+          <div class="ds-body" style="font-weight:900;">What is this costing management?</div>
+          <div class="ds-heading">Supervisor Tax Calculator</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Enter your agent count and how often they pull in a supervisor. See the hours and cost that adds up to every week.</div>
+          <a href="supervisor-tax-calculator.html" class="btn btn-primary" style="justify-content:center;">Run the numbers</a>
+        </div>
+
+        <div class="arrow">&rarr;</div>
+
+        <div class="card" style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">3</div>
+          <div class="ds-body" style="font-weight:900;">What would the solution look like?</div>
+          <div class="ds-heading">Client Profile Preview</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Paste a short SOP or policy excerpt and get a draft preview of how it could be structured as a Client Profile.</div>
+          <a href="client-profile-preview.html" class="btn btn-primary" style="justify-content:center;">Preview my rules</a>
+        </div>
+      </div>
+
+      <div class="card" style="background:var(--navy);border:none;">
+        <div class="ds-body" style="color:#fff;font-weight:750;margin-bottom:6px;">Get value first, then decide what's next</div>
+        <div class="ds-body-sm" style="color:#c7cce0;">Every tool here works before you give up anything. At the end, you can choose to have your result emailed to you, or send over your own real rules and see this done for real. Nothing is gated up front.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHY THIS EXISTS -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:14px;max-width:760px;">
+      <div class="ds-label eyebrow-v">Why tools instead of a download</div>
+      <p class="ds-body">A checklist tells you what to think about. A tool shows you what's actually happening in your own operation, with your own numbers and your own rules, in a couple of minutes. Agent First exists to solve an operational problem, so these are built the same way: small, working, and honest about what they can and can't tell you.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+</body>
+</html>
