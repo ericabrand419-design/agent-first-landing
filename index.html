@@ -95,7 +95,7 @@
   #widgetAsk{padding:12px 18px;white-space:nowrap;}
 
   /* Scroll-reveal */
-  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1);}
   .reveal.visible{opacity:1;transform:translateY(0);}
   .grid > .reveal:nth-child(1){transition-delay:0s}
   .grid > .reveal:nth-child(2){transition-delay:.07s}
@@ -115,6 +115,11 @@
   .nav-link{position:relative;}
   .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
   .nav-link:hover::after{right:0;}
+
+  /* Subtle background texture */
+  .bg-texture-light{background-image:radial-gradient(rgba(23,26,43,.12) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-tint{background-image:radial-gradient(rgba(124,58,237,.14) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-dark{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px)!important;background-size:22px 22px!important;}
 
   @media (max-width:900px){
     .section{padding:56px 24px}
@@ -164,7 +169,7 @@
         <h2 class="ds-hero" style="color:#fff;">Same question. Different client. Watch the answer change.</h2>
         <p class="ds-body-sm" style="color:#c7cce0;">A simplified, illustrative version of how Agent First actually resolves a rule. Pick a client below, then ask something.</p>
       </div>
-      <div class="demo-panel" style="max-width:620px;">
+      <div class="demo-panel" style="max-width:620px;margin:0 auto;width:100%;">
         <div class="demo-client" id="widgetScenario">A customer calls: &ldquo;I need to cancel my appointment tomorrow &mdash; will I be charged?&rdquo;</div>
         <div style="display:flex;gap:8px;flex-wrap:wrap;">
           <button type="button" class="demo-tab" data-client="A">Harborview</button>
@@ -300,7 +305,7 @@
   </script>
 
   <!-- HOW IT WORKS -->
-  <div id="how-it-works" class="section" style="background:var(--soft);">
+  <div id="how-it-works" class="section bg-texture-light" style="background:var(--soft);">
     <div class="wrap reveal" style="display:flex;flex-direction:column;gap:36px;">
       <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
         <div class="ds-label eyebrow-v">How it works</div>
@@ -369,7 +374,7 @@
   </div>
 
   <!-- HOW IT DECIDES -->
-  <div class="section" style="background:var(--soft);">
+  <div class="section bg-texture-light" style="background:var(--soft);">
     <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
       <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
         <div class="ds-label eyebrow-v">How it decides</div>
@@ -432,7 +437,7 @@
   </div>
 
   <!-- GUIDE / FOUNDER STORY -->
-  <div class="section" style="background:var(--purplebg);">
+  <div class="section bg-texture-tint" style="background:var(--purplebg);">
     <div class="wrap reveal" style="display:flex;justify-content:center;">
       <div style="max-width:680px;display:flex;flex-direction:column;gap:16px;">
         <div class="ds-label eyebrow-v">Why I'm building this</div>
