@@ -3,16 +3,27 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent First: Supervisor Tax Calculator</title>
-<meta name="description" content="Enter your agent count and how often they pull in a supervisor. See the hours and cost that adds up to every week and month.">
+<title>Agent First | Operational Decision Layer for Multi-Client Contact Centers</title>
+<meta name="description" content="The right answer changes by client. Agent First resolves each client's approved rules into the right action, wording, and next step while the customer is still on the line.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/">
+<meta property="og:title" content="Agent First | Operational Decision Layer for Multi-Client Contact Centers">
+<meta property="og:description" content="Same question. Different client. Different correct answer. Take the Agent Challenge and see for yourself.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First | Operational Decision Layer for Multi-Client Contact Centers">
+<meta name="twitter:description" content="Same question. Different client. Different correct answer. Take the Agent Challenge and see for yourself.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-TGQ8RPR5B1');
 </script>
 <style>
@@ -32,25 +43,25 @@
   h1,h2{margin:0}
   a{text-decoration:none}
   p{margin:0}
-  button{font-family:inherit}
-  input{font-family:inherit}
 
+  /* type scale: matches the Agent First design system's tokens.json exactly */
   .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
   .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
   .ds-body{font-size:16px;line-height:1.55;font-weight:400}
   .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-stat{font-size:22px;line-height:1.15;font-weight:900}
   .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
   .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
   .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
 
   .wrap{width:100%;max-width:1100px;margin:0 auto}
-  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .section{width:100%;padding:80px 48px;display:flex;justify-content:center}
   .eyebrow-v{color:var(--violet)}
   .eyebrow-c{color:var(--coral)}
   .grid{display:grid;gap:var(--space-4)}
 
   .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
-  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+  .card-dark{background:var(--navy);border-radius:var(--radius-lg);padding:24px;color:#fff}
 
   .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
   .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
@@ -59,26 +70,64 @@
   .btn-ghost-dark:hover{border-color:#fff}
   .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
 
+  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
+  .field-label{font-size:13px;font-weight:650;color:#c7cce0}
+  .field-input,.field-textarea{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease,background .14s ease}
+  .field-input::placeholder,.field-textarea::placeholder{color:#8890ab}
+  .field-input:focus,.field-textarea:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.1)}
+  .field-textarea{resize:vertical;min-height:110px}
+
   .logo-mark{display:block;flex:0 0 auto}
   .brand-row{display:flex;align-items:center;gap:12px}
   .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
 
-  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
-  .field-label{font-size:13px;font-weight:650;color:var(--ink)}
-  .field-hint{font-size:12px;color:var(--muted)}
-  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
-  .field-input:focus{outline:none;border-color:var(--violet)}
+  /* Product demo panel */
+  .demo-panel{background:#12172e;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:22px;flex:1;min-width:280px;display:flex;flex-direction:column;gap:14px;}
+  .demo-panel .demo-client{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8890ab;}
+  .demo-panel .demo-q{color:#e7eaf3;font-size:15px;line-height:1.5;}
+  .demo-verdict{display:inline-flex;align-items:center;padding:6px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;width:fit-content;}
+  .demo-outcome{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:rgba(124,58,237,.22);color:#d3b6ff;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;width:fit-content;margin-bottom:8px;}
+  .demo-say{color:#c7cce0;font-size:14px;line-height:1.55;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;}
+  .demo-source{color:#8890ab;font-size:12px;line-height:1.5;margin-top:8px;}
 
-  .field-row-dark{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
-  .field-label-dark{font-size:13px;font-weight:650;color:#c7cce0}
-  .field-input-dark{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-family:var(--font-sans);font-size:15px}
-  .field-input-dark::placeholder{color:#8890ab}
-  .field-input-dark:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.1)}
+  /* Interactive homepage widget */
+  .demo-tab{padding:8px 14px;border-radius:var(--radius-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#e7eaf3;font-size:13px;font-weight:650;cursor:pointer;transition:transform .14s ease,border-color .14s ease,background .14s ease;font-family:var(--font-sans);}
+  .demo-tab:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);transform:translateY(-1px);}
+  .demo-tab.active{background:var(--grad-primary);border-color:transparent;color:#fff;}
+  #widgetAsk{padding:12px 18px;white-space:nowrap;}
+
+  /* Scroll-reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .grid > .reveal:nth-child(1){transition-delay:0s}
+  .grid > .reveal:nth-child(2){transition-delay:.07s}
+  .grid > .reveal:nth-child(3){transition-delay:.14s}
+  .grid > .reveal:nth-child(4){transition-delay:.21s}
+  .grid > .reveal:nth-child(5){transition-delay:.28s}
+  .grid > .reveal:nth-child(6){transition-delay:.35s}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* Hover polish */
+  .card{transition:transform .18s ease,box-shadow .18s ease;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(64,47,112,.14),0 4px 10px rgba(20,22,45,.05);}
+  .card-dark{transition:transform .18s ease,box-shadow .18s ease;}
+  .card-dark:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.28);}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
+  .nav-link:hover::after{right:0;}
+
+  /* Subtle background texture */
+  .bg-texture-light{background-image:radial-gradient(rgba(23,26,43,.12) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-tint{background-image:radial-gradient(rgba(124,58,237,.14) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-dark{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px)!important;background-size:22px 22px!important;background-color:var(--navy)!important;}
+  .bg-texture-darkgrad{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px),var(--grad-navy)!important;background-size:22px 22px,auto!important;}
 
   @media (max-width:900px){
-    .section{padding:56px 20px}
-    .ds-display{font-size:32px}
-    .ds-hero{font-size:24px}
+    .section{padding:56px 24px}
+    .ds-display{font-size:34px}
+    .ds-hero{font-size:26px}
   }
 </style>
 </head>
@@ -100,174 +149,517 @@
     </div>
   </div>
 
-  <!-- INTRO -->
-  <div class="section" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:18px;max-width:820px;">
-      <div class="ds-label eyebrow-c">Agent First Labs · Tool 2 of 3</div>
-      <h1 class="ds-display" style="color:#fff;">The Supervisor Tax Calculator</h1>
-      <p class="ds-body" style="color:#c7cce0;">Every time an agent isn't sure of a rule and has to pull in a supervisor, that's time out of the supervisor's day, not just the agent's. Enter your own numbers below and see what that adds up to.</p>
+  <!-- HERO -->
+  <div style="width:100%;background:var(--grad-navy);padding:88px 48px 72px;display:flex;justify-content:center;">
+    <div class="reveal" style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;">
+      <div class="ds-label eyebrow-c">The operational decision layer for multi-client contact centers</div>
+      <div style="display:inline-flex;align-items:center;padding:7px 18px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;font-size:12px;font-weight:900;letter-spacing:.09em;box-shadow:0 8px 20px rgba(176,57,217,.22);">RIGHT CLIENT. RIGHT ACTION.</div>
+      <h1 class="ds-display" style="color:#fff;">Keep the human.<br>Upgrade the agent.</h1>
+      <div class="ds-heading" style="color:#e7eaf3;font-weight:650;max-width:620px;">The right answer changes by client.</div>
+      <p class="ds-body" style="color:#c7cce0;max-width:600px;">Agent First resolves each client's approved rules into the right action, wording, and next step while the customer is still on the line.</p>
+      <div class="ds-body" style="color:#fff;font-weight:750;max-width:600px;">Same question. Different client. Different correct answer.</div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+        <a href="#demo" class="btn btn-primary">See Agent First Work</a>
+        <a href="sample-client-profile.html" class="btn btn-ghost-dark">Build a Sample Client Profile</a>
+        <a href="agent-challenge.html" class="btn btn-ghost-dark">Take the Agent Challenge</a>
+      </div>
     </div>
   </div>
 
-  <!-- CALCULATOR -->
-  <div class="section" style="background:var(--soft);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:760px;">
-
-      <div class="card">
-        <div class="ds-label eyebrow-v" style="margin-bottom:16px;">Your numbers</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-          <div class="field-row">
-            <label class="field-label" for="stc-agents">Number of agents</label>
-            <input class="field-input" id="stc-agents" type="number" min="1" step="1" value="25">
-          </div>
-          <div class="field-row">
-            <label class="field-label" for="stc-freq">Supervisor pull-ins per agent, per day</label>
-            <input class="field-input" id="stc-freq" type="number" min="0" step="0.5" value="2">
-            <div class="field-hint">How often one agent has to stop and ask a supervisor a policy or rule question.</div>
-          </div>
-          <div class="field-row">
-            <label class="field-label" for="stc-minutes">Average length of one interruption (minutes)</label>
-            <input class="field-input" id="stc-minutes" type="number" min="0" step="1" value="6">
-            <div class="field-hint">Time the supervisor spends on it, not just the agent's wait.</div>
-          </div>
-          <div class="field-row">
-            <label class="field-label" for="stc-wage">Supervisor hourly cost (optional)</label>
-            <input class="field-input" id="stc-wage" type="number" min="0" step="1" placeholder="e.g. 28">
-            <div class="field-hint">Leave blank to see hours only, no dollar figure.</div>
-          </div>
-        </div>
-        <button class="btn btn-primary" id="stc-calc" style="margin-top:20px;">Calculate</button>
+  <!-- PRODUCT DEMO (interactive) -->
+  <div class="section bg-texture-dark" id="demo" style="background:var(--navy);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:720px;">
+        <div class="ds-label eyebrow-c">Try it yourself</div>
+        <h2 class="ds-hero" style="color:#fff;">Same question. Different client. Different correct answer.</h2>
+        <p class="ds-body-sm" style="color:#c7cce0;">A simplified, illustrative version of how Agent First actually resolves a rule. Pick a client below, then ask something.</p>
       </div>
+      <div class="demo-panel" style="max-width:620px;margin:0 auto;width:100%;">
+        <div class="demo-client" id="widgetScenario">A customer calls: &ldquo;I need to cancel my appointment tomorrow. Will I be charged?&rdquo;</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button type="button" class="demo-tab" data-client="A">Harborview</button>
+          <button type="button" class="demo-tab" data-client="B">Meridian</button>
+          <button type="button" class="demo-tab" data-client="C">Northgate</button>
+        </div>
+        <div>
+          <div class="demo-outcome" id="widgetOutcome" style="display:none;"></div>
+          <div class="demo-verdict" id="widgetVerdict" style="background:rgba(255,255,255,.08);color:#8890ab;">Pick a client above to see the answer</div>
+          <div class="demo-say" id="widgetSay" style="border-top:none;padding-top:0;">&nbsp;</div>
+          <div class="demo-source" id="widgetSource"></div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:14px;display:flex;flex-direction:column;gap:10px;">
+          <div class="ds-body-sm" style="color:#8890ab;">Or ask this client about something else:</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetTopics"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input id="widgetType" class="field-input" type="text" placeholder="Or type a question, e.g. &quot;do they need ID&quot;" style="border-color:rgba(255,255,255,.2);flex:1;min-width:180px;">
+            <button type="button" id="widgetAsk" class="btn btn-ghost-dark">Ask</button>
+          </div>
+          <div id="widgetHint" class="ds-body-sm" style="color:#f0a6ea;min-height:18px;"></div>
+        </div>
+      </div>
+      <div>
+        <a href="agent-challenge.html" class="btn btn-primary">Play the full Agent Challenge &rarr;</a>
+      </div>
+    </div>
+  </div>
 
-      <div class="card" id="stc-results" style="display:none;">
-        <div class="ds-label eyebrow-c" style="margin-bottom:16px;">What this adds up to</div>
+  <script>
+  (function(){
+    var CLIENTS = {
+      A: { name:'Harborview', rules:[
+        { text:'Cancellations within 48 hours of a scheduled appointment: no fee.', outcome:'ALLOW' },
+        { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+        { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+        { text:'Standard callback window for an open issue: 24 hours.', outcome:'DISCLOSE' }
+      ]},
+      B: { name:'Meridian', rules:[
+        { text:'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.', outcome:'ALLOW' },
+        { text:'ID verification is NOT required for general account questions, only for changes.', outcome:'ALLOW' },
+        { text:'Refunds over $200 can be processed by any agent, no sign-off required.', outcome:'ALLOW' },
+        { text:'Standard callback window for an open issue: 4 hours.', outcome:'DISCLOSE' }
+      ]},
+      C: { name:'Northgate', rules:[
+        { text:'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.', outcome:'VERIFY' },
+        { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+        { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+        { text:'Standard callback window for an open issue: 24 hours, except weekends (next business day).', outcome:'DISCLOSE' }
+      ]}
+    };
+    var TOPICS = [
+      { ruleIndex:0, label:'Cancellation Fee', keywords:['cancel','cancellation','reschedul','fee'] },
+      { ruleIndex:1, label:'ID Verification', keywords:['id','verify','verification','identity'] },
+      { ruleIndex:2, label:'Refund Sign-Off', keywords:['refund','sign-off','signoff','sign off','supervisor','200'] },
+      { ruleIndex:3, label:'Callback Window', keywords:['callback','call back','window','hour'] }
+    ];
+
+    var tabButtons = document.querySelectorAll('.demo-tab[data-client]');
+    var topicsEl = document.getElementById('widgetTopics');
+    var verdictEl = document.getElementById('widgetVerdict');
+    var outcomeEl = document.getElementById('widgetOutcome');
+    var sayEl = document.getElementById('widgetSay');
+    var sourceEl = document.getElementById('widgetSource');
+    var hintEl = document.getElementById('widgetHint');
+    var typeEl = document.getElementById('widgetType');
+    var askBtn = document.getElementById('widgetAsk');
+    if (!tabButtons.length || !topicsEl || !verdictEl) return;
+
+    var state = { client: null, topicIndex: 0 };
+
+    function renderTopics(){
+      topicsEl.innerHTML = '';
+      TOPICS.forEach(function(t){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'demo-tab';
+        b.textContent = t.label;
+        b.addEventListener('click', function(){ lookup(t.ruleIndex, t.label); });
+        topicsEl.appendChild(b);
+      });
+    }
+
+    function setActiveClientTab(key){
+      tabButtons.forEach(function(b){
+        b.classList.toggle('active', b.getAttribute('data-client') === key);
+      });
+    }
+
+    function lookup(ruleIndex, label){
+      hintEl.textContent = '';
+      if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
+      state.topicIndex = ruleIndex;
+      var c = CLIENTS[state.client];
+      var rule = c.rules[ruleIndex];
+      outcomeEl.style.display = 'inline-flex';
+      outcomeEl.textContent = rule.outcome;
+      verdictEl.style.background = 'rgba(124,58,237,.2)';
+      verdictEl.style.color = '#d3b6ff';
+      verdictEl.textContent = c.name + ' · ' + label;
+      sayEl.textContent = rule.text;
+      sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
+      sayEl.style.paddingTop = '12px';
+      sourceEl.textContent = 'Source: ' + c.name + '’s approved ' + label + ' rule';
+    }
+
+    function matchTyped(raw){
+      var text = (raw || '').toLowerCase();
+      for (var i = 0; i < TOPICS.length; i++) {
+        var t = TOPICS[i];
+        for (var j = 0; j < t.keywords.length; j++) {
+          if (text.indexOf(t.keywords[j]) !== -1) return t;
+        }
+      }
+      return null;
+    }
+
+    function submitTyped(){
+      var val = typeEl.value.trim();
+      if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
+      if (!val) { hintEl.textContent = 'Type a question, or use a quick button.'; return; }
+      var t = matchTyped(val);
+      if (!t) { hintEl.textContent = "Couldn't tell what that's about. Try a quick button instead."; return; }
+      lookup(t.ruleIndex, t.label);
+      typeEl.value = '';
+    }
+
+    tabButtons.forEach(function(b){
+      b.addEventListener('click', function(){
+        state.client = b.getAttribute('data-client');
+        setActiveClientTab(state.client);
+        lookup(state.topicIndex, TOPICS[state.topicIndex].label);
+      });
+    });
+    askBtn.addEventListener('click', submitTyped);
+    typeEl.addEventListener('keydown', function(e){
+      if (e.key === 'Enter') { e.preventDefault(); submitTyped(); }
+    });
+
+    renderTopics();
+  })();
+  </script>
+
+  <!-- WHAT IT IS NOT -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">For clarity</div>
+        <h2 class="ds-hero">What Agent First is not.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a knowledge base</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It doesn't just retrieve a policy.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a generic assistant</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It works from approved client rules and can return NOT SPECIFIED.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a replacement contact-center platform</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It is the operational decision layer behind the agent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div id="how-it-works" class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:36px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">How it works</div>
+        <h2 class="ds-hero">Each client's rules, entered once. A clear answer when the configured rules cover the situation.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">1</div>
+          <div class="ds-body" style="font-weight:750;">Configure once</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A client's rules get entered once into a structured Client Profile: a real, structured rule set the system can check against, not a wiki entry.</div>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">2</div>
+          <div class="ds-body" style="font-weight:750;">Ask, on the live call</div>
+          <div class="ds-body-sm" style="color:var(--muted);">The agent tells Agent First who they're talking to and what the customer wants. No searching, no second system to check.</div>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">3</div>
+          <div class="ds-body" style="font-weight:750;">Get a verdict and the words</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First hands back a clear decision, plus approved or configured wording. The agent still decides. It does not talk to the customer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROOF / OUTCOMES -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:40px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">What changes</div>
+        <h2 class="ds-hero">Less searching. Faster answers. More consistent decisions.</h2>
+        <p class="ds-body" style="color:var(--muted);">The work an agent actually does under time pressure breaks into three steps: find the right client's information, interpret what it means for this situation, and act on it correctly. Agent First collapses those three steps into one working answer, so adding a client shifts more of the client-specific knowledge burden into configuration instead of repeated agent retraining.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card-dark reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--coral);">Find the answer faster</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Instead of jumping between documents, systems, and tabs, the current client's rule is already in view.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Apply the right client's rule</div>
+          <div class="ds-body-sm" style="color:var(--muted);">The active Client Profile makes clear which client's rules are currently in force.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Reduce supervisor pull-ins</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agents don't have to escalate routine questions simply because the answer was hard to locate. Curious what that's costing you today? <a href="supervisor-tax-calculator.html" style="color:var(--violet);font-weight:650;">Run the numbers &rarr;</a></div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Ramp faster</div>
+          <div class="ds-body-sm" style="color:var(--muted);">New agents have less information to hunt through and interpret on their own, and policy changes land the moment one person updates the Client Profile.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Answer consistently</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Every agent works from the same approved Client Profile, so what a customer hears never depends on who happened to pick up. The agent still reads the answer and decides what to say.</div>
+        </div>
+      </div>
+      <div class="card reveal" style="background:var(--purplebg);border:none;">
+        <div class="ds-label" style="color:var(--muted);font-weight:650;letter-spacing:0;text-transform:none;margin-bottom:10px;">The search problem gets more expensive when the workforce keeps changing</div>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
-          <div><div class="ds-score" id="stc-perday">--</div><div class="ds-body-sm" style="color:var(--muted);">Supervisor hours per day</div></div>
-          <div><div class="ds-score" id="stc-perweek">--</div><div class="ds-body-sm" style="color:var(--muted);">Supervisor hours per week</div></div>
-          <div><div class="ds-score" id="stc-permonth">--</div><div class="ds-body-sm" style="color:var(--muted);">Supervisor hours per month</div></div>
-          <div id="stc-cost-block" style="display:none;"><div class="ds-score" id="stc-costmonth">--</div><div class="ds-body-sm" style="color:var(--muted);">Estimated monthly cost</div></div>
+          <div><div class="ds-score">40&ndash;45%</div><div class="ds-body-sm" style="color:var(--muted);margin-top:4px;">typical annual agent turnover</div></div>
+          <div><div class="ds-score">69&ndash;73%</div><div class="ds-body-sm" style="color:var(--muted);margin-top:4px;">of new hires don't make it past year one</div></div>
+          <div><div class="ds-score">~$46,000</div><div class="ds-body-sm" style="color:var(--muted);margin-top:4px;">fully loaded cost to replace one agent</div></div>
         </div>
-        <p class="ds-body-sm" style="color:var(--muted);margin-top:18px;">This is a direct calculation from the numbers you entered (agents &times; pull-ins &times; minutes, scaled to a 5-day week and a roughly 21.7-day month), not an industry benchmark or an average. It only accounts for the supervisor's own time, not the agent's wait or the customer's, so the real cost to your operation is likely higher than this number alone.</p>
+        <div class="ds-label" style="color:var(--muted);font-weight:400;letter-spacing:0;text-transform:none;margin-top:14px;">Source: Insignia Resources, 2026 industry benchmarking. Independent SQM Group research puts baseline annual attrition in a comparable 30&ndash;40% range.</div>
       </div>
-
-      <div class="card-on-dark" id="stc-after" style="display:none;flex-direction:column;gap:14px;background:var(--navy);border:none;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">That's what's happening today. Here's what changes.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">When the correct rule surfaces automatically the moment an agent needs it, most of those pull-ins never happen in the first place. Want to see what that would look like against your own actual rules?</p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
-          <a href="agent-challenge.html" class="btn btn-ghost-dark">Try the Agent Challenge</a>
-        </div>
-      </div>
-
-      <div class="card" id="stc-email-card" style="display:none;">
-        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
-        <form id="stc-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
-          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
-          <input type="hidden" name="subject" value="Supervisor Tax Calculator result, Agent First">
-          <input type="hidden" name="from_name" value="Agent First website">
-          <input type="hidden" name="result_summary" id="stc-result-summary" value="">
-          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
-          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
-          <button type="submit" class="btn btn-primary">Email it to me</button>
-        </form>
-        <div id="stc-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
-      </div>
-
     </div>
   </div>
+
+  <!-- HOW IT DECIDES -->
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">How it decides</div>
+        <h2 class="ds-hero">Agent First doesn't just retrieve the rule. It resolves the decision.</h2>
+        <p class="ds-body" style="color:var(--muted);">Finding the policy is only half the job. Agent First resolves what that policy means for this client, this customer, and this call, right now. Every answer resolves to one of a small set of plain outcomes, not a paragraph to interpret.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">ALLOW / DO NOT ALLOW</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Whether the agent can proceed on their own.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">VERIFY</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A detail to confirm before deciding anything else.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">DISCLOSE</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A specific line this client requires the agent to say out loud.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">TRANSFER / ESCALATE</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">When the call, or the decision, belongs with someone else.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">NOT SPECIFIED</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">This client hasn't set a rule for this situation. Agent First says so instead of guessing, and routes it to a person.</div>
+        </div>
+      </div>
+      <p class="ds-body-sm" style="color:var(--muted);max-width:720px;font-weight:650;">Agent First works from the client's approved operating rules. It can help interpret the request. It doesn't get to invent the policy.</p>
+      <p class="ds-body-sm" style="color:var(--muted);max-width:720px;">Inside one industry, adding a client is genuinely configuration: real rules entered once, running on the same engine already live today. Reaching that same depth in a brand new industry is the direction the architecture is built toward, not a claim already proven.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <div class="ds-label eyebrow-v" style="text-align:center;">The trust model, in one line</div>
+        <div class="card reveal" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;padding:22px 24px;width:100%;">
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Approved rules</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Active client</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Explicit outcome</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Source shown</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Human decides</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDUSTRY EXAMPLES -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">What this could look like elsewhere</div>
+        <h2 class="ds-hero">Same question. Different client. Different operating rule.</h2>
+        <p class="ds-body-sm" style="color:var(--muted);">The examples below are illustrative. The companies are not real and the rules are not verified against how these industries actually operate today.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Insurance</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: a minor accident, no injuries, asking about a rental car.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile lets the agent approve a rental on the spot, up to a daily cap. Another requires verifying a coverage add-on first, then escalating to an adjuster.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Healthcare</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: a parent asking for a same-day visit for a mild fever.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile lets the agent book directly against a defined list of non-urgent symptoms. Another sends every same-day sick call to nurse triage first.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Home services</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: no hot water, reported at 9:40pm.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile treats it as an after-hours emergency and dispatches a tech tonight. Another holds it for the next available slot unless there's active water damage.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Property management</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: no heat, 38&deg;F outside, reported at 11pm.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile authorizes the agent to dispatch the on-call vendor directly. Another escalates every after-hours emergency to a live manager.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE / FOUNDER STORY -->
+  <div class="section bg-texture-tint" style="background:var(--purplebg);">
+    <div class="wrap reveal" style="display:flex;justify-content:center;">
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:16px;">
+        <div class="ds-label eyebrow-v">Why I'm building this</div>
+        <p class="ds-heading" style="font-weight:650;">I'm not trying to replace the agent on the call. I'm trying to make sure they never have to guess.</p>
+        <p class="ds-body" style="color:var(--ink);">I watched a good agent give a customer the wrong answer, not because they didn't care, but because the right answer was buried three documents deep and the customer was still waiting. I also watched new agents get handed folders of client policies and then be expected to navigate all of it under pressure. That gap is what Agent First closes. It runs live today, built and rebuilt against real calls and more than a dozen real client profiles.</p>
+        <p class="ds-body" style="color:var(--ink);font-weight:650;">I am currently looking for pilot partners: outsourcers and multi-client operations ready to test it against their own rules and their own calls.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MID CTA -->
+  <div class="section" style="background:var(--grad-navy);padding:72px 48px;">
+    <div class="reveal" style="width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
+      <div class="ds-label eyebrow-c">Ready when you are</div>
+      <div class="ds-stat" style="color:#fff;line-height:1.45;">See Agent First run against your own rules.</div>
+      <a href="#contact" class="btn btn-primary" style="margin-top:6px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">Questions</div>
+        <h2 class="ds-hero">A few things people ask first.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;">
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Does this replace agents?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">No. The agent stays on every call and has the final word every time. Agent First hands them a decision and approved or configured wording. It does not talk to the customer.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What does setup look like for a new client?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A client's real rules get entered once into a structured Client Profile. It's a configuration process, not a software build, though the time it takes depends on how many exceptions that client's real rules actually have.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What happens to a client's rules once they're entered?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Each client's Client Profile is its own configuration. One client's rules are never visible in another client's calls, even when the same agent works both.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Are you looking for pilot partners?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Yes. The Starter tier is built for exactly that: a pilot to test Agent First against real rules and real calls before deciding whether to expand further.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">How is this different from a script or a knowledge base?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A script or knowledge base tells an agent where information lives. Agent First resolves which client's rule applies and what to do about it right now, instead of leaving the agent to find and interpret it live.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What happens if a client hasn't specified a rule for something?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First says so instead of guessing at what the client would want. That situation resolves to NOT SPECIFIED and routes to a person, and it becomes a clear signal for which rule that client's profile needs next.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="section bg-texture-darkgrad" style="background:var(--grad-navy);padding:96px 48px;">
+    <div class="reveal" style="width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <div class="ds-label eyebrow-c">Now recruiting pilot partners</div>
+      <h2 class="ds-hero" style="color:#fff;">Let's talk about a pilot for your contact center.</h2>
+      <p class="ds-body" style="color:#c7cce0;">Agent First is looking for a small number of pilot partners ready to run it against real rules and real calls. Fill this out and I will follow up directly.</p>
+      <a href="pilot-program.html" class="ds-body-sm" style="color:#c7cce0;text-decoration:underline;">See exactly what the pilot includes &rarr;</a>
+      <a href="sample-client-profile.html" class="ds-body-sm" style="color:#c7cce0;text-decoration:underline;">Not ready for a pilot? Build a free sample Client Profile first &rarr;</a>
+
+      <form id="af-contact-form" style="width:100%;margin-top:20px;display:flex;flex-direction:column;gap:16px;text-align:left;">
+        <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+        <input type="hidden" name="subject" value="New pilot partner inquiry, Agent First">
+        <input type="hidden" name="from_name" value="Agent First website">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="field-row">
+          <label class="field-label" for="af-name">Name</label>
+          <input class="field-input" id="af-name" name="name" type="text" required>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="af-email">Work email</label>
+          <input class="field-input" id="af-email" name="email" type="email" required>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="af-company">Company</label>
+          <input class="field-input" id="af-company" name="company" type="text">
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="af-message">Tell me about your team</label>
+          <textarea class="field-textarea" id="af-message" name="message" placeholder="How many agents, how many clients or programs, what's prompting the interest right now."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="justify-content:center;margin-top:4px;">Send</button>
+        <div id="af-form-status" class="ds-body-sm" style="display:none;"></div>
+      </form>
+
+      <p class="ds-body-sm" style="color:#8890ab;margin-top:4px;">Prefer email? Write to <a href="mailto:info@myagentfirst.com" style="color:#c7cce0;text-decoration:underline;">info@myagentfirst.com</a> directly.</p>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var form = document.getElementById('af-contact-form');
+    if(!form) return;
+    var status = document.getElementById('af-form-status');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.style.display = 'none';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res){ return res.json(); }).then(function(data){
+        if (data && data.success) {
+          form.reset();
+          form.style.display = 'none';
+          status.style.color = '#a8f0c6';
+          status.textContent = "Thanks. Taking you to the pilot program details...";
+          status.style.display = 'block';
+          setTimeout(function(){ window.location.href = 'pilot-program.html'; }, 900);
+        } else {
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+          status.style.color = '#ffb4b4';
+          status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+          status.style.display = 'block';
+        }
+      }).catch(function(){
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+        status.style.color = '#ffb4b4';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      });
+    });
+  })();
+  </script>
 
   <!-- FOOTER -->
   <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
-    <a href="index.html" class="brand-row">
+    <div class="brand-row">
       <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
-    </a>
+    </div>
     <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
   </div>
 
 </div>
 
 <script>
-(function () {
-  'use strict';
-  var $ = function (id) { return document.getElementById(id); };
-
-  function fmtHours(h) {
-    return (Math.round(h * 10) / 10).toLocaleString();
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('visible'); });
+    return;
   }
-  function fmtMoney(v) {
-    return '$' + Math.round(v).toLocaleString();
-  }
-
-  $('stc-calc').addEventListener('click', function () {
-    var agents = parseFloat($('stc-agents').value) || 0;
-    var freq = parseFloat($('stc-freq').value) || 0;
-    var minutes = parseFloat($('stc-minutes').value) || 0;
-    var wage = parseFloat($('stc-wage').value);
-
-    var minutesPerDay = agents * freq * minutes;
-    var hoursPerDay = minutesPerDay / 60;
-    var hoursPerWeek = hoursPerDay * 5;
-    var hoursPerMonth = hoursPerDay * 21.7;
-
-    $('stc-perday').textContent = fmtHours(hoursPerDay);
-    $('stc-perweek').textContent = fmtHours(hoursPerWeek);
-    $('stc-permonth').textContent = fmtHours(hoursPerMonth);
-
-    var summary = agents + ' agents, ' + freq + ' pull-ins/agent/day, ' + minutes + ' min each -> ' +
-      fmtHours(hoursPerDay) + ' hrs/day, ' + fmtHours(hoursPerWeek) + ' hrs/week, ' + fmtHours(hoursPerMonth) + ' hrs/month';
-
-    if (!isNaN(wage) && wage > 0) {
-      var costMonth = hoursPerMonth * wage;
-      $('stc-costmonth').textContent = fmtMoney(costMonth);
-      $('stc-cost-block').style.display = 'block';
-      summary += ', about ' + fmtMoney(costMonth) + '/month at $' + wage + '/hr';
-    } else {
-      $('stc-cost-block').style.display = 'none';
-    }
-
-    $('stc-result-summary').value = summary;
-    $('stc-results').style.display = 'block';
-    $('stc-after').style.display = 'flex';
-    $('stc-email-card').style.display = 'block';
-    $('stc-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-
-  var emailForm = $('stc-email-form');
-  emailForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('stc-email-status');
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(emailForm)
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      if (data && data.success) {
-        emailForm.style.display = 'none';
-        status.style.color = '#1f5c42';
-        status.textContent = "Sent -- I'll follow up directly too.";
-        status.style.display = 'block';
-      } else {
-        btn.disabled = false;
-        btn.textContent = original;
-        status.style.color = '#c53636';
-        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-        status.style.display = 'block';
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
       }
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = original;
-      status.style.color = '#c53636';
-      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-      status.style.display = 'block';
     });
-  });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el){ io.observe(el); });
 })();
 </script>
-
 </body>
 </html>
