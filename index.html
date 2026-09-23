@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent First | Real-Time Copilot for Multi-Client Contact Centers</title>
-<meta name="description" content="Agent First helps multi-client contact-center agents find and apply the relevant approved client-specific rule, wording, and next action while the customer is still on the line.">
+<title>Agent First | Operational Decision Layer for Multi-Client Contact Centers</title>
+<meta name="description" content="The right answer changes by client. Agent First resolves each client's approved rules into the right action, wording, and next step while the customer is still on the line.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://myagentfirst.com/">
-<meta property="og:title" content="Agent First | Real-Time Copilot for Multi-Client Contact Centers">
-<meta property="og:description" content="The answer exists. Agent First helps your agents find the right one for the right client, fast. Take the Agent Challenge and see for yourself.">
+<meta property="og:title" content="Agent First | Operational Decision Layer for Multi-Client Contact Centers">
+<meta property="og:description" content="Same question. Different client. Different correct answer. Take the Agent Challenge and see for yourself.">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent First | Real-Time Copilot for Multi-Client Contact Centers">
-<meta name="twitter:description" content="The answer exists. Agent First helps your agents find the right one for the right client, fast. Take the Agent Challenge and see for yourself.">
+<meta name="twitter:title" content="Agent First | Operational Decision Layer for Multi-Client Contact Centers">
+<meta name="twitter:description" content="Same question. Different client. Different correct answer. Take the Agent Challenge and see for yourself.">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,7 +86,9 @@
   .demo-panel .demo-client{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8890ab;}
   .demo-panel .demo-q{color:#e7eaf3;font-size:15px;line-height:1.5;}
   .demo-verdict{display:inline-flex;align-items:center;padding:6px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;width:fit-content;}
+  .demo-outcome{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:rgba(124,58,237,.22);color:#d3b6ff;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;width:fit-content;margin-bottom:8px;}
   .demo-say{color:#c7cce0;font-size:14px;line-height:1.55;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;}
+  .demo-source{color:#8890ab;font-size:12px;line-height:1.5;margin-top:8px;}
 
   /* Interactive homepage widget */
   .demo-tab{padding:8px 14px;border-radius:var(--radius-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#e7eaf3;font-size:13px;font-weight:650;cursor:pointer;transition:transform .14s ease,border-color .14s ease,background .14s ease;font-family:var(--font-sans);}
@@ -150,10 +152,12 @@
   <!-- HERO -->
   <div style="width:100%;background:var(--grad-navy);padding:88px 48px 72px;display:flex;justify-content:center;">
     <div class="reveal" style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;">
-      <div class="ds-label eyebrow-c">Real-time operational copilot for multi-client contact centers</div>
+      <div class="ds-label eyebrow-c">The operational decision layer for multi-client contact centers</div>
+      <div style="display:inline-flex;align-items:center;padding:7px 18px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;font-size:12px;font-weight:900;letter-spacing:.09em;box-shadow:0 8px 20px rgba(176,57,217,.22);">RIGHT CLIENT. RIGHT ACTION.</div>
       <h1 class="ds-display" style="color:#fff;">Keep the human.<br>Upgrade the agent.</h1>
-      <div class="ds-heading" style="color:#e7eaf3;font-weight:650;max-width:620px;">The right answer shouldn't be this hard to find.</div>
-      <p class="ds-body" style="color:#c7cce0;max-width:600px;">Agent First gives multi-client contact-center agents the relevant approved client-specific rule, wording, and next action while the customer is still on the line. No digging through documents. No guessing which rule applies.</p>
+      <div class="ds-heading" style="color:#e7eaf3;font-weight:650;max-width:620px;">The right answer changes by client.</div>
+      <p class="ds-body" style="color:#c7cce0;max-width:600px;">Agent First resolves each client's approved rules into the right action, wording, and next step while the customer is still on the line.</p>
+      <div class="ds-body" style="color:#fff;font-weight:750;max-width:600px;">Same question. Different client. Different correct answer.</div>
       <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
         <a href="#demo" class="btn btn-primary">See Agent First Work</a>
         <a href="sample-client-profile.html" class="btn btn-ghost-dark">Build a Sample Client Profile</a>
@@ -167,7 +171,7 @@
     <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
       <div style="display:flex;flex-direction:column;gap:10px;max-width:720px;">
         <div class="ds-label eyebrow-c">Try it yourself</div>
-        <h2 class="ds-hero" style="color:#fff;">Same question. Different client. Watch the answer change.</h2>
+        <h2 class="ds-hero" style="color:#fff;">Same question. Different client. Different correct answer.</h2>
         <p class="ds-body-sm" style="color:#c7cce0;">A simplified, illustrative version of how Agent First actually resolves a rule. Pick a client below, then ask something.</p>
       </div>
       <div class="demo-panel" style="max-width:620px;margin:0 auto;width:100%;">
@@ -178,8 +182,10 @@
           <button type="button" class="demo-tab" data-client="C">Northgate</button>
         </div>
         <div>
+          <div class="demo-outcome" id="widgetOutcome" style="display:none;"></div>
           <div class="demo-verdict" id="widgetVerdict" style="background:rgba(255,255,255,.08);color:#8890ab;">Pick a client above to see the answer</div>
           <div class="demo-say" id="widgetSay" style="border-top:none;padding-top:0;">&nbsp;</div>
+          <div class="demo-source" id="widgetSource"></div>
         </div>
         <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:14px;display:flex;flex-direction:column;gap:10px;">
           <div class="ds-body-sm" style="color:#8890ab;">Or ask this client about something else:</div>
@@ -201,22 +207,22 @@
   (function(){
     var CLIENTS = {
       A: { name:'Harborview', rules:[
-        'Cancellations within 48 hours of a scheduled appointment: no fee.',
-        'ID verification required before discussing any account details.',
-        'Refunds over $200 require a supervisor sign-off before processing.',
-        'Standard callback window for an open issue: 24 hours.'
+        { text:'Cancellations within 48 hours of a scheduled appointment: no fee.', outcome:'ALLOW' },
+        { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+        { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+        { text:'Standard callback window for an open issue: 24 hours.', outcome:'DISCLOSE' }
       ]},
       B: { name:'Meridian', rules:[
-        'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.',
-        'ID verification is NOT required for general account questions, only for changes.',
-        'Refunds over $200 can be processed by any agent, no sign-off required.',
-        'Standard callback window for an open issue: 4 hours.'
+        { text:'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.', outcome:'ALLOW' },
+        { text:'ID verification is NOT required for general account questions, only for changes.', outcome:'ALLOW' },
+        { text:'Refunds over $200 can be processed by any agent, no sign-off required.', outcome:'ALLOW' },
+        { text:'Standard callback window for an open issue: 4 hours.', outcome:'DISCLOSE' }
       ]},
       C: { name:'Northgate', rules:[
-        'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.',
-        'ID verification required before discussing any account details.',
-        'Refunds over $200 require a supervisor sign-off before processing.',
-        'Standard callback window for an open issue: 24 hours, except weekends (next business day).'
+        { text:'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.', outcome:'VERIFY' },
+        { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+        { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+        { text:'Standard callback window for an open issue: 24 hours, except weekends (next business day).', outcome:'DISCLOSE' }
       ]}
     };
     var TOPICS = [
@@ -229,7 +235,9 @@
     var tabButtons = document.querySelectorAll('.demo-tab[data-client]');
     var topicsEl = document.getElementById('widgetTopics');
     var verdictEl = document.getElementById('widgetVerdict');
+    var outcomeEl = document.getElementById('widgetOutcome');
     var sayEl = document.getElementById('widgetSay');
+    var sourceEl = document.getElementById('widgetSource');
     var hintEl = document.getElementById('widgetHint');
     var typeEl = document.getElementById('widgetType');
     var askBtn = document.getElementById('widgetAsk');
@@ -260,12 +268,16 @@
       if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
       state.topicIndex = ruleIndex;
       var c = CLIENTS[state.client];
+      var rule = c.rules[ruleIndex];
+      outcomeEl.style.display = 'inline-flex';
+      outcomeEl.textContent = rule.outcome;
       verdictEl.style.background = 'rgba(124,58,237,.2)';
       verdictEl.style.color = '#d3b6ff';
       verdictEl.textContent = c.name + ' · ' + label;
-      sayEl.textContent = c.rules[ruleIndex];
+      sayEl.textContent = rule.text;
       sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
       sayEl.style.paddingTop = '12px';
+      sourceEl.textContent = 'Source: ' + c.name + '’s approved ' + label + ' rule';
     }
 
     function matchTyped(raw){
@@ -379,8 +391,8 @@
     <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
       <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
         <div class="ds-label eyebrow-v">How it decides</div>
-        <h2 class="ds-hero">Not a document to search. A live authorization.</h2>
-        <p class="ds-body" style="color:var(--muted);">A knowledge base tells an agent where a policy lives. Agent First answers a narrower question: given this client, this customer, and this moment, what should the agent do right now? Every answer resolves to one of a small set of plain outcomes, not a paragraph to interpret.</p>
+        <h2 class="ds-hero">Agent First doesn't just retrieve the rule. It resolves the decision.</h2>
+        <p class="ds-body" style="color:var(--muted);">Finding the policy is only half the job. Agent First resolves what that policy means for this client, this customer, and this call, right now. Every answer resolves to one of a small set of plain outcomes, not a paragraph to interpret.</p>
       </div>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
         <div class="card reveal">
@@ -399,7 +411,12 @@
           <div class="ds-body" style="font-weight:750;color:var(--violet);">TRANSFER / ESCALATE</div>
           <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">When the call, or the decision, belongs with someone else.</div>
         </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">NOT SPECIFIED</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">This client hasn't set a rule for this situation. Agent First says so instead of guessing, and routes it to a person.</div>
+        </div>
       </div>
+      <p class="ds-body-sm" style="color:var(--muted);max-width:720px;font-weight:650;">Agent First works from the client's approved operating rules. It can help interpret the request. It doesn't get to invent the policy.</p>
       <p class="ds-body-sm" style="color:var(--muted);max-width:720px;">Inside one industry, adding a client is genuinely configuration: real rules entered once, running on the same engine already live today. Reaching that same depth in a brand new industry is the direction the architecture is built toward, not a claim already proven.</p>
     </div>
   </div>
@@ -484,7 +501,11 @@
         </div>
         <div>
           <div class="ds-body" style="font-weight:750;margin-bottom:8px;">How is this different from a script or a knowledge base?</div>
-          <div class="ds-body-sm" style="color:var(--muted);">A knowledge base tells an agent where a policy lives. Agent First resolves that policy into one specific answer for this client, this customer, and this moment, instead of leaving the agent to interpret it live.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A script or knowledge base tells an agent where information lives. Agent First resolves which client's rule applies and what to do about it right now, instead of leaving the agent to find and interpret it live.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What happens if a client hasn't specified a rule for something?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First says so instead of guessing at what the client would want. That situation resolves to NOT SPECIFIED and routes to a person, and it becomes a clear signal for which rule that client's profile needs next.</div>
         </div>
       </div>
     </div>
