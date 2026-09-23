@@ -165,25 +165,25 @@
     <div class="wrap" style="display:flex;flex-direction:column;gap:22px;max-width:820px;">
       <div class="ds-label eyebrow-c">The Agent Challenge</div>
       <h1 class="ds-display" style="color:#fff;">Three clients. Three sets of rules. Find the right answer before the customer gets tired of waiting.</h1>
-      <p class="ds-body" style="color:#c7cce0;">For two minutes, you're a multi-client agent using a mini version of Agent First itself. Three fictional clients, each with their own rules -- sitting right there in front of you. A customer calls in -- you click a quick button or type what they're asking about, and it pulls up whatever client you currently have selected. Get the right client selected before you look, and you'll always have the right answer, fast. Get the wrong one selected, and you'll confidently hand out someone else's policy. The answer was there the whole time. The hard part is finding the right rule for the right client quickly enough to use it -- Agent First skips the hunt and brings the relevant rule, decision, and wording into one working view.</p>
+      <p class="ds-body" style="color:#c7cce0;">For two minutes, you're a multi-client agent using a mini version of Agent First itself. Three fictional clients, each with their own rules, sitting right there in front of you. A customer calls in. You click a quick button or type what they're asking about, and it pulls up whatever client you currently have selected. Get the right client selected before you look, and you'll always have the right answer, fast. Get the wrong one selected, and you'll confidently hand out someone else's policy. The answer was there the whole time. The hard part is finding the right rule for the right client quickly enough to use it. Agent First skips the hunt and brings the relevant rule, decision, and wording into one working view.</p>
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px;">
         <div class="card-on-dark">
           <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">3 fictional clients</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Harborview, Meridian, and Northgate -- none of them real, each with its own policy rules.</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Harborview, Meridian, and Northgate (none of them real), each with its own policy rules.</div>
         </div>
         <div class="card-on-dark">
           <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">Quick buttons or type it out</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Click a topic button, or type a question in your own words -- either way, it looks up whichever client tab you're currently on.</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Click a topic button, or type a question in your own words. Either way, it looks up whichever client tab you're currently on.</div>
         </div>
         <div class="card-on-dark">
           <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">Your own result only</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">No made-up statistics here -- just what you actually score, and what changes with Agent First running alongside you.</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">No made-up statistics here: just what you actually score, and what changes with Agent First running alongside you.</div>
         </div>
       </div>
       <div>
         <button class="btn btn-primary" id="startBtn" style="margin-top:10px;font-size:17px;padding:16px 32px;">Start the challenge</button>
       </div>
-      <p class="ds-body-sm" style="color:#8991b3;">Works best on a laptop or desktop screen. Nothing is recorded or sent anywhere -- this runs entirely in your browser.</p>
+      <p class="ds-body-sm" style="color:#8991b3;">Works best on a laptop or desktop screen. Nothing is recorded or sent anywhere. This runs entirely in your browser.</p>
     </div>
   </div>
 
@@ -208,26 +208,26 @@
             <button class="clientTab" data-client="C">Northgate</button>
           </div>
           <div class="card" id="rulesCard">
-            <div class="ds-label eyebrow-v">Client Profile -- <span id="rulesClientName">--</span></div>
+            <div class="ds-label eyebrow-v">Client Profile: <span id="rulesClientName">Select a client</span></div>
             <div id="rulesList" class="chipList"></div>
           </div>
         </div>
 
-        <!-- RIGHT: Running Call Workspace -- feed + composer, styled after (not copied from) the multi-industry demo -->
+        <!-- RIGHT: Running Call Workspace, feed + composer, styled after (not copied from) the multi-industry demo -->
         <div class="card workspacePanel">
           <div class="ds-label eyebrow-c">Running Call Workspace</div>
           <div id="feed" class="feed"><div class="feedEmpty">Read each Client Profile on the left, then start the clock.</div></div>
 
           <div id="readyCard" style="padding-top:14px;border-top:1px solid var(--line);margin-top:14px;">
-            <p class="ds-body-sm" style="margin-bottom:14px;">A customer will call in and tell you what they need. Make sure you're on the right client tab on the left, then click the matching quick button below (or type what they're asking about) to pull up the answer -- exactly like the real tool. Wrong client selected, wrong answer, even if you click the right topic.</p>
-            <button class="btn btn-primary" id="beginQuestionsBtn">I'm ready -- start the clock</button>
+            <p class="ds-body-sm" style="margin-bottom:14px;">A customer will call in and tell you what they need. Make sure you're on the right client tab on the left, then click the matching quick button below (or type what they're asking about) to pull up the answer, exactly like the real tool. Wrong client selected, wrong answer, even if you click the right topic.</p>
+            <button class="btn btn-primary" id="beginQuestionsBtn">I'm ready: start the clock</button>
           </div>
 
           <div id="composer" class="composer" style="display:none;">
             <div class="ds-label eyebrow-c" id="questionClient" style="margin-bottom:8px;"></div>
             <p class="ds-heading" id="questionText" style="margin-bottom:14px;"></p>
 
-            <div class="ds-label" style="color:var(--muted);margin-bottom:8px;">What is this about? -- pulls the answer from whichever client is currently selected</div>
+            <div class="ds-label" style="color:var(--muted);margin-bottom:8px;">What is this about? (Pulls the answer from whichever client is currently selected.)</div>
             <div class="quickRow" id="topicQuickRow"></div>
 
             <div class="typeRow">
@@ -261,18 +261,18 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
         <div class="card" style="border-color:var(--red);background:var(--redbg);">
           <div class="ds-body" style="font-weight:900;margin-bottom:8px;">What you just felt</div>
-          <p class="ds-body-sm" style="color:#7a3a3a;">The lookup itself was never the hard part -- one click, one answer. The hard part was making sure you were on the right client before you trusted what came back. That mix-up is exactly what happens to a multi-client agent on a busy day, for as many clients as they're assigned.</p>
+          <p class="ds-body-sm" style="color:#7a3a3a;">The lookup itself was never the hard part: one click, one answer. The hard part was making sure you were on the right client before you trusted what came back. That mix-up is exactly what happens to a multi-client agent on a busy day, for as many clients as they're assigned.</p>
         </div>
         <div class="card" style="border-color:var(--green);background:var(--greenbg);">
           <div class="ds-body" style="font-weight:900;margin-bottom:8px;">With Agent First</div>
-          <p class="ds-body-sm" style="color:#1f5c42;">Agent First keeps guidance scoped to the active Client Profile for the call, not whichever tab happened to be open -- the exact mix-up you just experienced. A connected version goes further: routing context from the phone system or CRM tells Agent First which client a call belongs to automatically, so the agent never has to select it.</p>
+          <p class="ds-body-sm" style="color:#1f5c42;">Agent First keeps guidance scoped to the active Client Profile for the call, not whichever tab happened to be open. That is the exact mix-up you just experienced. A connected version goes further: routing context from the phone system or CRM tells Agent First which client a call belongs to automatically, so the agent never has to select it.</p>
         </div>
       </div>
 
       <div class="card" id="historyCard" style="display:none;">
         <div class="ds-label eyebrow-v" style="margin-bottom:10px;">Your previous runs (this browser only)</div>
         <div id="historyList" class="ds-body-sm" style="color:var(--muted);display:flex;flex-direction:column;gap:6px;"></div>
-        <p class="ds-body-sm" style="color:#8991b3;margin-top:10px;">Stored locally in this browser only -- not a shared leaderboard, and not sent anywhere.</p>
+        <p class="ds-body-sm" style="color:#8991b3;margin-top:10px;">Stored locally in this browser only, not a shared leaderboard, and not sent anywhere.</p>
       </div>
 
       <div class="card-dark" style="display:flex;flex-direction:column;gap:14px;">
@@ -340,7 +340,7 @@
 
   // topics == the reusable rule categories every fictional client shares. A quick button IS a
   // topic; clicking it (or typing a phrase that matches it) looks up that topic's rule text for
-  // whichever client tab is currently selected -- exactly like the demo's quick-item lookup, not
+  // whichever client tab is currently selected, exactly like the demo's quick-item lookup, not
   // a yes/no memory quiz.
   var TOPICS = [
     { key: 'cancel', ruleIndex: 0, label: 'Cancellation Fee', keywords: ['cancel', 'cancellation', 'reschedul', 'fee'] },
@@ -375,9 +375,9 @@
     });
   }
 
-  // Simple local keyword match for the free-text box -- no API call, matching the "simplified
+  // Simple local keyword match for the free-text box, no API call, matching the "simplified
   // fallback match" pattern from the multi-industry demo, not a real AI call. The visitor types a
-  // QUESTION or PHRASE (e.g. "does a cancellation fee apply"), not a yes/no answer -- this finds
+  // QUESTION or PHRASE (e.g. "does a cancellation fee apply"), not a yes/no answer; this finds
   // which topic they mean, and lookupTopic() below does the actual lookup against the currently
   // selected client, same as clicking the matching quick button would.
   function matchTypedTopic(raw) {
@@ -474,7 +474,7 @@
     state.current = q;
     state.activeTabWhenAsked = q.client;
     q.askedAt = Date.now();
-    $('questionClient').textContent = 'Customer on the line -- ' + CLIENTS[q.client].name + ' account';
+    $('questionClient').textContent = 'Customer on the line: ' + CLIENTS[q.client].name + ' account';
     $('questionText').textContent = q.text;
     $('typedQuestion').value = '';
     $('typeHint').textContent = '';
@@ -487,8 +487,8 @@
     row.className = 'feedEntry ' + (wasCorrect ? 'correct' : 'wrong');
     var header = escapeHtml(CLIENTS[q.client].name) + ' customer: ' + escapeHtml(q.text);
     var body = wasCorrect
-      ? ('You looked up ' + escapeHtml(topic.label) + ' on the right account (' + escapeHtml(CLIENTS[q.client].name) + ') -- correct.')
-      : ('You looked up ' + escapeHtml(topic.label) + ' while on ' + escapeHtml(CLIENTS[wrongClientKey].name) + '\'s account, but this customer is a ' + escapeHtml(CLIENTS[q.client].name) + ' account -- wrong client selected.');
+      ? ('You looked up ' + escapeHtml(topic.label) + ' on the right account (' + escapeHtml(CLIENTS[q.client].name) + '). Correct.')
+      : ('You looked up ' + escapeHtml(topic.label) + ' while on ' + escapeHtml(CLIENTS[wrongClientKey].name) + '\'s account, but this customer is a ' + escapeHtml(CLIENTS[q.client].name) + ' account. Wrong client selected.');
     row.innerHTML =
       '<div class="fq">' + header + '</div>' +
       '<div class="fa">' + body + '</div>' +
@@ -498,7 +498,7 @@
 
   // The single resolver for both quick-button clicks and a matched typed phrase: looks up the
   // given topic against whichever client tab is CURRENTLY selected (never the "correct" one
-  // behind the scenes) -- exactly what the real tool would show, right or wrong.
+  // behind the scenes), exactly what the real tool would show, right or wrong.
   function lookupTopic(topicKey) {
     if (!state.running || !state.current) return;
     var topic = null;
@@ -507,7 +507,7 @@
     var q = state.current;
 
     if (topic.ruleIndex !== q.template.ruleIndex) {
-      $('typeHint').textContent = 'That doesn\'t look like what this customer is asking about -- try a different quick button, or rephrase.';
+      $('typeHint').textContent = 'That doesn\'t look like what this customer is asking about. Try a different quick button, or rephrase.';
       return;
     }
 
@@ -544,7 +544,7 @@
     var topicKey = matchTypedTopic(raw);
     if (!topicKey) {
       $('typeHint').textContent = raw.trim()
-        ? 'Couldn\'t tell what topic that\'s about -- try a quick button, or mention it more directly (e.g. "cancellation fee").'
+        ? 'Couldn\'t tell what topic that\'s about. Try a quick button, or mention it more directly (e.g. "cancellation fee").'
         : 'Type what the customer is asking, or use a quick button.';
       return;
     }
@@ -571,9 +571,9 @@
     $('rWrongClient').textContent = state.wrongClientMixups;
 
     var headline;
-    if (state.answered === 0) headline = 'Time ran out before you looked anything up -- give it another go.';
-    else if (accuracy >= 90) headline = 'Sharp. ' + state.correct + ' of ' + state.answered + ' correct -- you had the right client selected every time you looked something up.';
-    else if (accuracy >= 70) headline = 'Solid run -- ' + state.correct + ' of ' + state.answered + ' correct. A couple of those were the wrong account selected, not the wrong information.';
+    if (state.answered === 0) headline = 'Time ran out before you looked anything up. Give it another go.';
+    else if (accuracy >= 90) headline = 'Sharp. ' + state.correct + ' of ' + state.answered + ' correct. You had the right client selected every time you looked something up.';
+    else if (accuracy >= 70) headline = 'Solid run. ' + state.correct + ' of ' + state.answered + ' correct. A couple of those were the wrong account selected, not the wrong information.';
     else headline = 'That\'s the point: ' + state.correct + ' of ' + state.answered + ' correct is what happens when the account on screen doesn\'t match the account on the phone.';
     $('resultsHeadline').textContent = headline;
 
@@ -589,7 +589,7 @@
       list.unshift(run);
       list = list.slice(0, 5);
       localStorage.setItem('af_challenge_history', JSON.stringify(list));
-    } catch (e) { /* localStorage unavailable -- runs just won't persist between visits */ }
+    } catch (e) { /* localStorage unavailable; runs just won't persist between visits */ }
   }
 
   function renderHistory() {
@@ -600,7 +600,7 @@
       $('historyCard').style.display = 'block';
       $('historyList').innerHTML = list.map(function (r) {
         var d = new Date(r.at);
-        return '<div>' + d.toLocaleDateString() + ' -- ' + r.score + ' pts, ' + r.accuracy + '% accuracy (' + r.correct + '/' + r.answered + ')</div>';
+        return '<div>' + d.toLocaleDateString() + ': ' + r.score + ' pts, ' + r.accuracy + '% accuracy (' + r.correct + '/' + r.answered + ')</div>';
       }).join('');
     } catch (e) { /* no history available */ }
   }
