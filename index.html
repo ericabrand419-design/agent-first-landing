@@ -137,15 +137,15 @@
 
   <!-- NAV -->
   <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
-    <div class="brand-row">
+    <a href="index.html" class="brand-row">
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
-    </div>
+    </a>
     <div style="display:flex;align-items:center;gap:20px;">
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
-      <a href="#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Talk about a pilot</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
     </div>
   </div>
 
@@ -317,6 +317,30 @@
   })();
   </script>
 
+  <!-- WHAT IT IS NOT -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">For clarity</div>
+        <h2 class="ds-hero">What Agent First is not.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a knowledge base</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It doesn't just retrieve a policy.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a generic assistant</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It works from approved client rules and can return NOT SPECIFIED.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a replacement contact-center platform</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It is the operational decision layer behind the agent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- HOW IT WORKS -->
   <div id="how-it-works" class="section bg-texture-light" style="background:var(--soft);">
     <div class="wrap reveal" style="display:flex;flex-direction:column;gap:36px;">
@@ -338,7 +362,7 @@
         <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
           <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">3</div>
           <div class="ds-body" style="font-weight:750;">Get a verdict and the words</div>
-          <div class="ds-body-sm" style="color:var(--muted);">Agent First hands back a clear decision, plus the exact words to say. The agent still decides. It does not talk to the customer.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First hands back a clear decision, plus approved or configured wording. The agent still decides. It does not talk to the customer.</div>
         </div>
       </div>
     </div>
@@ -418,6 +442,20 @@
       </div>
       <p class="ds-body-sm" style="color:var(--muted);max-width:720px;font-weight:650;">Agent First works from the client's approved operating rules. It can help interpret the request. It doesn't get to invent the policy.</p>
       <p class="ds-body-sm" style="color:var(--muted);max-width:720px;">Inside one industry, adding a client is genuinely configuration: real rules entered once, running on the same engine already live today. Reaching that same depth in a brand new industry is the direction the architecture is built toward, not a claim already proven.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <div class="ds-label eyebrow-v" style="text-align:center;">The trust model, in one line</div>
+        <div class="card reveal" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;padding:22px 24px;width:100%;">
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Approved rules</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Active client</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Explicit outcome</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Source shown</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Human decides</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -485,7 +523,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;">
         <div>
           <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Does this replace agents?</div>
-          <div class="ds-body-sm" style="color:var(--muted);">No. The agent stays on every call and has the final word every time. Agent First hands them a decision and the exact words to say. It does not talk to the customer.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">No. The agent stays on every call and has the final word every time. Agent First hands them a decision and approved or configured wording. It does not talk to the customer.</div>
         </div>
         <div>
           <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What does setup look like for a new client?</div>
