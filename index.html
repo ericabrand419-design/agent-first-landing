@@ -89,6 +89,8 @@
   .demo-outcome{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:rgba(124,58,237,.22);color:#d3b6ff;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;width:fit-content;margin-bottom:8px;}
   .demo-say{color:#c7cce0;font-size:14px;line-height:1.55;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;}
   .demo-source{color:#8890ab;font-size:12px;line-height:1.5;margin-top:8px;}
+  .demo-activeprofile{font-size:13px;line-height:1.5;margin-bottom:10px;color:#fff;font-weight:750;}
+  .demo-section-label{font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;color:#8890ab;}
 
   /* Interactive homepage widget */
   .demo-tab{padding:8px 14px;border-radius:var(--radius-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#e7eaf3;font-size:13px;font-weight:650;cursor:pointer;transition:transform .14s ease,border-color .14s ease,background .14s ease;font-family:var(--font-sans);}
@@ -141,7 +143,9 @@
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
     </a>
-    <div style="display:flex;align-items:center;gap:20px;">
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
@@ -172,22 +176,26 @@
       <div style="display:flex;flex-direction:column;gap:10px;max-width:720px;">
         <div class="ds-label eyebrow-c">Try it yourself</div>
         <h2 class="ds-hero" style="color:#fff;">Same question. Different client. Different correct answer.</h2>
-        <p class="ds-body-sm" style="color:#c7cce0;">A simplified, illustrative version of how Agent First actually resolves a rule. Pick a client below, then ask something.</p>
+        <p class="ds-body-sm" style="color:#c7cce0;">A simplified, illustrative version of how Agent First actually resolves a rule. Pick an industry, then a client, to see the Active Profile in action.</p>
       </div>
-      <div class="demo-panel" style="max-width:620px;margin:0 auto;width:100%;">
-        <div class="demo-client" id="widgetScenario">A customer calls: &ldquo;I need to cancel my appointment tomorrow. Will I be charged?&rdquo;</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <button type="button" class="demo-tab" data-client="A">Harborview</button>
-          <button type="button" class="demo-tab" data-client="B">Meridian</button>
-          <button type="button" class="demo-tab" data-client="C">Northgate</button>
+      <div class="demo-panel" style="max-width:620px;margin:0 auto;width:100%;gap:16px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="demo-section-label">Industry</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetIndustries"></div>
+        </div>
+        <div class="demo-client" id="widgetScenario"></div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="demo-section-label">Active Profile</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetClientTabs"></div>
         </div>
         <div>
+          <div class="demo-activeprofile" id="widgetActiveProfile" style="display:none;"></div>
           <div class="demo-outcome" id="widgetOutcome" style="display:none;"></div>
           <div class="demo-verdict" id="widgetVerdict" style="background:rgba(255,255,255,.08);color:#8890ab;">Pick a client above to see the answer</div>
           <div class="demo-say" id="widgetSay" style="border-top:none;padding-top:0;">&nbsp;</div>
           <div class="demo-source" id="widgetSource"></div>
         </div>
-        <div style="border-top:1px solid rgba(255,255,255,.08);padding-top:14px;display:flex;flex-direction:column;gap:10px;">
+        <div id="widgetTopicsWrap" style="border-top:1px solid rgba(255,255,255,.08);padding-top:14px;display:flex;flex-direction:column;gap:10px;">
           <div class="ds-body-sm" style="color:#8890ab;">Or ask this client about something else:</div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetTopics"></div>
           <div style="display:flex;gap:8px;flex-wrap:wrap;">
@@ -205,34 +213,97 @@
 
   <script>
   (function(){
-    var CLIENTS = {
-      A: { name:'Harborview', rules:[
-        { text:'Cancellations within 48 hours of a scheduled appointment: no fee.', outcome:'ALLOW' },
-        { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
-        { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
-        { text:'Standard callback window for an open issue: 24 hours.', outcome:'DISCLOSE' }
-      ]},
-      B: { name:'Meridian', rules:[
-        { text:'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.', outcome:'ALLOW' },
-        { text:'ID verification is NOT required for general account questions, only for changes.', outcome:'ALLOW' },
-        { text:'Refunds over $200 can be processed by any agent, no sign-off required.', outcome:'ALLOW' },
-        { text:'Standard callback window for an open issue: 4 hours.', outcome:'DISCLOSE' }
-      ]},
-      C: { name:'Northgate', rules:[
-        { text:'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.', outcome:'VERIFY' },
-        { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
-        { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
-        { text:'Standard callback window for an open issue: 24 hours, except weekends (next business day).', outcome:'DISCLOSE' }
-      ]}
+    var INDUSTRIES = {
+      contact: {
+        label: 'Contact Center',
+        scenario: 'A customer calls: “I need to cancel my appointment tomorrow. Will I be charged?”',
+        interactive: true,
+        clients: {
+          A: { name:'Harborview', rules:[
+            { text:'Cancellations within 48 hours of a scheduled appointment: no fee.', outcome:'ALLOW' },
+            { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+            { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+            { text:'Standard callback window for an open issue: 24 hours.', outcome:'DISCLOSE' }
+          ]},
+          B: { name:'Westfield', rules:[
+            { text:'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.', outcome:'ALLOW' },
+            { text:'ID verification is NOT required for general account questions, only for changes.', outcome:'ALLOW' },
+            { text:'Refunds over $200 can be processed by any agent, no sign-off required.', outcome:'ALLOW' },
+            { text:'Standard callback window for an open issue: 4 hours.', outcome:'DISCLOSE' }
+          ]},
+          C: { name:'Northgate', rules:[
+            { text:'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.', outcome:'VERIFY' },
+            { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+            { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+            { text:'Standard callback window for an open issue: 24 hours, except weekends (next business day).', outcome:'DISCLOSE' }
+          ]}
+        },
+        topics: [
+          { ruleIndex:0, label:'Cancellation Fee', keywords:['cancel','cancellation','reschedul','fee'] },
+          { ruleIndex:1, label:'ID Verification', keywords:['id','verify','verification','identity'] },
+          { ruleIndex:2, label:'Refund Sign-Off', keywords:['refund','sign-off','signoff','sign off','supervisor','200'] },
+          { ruleIndex:3, label:'Callback Window', keywords:['callback','call back','window','hour'] }
+        ]
+      },
+      insurance: {
+        label: 'Insurance',
+        scenario: 'A policyholder calls to report a minor collision (rear-ended at a stoplight, no injuries) and asks whether they can get a rental car right away.',
+        interactive: false,
+        clients: {
+          A: { name:'Meridian Auto Insurance', outcome:'ALLOW', label:'Rental Car Request',
+            text:"Rental reimbursement is included at your coverage tier. I can approve up to $35/day for up to 5 days right now, as long as it's one of our three approved rental partners for the direct-bill rate.",
+            source:"Source: Meridian Auto Insurance’s approved rental-reimbursement rule" },
+          B: { name:'Harbor Mutual Insurance', outcome:'VERIFY → TRANSFER / ESCALATE', label:'Rental Car Request',
+            text:"Let me check whether rental coverage is on your policy first, since that's a separate add-on here. If it isn't clearly on file, I'll need to get a claims adjuster on the line rather than quote you a rate myself.",
+            source:"Source: Harbor Mutual Insurance’s approved rental-coverage verification rule" }
+        }
+      },
+      healthcare: {
+        label: 'Healthcare',
+        scenario: 'A parent calls saying their child has had a 101.5°F fever since last night, is still eating and drinking normally, and asks to be seen today.',
+        interactive: false,
+        clients: {
+          A: { name:'Riverside Family Clinic', outcome:'ALLOW', label:'Same-Day Visit',
+            text:"I can get her in today. We hold same-day sick slots for exactly this kind of case. I can't give medical advice over the phone, but I'll pass these details to the provider before your visit.",
+            source:"Source: Riverside Family Clinic’s approved same-day scheduling list" },
+          B: { name:'Sunridge Pediatrics', outcome:'TRANSFER / ESCALATE', label:'Same-Day Visit',
+            text:"For any same-day sick-child call, I need to connect you with our after-hours nurse triage line first. Once they've spoken with you, we'll get her scheduled.",
+            source:"Source: Sunridge Pediatrics’ approved triage-first rule" }
+        }
+      },
+      homeServices: {
+        label: 'Home Services',
+        scenario: 'A customer calls at 9:40pm reporting no hot water and asks if someone can come tonight or if it has to wait until morning.',
+        interactive: false,
+        clients: {
+          A: { name:'Apex Plumbing & Drain', outcome:'ALLOW', label:'After-Hours Dispatch',
+            text:"No hot water qualifies for tonight's emergency dispatch here. There's a $150 after-hours trip fee, and I can get a tech out to you tonight.",
+            source:"Source: Apex Plumbing & Drain’s approved emergency-dispatch list" },
+          B: { name:'Coastal Heating & Air', outcome:'DO NOT ALLOW', label:'After-Hours Dispatch',
+            text:"We don't dispatch after-hours for hot water alone, so the next available slot is the standard path. If you're seeing any water actively leaking, though, that changes things, and I can page our on-call tech right now.",
+            source:"Source: Coastal Heating & Air’s approved after-hours exception rule" }
+        }
+      },
+      propertyManagement: {
+        label: 'Property Management',
+        scenario: "A tenant calls at 11pm reporting no heat in their unit; it's 38°F outside tonight.",
+        interactive: false,
+        clients: {
+          A: { name:'Lockwood Management', outcome:'ALLOW', label:'Emergency Dispatch',
+            text:"No heat in this cold counts as a must-act-tonight issue on this property. I'm dispatching our on-call HVAC vendor now, and you should expect them within about 2 hours.",
+            source:"Source: Lockwood Management’s approved emergency-dispatch rule" },
+          B: { name:'GreenPark Properties', outcome:'TRANSFER / ESCALATE', label:'Emergency Dispatch',
+            text:"I don't have the authority to dispatch a vendor directly here, so I'm paging our on-call property manager right now to get a person on the line with you. Let's stay on while that page goes out.",
+            source:"Source: GreenPark Properties’ approved after-hours escalation rule" }
+        }
+      }
     };
-    var TOPICS = [
-      { ruleIndex:0, label:'Cancellation Fee', keywords:['cancel','cancellation','reschedul','fee'] },
-      { ruleIndex:1, label:'ID Verification', keywords:['id','verify','verification','identity'] },
-      { ruleIndex:2, label:'Refund Sign-Off', keywords:['refund','sign-off','signoff','sign off','supervisor','200'] },
-      { ruleIndex:3, label:'Callback Window', keywords:['callback','call back','window','hour'] }
-    ];
 
-    var tabButtons = document.querySelectorAll('.demo-tab[data-client]');
+    var industriesEl = document.getElementById('widgetIndustries');
+    var clientTabsEl = document.getElementById('widgetClientTabs');
+    var scenarioEl = document.getElementById('widgetScenario');
+    var activeProfileEl = document.getElementById('widgetActiveProfile');
+    var topicsWrapEl = document.getElementById('widgetTopicsWrap');
     var topicsEl = document.getElementById('widgetTopics');
     var verdictEl = document.getElementById('widgetVerdict');
     var outcomeEl = document.getElementById('widgetOutcome');
@@ -241,13 +312,92 @@
     var hintEl = document.getElementById('widgetHint');
     var typeEl = document.getElementById('widgetType');
     var askBtn = document.getElementById('widgetAsk');
-    if (!tabButtons.length || !topicsEl || !verdictEl) return;
+    if (!industriesEl || !clientTabsEl || !verdictEl) return;
 
-    var state = { client: null, topicIndex: 0 };
+    var state = { industry: 'contact', client: null, topicIndex: 0 };
+
+    function activeProfileLabel(name, industryLabel){
+      return '<span style="color:#8890ab;font-weight:650;">Active Profile:</span> ' + name + ' — ' + industryLabel;
+    }
+
+    function resetPanel(){
+      activeProfileEl.style.display = 'none';
+      outcomeEl.style.display = 'none';
+      verdictEl.style.background = 'rgba(255,255,255,.08)';
+      verdictEl.style.color = '#8890ab';
+      verdictEl.textContent = 'Pick a client above to see the answer';
+      sayEl.textContent = ' ';
+      sayEl.style.borderTop = 'none';
+      sayEl.style.paddingTop = '0';
+      sourceEl.textContent = '';
+      hintEl.textContent = '';
+    }
+
+    function showScenario(c, ind){
+      hintEl.textContent = '';
+      outcomeEl.style.display = 'inline-flex';
+      outcomeEl.textContent = c.outcome;
+      verdictEl.style.background = 'rgba(124,58,237,.2)';
+      verdictEl.style.color = '#d3b6ff';
+      verdictEl.textContent = c.label;
+      sayEl.textContent = c.text;
+      sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
+      sayEl.style.paddingTop = '12px';
+      sourceEl.textContent = c.source;
+    }
+
+    function lookup(ruleIndex, label){
+      hintEl.textContent = '';
+      if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
+      state.topicIndex = ruleIndex;
+      var ind = INDUSTRIES[state.industry];
+      var c = ind.clients[state.client];
+      var rule = c.rules[ruleIndex];
+      outcomeEl.style.display = 'inline-flex';
+      outcomeEl.textContent = rule.outcome;
+      verdictEl.style.background = 'rgba(124,58,237,.2)';
+      verdictEl.style.color = '#d3b6ff';
+      verdictEl.textContent = label;
+      sayEl.textContent = rule.text;
+      sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
+      sayEl.style.paddingTop = '12px';
+      sourceEl.textContent = 'Source: ' + c.name + '’s approved ' + label + ' rule';
+    }
+
+    function setActiveClientTab(key){
+      var tabs = clientTabsEl.querySelectorAll('.demo-tab');
+      tabs.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-client') === key); });
+    }
+
+    function renderClientTabs(){
+      var ind = INDUSTRIES[state.industry];
+      clientTabsEl.innerHTML = '';
+      Object.keys(ind.clients).forEach(function(key){
+        var c = ind.clients[key];
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'demo-tab';
+        b.setAttribute('data-client', key);
+        b.textContent = c.name;
+        b.addEventListener('click', function(){
+          state.client = key;
+          setActiveClientTab(key);
+          activeProfileEl.style.display = 'block';
+          activeProfileEl.innerHTML = activeProfileLabel(c.name, ind.label);
+          if (ind.interactive) {
+            lookup(state.topicIndex, ind.topics[state.topicIndex].label);
+          } else {
+            showScenario(c, ind);
+          }
+        });
+        clientTabsEl.appendChild(b);
+      });
+    }
 
     function renderTopics(){
+      var ind = INDUSTRIES[state.industry];
       topicsEl.innerHTML = '';
-      TOPICS.forEach(function(t){
+      ind.topics.forEach(function(t){
         var b = document.createElement('button');
         b.type = 'button';
         b.className = 'demo-tab';
@@ -257,33 +407,11 @@
       });
     }
 
-    function setActiveClientTab(key){
-      tabButtons.forEach(function(b){
-        b.classList.toggle('active', b.getAttribute('data-client') === key);
-      });
-    }
-
-    function lookup(ruleIndex, label){
-      hintEl.textContent = '';
-      if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
-      state.topicIndex = ruleIndex;
-      var c = CLIENTS[state.client];
-      var rule = c.rules[ruleIndex];
-      outcomeEl.style.display = 'inline-flex';
-      outcomeEl.textContent = rule.outcome;
-      verdictEl.style.background = 'rgba(124,58,237,.2)';
-      verdictEl.style.color = '#d3b6ff';
-      verdictEl.textContent = c.name + ' · ' + label;
-      sayEl.textContent = rule.text;
-      sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
-      sayEl.style.paddingTop = '12px';
-      sourceEl.textContent = 'Source: ' + c.name + '’s approved ' + label + ' rule';
-    }
-
     function matchTyped(raw){
       var text = (raw || '').toLowerCase();
-      for (var i = 0; i < TOPICS.length; i++) {
-        var t = TOPICS[i];
+      var topics = INDUSTRIES[state.industry].topics || [];
+      for (var i = 0; i < topics.length; i++) {
+        var t = topics[i];
         for (var j = 0; j < t.keywords.length; j++) {
           if (text.indexOf(t.keywords[j]) !== -1) return t;
         }
@@ -301,19 +429,46 @@
       typeEl.value = '';
     }
 
-    tabButtons.forEach(function(b){
-      b.addEventListener('click', function(){
-        state.client = b.getAttribute('data-client');
-        setActiveClientTab(state.client);
-        lookup(state.topicIndex, TOPICS[state.topicIndex].label);
+    function setActiveIndustryPill(key){
+      var pills = industriesEl.querySelectorAll('.demo-tab');
+      pills.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-industry') === key); });
+    }
+
+    function switchIndustry(key){
+      state.industry = key;
+      state.client = null;
+      state.topicIndex = 0;
+      setActiveIndustryPill(key);
+      scenarioEl.textContent = INDUSTRIES[key].scenario;
+      renderClientTabs();
+      resetPanel();
+      var ind = INDUSTRIES[key];
+      topicsWrapEl.style.display = ind.interactive ? 'flex' : 'none';
+      if (ind.interactive) renderTopics();
+      typeEl.value = '';
+    }
+
+    function renderIndustryPills(){
+      industriesEl.innerHTML = '';
+      Object.keys(INDUSTRIES).forEach(function(key){
+        var ind = INDUSTRIES[key];
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'demo-tab';
+        b.setAttribute('data-industry', key);
+        b.textContent = ind.label;
+        b.addEventListener('click', function(){ switchIndustry(key); });
+        industriesEl.appendChild(b);
       });
-    });
+    }
+
     askBtn.addEventListener('click', submitTyped);
     typeEl.addEventListener('keydown', function(e){
       if (e.key === 'Enter') { e.preventDefault(); submitTyped(); }
     });
 
-    renderTopics();
+    renderIndustryPills();
+    switchIndustry('contact');
   })();
   </script>
 
