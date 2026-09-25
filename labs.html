@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent First Labs</title>
-<meta name="description" content="Free tools for multi-client contact-center operators: experience the problem, quantify what it costs, then see what the solution would look like with your own rules.">
+<meta name="description" content="Free tools for multi-client contact-center operators: experience the problem, diagnose your operating style, quantify what it costs, see what the solution would look like with your own rules, then get a checklist to act on.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
@@ -60,13 +60,13 @@
   .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
 
   .tool-num{flex:0 0 auto;width:36px;height:36px;border-radius:var(--radius-full);background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900}
-  .arrow{color:var(--muted);font-size:22px;flex:0 0 auto;display:flex;align-items:center;}
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;align-self:flex-start;}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
 
   @media (max-width:900px){
     .section{padding:56px 20px}
     .ds-display{font-size:32px}
     .ds-hero{font-size:24px}
-    .arrow{transform:rotate(90deg);}
   }
 </style>
 </head>
@@ -93,27 +93,91 @@
     <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:820px;">
       <div class="ds-label eyebrow-c">Agent First Labs</div>
       <h1 class="ds-display" style="color:#fff;">Free tools for multi-client contact-center operators.</h1>
-      <p class="ds-body" style="color:#c7cce0;">Not another PDF. Three small, working tools that show you the exact problem Agent First solves, using your own numbers and your own rules, not an invented statistic. Try any of them, no email required to start.</p>
+      <p class="ds-body" style="color:#c7cce0;">Six short games that make the problem impossible to miss, five calculators that turn it into your own numbers, and one checklist to act on today. No email required to start anything here.</p>
     </div>
   </div>
 
-  <!-- THE THREE TOOLS -->
+  <!-- GAMES -->
   <div class="section" style="background:var(--soft);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;">
-      <div class="ds-label eyebrow-v">Three tools, one story</div>
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="ds-label eyebrow-v">Play something first</div>
+        <p class="ds-body-sm" style="color:var(--muted);">No email required to play any of these. At the end, you can choose to have your result sent to you, or just play again.</p>
+      </div>
 
-      <div style="display:flex;align-items:stretch;gap:16px;flex-wrap:wrap;">
-        <div class="card" style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
-          <div class="tool-num">1</div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pill pill-violet">~2 min</div>
           <div class="ds-body" style="font-weight:900;">How hard is the answer to find?</div>
           <div class="ds-heading">Agent Challenge</div>
           <div class="ds-body-sm" style="color:var(--muted);flex:1;">Experience a multi-client lookup under time pressure. Three fictional clients, three sets of rules, real questions against the clock.</div>
           <a href="agent-challenge.html" class="btn btn-primary" style="justify-content:center;">Take the Challenge</a>
         </div>
 
-        <div class="arrow">&rarr;</div>
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pill pill-violet">90 sec</div>
+          <div class="ds-body" style="font-weight:900;">How many client switches can you survive?</div>
+          <div class="ds-heading">Client Roulette</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">A customer asks something, you answer, then: client switch. Same question, different company, a different rule. The pace gets faster as you go.</div>
+          <a href="client-roulette.html" class="btn btn-primary" style="justify-content:center;">Start the shift</a>
+        </div>
 
-        <div class="card" style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pill pill-violet">10 rounds</div>
+          <div class="ds-body" style="font-weight:900;">Real rule, or an answer nobody wrote down?</div>
+          <div class="ds-heading">Not Specified: The Game</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Ten calls. Some have a real rule behind them. Some do not, and the only correct move is admitting that out loud instead of guessing.</div>
+          <a href="not-specified-the-game.html" class="btn btn-primary" style="justify-content:center;">Play now</a>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pill pill-violet">10 calls</div>
+          <div class="ds-body" style="font-weight:900;">When do you actually need a supervisor?</div>
+          <div class="ds-heading">Supervisor Boss Battle</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Ten calls, one binary choice each: handle it, or escalate it. Get it wrong enough times and the boss meter fills all the way up.</div>
+          <a href="supervisor-boss-battle.html" class="btn btn-primary" style="justify-content:center;">Start your shift</a>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pill pill-violet">3 rounds</div>
+          <div class="ds-body" style="font-weight:900;">Can you out-search an automatic match?</div>
+          <div class="ds-heading">Beat Agent First</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Dig through a shared, messy knowledge base while Agent First resolves the same question its own way: fast, deterministic, no guessing.</div>
+          <a href="beat-agent-first.html" class="btn btn-primary" style="justify-content:center;">Start the race</a>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pill pill-violet">~5 min</div>
+          <div class="ds-body" style="font-weight:900;">One angry customer. How many ways can this go wrong?</div>
+          <div class="ds-heading">Call From Hell</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">A branching call with six real endings. Every choice feels reasonable in the moment. That is exactly the point.</div>
+          <a href="call-from-hell.html" class="btn btn-primary" style="justify-content:center;">Take the call</a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CALCULATORS -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <div class="ds-label eyebrow-v">Prove it with your own numbers</div>
+        <p class="ds-body-sm" style="color:var(--muted);">Five calculators using your real numbers, not an invented statistic, plus a checklist to act on today.</p>
+      </div>
+
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">1</div>
+          <div class="ds-body" style="font-weight:900;">What kind of operation are you actually running?</div>
+          <div class="ds-heading">Operating Style Quiz</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Eight quick questions about how policy actually reaches your floor today. Get a plain-language read on your operating style, and where the friction is really coming from.</div>
+          <a href="operating-style-quiz.html" class="btn btn-primary" style="justify-content:center;">Take the quiz</a>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
           <div class="tool-num">2</div>
           <div class="ds-body" style="font-weight:900;">What does that search cost your operation?</div>
           <div class="ds-heading">Supervisor Tax Calculator</div>
@@ -121,29 +185,52 @@
           <a href="supervisor-tax-calculator.html" class="btn btn-primary" style="justify-content:center;">Run the numbers</a>
         </div>
 
-        <div class="arrow">&rarr;</div>
-
-        <div class="card" style="flex:1;min-width:260px;display:flex;flex-direction:column;gap:12px;">
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
           <div class="tool-num">3</div>
+          <div class="ds-body" style="font-weight:900;">What does ramping new hires across every client actually cost?</div>
+          <div class="ds-heading">New-Hire Ramp Cost Estimator</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Enter your hiring numbers and today's ramp time, and watch the real cost of that ramp time add up for a full year.</div>
+          <a href="ramp-cost-estimator.html" class="btn btn-primary" style="justify-content:center;">Estimate the cost</a>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">4</div>
+          <div class="ds-body" style="font-weight:900;">What does it all add up to, in one number?</div>
+          <div class="ds-heading">Chaos Cost Calculator</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Combine supervisor interruption time and new-hire ramp time into a single Total Chaos Cost for the year, from your own numbers.</div>
+          <a href="chaos-cost-calculator.html" class="btn btn-primary" style="justify-content:center;">Calculate my total</a>
+        </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">5</div>
           <div class="ds-body" style="font-weight:900;">What would your information look like inside Agent First?</div>
           <div class="ds-heading">Client Profile Preview</div>
-          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Turn a real rule into structured guidance. Paste a short SOP or policy excerpt and get a draft preview of how it could be structured as a Client Profile.</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Answer nine short questions about a real client's rules and watch a sample Client Profile assemble as you go, with a readiness report at the end.</div>
           <a href="client-profile-preview.html" class="btn btn-primary" style="justify-content:center;">Preview my rules</a>
         </div>
+
+        <div class="card" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="tool-num">6</div>
+          <div class="ds-body" style="font-weight:900;">Ready to act on this today?</div>
+          <div class="ds-heading">Client Profile Setup Checklist</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Six things every Client Profile needs before it goes live: services eligibility, authorization levels, required language, escalation, contact hours, and how to handle what isn't specified.</div>
+          <a href="checklist.html" class="btn btn-primary" style="justify-content:center;">Get the checklist</a>
+        </div>
+
       </div>
 
       <div class="card" style="background:var(--navy);border:none;">
         <div class="ds-body" style="color:#fff;font-weight:750;margin-bottom:6px;">Get value first, then decide what's next</div>
-        <div class="ds-body-sm" style="color:#c7cce0;">Every tool here works before you give up anything. At the end, you can choose to have your result emailed to you, or send over your own real rules and see this done for real. Nothing is gated up front.</div>
+        <div class="ds-body-sm" style="color:#c7cce0;">Every tool and game here works before you give up anything, no email required to start. At the end, you can choose to have your result emailed to you, or send over your own real rules and see this done for real. The checklist is the one exception: it's a short form, then the PDF.</div>
       </div>
     </div>
   </div>
 
   <!-- WHY THIS EXISTS -->
-  <div class="section" style="background:#fff;">
+  <div class="section" style="background:var(--soft);">
     <div class="wrap" style="display:flex;flex-direction:column;gap:14px;max-width:760px;">
       <div class="ds-label eyebrow-v">Why tools instead of a download</div>
-      <p class="ds-body">A checklist tells you what to think about. A tool shows you what's actually happening in your own operation, with your own numbers and your own rules, in a couple of minutes. Agent First exists to solve an operational problem, so these are built the same way: small, working, and honest about what they can and can't tell you.</p>
+      <p class="ds-body">A checklist tells you what to think about. A tool, or a game, shows you what's actually happening in your own operation, or what it feels like on the floor, in a couple of minutes. Agent First exists to solve an operational problem, so these are built the same way: small, working, and honest about what they can and can't tell you.</p>
     </div>
   </div>
 
