@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: Call From Hell</title>
+<meta name="description" content="One angry customer, one branching call. Apologize first, escalate first, or promise first: every choice feels reasonable in the moment. See which of six real endings you land on.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/call-from-hell.html">
+<meta property="og:title" content="Agent First: Call From Hell">
+<meta property="og:description" content="One angry customer. A handful of choices, each reasonable on its own. Clean Resolution, Supervisor Rescue, Compliance Disaster, Accidental Promise, Wrong Client, or Customer Hung Up: which one do you land on?">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: Call From Hell">
+<meta name="twitter:description" content="One angry customer. A handful of choices, each reasonable on its own. Which of six endings do you land on?">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;--amber:#a15c00;--amberbg:#fff6e5;--danger:#c5364a;--dangerbg:#fdeaee;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .pill{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);font-size:12px;font-weight:750}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
+  .pill-green{background:var(--greenbg);color:var(--green)}
+  .pill-danger{background:var(--dangerbg);color:var(--danger)}
+  .pill-amber{background:var(--amberbg);color:var(--amber)}
+
+  /* transcript feed */
+  .cfh-feed{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;max-height:440px;overflow-y:auto;padding-right:4px;}
+  .cfh-feed-entry{border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.55;max-width:100%;}
+  .cfh-feed-entry.call{background:var(--soft);border:1px solid var(--line);color:var(--ink);}
+  .cfh-feed-entry.you{background:var(--purplebg);border:1px solid transparent;color:#4c2a99;font-weight:650;align-self:flex-end;max-width:86%;}
+  .cfh-feed-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:4px;}
+
+  .cfh-choice-btn{width:100%;text-align:left;padding:14px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;font-size:14.5px;font-weight:650;color:var(--ink);cursor:pointer;transition:border-color .12s ease,background .12s ease,transform .1s ease;margin-bottom:10px;}
+  .cfh-choice-btn:hover{border-color:var(--violet);background:var(--purplebg);transform:translateY(-1px);}
+  .cfh-choice-btn:active{transform:scale(.99);}
+  .cfh-choice-btn:last-child{margin-bottom:0;}
+
+  .cfh-path-list{display:flex;flex-direction:column;gap:8px;}
+  .cfh-path-item{display:flex;gap:10px;font-size:13.5px;color:var(--muted);line-height:1.5;}
+  .cfh-path-num{flex:0 0 auto;font-weight:900;color:var(--violet);}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO STAGE -->
+  <div class="section" id="introStage" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; Choose your response</div>
+      <h1 class="ds-display" style="color:#fff;">Call From Hell</h1>
+      <p class="ds-body" style="color:#c7cce0;">One customer. One call. A handful of choices, each of them reasonable on its own: apologize first, escalate first, promise first. There is no score here, just a transcript of exactly what you did, and which of six real endings it led to.</p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px;width:100%;">
+        <div class="card-on-dark">
+          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">One call, several ways to go wrong</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Every choice feels defensible in the moment. That is exactly what makes the wrong ones easy to pick.</div>
+        </div>
+        <div class="card-on-dark">
+          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">No score, just an ending</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">No points to chase. Just your path through the call, and the ending it actually earned.</div>
+        </div>
+        <div class="card-on-dark">
+          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">The endings are not random</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Clean Resolution, Supervisor Rescue, Compliance Disaster, Accidental Promise, Wrong Client, Customer Hung Up: each one maps to a specific, real failure mode.</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" style="margin-top:6px;padding:15px 34px;font-size:16px;">Take the call</button>
+      <p class="ds-body-sm" style="color:#8991b3;">Nothing is recorded or sent anywhere. This runs entirely in your browser.</p>
+    </div>
+  </div>
+
+  <!-- GAME STAGE -->
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:0;max-width:680px;">
+      <div class="card">
+        <div class="ds-label eyebrow-c" style="margin-bottom:12px;">The call</div>
+        <div id="feed" class="cfh-feed"></div>
+        <div id="choicesWrap" style="border-top:1px solid var(--line);padding-top:16px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULTS STAGE -->
+  <div class="section" id="resultsStage" style="background:#fff;display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:680px;">
+
+      <div class="card">
+        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Your ending</div>
+        <div id="endingBadgeRow" style="margin-bottom:12px;"></div>
+        <div class="ds-hero" id="endingTitle" style="margin-bottom:12px;">--</div>
+        <p class="ds-body" id="endingBody" style="color:var(--muted);">--</p>
+      </div>
+
+      <div class="card" style="border-color:var(--violet);background:var(--purplebg);">
+        <div class="ds-body" style="font-weight:900;margin-bottom:8px;">With Agent First</div>
+        <p class="ds-body-sm" id="endingAngle" style="color:#4c2a99;">--</p>
+      </div>
+
+      <div class="card">
+        <div class="ds-body" style="font-weight:750;margin-bottom:12px;">Your path through the call</div>
+        <div class="cfh-path-list" id="pathList"></div>
+      </div>
+
+      <div class="card">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Share your result</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input class="field-input" id="shareText" readonly style="flex:1;min-width:220px;">
+          <button class="btn btn-ghost-light" id="copyBtn">Copy</button>
+        </div>
+        <div class="ds-body-sm" id="copyStatus" style="color:var(--green);display:none;margin-top:8px;">Copied.</div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="playAgainBtn">Take the call again</button>
+        <a href="client-roulette.html" class="btn btn-ghost-light">Try another game: Client Roulette</a>
+      </div>
+
+      <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
+        <div class="ds-body" style="font-weight:900;color:#fff;">See your own rules handled this way</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">Send 1-2 pages of anonymized policy, SOP, script, or FAQ material from one real client, and see how those exact rules could appear inside Agent First.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
+          <a href="pilot-program.html" class="btn btn-ghost-dark">See the pilot program</a>
+        </div>
+      </div>
+
+      <div class="card" id="emailCard">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
+        <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+          <input type="hidden" name="subject" value="Call From Hell result, Agent First">
+          <input type="hidden" name="from_name" value="Agent First website">
+          <input type="hidden" name="result_summary" id="resultSummaryField" value="">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+          <button type="submit" class="btn btn-primary">Email it to me</button>
+        </form>
+        <div id="emailStatus" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var NODES = {
+    start: {
+      text: 'A customer calls in, sharp and fast: "I was told my cancellation was free, and now I am looking at a $25 charge on my card. I want this fixed. Right now."',
+      choices: [
+        { label: 'Apologize, and pull up the account to check what actually applies.', next: 'pull_account' },
+        { label: 'Tell them the fee is standard and cannot be waived.', next: 'standard_fee_pushback' },
+        { label: 'Offer to waive the fee immediately to calm them down.', next: 'immediate_waive' }
+      ]
+    },
+    pull_account: {
+      text: 'You pull up the account. The name on the call matches a customer in the system, but the appointment reference number they read out does not look like the usual format for that client.',
+      choices: [
+        { label: 'Ask which company actually scheduled the original appointment.', next: 'confirm_client' },
+        { label: 'The name matches, so proceed as if it is the obvious client.', next: 'wrong_client' }
+      ]
+    },
+    standard_fee_pushback: {
+      text: 'The customer\'s voice jumps a register. "That is NOT what I was told at booking. Get me a supervisor. Now."',
+      choices: [
+        { label: 'Apologize, and offer to check the account before escalating.', next: 'pull_account' },
+        { label: 'Tell them a supervisor will just say the same thing.', next: 'customer_hung_up' }
+      ]
+    },
+    immediate_waive: {
+      text: 'You tell them the fee is waived, right now, before checking which client this even is or what the actual policy says.',
+      choices: [
+        { label: 'Catch yourself. Check the account before confirming anything further.', next: 'pull_account' },
+        { label: 'Put it in writing by email immediately, since you already said it out loud.', next: 'accidental_promise' }
+      ]
+    },
+    confirm_client: {
+      text: '"It was Northgate. I am positive," the customer says. The reference number still does not match Northgate\'s usual format, and this is their second cancellation on file this year.',
+      choices: [
+        { label: 'Check Northgate\'s rule specifically for a second cancellation in the same year.', next: 'northgate_second_time' },
+        { label: 'Take their word for it and apply the standard rule without checking the second-time detail.', next: 'compliance_disaster' }
+      ]
+    },
+    northgate_second_time: {
+      text: 'Northgate\'s actual rule: cancellations within 48 hours are free, but only twice per year, and this is their second. The fee is technically correct, but nothing in their booking confirmation ever mentioned a twice-per-year limit.',
+      choices: [
+        { label: 'Explain the limit clearly, apologize that it was never disclosed, and flag the gap on the account.', next: 'clean_explain' },
+        { label: 'Just say the fee is correct and move on without explaining why.', next: 'customer_hung_up' }
+      ]
+    },
+    clean_explain: {
+      text: 'The customer exhales. "Okay. I get it. I just wish someone had told me that the first time."',
+      choices: [
+        { label: 'Note the account so the limit is disclosed clearly at every future booking, and close the call resolved.', next: 'clean_resolution' },
+        { label: 'Offer a one-time goodwill waiver, since the limit was never disclosed. That kind of exception needs supervisor sign-off first.', next: 'goodwill_escalation' }
+      ]
+    },
+    goodwill_escalation: {
+      text: 'You believe a goodwill waiver is fair here. Northgate\'s rules require supervisor sign-off for any fee exception outside the standard policy. Do you get sign-off, or apply it yourself since you are confident it is the right call?',
+      choices: [
+        { label: 'Get supervisor sign-off before applying the waiver.', next: 'supervisor_rescue' },
+        { label: 'Apply it yourself. You are confident, and it saves time.', next: 'compliance_disaster' }
+      ]
+    }
+  };
+
+  var ENDINGS = {
+    clean_resolution: {
+      tag: 'pill-green',
+      title: 'Clean Resolution',
+      body: 'You verified the account, found the real rule, and explained it clearly instead of guessing or caving. The customer was not thrilled about the fee, but they left the call understanding exactly why it applied.',
+      angle: 'This is the version without any dramatic stakes: the right client and the right rule were already sitting in front of you, so nothing else had room to go wrong.'
+    },
+    supervisor_rescue: {
+      tag: 'pill-violet',
+      title: 'Supervisor Rescue',
+      body: 'You spotted a fair exception, a disclosure gap that was not the customer\'s fault, and instead of guessing at your own authority, you got sign-off before applying it.',
+      angle: 'Agent First flags the moment a decision needs a human sign-off instead of leaving that judgment call to whoever happens to be on the phone under pressure.'
+    },
+    compliance_disaster: {
+      tag: 'pill-danger',
+      title: 'Compliance Disaster',
+      body: 'You applied an exception, or another client\'s policy, without the sign-off it actually required. Nobody says anything about it today. It surfaces quietly, during the next audit, attached to your name.',
+      angle: 'A required sign-off is not a suggestion. Agent First will not let that kind of exception through without it, no matter how confident the agent feels in the moment.'
+    },
+    accidental_promise: {
+      tag: 'pill-amber',
+      title: 'Accidental Promise',
+      body: 'You told the customer something was already handled before you had actually confirmed the client, the rule, or your own authority to approve it. Now it has to be walked back, or honored anyway.',
+      angle: 'Nothing gets confirmed to a customer before the rule and the authorization behind it are both checked. Confidence is not the same thing as being right.'
+    },
+    wrong_client: {
+      tag: 'pill-danger',
+      title: 'Wrong Client',
+      body: 'The name matched, so you proceeded, but the account belonged to a different client with a different rule entirely. Everything you told this customer was confidently, fluently wrong.',
+      angle: 'This is the exact mixup Client Roulette is built around. A Client Profile scoped to the actual account, not assumed from a name match, is what closes this gap.'
+    },
+    customer_hung_up: {
+      tag: 'pill-amber',
+      title: 'Customer Hung Up',
+      body: 'Frustration outran the resolution. The call ended before the actual rule, or the actual reason behind it, ever reached the customer.',
+      angle: 'An angry customer is not calmed by an apology loop. They are calmed by a correct answer, delivered fast enough that they are still on the line to hear it.'
+    }
+  };
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
+  var feed = $('feed'), choicesWrap = $('choicesWrap');
+  var state = null;
+
+  function startGame() {
+    state = { path: [] };
+    feed.innerHTML = '';
+    choicesWrap.innerHTML = '';
+    introStage.style.display = 'none';
+    resultsStage.style.display = 'none';
+    gameStage.style.display = 'flex';
+    renderNode('start');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function appendFeedEntry(who, text) {
+    var row = document.createElement('div');
+    row.className = 'cfh-feed-entry ' + who;
+    var label = who === 'you' ? 'You' : 'The call';
+    row.innerHTML = '<span class="cfh-feed-label">' + label + '</span>' + escapeHtml(text);
+    feed.appendChild(row);
+    feed.scrollTop = feed.scrollHeight;
+  }
+
+  function renderNode(nodeId) {
+    var node = NODES[nodeId];
+    appendFeedEntry('call', node.text);
+    renderChoices(node.choices);
+  }
+
+  function renderChoices(choices) {
+    choicesWrap.innerHTML = '';
+    choices.forEach(function (choice) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'cfh-choice-btn';
+      btn.textContent = choice.label;
+      btn.addEventListener('click', function () { handleChoice(choice); });
+      choicesWrap.appendChild(btn);
+    });
+  }
+
+  function handleChoice(choice) {
+    choicesWrap.innerHTML = '';
+    state.path.push(choice.label);
+    appendFeedEntry('you', choice.label);
+    var next = choice.next;
+    setTimeout(function () {
+      if (ENDINGS[next]) {
+        showEnding(next);
+      } else {
+        renderNode(next);
+      }
+    }, 450);
+  }
+
+  function showEnding(endingId) {
+    var ending = ENDINGS[endingId];
+    gameStage.style.display = 'none';
+    resultsStage.style.display = 'flex';
+
+    $('endingBadgeRow').innerHTML = '<div class="pill ' + ending.tag + '">' + escapeHtml(ending.title) + '</div>';
+    $('endingTitle').textContent = ending.title;
+    $('endingBody').textContent = ending.body;
+    $('endingAngle').textContent = ending.angle;
+
+    $('pathList').innerHTML = state.path.map(function (step, i) {
+      return '<div class="cfh-path-item"><span class="cfh-path-num">' + (i + 1) + '.</span><span>' + escapeHtml(step) + '</span></div>';
+    }).join('');
+
+    var shareLine = 'I just survived a Call From Hell and landed on: ' + ending.title + '. Try it yourself: myagentfirst.com/call-from-hell.html';
+    $('shareText').value = shareLine;
+    $('resultSummaryField').value = shareLine;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('startBtn').addEventListener('click', startGame);
+  $('playAgainBtn').addEventListener('click', startGame);
+
+  $('copyBtn').addEventListener('click', function () {
+    var field = $('shareText');
+    field.select();
+    var done = function () {
+      $('copyStatus').style.display = 'block';
+      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(field.value).then(done).catch(function () {
+        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+      });
+    } else {
+      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+    }
+  });
+
+  var emailForm = $('emailForm');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('emailStatus');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
