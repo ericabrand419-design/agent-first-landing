@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: How It Works</title>
+<meta name="description" content="How a Client Profile gets built, how the decision engine resolves a call, why every answer shows its source, and why the agent always keeps the final word.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/how-it-works.html">
+<meta property="og:title" content="Agent First: How It Works">
+<meta property="og:description" content="How a Client Profile gets built, how the decision engine resolves a call, why every answer shows its source, and why the agent always keeps the final word.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: How It Works">
+<meta name="twitter:description" content="How a Client Profile gets built, how the decision engine resolves a call, why every answer shows its source, and why the agent always keeps the final word.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-stat{font-size:22px;line-height:1.15;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-dark{background:var(--navy);border-radius:var(--radius-lg);padding:24px;color:#fff}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
+  .nav-link:hover::after{right:0;}
+
+  .pill{display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;width:fit-content;}
+  .pill-outcome{background:rgba(124,58,237,.12);color:var(--violet);}
+
+  @media (max-width:900px){
+    .section{padding:56px 24px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
+    </div>
+  </div>
+
+  <style>
+    .step-row{display:flex;gap:20px;align-items:flex-start}
+    .step-num{flex:0 0 auto;width:32px;height:32px;border-radius:var(--radius-full);background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900}
+  </style>
+
+  <!-- HERO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:820px;">
+      <div class="ds-label eyebrow-c">How It Works</div>
+      <h1 class="ds-display" style="color:#fff;">A client's rules, entered once. A clear answer, every time the situation is covered.</h1>
+      <p class="ds-body" style="color:#c7cce0;">Agent First is built from four pieces: a structured Client Profile for each account, a decision engine that checks the live situation against it, a small vocabulary of plain outcomes, and a rule that the agent, not the system, always has the final word.</p>
+    </div>
+  </div>
+
+  <!-- THE CLIENT PROFILE -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">1. The Client Profile</div>
+        <h2 class="ds-hero">What gets configured, once, per client.</h2>
+        <p class="ds-body" style="color:var(--muted);">A Client Profile is a structured version of a client's real policy language: a handbook, an internal wiki, call scripts, or compliance documents, entered once into a rule set every agent can rely on. It isn't a document the agent has to search. It's what the decision engine checks against on every call.</p>
+      </div>
+      <div class="grid" style="gap:20px;max-width:820px;">
+        <div class="step-row">
+          <div class="step-num">1</div>
+          <div>
+            <div class="ds-body" style="font-weight:750;margin-bottom:2px;">Services and eligibility</div>
+            <div class="ds-body-sm" style="color:var(--muted);">What this client offers, and what makes a specific situation eligible or not.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">2</div>
+          <div>
+            <div class="ds-body" style="font-weight:750;margin-bottom:2px;">Authorization levels</div>
+            <div class="ds-body-sm" style="color:var(--muted);">What an agent can decide alone, what needs verification, what's off-limits entirely.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">3</div>
+          <div>
+            <div class="ds-body" style="font-weight:750;margin-bottom:2px;">Required language</div>
+            <div class="ds-body-sm" style="color:var(--muted);">Exact disclosures and wording that have to be said, and what an agent should never promise.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">4</div>
+          <div>
+            <div class="ds-body" style="font-weight:750;margin-bottom:2px;">Escalation and transfer rules</div>
+            <div class="ds-body-sm" style="color:var(--muted);">Specifically who a situation goes to, not a generic “escalate.”</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">5</div>
+          <div>
+            <div class="ds-body" style="font-weight:750;margin-bottom:2px;">Hours, contacts, and routing</div>
+            <div class="ds-body-sm" style="color:var(--muted);">Who's reachable when, and what happens outside those hours.</div>
+          </div>
+        </div>
+        <div class="step-row">
+          <div class="step-num">6</div>
+          <div>
+            <div class="ds-body" style="font-weight:750;margin-bottom:2px;">What “not specified” should mean</div>
+            <div class="ds-body-sm" style="color:var(--muted);">The one decision that protects every gap the rest of the Profile doesn't catch.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE DECISION ENGINE -->
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">2. The decision engine</div>
+        <h2 class="ds-hero">Configure once. Ask on the call. Get a verdict and the words.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">1</div>
+          <div class="ds-body" style="font-weight:750;margin-top:10px;">Configure once</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A client's rules get entered once into a structured Client Profile, checked on every call, not searched on any of them.</div>
+        </div>
+        <div class="card">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">2</div>
+          <div class="ds-body" style="font-weight:750;margin-top:10px;">Ask, on the live call</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">The agent tells Agent First who they're talking to (the Active Profile) and what the customer wants. No searching, no second system to check.</div>
+        </div>
+        <div class="card">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">3</div>
+          <div class="ds-body" style="font-weight:750;margin-top:10px;">Get a verdict and the words</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Agent First hands back a clear decision, plus approved or configured wording. The agent still decides what to say.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE OUTCOME VOCABULARY -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">3. The outcome vocabulary</div>
+        <h2 class="ds-hero">Every answer resolves to one of six plain outcomes, not a paragraph to interpret.</h2>
+        <p class="ds-body" style="color:var(--muted);">The same six outcomes apply whatever the industry, whatever the client. Learning the vocabulary once means every new Profile is genuinely just configuration, not a new interface to learn.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));">
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">ALLOW / DO NOT ALLOW</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Whether the agent can proceed on their own, one way or the other. Most calls resolve here, and resolving here is the whole point: a clear yes or no instead of an agent's best guess.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">VERIFY</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A detail to confirm before deciding anything else, like whether a policyholder purchased a specific coverage add-on, or whether a patient's symptoms fall inside a defined list.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">DISCLOSE</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A specific line this client requires the agent to say out loud, word for word, before or during the rest of the interaction.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">DOCUMENT</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Something that has to be logged or recorded before the call ends, so the record exists even when nothing else about the call was unusual.</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">TRANSFER / ESCALATE</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">When the call, or just the decision, belongs with someone else, a supervisor, an adjuster, a triage nurse, a property manager, named specifically, not just “escalate.”</div>
+        </div>
+        <div class="card">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">NOT SPECIFIED</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">This client hasn't set a rule for this situation. Agent First says so instead of guessing, and routes it to a person. That gap then becomes a clear signal for what the Client Profile needs next.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROVENANCE -->
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:760px;">
+      <div class="ds-label eyebrow-v">4. Provenance: source shown</div>
+      <h2 class="ds-hero">Every answer says which client's rule it came from.</h2>
+      <p class="ds-body" style="color:var(--muted);">Agent First doesn't just hand back a verdict. It names the specific rule behind it, for example “Source: Meridian Auto Insurance's approved rental-reimbursement rule.” That's what makes the answer checkable instead of a black box, and it's what makes NOT SPECIFIED useful instead of just an error: the gap is visible, attributable to a specific client and situation, and fixable in the Profile.</p>
+    </div>
+  </div>
+
+  <!-- HUMAN CONTROL -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:760px;">
+      <div class="ds-label eyebrow-v">5. Human control</div>
+      <h2 class="ds-hero">The agent decides. Agent First never talks to the customer.</h2>
+      <p class="ds-body" style="color:var(--muted);">Agent First works from the client's approved operating rules. It can help interpret the request. It doesn't get to invent the policy, and it doesn't get to speak for the agent. The agent reads the verdict, reads the suggested wording, and decides what to actually say. On every call, every time.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;margin-top:10px;">
+        <div class="ds-label eyebrow-v" style="text-align:center;">The trust model, in one line</div>
+        <div class="card" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;padding:22px 24px;width:100%;">
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Approved rules</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Active Profile</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Explicit outcome</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Source shown</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Human decides</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section" style="background:var(--navy);padding:96px 48px;">
+    <div style="width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <h2 class="ds-hero" style="color:#fff;">See it work on your own rules.</h2>
+      <p class="ds-body" style="color:#c7cce0;">Try the interactive demo, or apply for a pilot built around your real Client Profile.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+        <a href="index.html#demo" class="btn btn-primary">Try the live demo</a>
+        <a href="index.html#contact" class="btn btn-ghost-dark">Apply for the pilot program</a>
+      </div>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+</body>
+</html>
