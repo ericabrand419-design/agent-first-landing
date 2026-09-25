@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: What's Your Contact Center's Operating Style?</title>
+<meta name="description" content="8 quick questions. Find out whether your multi-client operation runs like a Firefighter, an Improviser, a Librarian, or a Decision Layer.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/operating-style-quiz.html">
+<meta property="og:title" content="What's Your Contact Center's Operating Style?">
+<meta property="og:description" content="8 quick questions. Find out whether your multi-client operation runs like a Firefighter, an Improviser, a Librarian, or a Decision Layer.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What's Your Contact Center's Operating Style?">
+<meta name="twitter:description" content="8 quick questions. Find out whether your multi-client operation runs like a Firefighter, an Improviser, a Librarian, or a Decision Layer.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
+  .field-label{font-size:13px;font-weight:650;color:var(--ink)}
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .oq-progress-track{width:100%;height:8px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .oq-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--grad-primary);width:0%;transition:width .35s ease;}
+  .oq-progress-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
+
+  .oq-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .14s ease,background .14s ease,transform .1s ease;}
+  .oq-option:hover{border-color:var(--violet);background:var(--purplebg);}
+  .oq-option:active{transform:scale(.99);}
+
+  .oq-badge{display:inline-flex;align-items:center;padding:7px 18px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;font-size:13px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;width:fit-content;}
+
+  @keyframes oq-fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .oq-fade{animation:oq-fade-in .35s ease;}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:18px;max-width:820px;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; Free tool</div>
+      <h1 class="ds-display" style="color:#fff;">What's your contact center's operating style?</h1>
+      <p class="ds-body" style="color:#c7cce0;">8 quick questions about how your multi-client operation actually runs today. No client names or account numbers, just how the floor handles the moment an agent isn't sure of a rule.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:680px;">
+
+      <div id="oq-quiz">
+        <div class="oq-progress-label" id="oq-progress-label">Question 1 of 8</div>
+        <div class="oq-progress-track" style="margin-bottom:28px;"><div class="oq-progress-fill" id="oq-progress-fill"></div></div>
+
+        <div class="card oq-fade" id="oq-question-card">
+          <div class="ds-heading" id="oq-question-text" style="margin-bottom:20px;"></div>
+          <div id="oq-options" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+      </div>
+
+      <div id="oq-result" style="display:none;flex-direction:column;gap:20px;">
+        <div class="card oq-fade" style="align-items:flex-start;display:flex;flex-direction:column;gap:14px;">
+          <div class="oq-badge" id="oq-result-badge">--</div>
+          <h2 class="ds-hero" id="oq-result-title">--</h2>
+          <p class="ds-body" style="color:var(--muted);" id="oq-result-desc">--</p>
+          <p class="ds-body-sm" style="color:var(--muted);" id="oq-result-breakdown"></p>
+          <a id="oq-result-cta" class="btn btn-primary" href="#">--</a>
+        </div>
+
+        <div class="card" id="oq-email-card">
+          <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want your full breakdown emailed, including how you compare to the other 3 styles?</div>
+          <form id="oq-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+            <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+            <input type="hidden" name="subject" value="Operating Style Quiz result, Agent First">
+            <input type="hidden" name="from_name" value="Agent First website">
+            <input type="hidden" name="result_summary" id="oq-result-summary" value="">
+            <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+            <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+            <button type="submit" class="btn btn-primary">Email me my results</button>
+          </form>
+          <div id="oq-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+        </div>
+
+        <button class="btn btn-ghost-light" id="oq-retake" style="align-self:flex-start;">Retake the quiz</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var QUESTIONS = [
+    {
+      text: "When an agent isn't sure of a client's specific rule mid-call, what typically happens?",
+      options: [
+        { label: "They make their best guess and move on", key: "improviser" },
+        { label: "They put the customer on hold and grab a supervisor", key: "firefighter" },
+        { label: "They search a shared doc or wiki and hope it's current", key: "librarian" },
+        { label: "The right rule for that exact client is already in front of them", key: "decision" }
+      ]
+    },
+    {
+      text: "Two agents get the same question from two different clients' customers. How often do they give different-quality answers?",
+      options: [
+        { label: "Constantly. It depends entirely on who picks up", key: "improviser" },
+        { label: "Often enough that QA catches it after the fact, not during the call", key: "librarian" },
+        { label: "Rarely, because supervisors are always double-checking", key: "firefighter" },
+        { label: "Basically never. Same question, same rule, every time", key: "decision" }
+      ]
+    },
+    {
+      text: "How does a client's policy update actually reach the floor?",
+      options: [
+        { label: "It doesn't, not reliably", key: "improviser" },
+        { label: "An email goes out, and people read it eventually, or don't", key: "librarian" },
+        { label: "Supervisors manually retrain the team", key: "firefighter" },
+        { label: "It's live for every agent the moment it's approved", key: "decision" }
+      ]
+    },
+    {
+      text: "What's eating the most of a supervisor's day?",
+      options: [
+        { label: "Being pulled onto calls to bail an agent out", key: "firefighter" },
+        { label: "Answering the same policy questions over and over", key: "improviser" },
+        { label: "Reviewing calls after the fact to catch what went wrong", key: "librarian" },
+        { label: "Actual coaching and performance, not policy lookups", key: "decision" }
+      ]
+    },
+    {
+      text: "Where does most institutional knowledge about a client actually live?",
+      options: [
+        { label: "In a few tenured agents' heads", key: "improviser" },
+        { label: "A shared drive of SOPs, if anyone can find the current version", key: "librarian" },
+        { label: "With supervisors, who are the real reference point", key: "firefighter" },
+        { label: "In one structured place every agent can trust", key: "decision" }
+      ]
+    },
+    {
+      text: "How long until a brand-new agent can be trusted on a call without backup?",
+      options: [
+        { label: "A few days. We don't really have a choice", key: "improviser" },
+        { label: "Weeks, they have to work through the documentation first", key: "librarian" },
+        { label: "It varies wildly by client and by agent", key: "firefighter" },
+        { label: "Days, because the system carries the client-specific knowledge", key: "decision" }
+      ]
+    },
+    {
+      text: "When something goes wrong on a call, what usually caused it?",
+      options: [
+        { label: "The agent didn't know, and nobody caught it in time", key: "improviser" },
+        { label: "The right answer existed somewhere, just not where the agent could find it", key: "librarian" },
+        { label: "It got escalated, but too late to matter to the customer", key: "firefighter" },
+        { label: "Rarely happens. Gaps get caught before the call, not after", key: "decision" }
+      ]
+    },
+    {
+      text: "If your best supervisor took a two-week vacation, what would happen?",
+      options: [
+        { label: "Agents would lean even harder on guesswork", key: "improviser" },
+        { label: "The team would fall back on the docs and muddle through", key: "librarian" },
+        { label: "Things would get noticeably worse, fast", key: "firefighter" },
+        { label: "Barely anything would change", key: "decision" }
+      ]
+    }
+  ];
+
+  var RESULTS = {
+    firefighter: {
+      badge: "The Firefighter",
+      title: "Your operation runs on escalation.",
+      desc: "Supervisors are the safety net catching what agents can't resolve alone. It works, but it caps how much your team can grow without growing headcount right alongside it, one supervisor at a time.",
+      cta: { text: "See what that safety net actually costs", href: "chaos-cost-calculator.html" }
+    },
+    improviser: {
+      badge: "The Improviser",
+      title: "Your agents are making the call. Literally.",
+      desc: "Without a reliable source of truth in the moment, good agents end up guessing with confidence, and the customer has no way to tell the difference between a right answer and a fast one.",
+      cta: { text: "Feel what that guessing pressure is like", href: "agent-challenge.html" }
+    },
+    librarian: {
+      badge: "The Librarian",
+      title: "You have the answers. They're just not where the moment needs them.",
+      desc: "Documentation isn't the problem. The distance between the document and the live call is. The rule exists, it just doesn't arrive in time to be useful.",
+      cta: { text: "See what turns a document into something usable mid-call", href: "client-profile-preview.html" }
+    },
+    decision: {
+      badge: "The Decision Layer",
+      title: "You're already thinking the way we build for.",
+      desc: "Structured, current, and consistent across every client, that's the state everything else on this page is working toward. Worth seeing what it looks like operationalized.",
+      cta: { text: "See what a pilot looks like", href: "pilot-program.html" }
+    }
+  };
+
+  var LABELS = { firefighter: "Firefighter", improviser: "Improviser", librarian: "Librarian", decision: "Decision Layer" };
+
+  var state = { index: 0, scores: { firefighter: 0, improviser: 0, librarian: 0, decision: 0 } };
+
+  function renderQuestion() {
+    var q = QUESTIONS[state.index];
+    $('oq-progress-label').textContent = 'Question ' + (state.index + 1) + ' of ' + QUESTIONS.length;
+    $('oq-progress-fill').style.width = (((state.index) / QUESTIONS.length) * 100) + '%';
+    $('oq-question-text').textContent = q.text;
+    var optionsEl = $('oq-options');
+    optionsEl.innerHTML = '';
+    q.options.forEach(function (opt) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'oq-option';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function () { selectAnswer(opt.key); });
+      optionsEl.appendChild(btn);
+    });
+    var card = $('oq-question-card');
+    card.classList.remove('oq-fade');
+    void card.offsetWidth;
+    card.classList.add('oq-fade');
+  }
+
+  function selectAnswer(key) {
+    state.scores[key] = (state.scores[key] || 0) + 1;
+    state.index += 1;
+    if (state.index < QUESTIONS.length) {
+      renderQuestion();
+    } else {
+      $('oq-progress-fill').style.width = '100%';
+      showResult();
+    }
+  }
+
+  function topArchetype() {
+    var order = ['decision', 'librarian', 'firefighter', 'improviser'];
+    var best = order[0];
+    order.forEach(function (key) {
+      if (state.scores[key] > state.scores[best]) best = key;
+    });
+    return best;
+  }
+
+  function showResult() {
+    var key = topArchetype();
+    var r = RESULTS[key];
+    $('oq-result-badge').textContent = r.badge;
+    $('oq-result-title').textContent = r.title;
+    $('oq-result-desc').textContent = r.desc;
+    $('oq-result-cta').textContent = r.cta.text;
+    $('oq-result-cta').href = r.cta.href;
+
+    var breakdown = Object.keys(state.scores).sort(function (a, b) { return state.scores[b] - state.scores[a]; })
+      .map(function (k) { return LABELS[k] + ' (' + state.scores[k] + '/8)'; }).join(', ');
+    $('oq-result-breakdown').textContent = 'Full breakdown: ' + breakdown + '.';
+    $('oq-result-summary').value = r.badge + ': ' + breakdown;
+
+    $('oq-quiz').style.display = 'none';
+    $('oq-result').style.display = 'flex';
+    $('oq-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  $('oq-retake').addEventListener('click', function () {
+    state = { index: 0, scores: { firefighter: 0, improviser: 0, librarian: 0, decision: 0 } };
+    $('oq-result').style.display = 'none';
+    $('oq-quiz').style.display = 'block';
+    renderQuestion();
+    $('oq-quiz').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  var emailForm = $('oq-email-form');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('oq-email-status');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+
+  renderQuestion();
+})();
+</script>
+
+</body>
+</html>
