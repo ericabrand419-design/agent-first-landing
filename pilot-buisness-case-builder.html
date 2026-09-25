@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: Build My Pilot Business Case</title>
+<meta name="description" content="Pull together what you found in the other Manager Labs tools into one baseline, and see the exact numbers a 90-day pilot would be built to test. Not a savings estimate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/pilot-business-case-builder.html">
+<meta property="og:title" content="Agent First: Build My Pilot Business Case">
+<meta property="og:description" content="Pull together what you found in the other Manager Labs tools into one baseline, and see the exact numbers a 90-day pilot would be built to test. Not a savings estimate.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: Build My Pilot Business Case">
+<meta name="twitter:description" content="Pull together what you found in the other Manager Labs tools into one baseline, and see the exact numbers a 90-day pilot would be built to test. Not a savings estimate.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
+  .field-label{font-size:13px;font-weight:650;color:var(--ink)}
+  .field-hint{font-size:12px;color:var(--muted)}
+  .field-hint a{color:var(--violet);font-weight:650;text-decoration:underline;}
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .pbc-metric-tile{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;display:flex;flex-direction:column;gap:4px;}
+
+  .ds-score{display:inline-block;transition:transform .18s ease}
+  @keyframes pbc-pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+  .pbc-pop{animation:pbc-pop .5s ease;}
+
+  .pbc-total-wrap{text-align:center;padding:8px 0 4px;}
+  .pbc-total{font-size:48px;line-height:1.05;font-weight:900;letter-spacing:-.02em;background:var(--grad-primary);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;}
+
+  .pbc-divider{width:100%;height:1px;background:var(--line);margin:22px 0;}
+  .pbc-divider-dark{width:100%;height:1px;background:rgba(255,255,255,.16);margin:18px 0;}
+
+  .pbc-metric-row{display:flex;gap:12px;align-items:flex-start;}
+  .pbc-metric-badge{flex:0 0 auto;width:28px;height:28px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+    .pbc-total{font-size:36px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:18px;max-width:820px;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; Free tool</div>
+      <h1 class="ds-display" style="color:#fff;">Build My Pilot Business Case</h1>
+      <p class="ds-body" style="color:#c7cce0;">Pull together what you found in Supervisor Tax, Ramp Cost, Decision Resolution Time, and Can I Book It into one baseline. This does not calculate what Agent First would save you. It turns what you already measured into the four numbers a 90-day pilot would be built to test.</p>
+    </div>
+  </div>
+
+  <!-- CALCULATOR -->
+  <div class="section" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:760px;">
+
+      <div class="card">
+        <div class="ds-label eyebrow-v" style="margin-bottom:16px;">Your baseline, today</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
+          <div class="field-row">
+            <label class="field-label" for="pbc-suptax">Supervisor Tax: annual cost of supervisor interruptions</label>
+            <input class="field-input" id="pbc-suptax" type="number" min="0" step="100" value="70000">
+            <div class="field-hint">From the <a href="supervisor-tax-calculator.html">Supervisor Tax Calculator</a>, monthly cost &times; 12, or your own estimate.</div>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="pbc-ramp">Ramp Cost: annual cost of new-hire ramp time</label>
+            <input class="field-input" id="pbc-ramp" type="number" min="0" step="100" value="120000">
+            <div class="field-hint">From the <a href="ramp-cost-estimator.html">New-Hire Ramp Cost Estimator</a>.</div>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="pbc-drt">Decision Resolution Time: seconds per decision, today</label>
+            <input class="field-input" id="pbc-drt" type="number" min="0" step="1" value="80">
+            <div class="field-hint">From the <a href="decision-resolution-time-calculator.html">Decision Resolution Time Calculator</a>. Time, not a call handle time.</div>
+          </div>
+          <div class="field-row">
+            <label class="field-label" for="pbc-booking">Booking Mistakes: annual cost of missed-rule bookings</label>
+            <input class="field-input" id="pbc-booking" type="number" min="0" step="100" value="18000">
+            <div class="field-hint">From <a href="can-i-book-it.html">Can I Book It?</a>, if booking is part of your operation. Leave at 0 if it isn't.</div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="pbc-calc" style="margin-top:24px;">Build my business case</button>
+      </div>
+
+      <div class="card" id="pbc-results" style="display:none;">
+        <div class="pbc-total-wrap">
+          <div class="ds-label eyebrow-v">Combined annual cost identified so far</div>
+          <div class="pbc-total" id="pbc-total">$0</div>
+          <p class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Supervisor Tax, Ramp Cost, and Booking Mistakes, added together. Decision Resolution Time is measured separately, in seconds, not dollars, on purpose.</p>
+        </div>
+
+        <div class="pbc-divider"></div>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+          <div class="pbc-metric-tile">
+            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Supervisor Tax</div>
+            <div class="ds-score" id="pbc-out-suptax" style="font-size:22px;">--</div>
+          </div>
+          <div class="pbc-metric-tile">
+            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Ramp Cost</div>
+            <div class="ds-score" id="pbc-out-ramp" style="font-size:22px;">--</div>
+          </div>
+          <div class="pbc-metric-tile">
+            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Decision Resolution Time</div>
+            <div class="ds-score" id="pbc-out-drt" style="font-size:22px;">--</div>
+          </div>
+          <div class="pbc-metric-tile">
+            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Booking Mistakes</div>
+            <div class="ds-score" id="pbc-out-booking" style="font-size:22px;">--</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-on-dark" id="pbc-after" style="display:none;flex-direction:column;gap:16px;background:var(--navy);border:none;">
+        <div class="ds-body" style="font-weight:900;color:#fff;">This is not a savings estimate.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;" id="pbc-framing">Based on your inputs, a 90-day pilot should test whether Agent First can materially change these four numbers.</p>
+
+        <div class="pbc-divider-dark"></div>
+
+        <div class="ds-body" style="font-weight:750;color:#fff;">The four things a pilot would measure</div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <div class="pbc-metric-row">
+            <div class="pbc-metric-badge">1</div>
+            <div class="ds-body-sm" style="color:#c7cce0;">Supervisor pull-ins: do agents need fewer interruptions once they're working from an approved Active Profile instead of memory?</div>
+          </div>
+          <div class="pbc-metric-row">
+            <div class="pbc-metric-badge">2</div>
+            <div class="ds-body-sm" style="color:#c7cce0;">Ramp time: do new hires reach full productivity faster with an approved Profile as the reference, instead of memorizing rules per client?</div>
+          </div>
+          <div class="pbc-metric-row">
+            <div class="pbc-metric-badge">3</div>
+            <div class="ds-body-sm" style="color:#c7cce0;">Decision Resolution Time: does the time from encountering a rule question to a validated decision actually shorten?</div>
+          </div>
+          <div class="pbc-metric-row">
+            <div class="pbc-metric-badge">4</div>
+            <div class="ds-body-sm" style="color:#c7cce0;">Missed-rule bookings: does the rate of wrong-rule bookings measurably drop?</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+          <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
+          <a href="index.html#contact" class="btn btn-ghost-dark">Talk to us about a pilot</a>
+        </div>
+      </div>
+
+      <div class="card" id="pbc-email-card" style="display:none;">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this business case emailed to you?</div>
+        <form id="pbc-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+          <input type="hidden" name="subject" value="Pilot Business Case result, Agent First">
+          <input type="hidden" name="from_name" value="Agent First website">
+          <input type="hidden" name="result_summary" id="pbc-result-summary" value="">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+          <button type="submit" class="btn btn-primary">Email it to me</button>
+        </form>
+        <div id="pbc-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  function fmtMoney(v) {
+    return '$' + Math.round(v).toLocaleString();
+  }
+  function fmtSeconds(v) {
+    return Math.round(v) + 's';
+  }
+
+  function countUp(el, target, formatter) {
+    var start = 0;
+    var duration = 800;
+    var startTime = null;
+    function step(ts) {
+      if (startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = formatter(start + (target - start) * eased);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = formatter(target);
+        el.classList.add('pbc-pop');
+        setTimeout(function () { el.classList.remove('pbc-pop'); }, 500);
+      }
+    }
+    requestAnimationFrame(step);
+  }
+
+  $('pbc-calc').addEventListener('click', function () {
+    var supTax = parseFloat($('pbc-suptax').value) || 0;
+    var ramp = parseFloat($('pbc-ramp').value) || 0;
+    var drt = parseFloat($('pbc-drt').value) || 0;
+    var booking = parseFloat($('pbc-booking').value) || 0;
+
+    var combined = supTax + ramp + booking;
+
+    countUp($('pbc-total'), combined, fmtMoney);
+    countUp($('pbc-out-suptax'), supTax, fmtMoney);
+    countUp($('pbc-out-ramp'), ramp, fmtMoney);
+    countUp($('pbc-out-booking'), booking, fmtMoney);
+    $('pbc-out-drt').textContent = fmtSeconds(drt);
+
+    $('pbc-framing').textContent = 'Today, that’s roughly ' + fmtMoney(supTax) + ' in supervisor tax, ' + fmtMoney(ramp) + ' in ramp cost, ' + Math.round(drt) + ' seconds per decision, and ' + fmtMoney(booking) + ' in missed-rule bookings. Based on your inputs, a 90-day pilot should test whether Agent First can materially change these four numbers, not promise a dollar figure in advance.';
+
+    var summary = 'Pilot Business Case baseline: Supervisor Tax ' + fmtMoney(supTax) + '/yr, Ramp Cost ' + fmtMoney(ramp) + '/yr, Decision Resolution Time ' + Math.round(drt) + 's/decision, Booking Mistakes ' + fmtMoney(booking) + '/yr. Combined identified annual cost (excl. decision time): ' + fmtMoney(combined) + '. This is a baseline for a 90-day pilot to test, not a savings estimate.';
+    $('pbc-result-summary').value = summary;
+
+    $('pbc-results').style.display = 'block';
+    $('pbc-after').style.display = 'flex';
+    $('pbc-email-card').style.display = 'block';
+    $('pbc-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  var emailForm = $('pbc-email-form');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('pbc-email-status');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
