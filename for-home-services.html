@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: For Home Services</title>
+<meta name="description" content="The same after-hours call resolves differently depending on which client's emergency-dispatch rule is active. Agent First keeps dispatchers inside the right client's approved rules.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/for-home-services.html">
+<meta property="og:title" content="Agent First: For Home Services">
+<meta property="og:description" content="The same after-hours call resolves differently depending on which client's emergency-dispatch rule is active. Agent First keeps dispatchers inside the right client's approved rules.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: For Home Services">
+<meta name="twitter:description" content="The same after-hours call resolves differently depending on which client's emergency-dispatch rule is active. Agent First keeps dispatchers inside the right client's approved rules.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-stat{font-size:22px;line-height:1.15;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-dark{background:var(--navy);border-radius:var(--radius-lg);padding:24px;color:#fff}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
+  .nav-link:hover::after{right:0;}
+
+  .pill{display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;width:fit-content;}
+  .pill-outcome{background:rgba(124,58,237,.12);color:var(--violet);}
+
+  @media (max-width:900px){
+    .section{padding:56px 24px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:820px;">
+      <div class="ds-label eyebrow-c">For Home Services</div>
+      <div style="display:inline-flex;align-items:center;padding:7px 18px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;font-size:12px;font-weight:900;letter-spacing:.09em;box-shadow:0 8px 20px rgba(176,57,217,.22);width:fit-content;">RIGHT CLIENT. RIGHT ACTION.</div>
+      <h1 class="ds-display" style="color:#fff;">The right after-hours call, without guessing at what counts as an emergency.</h1>
+      <p class="ds-body" style="color:#c7cce0;">A dispatch team supporting several trade businesses has to know, instantly, which situations are contractually emergencies for this client and which aren't, and what the safety-override exceptions are. Getting that wrong either strands a customer overnight or triggers a dispatch the client never authorized.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;">
+        <a href="index.html#contact" class="btn btn-primary">Apply for the pilot program</a>
+        <a href="how-it-works.html" class="btn btn-ghost-dark">See how it works</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCENARIO -->
+  <div class="section" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">Same question, two Active Profiles</div>
+        <h2 class="ds-hero">After-Hours Dispatch: the same call, two correct answers.</h2>
+        <p class="ds-body" style="color:var(--muted);">A customer calls at 9:40pm reporting no hot water and asks if someone can come tonight or if it has to wait until morning.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div class="card">
+          <div class="ds-label eyebrow-v" style="margin-bottom:10px;">Active Profile: Apex Plumbing & Drain — Home Services</div>
+          <div class="pill pill-outcome" style="margin-bottom:12px;">ALLOW</div>
+          <div class="ds-body-sm" style="color:var(--ink);line-height:1.6;">Apex has a defined after-hours emergency tier, and no hot water is on that client's emergency-eligible list. The agent is allowed to offer emergency dispatch directly: disclose the $150 after-hours trip fee before booking, then book the on-call tech. They must also document whether water is actively leaking anywhere and the water heater's approximate age if known.</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:12px;">Source: Apex Plumbing & Drain's approved emergency-dispatch list</div>
+        </div>
+        <div class="card">
+          <div class="ds-label eyebrow-v" style="margin-bottom:10px;">Active Profile: Coastal Heating & Air — Home Services</div>
+          <div class="pill pill-outcome" style="margin-bottom:12px;">DO NOT ALLOW</div>
+          <div class="ds-body-sm" style="color:var(--ink);line-height:1.6;">Coastal has no after-hours tier for comfort issues like hot water: next available slot only. One carved-out exception: if the customer describes active water damage or flooding, that reclassifies as a safety issue and the agent must escalate by paging the on-call tech regardless of the normal after-hours rule. The agent has a specific line to ask the distinguishing question rather than guessing.</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:12px;">Source: Coastal Heating & Air's approved after-hours exception rule</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT THIS SHOWS -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:14px;max-width:760px;">
+      <div class="ds-label eyebrow-v">What this shows</div>
+      <p class="ds-body" style="color:var(--ink);">The same normal-vs-urgent distinction generalizes directly: a request only becomes an emergency because a specific, named condition is met, not because the agent feels like it's urgent. One client's definition of that condition is broader than the other's, and the agent never has to remember which by heart.</p>
+      <p class="ds-body-sm" style="color:var(--muted);">This example is illustrative. The companies are not real and the rules are not verified against how home services operations actually run today, though the shape, one engine, two Client Profiles, two correct answers, is the same shape the product already proves.</p>
+    </div>
+  </div>
+
+  <!-- DECISION VOCABULARY RECAP -->
+  <div class="section bg-texture-light" style="background:var(--purplebg);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:760px;">
+      <div class="ds-label eyebrow-v">The same vocabulary, every industry</div>
+      <h2 class="ds-hero">ALLOW, VERIFY, DISCLOSE, DOCUMENT, TRANSFER / ESCALATE, NOT SPECIFIED.</h2>
+      <p class="ds-body" style="color:var(--muted);">Every Agent First decision resolves to one of a small set of plain outcomes, whatever the industry. <a href="how-it-works.html" style="color:var(--violet);font-weight:650;">See the full decision vocabulary on the How It Works page &rarr;</a></p>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section" style="background:var(--navy);padding:96px 48px;">
+    <div style="width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <h2 class="ds-hero" style="color:#fff;">See what a pilot looks like for home services.</h2>
+      <p class="ds-body" style="color:#c7cce0;">A pilot runs on your real rules and your real calls, not a generic example. No setup cost, and the results get reported plainly either way.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+        <a href="index.html#contact" class="btn btn-primary">Apply for the pilot program</a>
+        <a href="pilot-program.html" class="btn btn-ghost-dark">See exactly what the pilot includes</a>
+      </div>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+</body>
+</html>
