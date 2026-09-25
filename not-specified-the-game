@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: NOT SPECIFIED, The Game</title>
+<meta name="description" content="Ten operational calls. Sometimes the client has a rule. Sometimes they never wrote one down. Can you tell the difference, and resist guessing when the answer is NOT SPECIFIED?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/not-specified-the-game.html">
+<meta property="og:title" content="Agent First: NOT SPECIFIED, The Game">
+<meta property="og:description" content="Most games reward knowing the answer. This one sometimes rewards knowing there isn't one.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: NOT SPECIFIED, The Game">
+<meta name="twitter:description" content="Most games reward knowing the answer. This one sometimes rewards knowing there isn't one.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;--amber:#a15c00;--amberbg:#fff6e5;--danger:#c5364a;--dangerbg:#fdeaee;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
+  .pill-amber{background:var(--amberbg);color:var(--amber)}
+  .pill-green{background:var(--greenbg);color:var(--green)}
+  .pill-danger{background:var(--dangerbg);color:var(--danger)}
+
+  .nsg-progress-track{width:100%;height:8px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .nsg-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--grad-primary);width:0%;transition:width .35s ease;}
+  .nsg-progress-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
+
+  .nsg-client-badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:var(--navy);color:#fff;font-size:12px;font-weight:750;}
+
+  .nsg-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .12s ease,background .12s ease,transform .1s ease;}
+  .nsg-option:hover{border-color:var(--violet);background:var(--purplebg);}
+  .nsg-option:active{transform:scale(.99);}
+  .nsg-option-ns{border-style:dashed;border-color:var(--amber);color:var(--amber);font-weight:750;}
+  .nsg-option-ns:hover{background:var(--amberbg);border-color:var(--amber);}
+
+  .nsg-option.is-correct{border-color:var(--green);background:var(--greenbg);}
+  .nsg-option.is-wrong{border-color:var(--danger);background:var(--dangerbg);}
+  .nsg-option[disabled]{cursor:default;}
+
+  @keyframes nsg-pop{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+  .nsg-pop{animation:nsg-pop .4s ease;}
+  @keyframes nsg-fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .nsg-fade{animation:nsg-fade-in .3s ease;}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section" id="introStage" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; 10 calls</div>
+      <h1 class="ds-display" style="color:#fff;">NOT SPECIFIED: The Game</h1>
+      <p class="ds-body" style="color:#c7cce0;">Ten operational calls, three fictional clients. Sometimes the client has an actual rule. Sometimes they genuinely never wrote one down. Your job isn't to sound confident. It's to tell the difference, and pick NOT SPECIFIED when that's the honest answer, even though every wrong option sounds just as plausible.</p>
+      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Take the first call</button>
+    </div>
+  </div>
+
+  <!-- GAME -->
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:640px;">
+
+      <div class="nsg-progress-label" id="progressLabel">Call 1 of 10</div>
+      <div class="nsg-progress-track" style="margin-top:-12px;"><div class="nsg-progress-fill" id="progressFill"></div></div>
+
+      <div class="card nsg-fade" id="questionCard">
+        <div style="margin-bottom:12px;"><span class="nsg-client-badge" id="clientBadge">--</span></div>
+        <div class="ds-heading" id="situationText" style="margin-bottom:18px;">&nbsp;</div>
+        <div id="optionsWrap" style="display:flex;flex-direction:column;gap:10px;"></div>
+        <div id="feedback" class="ds-body-sm" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);"></div>
+        <button class="btn btn-primary" id="nextBtn" style="display:none;margin-top:16px;">Next call</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="section" id="resultsStage" style="background:#fff;display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:640px;">
+
+      <div class="card">
+        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Final score</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
+          <div><div class="ds-score" id="rCorrect">0/10</div><div class="ds-body-sm" style="color:var(--muted);">Correct calls</div></div>
+          <div><div class="ds-score" style="color:var(--danger);" id="rGuessed">0</div><div class="ds-body-sm" style="color:var(--muted);">Times you guessed instead of saying NOT SPECIFIED</div></div>
+          <div><div class="ds-score" style="color:var(--amber);" id="rOverCautious">0</div><div class="ds-body-sm" style="color:var(--muted);">Times you said NOT SPECIFIED when a rule existed</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Share your result</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input class="field-input" id="shareText" readonly style="flex:1;min-width:220px;">
+          <button class="btn btn-ghost-light" id="copyBtn">Copy</button>
+        </div>
+        <div class="ds-body-sm" id="copyStatus" style="color:var(--green);display:none;margin-top:8px;">Copied.</div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="playAgainBtn">Play again</button>
+        <a href="sample-client-profile.html" class="btn btn-ghost-light">Build my sample Client Profile</a>
+      </div>
+
+      <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
+        <div class="ds-body" style="font-weight:900;color:#fff;">This is a designed state, not a gap in a search index.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">When an approved Client Profile has no rule for a situation, Agent First says so plainly and hands back a safe default next step, instead of guessing or inventing a plausible-sounding answer. Most AI products are rewarded for always answering. This one is built to know when not to.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
+          <a href="agent-challenge.html" class="btn btn-ghost-dark">Try the Agent Challenge</a>
+        </div>
+      </div>
+
+      <div class="card" id="emailCard">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
+        <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+          <input type="hidden" name="subject" value="NOT SPECIFIED: The Game result, Agent First">
+          <input type="hidden" name="from_name" value="Agent First website">
+          <input type="hidden" name="result_summary" id="resultSummaryField" value="">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+          <button type="submit" class="btn btn-primary">Email it to me</button>
+        </form>
+        <div id="emailStatus" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var CLIENT_NAMES = { A: 'Harborview', B: 'Meridian', C: 'Northgate' };
+
+  var NOT_SPECIFIED = 'NOT SPECIFIED';
+
+  var SCENARIOS = [
+    {
+      client: 'A',
+      situation: 'A long-time customer asks for a one-time exception to bring a pet into a no-pets service area.',
+      correct: 'DO NOT ALLOW. Service animals only; no discretionary pet exceptions.',
+      guesses: ['ALLOW, since they have been a customer for years.', 'ALLOW, but log it as a one-time exception.']
+    },
+    {
+      client: 'B',
+      situation: 'A customer wants to apply a discount code that expired yesterday.',
+      correct: NOT_SPECIFIED,
+      guesses: ['ALLOW, one day late is close enough.', 'Follow whatever the other client accounts do in this situation.']
+    },
+    {
+      client: 'C',
+      situation: 'A caller says their spouse handles the account and asks to discuss billing with them instead.',
+      correct: 'VERIFY the spouse independently first. The account holder\'s authorization alone does not transfer automatically.',
+      guesses: ['DISCLOSE, a spouse counts as the account holder.', 'TRANSFER to billing and let them sort it out.']
+    },
+    {
+      client: 'A',
+      situation: 'A customer wants a refund credited to a different card than the one they paid with.',
+      correct: NOT_SPECIFIED,
+      guesses: ['ALLOW, refunds to any card on file.', 'DO NOT ALLOW, refunds always go back to the original payment method.']
+    },
+    {
+      client: 'B',
+      situation: 'A customer asks to reschedule for the third time this month.',
+      correct: 'ALLOW, but ESCALATE for a supervisor note after the second reschedule in a month.',
+      guesses: ['DO NOT ALLOW, two reschedules is the hard limit.', 'ALLOW, with no limit on reschedules.']
+    },
+    {
+      client: 'C',
+      situation: 'A customer wants same-day service outside normal service hours.',
+      correct: NOT_SPECIFIED,
+      guesses: ['ALLOW with a rush fee, that is standard in the industry.', 'DO NOT ALLOW, same-day requests always need advance notice.']
+    },
+    {
+      client: 'A',
+      situation: 'A customer says a friend at another company was told their setup fee gets waived, and asks for the same deal here.',
+      correct: 'DO NOT ALLOW. This account\'s fee schedule is independent of what another company offers.',
+      guesses: ['ALLOW, to keep the customer happy.', 'NOT SPECIFIED']
+    },
+    {
+      client: 'B',
+      situation: 'A caller asks the agent to email a copy of their signed agreement to a new email address, on the spot.',
+      correct: NOT_SPECIFIED,
+      guesses: ['ALLOW, it is just a document.', 'DISCLOSE only after ID verification, same as any account change.']
+    },
+    {
+      client: 'C',
+      situation: 'A customer wants to combine two separate promotional discounts on one order.',
+      correct: 'DO NOT ALLOW. Promotional discounts do not stack; one per order.',
+      guesses: ['ALLOW, whichever gives the bigger discount.', 'NOT SPECIFIED']
+    },
+    {
+      client: 'A',
+      situation: 'A customer who is moving out of the service area asks to keep their current rate at the new address.',
+      correct: NOT_SPECIFIED,
+      guesses: ['ALLOW, rate protection is common practice.', 'DO NOT ALLOW, rates always reset at a new address.']
+    }
+  ];
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
+  var order = [];
+  var state = null;
+
+  function startGame() {
+    order = shuffle(SCENARIOS.map(function (s, i) { return i; }));
+    state = { index: 0, correct: 0, guessedInsteadOfNS: 0, overCautiousNS: 0, locked: false };
+    introStage.style.display = 'none';
+    resultsStage.style.display = 'none';
+    gameStage.style.display = 'flex';
+    renderQuestion();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function renderQuestion() {
+    var s = SCENARIOS[order[state.index]];
+    state.locked = false;
+    $('progressLabel').textContent = 'Call ' + (state.index + 1) + ' of ' + SCENARIOS.length;
+    $('progressFill').style.width = ((state.index / SCENARIOS.length) * 100) + '%';
+    $('clientBadge').textContent = CLIENT_NAMES[s.client] + ' account';
+    $('situationText').textContent = s.situation;
+    $('feedback').style.display = 'none';
+    $('nextBtn').style.display = 'none';
+
+    var options = shuffle(s.guesses.filter(function (g) { return g !== NOT_SPECIFIED; }).concat(
+      s.correct !== NOT_SPECIFIED ? [s.correct] : []
+    ));
+    var wrap = $('optionsWrap');
+    wrap.innerHTML = '';
+    options.forEach(function (text) {
+      var btn = document.createElement('button');
+      btn.className = 'nsg-option';
+      btn.textContent = text;
+      btn.addEventListener('click', function () { selectAnswer(text, btn); });
+      wrap.appendChild(btn);
+    });
+    var nsBtn = document.createElement('button');
+    nsBtn.className = 'nsg-option nsg-option-ns';
+    nsBtn.textContent = 'NOT SPECIFIED, this client never wrote a rule for this';
+    nsBtn.addEventListener('click', function () { selectAnswer(NOT_SPECIFIED, nsBtn); });
+    wrap.appendChild(nsBtn);
+
+    var card = $('questionCard');
+    card.classList.remove('nsg-fade');
+    void card.offsetWidth;
+    card.classList.add('nsg-fade');
+  }
+
+  function selectAnswer(picked, btnEl) {
+    if (state.locked) return;
+    state.locked = true;
+    var s = SCENARIOS[order[state.index]];
+    var wasCorrect = picked === s.correct;
+
+    document.querySelectorAll('.nsg-option').forEach(function (b) { b.disabled = true; });
+
+    if (wasCorrect) {
+      state.correct += 1;
+      btnEl.classList.add('is-correct');
+    } else {
+      btnEl.classList.add('is-wrong');
+      if (s.correct === NOT_SPECIFIED) {
+        state.guessedInsteadOfNS += 1;
+      } else if (picked === NOT_SPECIFIED) {
+        state.overCautiousNS += 1;
+      }
+    }
+
+    var feedback = $('feedback');
+    feedback.style.display = 'block';
+    if (wasCorrect) {
+      feedback.innerHTML = '<span class="pill pill-green" style="margin-bottom:8px;">Correct</span><br>' +
+        (s.correct === NOT_SPECIFIED
+          ? 'This client genuinely never wrote a rule for this. Saying so, and handing back a safe default, is the right move.'
+          : 'The correct call: ' + escapeHtml(s.correct));
+    } else if (s.correct === NOT_SPECIFIED) {
+      feedback.innerHTML = '<span class="pill pill-danger" style="margin-bottom:8px;">Wrong</span><br>' +
+        'There was no rule here. That answer sounded plausible, but it was a guess, not something this client ever approved.';
+    } else {
+      feedback.innerHTML = '<span class="pill pill-amber" style="margin-bottom:8px;">Wrong</span><br>' +
+        'This one actually was specified. The correct call: ' + escapeHtml(s.correct);
+    }
+
+    $('nextBtn').style.display = 'inline-flex';
+    $('nextBtn').textContent = state.index < SCENARIOS.length - 1 ? 'Next call' : 'See my results';
+  }
+
+  $('nextBtn').addEventListener('click', function () {
+    state.index += 1;
+    if (state.index >= SCENARIOS.length) {
+      endGame();
+    } else {
+      renderQuestion();
+    }
+  });
+
+  function endGame() {
+    gameStage.style.display = 'none';
+    resultsStage.style.display = 'flex';
+
+    var headline;
+    if (state.guessedInsteadOfNS === 0 && state.correct === SCENARIOS.length) {
+      headline = 'Perfect run. ' + state.correct + ' of ' + SCENARIOS.length + ', and you never guessed when the honest answer was NOT SPECIFIED.';
+    } else if (state.guessedInsteadOfNS > 0) {
+      headline = state.correct + ' of ' + SCENARIOS.length + ' correct. ' + state.guessedInsteadOfNS + ' time' + (state.guessedInsteadOfNS === 1 ? '' : 's') + ' you guessed instead of admitting there was no rule.';
+    } else {
+      headline = state.correct + ' of ' + SCENARIOS.length + ' correct.';
+    }
+    $('resultsHeadline').textContent = headline;
+    $('rCorrect').textContent = state.correct + '/' + SCENARIOS.length;
+    $('rGuessed').textContent = state.guessedInsteadOfNS;
+    $('rOverCautious').textContent = state.overCautiousNS;
+
+    var shareLine = 'I scored ' + state.correct + '/' + SCENARIOS.length + ' on NOT SPECIFIED: The Game, and guessed instead of saying NOT SPECIFIED ' + state.guessedInsteadOfNS + ' time' + (state.guessedInsteadOfNS === 1 ? '' : 's') + '. Try it: myagentfirst.com/not-specified-the-game.html';
+    $('shareText').value = shareLine;
+    $('resultSummaryField').value = shareLine;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('startBtn').addEventListener('click', startGame);
+  $('playAgainBtn').addEventListener('click', function () {
+    resultsStage.style.display = 'none';
+    startGame();
+  });
+
+  $('copyBtn').addEventListener('click', function () {
+    var field = $('shareText');
+    field.select();
+    var done = function () {
+      $('copyStatus').style.display = 'block';
+      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(field.value).then(done).catch(function () {
+        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+      });
+    } else {
+      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+    }
+  });
+
+  var emailForm = $('emailForm');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('emailStatus');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
