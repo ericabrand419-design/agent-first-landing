@@ -1,0 +1,670 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: Beat Agent First</title>
+<meta name="description" content="Three rounds. The same fictional clients, a shared messy knowledge base sorted by topic instead of by client, and a race against how Agent First actually resolves a rule: fast, deterministic, no guessing.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/beat-agent-first.html">
+<meta property="og:title" content="Can You Beat Agent First?">
+<meta property="og:description" content="Find the right rule in a messy shared knowledge base before Agent First matches it automatically. Speed and accuracy, both tracked, both shown to you honestly.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Can You Beat Agent First?">
+<meta name="twitter:description" content="Find the right rule before Agent First matches it automatically. Speed and accuracy, both tracked.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;--amber:#a15c00;--amberbg:#fff6e5;--danger:#c5364a;--dangerbg:#fdeaee;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
+  .pill-green{background:var(--greenbg);color:var(--green)}
+  .pill-danger{background:var(--dangerbg);color:var(--danger)}
+  .pill-amber{background:var(--amberbg);color:var(--amber)}
+
+  /* race layout */
+  .baf-round-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  .baf-race-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:16px;}
+  .baf-panel-you{border-top:3px solid var(--coral);}
+  .baf-panel-agent{border-top:3px solid var(--violet);}
+  .baf-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .baf-timer-chip{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--ink);}
+
+  .baf-scenario-hint{color:var(--muted);margin-top:8px;}
+
+  .baf-accordion-section{border:1px solid var(--line);border-radius:11px;margin-bottom:8px;overflow:hidden;}
+  .baf-accordion-header{width:100%;display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--soft);border:0;cursor:pointer;font-family:inherit;font-weight:750;font-size:13.5px;color:var(--ink);}
+  .baf-accordion-header:hover{background:var(--purplebg);}
+  .baf-accordion-toggle{font-size:11px;font-weight:750;color:var(--violet);text-transform:uppercase;letter-spacing:.05em;}
+  .baf-accordion-body{display:none;flex-direction:column;gap:6px;padding:10px;}
+  .baf-accordion-body.open{display:flex;}
+
+  .baf-entry{text-align:left;padding:10px 12px;border-radius:9px;border:1px solid var(--line);background:#fff;font-size:13px;line-height:1.5;cursor:pointer;color:var(--ink);}
+  .baf-entry:hover{border-color:var(--violet);background:var(--purplebg);}
+  .baf-entry .bec{font-weight:750;display:block;margin-bottom:2px;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  .baf-entry.is-correct{border-color:var(--green);background:var(--greenbg);}
+  .baf-entry.is-wrong{border-color:var(--danger);background:var(--dangerbg);}
+  .baf-entry.is-disabled{cursor:default;}
+  .baf-entry:disabled{cursor:default;}
+
+  .baf-steps{display:flex;flex-direction:column;gap:10px;}
+  .baf-step{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:var(--soft);opacity:.5;transition:opacity .2s ease,border-color .2s ease,background .2s ease;}
+  .baf-step.done{opacity:1;border-color:var(--green);background:var(--greenbg);}
+  .baf-step-icon{flex:0 0 auto;width:22px;height:22px;border-radius:999px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--muted);background:#fff;}
+  .baf-step.done .baf-step-icon{border-color:var(--green);background:var(--green);color:#fff;}
+  .baf-step-text{font-size:13.5px;line-height:1.4;}
+  .baf-step-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:2px;}
+
+  .baf-summary{margin-top:18px;display:none;}
+  .baf-badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+  .baf-reveal-row{padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:#fff;margin-bottom:10px;}
+  .baf-reveal-label{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px;}
+
+  .baf-flash{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:40}
+  .baf-flash.show{opacity:1}
+  .baf-flash.correct{background:rgba(23,122,85,.10)}
+  .baf-flash.wrong{background:rgba(197,54,74,.12)}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+  @media (max-width:860px){
+    .baf-race-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO STAGE -->
+  <div class="section" id="introStage" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:760px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; 3-round race</div>
+      <h1 class="ds-display" style="color:#fff;">Can You Beat Agent First?</h1>
+      <p class="ds-body" style="color:#c7cce0;">Three rounds. The same three fictional clients you have seen throughout this site. Somewhere in a shared knowledge base, sorted by topic instead of by client, is the exact rule you need. Find it, pick it, and see how your time compares to Agent First matching the call to a Client Profile and the active rule, automatically.</p>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px;width:100%;">
+        <div class="card-on-dark">
+          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">One shared knowledge base</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Four topics, three clients each: twelve lines total, sorted by topic the way most internal documentation actually is, not sorted for you.</div>
+        </div>
+        <div class="card-on-dark">
+          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">This is not a live AI guessing</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">What races you here is the same deterministic client-and-topic match described throughout this site, animated at roughly the speed a lookup like that actually takes. Nothing invented, nothing hidden.</div>
+        </div>
+        <div class="card-on-dark">
+          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">Speed and accuracy, tracked separately</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Answer first with the wrong client's rule and you still lose the round on accuracy. Both get counted, then shown to you honestly at the end.</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" style="margin-top:6px;padding:15px 34px;font-size:16px;">Start the race</button>
+      <p class="ds-body-sm" style="color:#8991b3;">Works best on a laptop or desktop screen. Nothing is recorded or sent anywhere. This runs entirely in your browser.</p>
+    </div>
+  </div>
+
+  <!-- GAME STAGE -->
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:0;max-width:1000px;">
+
+      <div class="baf-round-row">
+        <div class="pill pill-violet" id="roundBadge">Round 1 of 3</div>
+        <div class="ds-body-sm" style="color:var(--muted);">Reset each round: a fresh scenario, a fresh timer, the same shared knowledge base.</div>
+      </div>
+
+      <div class="card" style="margin-top:16px;">
+        <div class="ds-label eyebrow-c">Customer on the line</div>
+        <div class="ds-heading" id="scenarioText" style="margin-top:6px;">&nbsp;</div>
+        <p class="ds-body-sm baf-scenario-hint">The knowledge base below is grouped by topic, not by client. Expand the right topic, then pick the line for this client.</p>
+      </div>
+
+      <div class="baf-race-grid">
+
+        <!-- YOU -->
+        <div class="card baf-panel-you">
+          <div class="baf-panel-head">
+            <div class="pill pill-violet">You</div>
+            <div class="baf-timer-chip" id="playerTimerChip">0.0s</div>
+          </div>
+          <div id="accordionWrap"></div>
+        </div>
+
+        <!-- AGENT FIRST -->
+        <div class="card baf-panel-agent">
+          <div class="baf-panel-head">
+            <div class="pill pill-violet">Agent First</div>
+            <div class="baf-timer-chip" id="agentTimerChip">--</div>
+          </div>
+          <div class="baf-steps">
+            <div class="baf-step" id="agentStep1">
+              <div class="baf-step-icon">1</div>
+              <div class="baf-step-text"><span class="baf-step-label">Find</span><span id="agentStep1Text">Matching call to Client Profile...</span></div>
+            </div>
+            <div class="baf-step" id="agentStep2">
+              <div class="baf-step-icon">2</div>
+              <div class="baf-step-text"><span class="baf-step-label">Interpret</span><span id="agentStep2Text">Locating the active rule...</span></div>
+            </div>
+            <div class="baf-step" id="agentStep3">
+              <div class="baf-step-icon">3</div>
+              <div class="baf-step-text"><span class="baf-step-label">Act</span><span id="agentStep3Text">Rule applied.</span></div>
+            </div>
+          </div>
+          <p class="ds-body-sm" style="color:var(--muted);margin-top:14px;">The rule itself stays hidden until you answer, so this cannot just hand you the result. Only the timing shows.</p>
+        </div>
+
+      </div>
+
+      <div class="card baf-summary" id="roundSummary">
+        <div class="baf-badge-row" id="summaryBadges"></div>
+        <div class="baf-reveal-row" id="summaryYourRow"></div>
+        <div class="baf-reveal-row" id="summaryAgentRow"></div>
+        <div class="ds-body-sm" style="color:var(--muted);margin-bottom:14px;" id="summaryTimes"></div>
+        <button class="btn btn-primary" id="continueBtn">Next round</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESULTS STAGE -->
+  <div class="section" id="resultsStage" style="background:#fff;display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:720px;">
+
+      <div class="card">
+        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Race over</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
+          <div><div class="ds-score" id="rSpeedWins">0</div><div class="ds-body-sm" style="color:var(--muted);">Rounds you were faster</div></div>
+          <div><div class="ds-score" id="rAccuracy">0%</div><div class="ds-body-sm" style="color:var(--muted);">Your accuracy</div></div>
+          <div><div class="ds-score" id="rYourAvg">--</div><div class="ds-body-sm" style="color:var(--muted);">Your avg. time</div></div>
+          <div><div class="ds-score" id="rAgentAvg">--</div><div class="ds-body-sm" style="color:var(--muted);">Agent First avg. time</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Share your result</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input class="field-input" id="shareText" readonly style="flex:1;min-width:220px;">
+          <button class="btn btn-ghost-light" id="copyBtn">Copy</button>
+        </div>
+        <div class="ds-body-sm" id="copyStatus" style="color:var(--green);display:none;margin-top:8px;">Copied.</div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="playAgainBtn">Race again</button>
+        <a href="client-roulette.html" class="btn btn-ghost-light">Try the faster version: Client Roulette</a>
+        <a href="agent-challenge.html" class="btn btn-ghost-light">Try the original: Agent Challenge</a>
+      </div>
+
+      <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
+        <div class="ds-body" style="font-weight:900;color:#fff;">Agent First was not guessing. It was matching.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">Every round, Agent First's side resolved the same way: match the call to a Client Profile, match the request to the active rule, apply it. No search, no scrolling, no chance of grabbing the wrong client's line by accident. See what that looks like against your own rules.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
+          <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
+        </div>
+      </div>
+
+      <div class="card" id="emailCard">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
+        <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+          <input type="hidden" name="subject" value="Beat Agent First result, Agent First">
+          <input type="hidden" name="from_name" value="Agent First website">
+          <input type="hidden" name="result_summary" id="resultSummaryField" value="">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+          <button type="submit" class="btn btn-primary">Email it to me</button>
+        </form>
+        <div id="emailStatus" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<div class="baf-flash" id="flash"></div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var CLIENTS = {
+    A: { name: 'Harborview', rules: [
+      'Cancellations within 48 hours of a scheduled appointment: no fee.',
+      'ID verification required before discussing any account details.',
+      'Refunds over $200 require a supervisor sign-off before processing.',
+      'Standard callback window for an open issue: 24 hours.'
+    ] },
+    B: { name: 'Meridian', rules: [
+      'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.',
+      'ID verification is NOT required for general account questions, only for changes.',
+      'Refunds over $200 can be processed by any agent, no sign-off required.',
+      'Standard callback window for an open issue: 4 hours.'
+    ] },
+    C: { name: 'Northgate', rules: [
+      'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.',
+      'ID verification required before discussing any account details.',
+      'Refunds over $200 require a supervisor sign-off before processing.',
+      'Standard callback window for an open issue: 24 hours, except weekends (next business day).'
+    ] }
+  };
+  var CLIENT_KEYS = Object.keys(CLIENTS);
+
+  var CATEGORIES = [
+    { key: 'cancel', ruleIndex: 0, label: 'Cancellation Fee' },
+    { key: 'idverify', ruleIndex: 1, label: 'ID Verification' },
+    { key: 'refund', ruleIndex: 2, label: 'Refund Sign-Off' },
+    { key: 'callback', ruleIndex: 3, label: 'Callback Window' }
+  ];
+
+  var ROUNDS = [
+    { client: 'C', categoryKey: 'refund', ask: 'A Northgate customer is owed a $275 refund. What do you tell them about getting it processed?' },
+    { client: 'B', categoryKey: 'idverify', ask: 'A Meridian customer calls with a general question about their account balance. What do you tell them about ID verification?' },
+    { client: 'A', categoryKey: 'callback', ask: 'A Harborview customer has an open issue and it is a Friday afternoon. When should they expect a callback?' }
+  ];
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function categoryByKey(key) {
+    for (var i = 0; i < CATEGORIES.length; i++) { if (CATEGORIES[i].key === key) return CATEGORIES[i]; }
+    return null;
+  }
+
+  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
+  var flash = $('flash');
+  var state = null;
+
+  function startGame() {
+    state = {
+      roundIndex: 0,
+      roundResults: [],
+      running: true,
+      locked: false,
+      playerStartTime: 0,
+      playerTickInterval: null,
+      agentTimers: [],
+      agentResolveMs: 0,
+      currentRound: null
+    };
+    introStage.style.display = 'none';
+    resultsStage.style.display = 'none';
+    gameStage.style.display = 'flex';
+    startRound();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function startRound() {
+    var round = ROUNDS[state.roundIndex];
+    state.currentRound = round;
+    state.locked = false;
+
+    $('roundBadge').textContent = 'Round ' + (state.roundIndex + 1) + ' of ' + ROUNDS.length;
+    $('scenarioText').textContent = round.ask;
+    $('roundSummary').style.display = 'none';
+
+    rebuildAccordion();
+    resetAgentPanel(round);
+
+    state.agentResolveMs = 1100 + Math.floor(Math.random() * 600);
+    scheduleAgentSteps(state.agentResolveMs);
+
+    state.playerStartTime = Date.now();
+    clearInterval(state.playerTickInterval);
+    updatePlayerTimerDisplay();
+    state.playerTickInterval = setInterval(updatePlayerTimerDisplay, 100);
+  }
+
+  function updatePlayerTimerDisplay() {
+    var elapsed = (Date.now() - state.playerStartTime) / 1000;
+    $('playerTimerChip').textContent = elapsed.toFixed(1) + 's';
+  }
+
+  function resetAgentPanel(round) {
+    ['agentStep1', 'agentStep2', 'agentStep3'].forEach(function (id) { $(id).classList.remove('done'); });
+    $('agentStep1Text').textContent = 'Matching call to Client Profile: ' + CLIENTS[round.client].name;
+    $('agentStep2Text').textContent = 'Locating the active rule: ' + categoryByKey(round.categoryKey).label;
+    $('agentStep3Text').textContent = 'Rule applied.';
+    $('agentTimerChip').textContent = '--';
+  }
+
+  function clearAgentTimers() {
+    state.agentTimers.forEach(function (t) { clearTimeout(t); });
+    state.agentTimers = [];
+  }
+
+  function scheduleAgentSteps(ms) {
+    clearAgentTimers();
+    var t1 = Math.round(ms * 0.32);
+    var t2 = Math.round(ms * 0.66);
+    state.agentTimers.push(setTimeout(function () { markStepDone(1); }, t1));
+    state.agentTimers.push(setTimeout(function () { markStepDone(2); }, t2));
+    state.agentTimers.push(setTimeout(function () { markStep3Resolved(ms); }, ms));
+  }
+
+  function markStepDone(n) {
+    $('agentStep' + n).classList.add('done');
+  }
+
+  function markStep3Resolved(ms) {
+    markStepDone(3);
+    $('agentStep3Text').textContent = 'Resolved in ' + (ms / 1000).toFixed(1) + 's. Answer ready.';
+    $('agentTimerChip').textContent = (ms / 1000).toFixed(1) + 's';
+  }
+
+  function rebuildAccordion() {
+    var wrap = $('accordionWrap');
+    wrap.innerHTML = '';
+    CATEGORIES.forEach(function (cat) {
+      var section = document.createElement('div');
+      section.className = 'baf-accordion-section';
+
+      var header = document.createElement('button');
+      header.type = 'button';
+      header.className = 'baf-accordion-header';
+      header.innerHTML = '<span>' + escapeHtml(cat.label) + '</span><span class="baf-accordion-toggle">Expand</span>';
+
+      var body = document.createElement('div');
+      body.className = 'baf-accordion-body';
+
+      var order = shuffle(CLIENT_KEYS);
+      order.forEach(function (ck) {
+        var ruleText = CLIENTS[ck].rules[cat.ruleIndex];
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'baf-entry';
+        btn.innerHTML = '<span class="bec">' + escapeHtml(CLIENTS[ck].name) + '</span>' + escapeHtml(ruleText);
+        btn.addEventListener('click', function () { selectAnswer(cat.key, ck, ruleText, btn); });
+        body.appendChild(btn);
+      });
+
+      header.addEventListener('click', function () {
+        var isOpen = body.classList.toggle('open');
+        header.querySelector('.baf-accordion-toggle').textContent = isOpen ? 'Collapse' : 'Expand';
+      });
+
+      section.appendChild(header);
+      section.appendChild(body);
+      wrap.appendChild(section);
+    });
+  }
+
+  function disableAllEntries() {
+    document.querySelectorAll('.baf-entry').forEach(function (b) {
+      b.disabled = true;
+      b.classList.add('is-disabled');
+    });
+  }
+
+  function flashScreen(kind) {
+    flash.className = 'baf-flash show ' + kind;
+    setTimeout(function () { flash.className = 'baf-flash'; }, 260);
+  }
+
+  function selectAnswer(categoryKey, clientKey, ruleText, btnEl) {
+    if (!state.running || state.locked) return;
+    state.locked = true;
+    clearInterval(state.playerTickInterval);
+    var playerMs = Date.now() - state.playerStartTime;
+    updatePlayerTimerDisplay();
+
+    markStepDone(1);
+    markStepDone(2);
+    markStep3Resolved(state.agentResolveMs);
+    clearAgentTimers();
+
+    var round = state.currentRound;
+    var playerCorrect = (categoryKey === round.categoryKey && clientKey === round.client);
+
+    btnEl.classList.add(playerCorrect ? 'is-correct' : 'is-wrong');
+    disableAllEntries();
+    flashScreen(playerCorrect ? 'correct' : 'wrong');
+
+    var agentMs = state.agentResolveMs;
+    var speedWinner = playerMs <= agentMs ? 'player' : 'agent';
+    var correctRuleText = CLIENTS[round.client].rules[categoryByKey(round.categoryKey).ruleIndex];
+
+    state.roundResults.push({
+      playerMs: playerMs, agentMs: agentMs, playerCorrect: playerCorrect, speedWinner: speedWinner
+    });
+
+    renderRoundSummary(CLIENTS[clientKey].name, ruleText, playerCorrect, playerMs, agentMs, speedWinner, CLIENTS[round.client].name, correctRuleText);
+  }
+
+  function renderRoundSummary(pickedClientName, pickedText, playerCorrect, playerMs, agentMs, speedWinner, correctClientName, correctText) {
+    var badges = '';
+    badges += speedWinner === 'player'
+      ? '<div class="pill pill-green">You answered first</div>'
+      : '<div class="pill pill-violet">Agent First answered first</div>';
+    badges += playerCorrect
+      ? '<div class="pill pill-green">Correct client and rule</div>'
+      : '<div class="pill pill-danger">Wrong match</div>';
+    $('summaryBadges').innerHTML = badges;
+
+    $('summaryYourRow').innerHTML =
+      '<div class="baf-reveal-label">Your answer</div>' +
+      '<div class="ds-body-sm"><span style="font-weight:750;">' + escapeHtml(pickedClientName) + ':</span> ' + escapeHtml(pickedText) + '</div>';
+
+    $('summaryAgentRow').innerHTML =
+      '<div class="baf-reveal-label">Agent First\'s match</div>' +
+      '<div class="ds-body-sm"><span style="font-weight:750;">' + escapeHtml(correctClientName) + ':</span> ' + escapeHtml(correctText) + '</div>';
+
+    $('summaryTimes').textContent = 'Your time: ' + (playerMs / 1000).toFixed(1) + 's. Agent First: ' + (agentMs / 1000).toFixed(1) + 's.';
+
+    var isLastRound = state.roundIndex + 1 >= ROUNDS.length;
+    $('continueBtn').textContent = isLastRound ? 'See your results' : 'Next round';
+
+    $('roundSummary').style.display = 'block';
+  }
+
+  function continueRound() {
+    state.roundIndex += 1;
+    if (state.roundIndex < ROUNDS.length) {
+      startRound();
+    } else {
+      endGame();
+    }
+  }
+
+  function endGame() {
+    state.running = false;
+    gameStage.style.display = 'none';
+    resultsStage.style.display = 'flex';
+
+    var speedWinsPlayer = 0, correctCount = 0, totalPlayerMs = 0, totalAgentMs = 0;
+    state.roundResults.forEach(function (r) {
+      if (r.speedWinner === 'player') speedWinsPlayer += 1;
+      if (r.playerCorrect) correctCount += 1;
+      totalPlayerMs += r.playerMs;
+      totalAgentMs += r.agentMs;
+    });
+    var speedWinsAgent = ROUNDS.length - speedWinsPlayer;
+    var accuracy = Math.round((correctCount / ROUNDS.length) * 100);
+    var avgPlayer = totalPlayerMs / ROUNDS.length / 1000;
+    var avgAgent = totalAgentMs / ROUNDS.length / 1000;
+
+    $('rSpeedWins').textContent = speedWinsPlayer + '/' + ROUNDS.length;
+    $('rAccuracy').textContent = accuracy + '%';
+    $('rYourAvg').textContent = avgPlayer.toFixed(1) + 's';
+    $('rAgentAvg').textContent = avgAgent.toFixed(1) + 's';
+
+    var headline;
+    if (correctCount < ROUNDS.length && speedWinsPlayer >= 2) {
+      headline = 'You out-ran Agent First in ' + speedWinsPlayer + ' of ' + ROUNDS.length + ' rounds, but only got ' + correctCount + ' of ' + ROUNDS.length + ' exactly right. Fast and wrong still reaches the wrong client.';
+    } else if (speedWinsPlayer === 0) {
+      headline = 'Agent First matched client and topic automatically in all ' + ROUNDS.length + ' rounds, faster than you could open the right section even once.';
+    } else if (correctCount === ROUNDS.length && speedWinsPlayer === ROUNDS.length) {
+      headline = 'Perfect accuracy, and faster than Agent First in every round. Genuinely quick work, on three calls. Now multiply that gap across a full shift.';
+    } else if (correctCount === ROUNDS.length) {
+      headline = 'You got all ' + ROUNDS.length + ' exactly right, and still lost the race on speed ' + speedWinsAgent + ' out of ' + ROUNDS.length + ' times.';
+    } else {
+      headline = 'You beat Agent First on speed in ' + speedWinsPlayer + ' of ' + ROUNDS.length + ' rounds, with ' + correctCount + ' of ' + ROUNDS.length + ' exactly right.';
+    }
+    $('resultsHeadline').textContent = headline;
+
+    var shareLine = 'I beat Agent First on speed in ' + speedWinsPlayer + ' of ' + ROUNDS.length + ' rounds (accuracy: ' + correctCount + '/' + ROUNDS.length + ') in Beat Agent First. Try it: myagentfirst.com/beat-agent-first.html';
+    $('shareText').value = shareLine;
+    $('resultSummaryField').value = shareLine;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('startBtn').addEventListener('click', startGame);
+  $('continueBtn').addEventListener('click', continueRound);
+  $('playAgainBtn').addEventListener('click', function () {
+    resultsStage.style.display = 'none';
+    startGame();
+  });
+
+  $('copyBtn').addEventListener('click', function () {
+    var field = $('shareText');
+    field.select();
+    var done = function () {
+      $('copyStatus').style.display = 'block';
+      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(field.value).then(done).catch(function () {
+        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+      });
+    } else {
+      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+    }
+  });
+
+  var emailForm = $('emailForm');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('emailStatus');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
