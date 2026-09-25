@@ -4,7 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent First: Can I Book It?</title>
-<meta name="description" content="Enter your booking volume and how often a client-specific rule gets missed. See how many bookings that gets wrong every month, and what it costs to fix.">
+<meta name="description" content="Enter your booking volume and how often a Profile-specific rule gets missed. See how many bookings that gets wrong every month, and what fixing it actually costs.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/can-i-book-it.html">
+<meta property="og:title" content="Agent First: Can I Book It?">
+<meta property="og:description" content="Enter your booking volume and how often a Profile-specific rule gets missed. See how many bookings that gets wrong every month, and what fixing it actually costs.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: Can I Book It?">
+<meta name="twitter:description" content="Enter your booking volume and how often a Profile-specific rule gets missed. See how many bookings that gets wrong every month, and what fixing it actually costs.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
@@ -69,10 +78,20 @@
   .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
   .field-input:focus{outline:none;border-color:var(--violet)}
 
+  .ds-score{display:inline-block;transition:transform .18s ease}
+  @keyframes cib-pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
+  .cib-pop{animation:cib-pop .5s ease;}
+
+  .cib-total-wrap{text-align:center;padding:8px 0 4px;}
+  .cib-total{font-size:56px;line-height:1.05;font-weight:900;letter-spacing:-.02em;background:var(--grad-primary);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;}
+
+  .cib-divider{width:100%;height:1px;background:var(--line);margin:22px 0;}
+
   @media (max-width:900px){
     .section{padding:56px 20px}
     .ds-display{font-size:32px}
     .ds-hero{font-size:24px}
+    .cib-total{font-size:40px}
   }
 </style>
 </head>
@@ -86,20 +105,22 @@
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
     </a>
-    <div style="display:flex;align-items:center;gap:20px;">
+    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
-      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
     </div>
   </div>
 
   <!-- INTRO -->
   <div class="section" style="background:var(--grad-navy);">
     <div class="wrap" style="display:flex;flex-direction:column;gap:18px;max-width:820px;">
-      <div class="ds-label eyebrow-c">Agent First Labs</div>
-      <h1 class="ds-display" style="color:#fff;">Can I book it?</h1>
-      <p class="ds-body" style="color:#c7cce0;">Every booking that touches a deposit, a blackout date, an eligibility rule, or any other client-specific exception is a moment an agent has to be right about a rule they may not have in front of them. Enter your own numbers below and see how often that moment goes wrong, and what fixing it actually costs.</p>
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; Free tool</div>
+      <h1 class="ds-display" style="color:#fff;">Can I Book It?</h1>
+      <p class="ds-body" style="color:#c7cce0;">Every booking has a rule attached, even when nobody wrote it down where the person booking it could see it: this client only, this location, this provider, this program, this appointment type. Enter your own numbers and see what it costs when that Profile-specific rule gets missed at the moment of booking.</p>
     </div>
   </div>
 
@@ -111,60 +132,79 @@
         <div class="ds-label eyebrow-v" style="margin-bottom:16px;">Your numbers</div>
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
           <div class="field-row">
-            <label class="field-label" for="ciq-bookings">Bookings or appointments scheduled per week</label>
-            <input class="field-input" id="ciq-bookings" type="number" min="0" step="1" value="200">
+            <label class="field-label" for="cib-bookings">Bookings per month</label>
+            <input class="field-input" id="cib-bookings" type="number" min="0" step="1" value="1200">
           </div>
           <div class="field-row">
-            <label class="field-label" for="ciq-rulepct">Percent that involve a client-specific rule or exception</label>
-            <input class="field-input" id="ciq-rulepct" type="number" min="0" max="100" step="1" value="40">
-            <div class="field-hint">Deposits, blackout dates, eligibility, cancellation windows, service exclusions: anything one client handles differently than the next.</div>
+            <label class="field-label" for="cib-missrate">How often a Profile-specific rule gets missed (%)</label>
+            <input class="field-input" id="cib-missrate" type="number" min="0" max="100" step="0.5" value="3">
+            <div class="field-hint">Wrong client rule, wrong location, wrong provider, wrong program, whatever the specific rule was for that booking.</div>
           </div>
           <div class="field-row">
-            <label class="field-label" for="ciq-errorrate">Incorrect bookings, per 100 rule-dependent bookings</label>
-            <input class="field-input" id="ciq-errorrate" type="number" min="0" max="100" step="1" value="8">
-            <div class="field-hint">How often the wrong call gets made because the right client's rule wasn't in front of the agent at the moment of booking.</div>
+            <label class="field-label" for="cib-fixcost">Average cost to catch and fix one</label>
+            <input class="field-input" id="cib-fixcost" type="number" min="0" step="1" value="45">
+            <div class="field-hint">Staff time to catch it and rebook, a refund or comp, or a customer who quietly doesn't come back.</div>
           </div>
           <div class="field-row">
-            <label class="field-label" for="ciq-cost">Cost to fix one incorrect booking (optional)</label>
-            <input class="field-input" id="ciq-cost" type="number" min="0" step="1" placeholder="e.g. 45">
-            <div class="field-hint">Rebooking time, a refund, a no-show, or the staff time to untangle it. Leave blank to see the count only.</div>
+            <label class="field-label" for="cib-profiles">Client accounts, locations, or providers this spans (optional)</label>
+            <input class="field-input" id="cib-profiles" type="number" min="0" step="1" placeholder="e.g. 6">
+            <div class="field-hint">Not used in the math, just shown alongside it.</div>
           </div>
         </div>
-        <button class="btn btn-primary" id="ciq-calc" style="margin-top:20px;">Calculate</button>
+
+        <button class="btn btn-primary" id="cib-calc" style="margin-top:24px;">Run the numbers</button>
       </div>
 
-      <div class="card" id="ciq-results" style="display:none;">
-        <div class="ds-label eyebrow-c" style="margin-bottom:16px;">What this adds up to</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));">
-          <div><div class="ds-score" id="ciq-ruledep">--</div><div class="ds-body-sm" style="color:var(--muted);">Rule-dependent bookings per week</div></div>
-          <div><div class="ds-score" id="ciq-perweek">--</div><div class="ds-body-sm" style="color:var(--muted);">Incorrect bookings per week</div></div>
-          <div><div class="ds-score" id="ciq-permonth">--</div><div class="ds-body-sm" style="color:var(--muted);">Incorrect bookings per month</div></div>
-          <div id="ciq-cost-block" style="display:none;"><div class="ds-score" id="ciq-costmonth">--</div><div class="ds-body-sm" style="color:var(--muted);">Estimated monthly cost</div></div>
+      <div class="card" id="cib-results" style="display:none;">
+        <div class="cib-total-wrap">
+          <div class="ds-label eyebrow-v">Estimated cost of missed-rule bookings, per year</div>
+          <div class="cib-total" id="cib-total">$0</div>
+          <p class="ds-body-sm" style="color:var(--muted);margin-top:6px;">From the bookings, miss rate, and per-incident cost you entered above.</p>
         </div>
-        <p class="ds-body-sm" style="color:var(--muted);margin-top:18px;">This is a direct calculation from the numbers you entered (bookings &times; percent rule-dependent &times; error rate, scaled to a 4.33-week month), not an industry benchmark or an average. It only counts the cost to fix the booking, not the customer's experience or the repeat business at risk, so the real cost to your operation is likely higher than this number alone.</p>
+
+        <div class="cib-divider"></div>
+
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;">
+          <div>
+            <div class="ds-score" id="cib-per-month">--</div>
+            <div class="ds-body-sm" style="color:var(--muted);">Mis-booked, per month</div>
+          </div>
+          <div>
+            <div class="ds-score" id="cib-per-year">--</div>
+            <div class="ds-body-sm" style="color:var(--muted);">Mis-booked, per year</div>
+          </div>
+          <div>
+            <div class="ds-score" id="cib-rate">--</div>
+            <div class="ds-body-sm" style="color:var(--muted);">Of all bookings</div>
+          </div>
+        </div>
+
+        <p class="ds-body-sm" style="color:var(--muted);margin-top:18px;" id="cib-profiles-note"></p>
+
+        <p class="ds-body-sm" style="color:var(--muted);margin-top:18px;">This only counts the cost of catching and fixing the mistake. It doesn't count the staff time spent double-checking a booking that turned out fine, or a customer who never complains and just doesn't rebook, so the real number is likely higher than this one.</p>
       </div>
 
-      <div class="card-on-dark" id="ciq-after" style="display:none;flex-direction:column;gap:14px;background:var(--navy);border:none;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">That's what's happening today. Here's what changes.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">When the active client's own rule is already in view the moment an agent goes to book, "can I book it" stops being a guess. Want to see what that looks like against your own actual rules?</p>
+      <div class="card-on-dark" id="cib-after" style="display:none;flex-direction:column;gap:14px;background:var(--navy);border:none;">
+        <div class="ds-body" style="font-weight:900;color:#fff;">That's what's happening today. Here's what the pilot is built to test.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">When the agent is booking against an approved Active Profile instead of memory, whether the missed-rule rate actually drops is exactly what a pilot measures against your own baseline, not an industry claim.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
-          <a href="agent-challenge.html" class="btn btn-ghost-dark">Try the Agent Challenge</a>
+          <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
+          <a href="pilot-business-case-builder.html" class="btn btn-ghost-dark">Build my pilot business case</a>
         </div>
       </div>
 
-      <div class="card" id="ciq-email-card" style="display:none;">
+      <div class="card" id="cib-email-card" style="display:none;">
         <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
-        <form id="ciq-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+        <form id="cib-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
           <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
-          <input type="hidden" name="subject" value="Can I Book It? Calculator result, Agent First">
+          <input type="hidden" name="subject" value="Can I Book It? result, Agent First">
           <input type="hidden" name="from_name" value="Agent First website">
-          <input type="hidden" name="result_summary" id="ciq-result-summary" value="">
+          <input type="hidden" name="result_summary" id="cib-result-summary" value="">
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
           <button type="submit" class="btn btn-primary">Email it to me</button>
         </form>
-        <div id="ciq-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+        <div id="cib-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
       </div>
 
     </div>
@@ -186,51 +226,74 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
 
-  function fmtNum(n) {
-    return (Math.round(n * 10) / 10).toLocaleString();
-  }
   function fmtMoney(v) {
     return '$' + Math.round(v).toLocaleString();
   }
+  function fmtNum(v) {
+    return (Math.round(v * 10) / 10).toLocaleString();
+  }
+  function fmtPct(v) {
+    return (Math.round(v * 10) / 10) + '%';
+  }
 
-  $('ciq-calc').addEventListener('click', function () {
-    var bookings = parseFloat($('ciq-bookings').value) || 0;
-    var rulePct = parseFloat($('ciq-rulepct').value) || 0;
-    var errorRate = parseFloat($('ciq-errorrate').value) || 0;
-    var cost = parseFloat($('ciq-cost').value);
+  function countUp(el, target, formatter) {
+    var start = 0;
+    var duration = 800;
+    var startTime = null;
+    function step(ts) {
+      if (startTime === null) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = formatter(start + (target - start) * eased);
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      } else {
+        el.textContent = formatter(target);
+        el.classList.add('cib-pop');
+        setTimeout(function () { el.classList.remove('cib-pop'); }, 500);
+      }
+    }
+    requestAnimationFrame(step);
+  }
 
-    var ruleDepPerWeek = bookings * (rulePct / 100);
-    var incorrectPerWeek = ruleDepPerWeek * (errorRate / 100);
-    var incorrectPerMonth = incorrectPerWeek * 4.33;
+  $('cib-calc').addEventListener('click', function () {
+    var bookings = parseFloat($('cib-bookings').value) || 0;
+    var missRate = parseFloat($('cib-missrate').value) || 0;
+    var fixCost = parseFloat($('cib-fixcost').value) || 0;
+    var profiles = parseFloat($('cib-profiles').value);
 
-    $('ciq-ruledep').textContent = fmtNum(ruleDepPerWeek);
-    $('ciq-perweek').textContent = fmtNum(incorrectPerWeek);
-    $('ciq-permonth').textContent = fmtNum(incorrectPerMonth);
+    var perMonth = bookings * (missRate / 100);
+    var perYear = perMonth * 12;
+    var annualCost = perYear * fixCost;
 
-    var summary = bookings + ' bookings/week, ' + rulePct + '% rule-dependent, ' + errorRate + ' incorrect per 100 -> ' +
-      fmtNum(ruleDepPerWeek) + ' rule-dependent/week, ' + fmtNum(incorrectPerWeek) + ' incorrect/week, ' + fmtNum(incorrectPerMonth) + ' incorrect/month';
+    countUp($('cib-total'), annualCost, fmtMoney);
+    countUp($('cib-per-month'), perMonth, fmtNum);
+    countUp($('cib-per-year'), perYear, fmtNum);
+    $('cib-rate').textContent = fmtPct(missRate);
 
-    if (!isNaN(cost) && cost > 0) {
-      var costMonth = incorrectPerMonth * cost;
-      $('ciq-costmonth').textContent = fmtMoney(costMonth);
-      $('ciq-cost-block').style.display = 'block';
-      summary += ', about ' + fmtMoney(costMonth) + '/month to fix at $' + cost + '/incident';
+    var profilesNote = $('cib-profiles-note');
+    if (!isNaN(profiles) && profiles > 0) {
+      profilesNote.textContent = 'That’s spread across roughly ' + profiles + ' client accounts, locations, or providers, each with its own rule to get right.';
     } else {
-      $('ciq-cost-block').style.display = 'none';
+      profilesNote.textContent = '';
     }
 
-    $('ciq-result-summary').value = summary;
-    $('ciq-results').style.display = 'block';
-    $('ciq-after').style.display = 'flex';
-    $('ciq-email-card').style.display = 'block';
-    $('ciq-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var summary = 'Can I Book It? Estimated cost of missed-rule bookings: ' + fmtMoney(annualCost) + '/year. ' +
+      bookings + ' bookings/month, ' + missRate + '% missed-rule rate -> ' + fmtNum(perMonth) + ' mis-booked/month, ' + fmtNum(perYear) + ' mis-booked/year, $' + fixCost + ' to catch and fix each one' +
+      (!isNaN(profiles) && profiles > 0 ? ', spanning ~' + profiles + ' client accounts/locations/providers' : '') + '.';
+    $('cib-result-summary').value = summary;
+
+    $('cib-results').style.display = 'block';
+    $('cib-after').style.display = 'flex';
+    $('cib-email-card').style.display = 'block';
+    $('cib-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  var emailForm = $('ciq-email-form');
+  var emailForm = $('cib-email-form');
   emailForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('ciq-email-status');
+    var status = $('cib-email-status');
     var original = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Sending...';
