@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: Decision Bottleneck Finder</title>
+<meta name="description" content="Five short questions about where agents actually lose time on a call. Get a ranked breakdown of your biggest bottleneck and which Agent First capability addresses it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/decision-bottleneck-finder.html">
+<meta property="og:title" content="Agent First: Decision Bottleneck Finder">
+<meta property="og:description" content="Five short questions about where agents actually lose time on a call. Get a ranked breakdown of your biggest bottleneck.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: Decision Bottleneck Finder">
+<meta name="twitter:description" content="Five short questions about where agents actually lose time on a call. Get a ranked breakdown of your biggest bottleneck.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
+
+  .field-block{border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;background:var(--soft)}
+  .field-block-top{border-color:var(--violet);box-shadow:0 0 0 3px var(--purplebg);background:#fff;}
+
+  .dbf-progress-track{width:100%;height:8px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .dbf-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--grad-primary);width:0%;transition:width .35s ease;}
+  .dbf-progress-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
+
+  .dbf-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .14s ease,background .14s ease,transform .1s ease;}
+  .dbf-option:hover{border-color:var(--violet);background:var(--purplebg);}
+  .dbf-option:active{transform:scale(.99);}
+
+  .dbf-track{width:100%;height:12px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .dbf-fill{height:100%;border-radius:var(--radius-full);background:var(--violet);width:0%;transition:width .8s cubic-bezier(.16,1,.3,1);}
+  .dbf-fill-top{background:var(--grad-primary);}
+
+  @keyframes dbf-fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .dbf-fade{animation:dbf-fade-in .3s ease;}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:18px;max-width:820px;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; Free tool</div>
+      <h1 class="ds-display" style="color:#fff;">The Decision Bottleneck Finder</h1>
+      <p class="ds-body" style="color:#c7cce0;">Five short questions about where agents actually lose time on a call. Answer honestly and get a ranked breakdown of your biggest bottleneck, plus which capability of Agent First addresses each one.</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" style="background:var(--soft);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:640px;">
+
+      <div class="dbf-progress-label" id="dbf-progress-label">Question 1 of 5</div>
+      <div class="dbf-progress-track" style="margin-top:-16px;margin-bottom:8px;"><div class="dbf-progress-fill" id="dbf-progress-fill"></div></div>
+
+      <div class="card dbf-fade" id="dbf-question-card">
+        <div class="ds-label eyebrow-v" id="dbf-q-eyebrow" style="margin-bottom:10px;">&nbsp;</div>
+        <div class="ds-heading" id="dbf-q-text" style="margin-bottom:18px;">&nbsp;</div>
+        <div id="dbf-options" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+
+      <div class="card dbf-fade" id="dbf-result" style="display:none;flex-direction:column;gap:18px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span class="pill pill-violet">Your biggest bottleneck</span>
+        </div>
+        <div>
+          <div class="ds-hero" id="dbf-top-label">--</div>
+          <p class="ds-body-sm" style="color:var(--muted);margin-top:8px;" id="dbf-top-capability">--</p>
+        </div>
+
+        <div style="width:100%;height:1px;background:var(--line);"></div>
+
+        <div>
+          <div class="ds-label eyebrow-c" style="margin-bottom:12px;">Full breakdown</div>
+          <div id="dbf-bars" style="display:flex;flex-direction:column;gap:14px;"></div>
+        </div>
+
+        <button class="btn btn-ghost-light" id="dbf-retake" style="align-self:flex-start;">Retake the quiz</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA + EMAIL -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:640px;">
+      <div class="card-on-dark" id="dbf-after" style="display:none;flex-direction:column;gap:14px;background:var(--navy);border:none;">
+        <div class="ds-body" style="font-weight:900;color:#fff;" id="dbf-after-title">See what changes.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;" id="dbf-after-desc">Want to see this against your own rules, not a hypothetical?</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
+          <a href="#" id="dbf-after-link" class="btn btn-ghost-dark">Try it</a>
+        </div>
+      </div>
+
+      <div class="card" id="dbf-email-card" style="display:none;">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
+        <form id="dbf-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+          <input type="hidden" name="subject" value="Decision Bottleneck Finder result, Agent First">
+          <input type="hidden" name="from_name" value="Agent First website">
+          <input type="hidden" name="result_summary" id="dbf-result-summary" value="">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+          <button type="submit" class="btn btn-primary">Email it to me</button>
+        </form>
+        <div id="dbf-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var SCALE = [
+    { label: 'Rarely', score: 0 },
+    { label: 'Sometimes', score: 1 },
+    { label: 'Often', score: 2 },
+    { label: 'Constantly', score: 3 }
+  ];
+
+  var QUESTIONS = [
+    {
+      key: 'finding',
+      label: 'Finding info',
+      question: 'How often does an agent have to stop and search for the right policy or rule mid-call?',
+      capability: 'Client-aware rule resolution',
+      capabilityDesc: "Agent First resolves the correct client's approved rule the moment it's needed, instead of leaving an agent to search for it mid-call.",
+      cta: { text: 'Try the Agent Challenge', href: 'agent-challenge.html' }
+    },
+    {
+      key: 'exceptions',
+      label: 'Understanding exceptions',
+      question: 'How often does a request fall into a gray area, an exception to the standard rule?',
+      capability: 'Exceptions built into the decision',
+      capabilityDesc: "Every scenario resolves to a fixed decision, ALLOW or DO NOT ALLOW, with the client's approved exceptions already built in rather than left for the agent to work out.",
+      cta: { text: 'Build my sample Client Profile', href: 'sample-client-profile.html' }
+    },
+    {
+      key: 'authority',
+      label: 'Figuring out authority',
+      question: 'How often is it unclear whether the agent is even allowed to make the call themselves?',
+      capability: 'Defined authorization limits',
+      capabilityDesc: 'Authorization thresholds live in the Client Profile itself, so who is allowed to approve what is not something an agent has to work out live.',
+      cta: { text: 'Build my sample Client Profile', href: 'sample-client-profile.html' }
+    },
+    {
+      key: 'approval',
+      label: 'Getting approval',
+      question: 'How often does resolving a request mean tracking down a supervisor for a sign-off?',
+      capability: 'Escalation resolved as part of the decision',
+      capabilityDesc: 'When a request needs a supervisor, Agent First surfaces that as ESCALATE, as part of the decision itself, instead of leaving the agent to chase someone down.',
+      cta: { text: 'Run the Chaos Cost Calculator', href: 'chaos-cost-calculator.html' }
+    },
+    {
+      key: 'wording',
+      label: 'Knowing what to say',
+      question: 'How often does an agent have to reconstruct the exact required wording from memory?',
+      capability: 'Required wording surfaced automatically',
+      capabilityDesc: 'Agent First surfaces the disclosure or required wording tied to the decision (DISCLOSE), instead of relying on an agent to remember it correctly.',
+      cta: { text: 'Build my sample Client Profile', href: 'sample-client-profile.html' }
+    }
+  ];
+
+  var state = { index: 0, scores: {} };
+
+  function renderQuestion() {
+    var q = QUESTIONS[state.index];
+    $('dbf-progress-label').textContent = 'Question ' + (state.index + 1) + ' of ' + QUESTIONS.length;
+    $('dbf-progress-fill').style.width = ((state.index / QUESTIONS.length) * 100) + '%';
+    $('dbf-q-eyebrow').textContent = q.label;
+    $('dbf-q-text').textContent = q.question;
+
+    var optionsEl = $('dbf-options');
+    optionsEl.innerHTML = '';
+    SCALE.forEach(function (opt) {
+      var btn = document.createElement('button');
+      btn.className = 'dbf-option';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function () { selectAnswer(q.key, opt.score); });
+      optionsEl.appendChild(btn);
+    });
+
+    var card = $('dbf-question-card');
+    card.classList.remove('dbf-fade');
+    void card.offsetWidth;
+    card.classList.add('dbf-fade');
+  }
+
+  function selectAnswer(key, score) {
+    state.scores[key] = score;
+    if (state.index < QUESTIONS.length - 1) {
+      state.index++;
+      renderQuestion();
+    } else {
+      $('dbf-progress-fill').style.width = '100%';
+      $('dbf-progress-label').textContent = 'Question ' + QUESTIONS.length + ' of ' + QUESTIONS.length;
+      showResult();
+    }
+  }
+
+  function showResult() {
+    var ranked = QUESTIONS.slice().sort(function (a, b) {
+      return state.scores[b.key] - state.scores[a.key];
+    });
+    var top = ranked[0];
+
+    $('dbf-top-label').textContent = top.label;
+    $('dbf-top-capability').textContent = 'Maps to: ' + top.capability + '. ' + top.capabilityDesc;
+
+    var barsHtml = '';
+    ranked.forEach(function (q, i) {
+      var score = state.scores[q.key];
+      var pct = (score / 3) * 100;
+      var isTop = i === 0;
+      barsHtml += '<div class="field-block' + (isTop ? ' field-block-top' : '') + '">' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:10px;">' +
+        '<div class="ds-body-sm" style="font-weight:750;">' + (i + 1) + '. ' + q.label + '</div>' +
+        '<div class="ds-body-sm" style="color:var(--muted);">' + score + ' of 3</div>' +
+        '</div>' +
+        '<div class="dbf-track"><div class="dbf-fill' + (isTop ? ' dbf-fill-top' : '') + '" style="width:' + pct + '%;"></div></div>' +
+        '<div class="ds-body-sm" style="color:var(--muted);margin-top:8px;">Maps to: ' + q.capability + '</div>' +
+        '</div>';
+    });
+    $('dbf-bars').innerHTML = barsHtml;
+
+    $('dbf-after-title').textContent = 'See what changes for ' + top.label.toLowerCase() + '.';
+    $('dbf-after-desc').textContent = top.capabilityDesc;
+    $('dbf-after-link').textContent = top.cta.text;
+    $('dbf-after-link').href = top.cta.href;
+    $('dbf-after').style.display = 'flex';
+
+    var summary = 'Biggest bottleneck: ' + top.label + ' (' + state.scores[top.key] + '/3). Full breakdown: ' +
+      ranked.map(function (q) { return q.label + ' (' + state.scores[q.key] + '/3)'; }).join(', ') + '.';
+    $('dbf-result-summary').value = summary;
+    $('dbf-email-card').style.display = 'block';
+
+    $('dbf-question-card').style.display = 'none';
+    $('dbf-result').style.display = 'flex';
+    $('dbf-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  $('dbf-retake').addEventListener('click', function () {
+    state = { index: 0, scores: {} };
+    $('dbf-result').style.display = 'none';
+    $('dbf-after').style.display = 'none';
+    $('dbf-email-card').style.display = 'none';
+    $('dbf-question-card').style.display = 'block';
+    renderQuestion();
+    $('dbf-question-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  var emailForm = $('dbf-email-form');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('dbf-email-status');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+
+  renderQuestion();
+})();
+</script>
+
+</body>
+</html>
