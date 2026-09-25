@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: Client Roulette</title>
+<meta name="description" content="A customer asks something. You answer. Then: client switch. Same question, different company, different rule. Survive 90 seconds without mixing up whose policy applies.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/client-roulette.html">
+<meta property="og:title" content="Agent First: Client Roulette">
+<meta property="og:description" content="A customer asks something. You answer. Then: client switch. Same question, different company, different rule. How many switches can you survive?">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: Client Roulette">
+<meta name="twitter:description" content="A customer asks something. You answer. Then: client switch. Same question, different company, different rule.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;--amber:#a15c00;--amberbg:#fff6e5;--danger:#c5364a;--dangerbg:#fdeaee;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+  button{font-family:inherit}
+  input{font-family:inherit}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
+  .field-input:focus{outline:none;border-color:var(--violet)}
+
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
+
+  /* HUD */
+  .rlt-hud{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:var(--radius-md);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-panel);}
+  .rlt-hud-stat{display:flex;flex-direction:column;gap:2px;}
+  .rlt-hud-num{font-size:20px;font-weight:900;}
+  .rlt-hud-label{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+  .rlt-meter-wrap{flex:1;min-width:160px;display:flex;flex-direction:column;gap:4px;}
+  .rlt-meter-track{width:100%;height:12px;border-radius:var(--radius-full);background:var(--bg);overflow:hidden;}
+  .rlt-meter-fill{height:100%;border-radius:var(--radius-full);background:var(--green);width:100%;transition:width .3s ease,background .3s ease;}
+
+  /* active client badge */
+  .rlt-client-badge{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:var(--radius-md);background:var(--navy);color:#fff;}
+  .rlt-client-name{font-size:20px;font-weight:900;}
+
+  /* per-question timer */
+  .rlt-qtimer-track{width:100%;height:5px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .rlt-qtimer-fill{height:100%;background:var(--grad-primary);width:100%;}
+
+  .rlt-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .12s ease,background .12s ease,transform .1s ease;}
+  .rlt-option:hover{border-color:var(--violet);background:var(--purplebg);}
+  .rlt-option:active{transform:scale(.99);}
+  .rlt-option-ask{border-style:dashed;color:var(--muted);font-weight:650;}
+
+  /* flash + switch banner */
+  .rlt-flash{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:40}
+  .rlt-flash.show{opacity:1}
+  .rlt-flash.correct{background:rgba(23,122,85,.12)}
+  .rlt-flash.wrong{background:rgba(197,54,74,.14)}
+  .rlt-flash.ask{background:rgba(161,92,0,.10)}
+
+  .rlt-switch-banner{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:rgba(11,16,37,.92);opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:50;text-align:center;padding:20px;}
+  .rlt-switch-banner.show{opacity:1;}
+  .rlt-switch-title{font-size:14px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);}
+  .rlt-switch-name{font-size:44px;font-weight:900;color:#fff;letter-spacing:-.02em;}
+
+  @keyframes rlt-pop{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
+  .rlt-pop{animation:rlt-pop .4s ease;}
+
+  @media (max-width:900px){
+    .section{padding:56px 20px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+    .rlt-switch-name{font-size:32px;}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+    </div>
+  </div>
+
+  <!-- INTRO STAGE -->
+  <div class="section" id="introStage" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Labs &middot; 90-second game</div>
+      <h1 class="ds-display" style="color:#fff;">Client Roulette</h1>
+      <p class="ds-body" style="color:#c7cce0;">A customer asks something. You answer. Then: CLIENT SWITCH. Same question, different company, a completely different rule. The pace gets faster. Your patience meter drops on every mixup. Survive as many switches as you can.</p>
+      <div class="card" style="text-align:left;max-width:520px;">
+        <div class="ds-body-sm" style="color:var(--muted);">Three real fictional clients (Harborview, Meridian, Northgate) share the same kinds of questions but different rules. Watch the badge at the top of the screen: it always tells you which account you're currently on. Pick the answer that matches <span style="font-weight:750;color:var(--ink);">that</span> client, not the last one.</div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Start the shift</button>
+    </div>
+  </div>
+
+  <!-- GAME STAGE -->
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:640px;">
+
+      <div class="rlt-hud">
+        <div class="rlt-hud-stat"><div class="rlt-hud-num" id="hudTime">1:30</div><div class="rlt-hud-label">Time left</div></div>
+        <div class="rlt-hud-stat"><div class="rlt-hud-num" id="hudSwitches">0</div><div class="rlt-hud-label">Switches</div></div>
+        <div class="rlt-hud-stat"><div class="rlt-hud-num" id="hudCorrect">0/0</div><div class="rlt-hud-label">Correct</div></div>
+        <div class="rlt-meter-wrap">
+          <div class="rlt-hud-label">Customer patience</div>
+          <div class="rlt-meter-track"><div class="rlt-meter-fill" id="patienceFill"></div></div>
+        </div>
+      </div>
+
+      <div class="rlt-client-badge">
+        <div>
+          <div class="ds-label" style="color:#8890ab;">You are viewing</div>
+          <div class="rlt-client-name" id="activeClientName">--</div>
+        </div>
+        <div class="ds-body-sm" style="color:#8890ab;">account</div>
+      </div>
+
+      <div class="card">
+        <div class="rlt-qtimer-track" style="margin-bottom:16px;"><div class="rlt-qtimer-fill" id="qTimerFill"></div></div>
+        <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Customer on the line</div>
+        <div class="ds-heading" id="questionText" style="margin-bottom:18px;">&nbsp;</div>
+        <div id="optionsWrap" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESULTS STAGE -->
+  <div class="section" id="resultsStage" style="background:#fff;display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:640px;">
+
+      <div class="card">
+        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Shift over</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
+          <div><div class="ds-score" id="rSwitches">0</div><div class="ds-body-sm" style="color:var(--muted);">Client switches survived</div></div>
+          <div><div class="ds-score" id="rCorrect">0</div><div class="ds-body-sm" style="color:var(--muted);">Correct answers</div></div>
+          <div><div class="ds-score" style="color:var(--danger);" id="rMixups">0</div><div class="ds-body-sm" style="color:var(--muted);">Wrong-client mixups</div></div>
+          <div><div class="ds-score" id="rAsks">0</div><div class="ds-body-sm" style="color:var(--muted);">Supervisor asks</div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Share your result</div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input class="field-input" id="shareText" readonly style="flex:1;min-width:220px;">
+          <button class="btn btn-ghost-light" id="copyBtn">Copy</button>
+        </div>
+        <div class="ds-body-sm" id="copyStatus" style="color:var(--green);display:none;margin-top:8px;">Copied.</div>
+      </div>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <button class="btn btn-primary" id="playAgainBtn">Play again</button>
+        <a href="agent-challenge.html" class="btn btn-ghost-light">Try the slower version: Agent Challenge</a>
+      </div>
+
+      <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
+        <div class="ds-body" style="font-weight:900;color:#fff;">This is the exact mixup a connected version prevents.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">Routing context from the phone system or CRM tells Agent First which client a call belongs to automatically, so the agent never has to remember to check. See what that looks like against your own rules.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
+          <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
+        </div>
+      </div>
+
+      <div class="card" id="emailCard">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
+        <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
+          <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+          <input type="hidden" name="subject" value="Client Roulette result, Agent First">
+          <input type="hidden" name="from_name" value="Agent First website">
+          <input type="hidden" name="result_summary" id="resultSummaryField" value="">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
+          <button type="submit" class="btn btn-primary">Email it to me</button>
+        </form>
+        <div id="emailStatus" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
+<div class="rlt-flash" id="flash"></div>
+<div class="rlt-switch-banner" id="switchBanner">
+  <div class="rlt-switch-title">Client switch</div>
+  <div class="rlt-switch-name" id="switchBannerName">--</div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+
+  var CLIENTS = {
+    A: { name: 'Harborview', rules: [
+      'Cancellations within 48 hours of a scheduled appointment: no fee.',
+      'ID verification required before discussing any account details.',
+      'Refunds over $200 require a supervisor sign-off before processing.',
+      'Standard callback window for an open issue: 24 hours.'
+    ] },
+    B: { name: 'Meridian', rules: [
+      'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.',
+      'ID verification is NOT required for general account questions, only for changes.',
+      'Refunds over $200 can be processed by any agent, no sign-off required.',
+      'Standard callback window for an open issue: 4 hours.'
+    ] },
+    C: { name: 'Northgate', rules: [
+      'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.',
+      'ID verification required before discussing any account details.',
+      'Refunds over $200 require a supervisor sign-off before processing.',
+      'Standard callback window for an open issue: 24 hours, except weekends (next business day).'
+    ] }
+  };
+  var CLIENT_KEYS = Object.keys(CLIENTS);
+
+  var TEMPLATES = [
+    { ruleIndex: 0, ask: 'A customer wants to cancel an appointment scheduled for tomorrow. What do you tell them about a fee?' },
+    { ruleIndex: 1, ask: 'A customer calls asking a general question about their account. What do you tell them about ID verification?' },
+    { ruleIndex: 2, ask: 'A customer is owed a $350 refund. What do you tell them about getting it processed?' },
+    { ruleIndex: 3, ask: 'A customer has an open issue and asks when they\'ll hear back. What do you tell them about the callback window?' }
+  ];
+
+  var GAME_SECONDS = 90;
+  var PASSIVE_DECAY_PER_SEC = 1.1;
+
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
+  var flash = $('flash'), switchBanner = $('switchBanner');
+  var mainTimer = null, qTimer = null;
+  var state = null;
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function qTimeLimit() {
+    return Math.max(2.6, 6 - state.answered * 0.14);
+  }
+
+  function startGame() {
+    state = {
+      patience: 100, timeLeft: GAME_SECONDS, score: 0,
+      correct: 0, wrongClientMixups: 0, supervisorAsks: 0, timeouts: 0, answered: 0, switches: 0,
+      activeClient: CLIENT_KEYS[Math.floor(Math.random() * CLIENT_KEYS.length)],
+      running: true, locked: false
+    };
+    introStage.style.display = 'none';
+    resultsStage.style.display = 'none';
+    gameStage.style.display = 'flex';
+    updateClientBadge();
+    updateHud();
+    nextRound(false);
+    mainTimer = setInterval(tick, 1000);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function tick() {
+    if (!state.running) return;
+    state.timeLeft -= 1;
+    state.patience = Math.max(0, state.patience - PASSIVE_DECAY_PER_SEC);
+    updateHud();
+    if (state.patience <= 0) { endGame('patience'); return; }
+    if (state.timeLeft <= 0) { endGame('time'); return; }
+  }
+
+  function updateHud() {
+    var m = Math.floor(Math.max(0, state.timeLeft) / 60);
+    var s = Math.max(0, state.timeLeft) % 60;
+    $('hudTime').textContent = m + ':' + (s < 10 ? '0' : '') + s;
+    $('hudSwitches').textContent = state.switches;
+    $('hudCorrect').textContent = state.correct + '/' + state.answered;
+    var fill = $('patienceFill');
+    fill.style.width = state.patience + '%';
+    fill.style.background = state.patience > 55 ? 'var(--green)' : (state.patience > 25 ? 'var(--amber)' : 'var(--danger)');
+  }
+
+  function updateClientBadge() {
+    $('activeClientName').textContent = CLIENTS[state.activeClient].name;
+  }
+
+  function showSwitchBanner(cb) {
+    $('switchBannerName').textContent = CLIENTS[state.activeClient].name;
+    switchBanner.classList.add('show');
+    setTimeout(function () {
+      switchBanner.classList.remove('show');
+      setTimeout(cb, 180);
+    }, 620);
+  }
+
+  function nextRound(allowSwitch) {
+    if (!state.running) return;
+    var doSwitch = allowSwitch && Math.random() < 0.82;
+    if (doSwitch) {
+      var pool = CLIENT_KEYS.filter(function (k) { return k !== state.activeClient; });
+      state.activeClient = pool[Math.floor(Math.random() * pool.length)];
+      state.switches += 1;
+      updateClientBadge();
+      updateHud();
+      showSwitchBanner(function () { renderQuestion(); });
+    } else {
+      renderQuestion();
+    }
+  }
+
+  function renderQuestion() {
+    if (!state.running) return;
+    state.locked = false;
+    var template = TEMPLATES[Math.floor(Math.random() * TEMPLATES.length)];
+    var texts = CLIENT_KEYS.map(function (k) { return CLIENTS[k].rules[template.ruleIndex]; });
+    var unique = [];
+    texts.forEach(function (t) { if (unique.indexOf(t) === -1) unique.push(t); });
+    var options = shuffle(unique);
+    var correctText = CLIENTS[state.activeClient].rules[template.ruleIndex];
+
+    $('questionText').textContent = template.ask;
+    var wrap = $('optionsWrap');
+    wrap.innerHTML = '';
+    options.forEach(function (text) {
+      var btn = document.createElement('button');
+      btn.className = 'rlt-option';
+      btn.textContent = text;
+      btn.addEventListener('click', function () { answer(text, correctText); });
+      wrap.appendChild(btn);
+    });
+    var askBtn = document.createElement('button');
+    askBtn.className = 'rlt-option rlt-option-ask';
+    askBtn.textContent = 'Not sure, ask a supervisor';
+    askBtn.addEventListener('click', function () { answer('__ASK__', correctText); });
+    wrap.appendChild(askBtn);
+
+    var qt = qTimeLimit();
+    var fill = $('qTimerFill');
+    fill.style.transition = 'none';
+    fill.style.width = '100%';
+    void fill.offsetWidth;
+    fill.style.transition = 'width ' + qt + 's linear';
+    fill.style.width = '0%';
+    clearTimeout(qTimer);
+    qTimer = setTimeout(function () { answer('__TIMEOUT__', correctText); }, qt * 1000);
+  }
+
+  function flashScreen(kind) {
+    flash.className = 'rlt-flash show ' + kind;
+    setTimeout(function () { flash.className = 'rlt-flash'; }, 260);
+  }
+
+  function answer(picked, correctText) {
+    if (!state.running || state.locked) return;
+    state.locked = true;
+    clearTimeout(qTimer);
+
+    if (picked === '__TIMEOUT__') {
+      state.timeouts += 1;
+      state.answered += 1;
+      state.patience = Math.max(0, state.patience - 16);
+      flashScreen('wrong');
+    } else if (picked === '__ASK__') {
+      state.supervisorAsks += 1;
+      state.answered += 1;
+      state.patience = Math.max(0, state.patience - 8);
+      flashScreen('ask');
+    } else if (picked === correctText) {
+      state.correct += 1;
+      state.answered += 1;
+      state.score += 100;
+      state.patience = Math.min(100, state.patience + 3);
+      flashScreen('correct');
+    } else {
+      state.wrongClientMixups += 1;
+      state.answered += 1;
+      state.patience = Math.max(0, state.patience - 22);
+      flashScreen('wrong');
+    }
+
+    updateHud();
+
+    if (state.patience <= 0) { endGame('patience'); return; }
+    if (state.timeLeft <= 0) { endGame('time'); return; }
+    setTimeout(function () { nextRound(true); }, 550);
+  }
+
+  function endGame(reason) {
+    state.running = false;
+    clearInterval(mainTimer);
+    clearTimeout(qTimer);
+    gameStage.style.display = 'none';
+    resultsStage.style.display = 'flex';
+
+    var headline;
+    if (reason === 'patience') {
+      headline = 'The customer hung up. Patience ran out after ' + state.switches + ' client switches.';
+    } else if (state.wrongClientMixups === 0 && state.answered > 0) {
+      headline = 'You survived ' + state.switches + ' client switches with zero wrong-client mixups.';
+    } else {
+      headline = 'You survived ' + state.switches + ' client switches. ' + state.wrongClientMixups + ' of your answers were the wrong client\'s policy.';
+    }
+    $('resultsHeadline').textContent = headline;
+    $('rSwitches').textContent = state.switches;
+    $('rCorrect').textContent = state.correct;
+    $('rMixups').textContent = state.wrongClientMixups;
+    $('rAsks').textContent = state.supervisorAsks;
+
+    var shareLine = 'I survived ' + state.switches + ' client switches in Client Roulette, with ' + state.wrongClientMixups + ' wrong-client mixups and ' + state.correct + ' correct answers. Try it: myagentfirst.com/client-roulette.html';
+    $('shareText').value = shareLine;
+    $('resultSummaryField').value = shareLine;
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('startBtn').addEventListener('click', startGame);
+  $('playAgainBtn').addEventListener('click', function () {
+    resultsStage.style.display = 'none';
+    startGame();
+  });
+
+  $('copyBtn').addEventListener('click', function () {
+    var field = $('shareText');
+    field.select();
+    var done = function () {
+      $('copyStatus').style.display = 'block';
+      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(field.value).then(done).catch(function () {
+        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+      });
+    } else {
+      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
+    }
+  });
+
+  var emailForm = $('emailForm');
+  emailForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = emailForm.querySelector('button[type="submit"]');
+    var status = $('emailStatus');
+    var original = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(emailForm)
+    }).then(function (r) { return r.json(); }).then(function (data) {
+      if (data && data.success) {
+        emailForm.style.display = 'none';
+        status.style.color = '#1f5c42';
+        status.textContent = "Sent. I'll follow up directly too.";
+        status.style.display = 'block';
+      } else {
+        btn.disabled = false;
+        btn.textContent = original;
+        status.style.color = '#c53636';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      }
+    }).catch(function () {
+      btn.disabled = false;
+      btn.textContent = original;
+      status.style.color = '#c53636';
+      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+      status.style.display = 'block';
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
