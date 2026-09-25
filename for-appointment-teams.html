@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First: For Appointment Teams</title>
+<meta name="description" content="Scheduling isn't hard because calendars are hard. Agent First resolves the operational decision around the appointment; your booking system still handles the calendar.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/for-appointment-teams.html">
+<meta property="og:title" content="Agent First: For Appointment Teams">
+<meta property="og:description" content="Scheduling isn't hard because calendars are hard. Agent First resolves the operational decision around the appointment; your booking system still handles the calendar.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First: For Appointment Teams">
+<meta name="twitter:description" content="Scheduling isn't hard because calendars are hard. Agent First resolves the operational decision around the appointment; your booking system still handles the calendar.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
+<style>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-stat{font-size:22px;line-height:1.15;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:88px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-dark{background:var(--navy);border-radius:var(--radius-lg);padding:24px;color:#fff}
+  .card-on-dark{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:var(--radius-lg);padding:24px}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
+  .nav-link:hover::after{right:0;}
+
+  .pill{display:inline-flex;align-items:center;padding:5px 14px;border-radius:var(--radius-full);font-size:11px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;width:fit-content;}
+  .pill-outcome{background:rgba(124,58,237,.12);color:var(--violet);}
+
+  @media (max-width:900px){
+    .section{padding:56px 24px}
+    .ds-display{font-size:32px}
+    .ds-hero{font-size:24px}
+  }
+</style>
+</head>
+<body>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="section" style="background:var(--grad-navy);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:820px;">
+      <div class="ds-label eyebrow-c">For Appointment Teams</div>
+      <h1 class="ds-display" style="color:#fff;">AN OPEN SLOT ISN'T ALWAYS THE RIGHT APPOINTMENT.</h1>
+      <p class="ds-body" style="color:#c7cce0;">A calendar can tell an employee that a slot is open. It can't tell them whether this customer, this service, and this account are actually allowed to use it. That's a rules problem before it's a calendar problem, and it's the same kind of decision Agent First already resolves on a call.</p>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;">
+        <a href="can-i-book-it.html" class="btn btn-primary">Run the Can I Book It? calculator</a>
+        <a href="index.html#contact" class="btn btn-ghost-dark">Apply for the pilot program</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULING QUESTIONS -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">What a calendar doesn't know</div>
+        <h2 class="ds-hero">Questions that decide whether a slot should be booked, not just whether it's open.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card"><div class="ds-body-sm">Does this client require a deposit before the slot is held?</div></div>
+        <div class="card"><div class="ds-body-sm">Is this date inside a blackout window for this specific client?</div></div>
+        <div class="card"><div class="ds-body-sm">Does the customer meet the eligibility rule for this service?</div></div>
+        <div class="card"><div class="ds-body-sm">Is this request inside the allowed cancellation or rescheduling window?</div></div>
+        <div class="card"><div class="ds-body-sm">Does this appointment type need a longer slot than the calendar is showing?</div></div>
+        <div class="card"><div class="ds-body-sm">Does booking it require a specific credential or certification?</div></div>
+        <div class="card"><div class="ds-body-sm">Does this request need a supervisor or manager sign-off before it's confirmed?</div></div>
+        <div class="card"><div class="ds-body-sm">Is there a required disclosure the customer needs to hear before the booking is confirmed?</div></div>
+      </div>
+      <div class="card-dark">
+        <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:#fff;">Agent First handles the operational decision, whether this is the right slot for this client, this customer, this request. Your existing scheduling system still handles the calendar itself.</div>
+        <div class="ds-body-sm" style="color:#c7cce0;">It doesn't replace your booking software. It decides whether the slot your booking software is about to hold is the right one to hold.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHO THIS FITS -->
+  <div class="section bg-texture-tint" style="background:var(--purplebg);">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">Who this fits</div>
+        <h2 class="ds-hero">Any team booking appointments against client- or account-specific rules.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card"><div class="ds-body-sm" style="color:var(--muted);">Centralized scheduling teams booking for multiple practices, locations, or providers.</div></div>
+        <div class="card"><div class="ds-body-sm" style="color:var(--muted);">Service businesses where eligibility, deposits, or credentials vary by client or job type.</div></div>
+        <div class="card"><div class="ds-body-sm" style="color:var(--muted);">Any operation where an open calendar slot doesn't automatically mean the appointment should be booked.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section" style="background:var(--navy);padding:96px 48px;">
+    <div style="width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <h2 class="ds-hero" style="color:#fff;">See what a missed booking rule is actually costing you.</h2>
+      <p class="ds-body" style="color:#c7cce0;">Run the numbers on your own booking volume, then talk about a pilot.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px;">
+        <a href="can-i-book-it.html" class="btn btn-primary">Run the Can I Book It? calculator</a>
+        <a href="index.html#contact" class="btn btn-ghost-dark">Apply for the pilot program</a>
+      </div>
+    </div>
+  </div>
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </a>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+</body>
+</html>
