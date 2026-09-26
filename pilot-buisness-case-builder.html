@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent First: Build My Pilot Business Case</title>
-<meta name="description" content="Pull together what you found in the other Manager Labs tools into one baseline, and see the exact numbers a 90-day pilot would be built to test. Not a savings estimate.">
+<title>Agent First: Decision Bottleneck Finder</title>
+<meta name="description" content="Five short questions about where agents actually lose time on a call. Get a ranked breakdown of your biggest bottleneck and which Agent First capability addresses it.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://myagentfirst.com/pilot-business-case-builder.html">
-<meta property="og:title" content="Agent First: Build My Pilot Business Case">
-<meta property="og:description" content="Pull together what you found in the other Manager Labs tools into one baseline, and see the exact numbers a 90-day pilot would be built to test. Not a savings estimate.">
+<meta property="og:url" content="https://myagentfirst.com/decision-bottleneck-finder.html">
+<meta property="og:title" content="Agent First: Decision Bottleneck Finder">
+<meta property="og:description" content="Five short questions about where agents actually lose time on a call. Get a ranked breakdown of your biggest bottleneck.">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent First: Build My Pilot Business Case">
-<meta name="twitter:description" content="Pull together what you found in the other Manager Labs tools into one baseline, and see the exact numbers a 90-day pilot would be built to test. Not a savings estimate.">
+<meta name="twitter:title" content="Agent First: Decision Bottleneck Finder">
+<meta name="twitter:description" content="Five short questions about where agents actually lose time on a call. Get a ranked breakdown of your biggest bottleneck.">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,7 +48,6 @@
   .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
   .ds-body{font-size:16px;line-height:1.55;font-weight:400}
   .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
-  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
   .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
   .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
 
@@ -72,33 +71,34 @@
   .brand-row{display:flex;align-items:center;gap:12px}
   .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
 
-  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
-  .field-label{font-size:13px;font-weight:650;color:var(--ink)}
-  .field-hint{font-size:12px;color:var(--muted)}
-  .field-hint a{color:var(--violet);font-weight:650;text-decoration:underline;}
   .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
   .field-input:focus{outline:none;border-color:var(--violet)}
 
-  .pbc-metric-tile{background:var(--soft);border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;display:flex;flex-direction:column;gap:4px;}
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
+  .pill-violet{background:var(--purplebg);color:var(--violet)}
 
-  .ds-score{display:inline-block;transition:transform .18s ease}
-  @keyframes pbc-pop{0%{transform:scale(1)}45%{transform:scale(1.06)}100%{transform:scale(1)}}
-  .pbc-pop{animation:pbc-pop .5s ease;}
+  .field-block{border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;background:var(--soft)}
+  .field-block-top{border-color:var(--violet);box-shadow:0 0 0 3px var(--purplebg);background:#fff;}
 
-  .pbc-total-wrap{text-align:center;padding:8px 0 4px;}
-  .pbc-total{font-size:48px;line-height:1.05;font-weight:900;letter-spacing:-.02em;background:var(--grad-primary);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;}
+  .dbf-progress-track{width:100%;height:8px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .dbf-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--grad-primary);width:0%;transition:width .35s ease;}
+  .dbf-progress-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
 
-  .pbc-divider{width:100%;height:1px;background:var(--line);margin:22px 0;}
-  .pbc-divider-dark{width:100%;height:1px;background:rgba(255,255,255,.16);margin:18px 0;}
+  .dbf-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .14s ease,background .14s ease,transform .1s ease;}
+  .dbf-option:hover{border-color:var(--violet);background:var(--purplebg);}
+  .dbf-option:active{transform:scale(.99);}
 
-  .pbc-metric-row{display:flex;gap:12px;align-items:flex-start;}
-  .pbc-metric-badge{flex:0 0 auto;width:28px;height:28px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;}
+  .dbf-track{width:100%;height:12px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
+  .dbf-fill{height:100%;border-radius:var(--radius-full);background:var(--violet);width:0%;transition:width .8s cubic-bezier(.16,1,.3,1);}
+  .dbf-fill-top{background:var(--grad-primary);}
+
+  @keyframes dbf-fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .dbf-fade{animation:dbf-fade-in .3s ease;}
 
   @media (max-width:900px){
     .section{padding:56px 20px}
     .ds-display{font-size:32px}
     .ds-hero{font-size:24px}
-    .pbc-total{font-size:36px}
   }
 </style>
 </head>
@@ -112,7 +112,7 @@
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
     </a>
-    <div style="display:flex;align-items:center;gap:20px;flex-wrap:wrap;justify-content:flex-end;">
+    <div style="display:flex;align-items:center;gap:20px;">
       <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
       <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
@@ -126,118 +126,72 @@
   <div class="section" style="background:var(--grad-navy);">
     <div class="wrap" style="display:flex;flex-direction:column;gap:18px;max-width:820px;">
       <div class="ds-label eyebrow-c">Agent First Labs &middot; Free tool</div>
-      <h1 class="ds-display" style="color:#fff;">Build My Pilot Business Case</h1>
-      <p class="ds-body" style="color:#c7cce0;">Pull together what you found in Supervisor Tax, Ramp Cost, Decision Resolution Time, and Can I Book It into one baseline. This does not calculate what Agent First would save you. It turns what you already measured into the four numbers a 90-day pilot would be built to test.</p>
+      <h1 class="ds-display" style="color:#fff;">The Decision Bottleneck Finder</h1>
+      <p class="ds-body" style="color:#c7cce0;">Five short questions about where agents actually lose time on a call. Answer honestly and get a ranked breakdown of your biggest bottleneck, plus which capability of Agent First addresses each one.</p>
     </div>
   </div>
 
-  <!-- CALCULATOR -->
+  <!-- QUIZ -->
   <div class="section" style="background:var(--soft);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:760px;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:640px;">
 
-      <div class="card">
-        <div class="ds-label eyebrow-v" style="margin-bottom:16px;">Your baseline, today</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
-          <div class="field-row">
-            <label class="field-label" for="pbc-suptax">Supervisor Tax: annual cost of supervisor interruptions</label>
-            <input class="field-input" id="pbc-suptax" type="number" min="0" step="100" value="70000">
-            <div class="field-hint">From the <a href="supervisor-tax-calculator.html">Supervisor Tax Calculator</a>, monthly cost &times; 12, or your own estimate.</div>
-          </div>
-          <div class="field-row">
-            <label class="field-label" for="pbc-ramp">Ramp Cost: annual cost of new-hire ramp time</label>
-            <input class="field-input" id="pbc-ramp" type="number" min="0" step="100" value="120000">
-            <div class="field-hint">From the <a href="ramp-cost-estimator.html">New-Hire Ramp Cost Estimator</a>.</div>
-          </div>
-          <div class="field-row">
-            <label class="field-label" for="pbc-drt">Decision Resolution Time: seconds per decision, today</label>
-            <input class="field-input" id="pbc-drt" type="number" min="0" step="1" value="80">
-            <div class="field-hint">From the <a href="decision-resolution-time-calculator.html">Decision Resolution Time Calculator</a>. Time, not a call handle time.</div>
-          </div>
-          <div class="field-row">
-            <label class="field-label" for="pbc-booking">Booking Mistakes: annual cost of missed-rule bookings</label>
-            <input class="field-input" id="pbc-booking" type="number" min="0" step="100" value="18000">
-            <div class="field-hint">From <a href="can-i-book-it.html">Can I Book It?</a>, if booking is part of your operation. Leave at 0 if it isn't.</div>
-          </div>
-        </div>
+      <div class="dbf-progress-label" id="dbf-progress-label">Question 1 of 5</div>
+      <div class="dbf-progress-track" style="margin-top:-16px;margin-bottom:8px;"><div class="dbf-progress-fill" id="dbf-progress-fill"></div></div>
 
-        <button class="btn btn-primary" id="pbc-calc" style="margin-top:24px;">Build my business case</button>
+      <div class="card dbf-fade" id="dbf-question-card">
+        <div class="ds-label eyebrow-v" id="dbf-q-eyebrow" style="margin-bottom:10px;">&nbsp;</div>
+        <div class="ds-heading" id="dbf-q-text" style="margin-bottom:18px;">&nbsp;</div>
+        <div id="dbf-options" style="display:flex;flex-direction:column;gap:10px;"></div>
       </div>
 
-      <div class="card" id="pbc-results" style="display:none;">
-        <div class="pbc-total-wrap">
-          <div class="ds-label eyebrow-v">Combined annual cost identified so far</div>
-          <div class="pbc-total" id="pbc-total">$0</div>
-          <p class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Supervisor Tax, Ramp Cost, and Booking Mistakes, added together. Decision Resolution Time is measured separately, in seconds, not dollars, on purpose.</p>
+      <div class="card dbf-fade" id="dbf-result" style="display:none;flex-direction:column;gap:18px;">
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span class="pill pill-violet">Your biggest bottleneck</span>
+        </div>
+        <div>
+          <div class="ds-hero" id="dbf-top-label">--</div>
+          <p class="ds-body-sm" style="color:var(--muted);margin-top:8px;" id="dbf-top-capability">--</p>
         </div>
 
-        <div class="pbc-divider"></div>
+        <div style="width:100%;height:1px;background:var(--line);"></div>
 
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
-          <div class="pbc-metric-tile">
-            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Supervisor Tax</div>
-            <div class="ds-score" id="pbc-out-suptax" style="font-size:22px;">--</div>
-          </div>
-          <div class="pbc-metric-tile">
-            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Ramp Cost</div>
-            <div class="ds-score" id="pbc-out-ramp" style="font-size:22px;">--</div>
-          </div>
-          <div class="pbc-metric-tile">
-            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Decision Resolution Time</div>
-            <div class="ds-score" id="pbc-out-drt" style="font-size:22px;">--</div>
-          </div>
-          <div class="pbc-metric-tile">
-            <div class="ds-body-sm" style="color:var(--muted);font-weight:650;">Booking Mistakes</div>
-            <div class="ds-score" id="pbc-out-booking" style="font-size:22px;">--</div>
-          </div>
+        <div>
+          <div class="ds-label eyebrow-c" style="margin-bottom:12px;">Full breakdown</div>
+          <div id="dbf-bars" style="display:flex;flex-direction:column;gap:14px;"></div>
         </div>
+
+        <button class="btn btn-ghost-light" id="dbf-retake" style="align-self:flex-start;">Retake the quiz</button>
       </div>
 
-      <div class="card-on-dark" id="pbc-after" style="display:none;flex-direction:column;gap:16px;background:var(--navy);border:none;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">This is not a savings estimate.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;" id="pbc-framing">Based on your inputs, a 90-day pilot should test whether Agent First can materially change these four numbers.</p>
+    </div>
+  </div>
 
-        <div class="pbc-divider-dark"></div>
-
-        <div class="ds-body" style="font-weight:750;color:#fff;">The four things a pilot would measure</div>
-        <div style="display:flex;flex-direction:column;gap:12px;">
-          <div class="pbc-metric-row">
-            <div class="pbc-metric-badge">1</div>
-            <div class="ds-body-sm" style="color:#c7cce0;">Supervisor pull-ins: do agents need fewer interruptions once they're working from an approved Active Profile instead of memory?</div>
-          </div>
-          <div class="pbc-metric-row">
-            <div class="pbc-metric-badge">2</div>
-            <div class="ds-body-sm" style="color:#c7cce0;">Ramp time: do new hires reach full productivity faster with an approved Profile as the reference, instead of memorizing rules per client?</div>
-          </div>
-          <div class="pbc-metric-row">
-            <div class="pbc-metric-badge">3</div>
-            <div class="ds-body-sm" style="color:#c7cce0;">Decision Resolution Time: does the time from encountering a rule question to a validated decision actually shorten?</div>
-          </div>
-          <div class="pbc-metric-row">
-            <div class="pbc-metric-badge">4</div>
-            <div class="ds-body-sm" style="color:#c7cce0;">Missed-rule bookings: does the rate of wrong-rule bookings measurably drop?</div>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
+  <!-- CTA + EMAIL -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:28px;max-width:640px;">
+      <div class="card-on-dark" id="dbf-after" style="display:none;flex-direction:column;gap:14px;background:var(--navy);border:none;">
+        <div class="ds-body" style="font-weight:900;color:#fff;" id="dbf-after-title">See what changes.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;" id="dbf-after-desc">Want to see this against your own rules, not a hypothetical?</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
-          <a href="index.html#contact" class="btn btn-ghost-dark">Talk to us about a pilot</a>
+          <a href="#" id="dbf-after-link" class="btn btn-ghost-dark">Try it</a>
+          <a href="pilot-business-case-builder.html" class="btn btn-ghost-dark">Build my pilot business case</a>
         </div>
       </div>
 
-      <div class="card" id="pbc-email-card" style="display:none;">
-        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this business case emailed to you?</div>
-        <form id="pbc-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
+      <div class="card" id="dbf-email-card" style="display:none;">
+        <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
+        <form id="dbf-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
           <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
-          <input type="hidden" name="subject" value="Pilot Business Case result, Agent First">
+          <input type="hidden" name="subject" value="Decision Bottleneck Finder result, Agent First">
           <input type="hidden" name="from_name" value="Agent First website">
-          <input type="hidden" name="result_summary" id="pbc-result-summary" value="">
+          <input type="hidden" name="result_summary" id="dbf-result-summary" value="">
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
           <input class="field-input" style="flex:1;min-width:220px;" type="email" name="email" placeholder="Your work email" required>
           <button type="submit" class="btn btn-primary">Email it to me</button>
         </form>
-        <div id="pbc-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
+        <div id="dbf-email-status" class="ds-body-sm" style="display:none;margin-top:10px;"></div>
       </div>
-
     </div>
   </div>
 
@@ -257,63 +211,149 @@
   'use strict';
   var $ = function (id) { return document.getElementById(id); };
 
-  function fmtMoney(v) {
-    return '$' + Math.round(v).toLocaleString();
-  }
-  function fmtSeconds(v) {
-    return Math.round(v) + 's';
-  }
+  var SCALE = [
+    { label: 'Rarely', score: 0 },
+    { label: 'Sometimes', score: 1 },
+    { label: 'Often', score: 2 },
+    { label: 'Constantly', score: 3 }
+  ];
 
-  function countUp(el, target, formatter) {
-    var start = 0;
-    var duration = 800;
-    var startTime = null;
-    function step(ts) {
-      if (startTime === null) startTime = ts;
-      var progress = Math.min((ts - startTime) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = formatter(start + (target - start) * eased);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = formatter(target);
-        el.classList.add('pbc-pop');
-        setTimeout(function () { el.classList.remove('pbc-pop'); }, 500);
-      }
+  var QUESTIONS = [
+    {
+      key: 'finding',
+      label: 'Finding info',
+      question: 'How often does an agent have to stop and search for the right policy or rule mid-call?',
+      capability: 'Client-aware rule resolution',
+      capabilityDesc: "Agent First resolves the correct client's approved rule the moment it's needed, instead of leaving an agent to search for it mid-call.",
+      cta: { text: 'Try the Agent Challenge', href: 'agent-challenge.html' }
+    },
+    {
+      key: 'exceptions',
+      label: 'Understanding exceptions',
+      question: 'How often does a request fall into a gray area, an exception to the standard rule?',
+      capability: 'Exceptions built into the decision',
+      capabilityDesc: "Every scenario resolves to a fixed decision, ALLOW or DO NOT ALLOW, with the client's approved exceptions already built in rather than left for the agent to work out.",
+      cta: { text: 'Build my sample Client Profile', href: 'sample-client-profile.html' }
+    },
+    {
+      key: 'authority',
+      label: 'Figuring out authority',
+      question: 'How often is it unclear whether the agent is even allowed to make the call themselves?',
+      capability: 'Defined authorization limits',
+      capabilityDesc: 'Authorization thresholds live in the Client Profile itself, so who is allowed to approve what is not something an agent has to work out live.',
+      cta: { text: 'Build my sample Client Profile', href: 'sample-client-profile.html' }
+    },
+    {
+      key: 'approval',
+      label: 'Getting approval',
+      question: 'How often does resolving a request mean tracking down a supervisor for a sign-off?',
+      capability: 'Escalation resolved as part of the decision',
+      capabilityDesc: 'When a request needs a supervisor, Agent First surfaces that as ESCALATE, as part of the decision itself, instead of leaving the agent to chase someone down.',
+      cta: { text: 'Run the Chaos Cost Calculator', href: 'chaos-cost-calculator.html' }
+    },
+    {
+      key: 'wording',
+      label: 'Knowing what to say',
+      question: 'How often does an agent have to reconstruct the exact required wording from memory?',
+      capability: 'Required wording surfaced automatically',
+      capabilityDesc: 'Agent First surfaces the disclosure or required wording tied to the decision (DISCLOSE), instead of relying on an agent to remember it correctly.',
+      cta: { text: 'Build my sample Client Profile', href: 'sample-client-profile.html' }
     }
-    requestAnimationFrame(step);
+  ];
+
+  var state = { index: 0, scores: {} };
+
+  function renderQuestion() {
+    var q = QUESTIONS[state.index];
+    $('dbf-progress-label').textContent = 'Question ' + (state.index + 1) + ' of ' + QUESTIONS.length;
+    $('dbf-progress-fill').style.width = ((state.index / QUESTIONS.length) * 100) + '%';
+    $('dbf-q-eyebrow').textContent = q.label;
+    $('dbf-q-text').textContent = q.question;
+
+    var optionsEl = $('dbf-options');
+    optionsEl.innerHTML = '';
+    SCALE.forEach(function (opt) {
+      var btn = document.createElement('button');
+      btn.className = 'dbf-option';
+      btn.textContent = opt.label;
+      btn.addEventListener('click', function () { selectAnswer(q.key, opt.score); });
+      optionsEl.appendChild(btn);
+    });
+
+    var card = $('dbf-question-card');
+    card.classList.remove('dbf-fade');
+    void card.offsetWidth;
+    card.classList.add('dbf-fade');
   }
 
-  $('pbc-calc').addEventListener('click', function () {
-    var supTax = parseFloat($('pbc-suptax').value) || 0;
-    var ramp = parseFloat($('pbc-ramp').value) || 0;
-    var drt = parseFloat($('pbc-drt').value) || 0;
-    var booking = parseFloat($('pbc-booking').value) || 0;
+  function selectAnswer(key, score) {
+    state.scores[key] = score;
+    if (state.index < QUESTIONS.length - 1) {
+      state.index++;
+      renderQuestion();
+    } else {
+      $('dbf-progress-fill').style.width = '100%';
+      $('dbf-progress-label').textContent = 'Question ' + QUESTIONS.length + ' of ' + QUESTIONS.length;
+      showResult();
+    }
+  }
 
-    var combined = supTax + ramp + booking;
+  function showResult() {
+    var ranked = QUESTIONS.slice().sort(function (a, b) {
+      return state.scores[b.key] - state.scores[a.key];
+    });
+    var top = ranked[0];
 
-    countUp($('pbc-total'), combined, fmtMoney);
-    countUp($('pbc-out-suptax'), supTax, fmtMoney);
-    countUp($('pbc-out-ramp'), ramp, fmtMoney);
-    countUp($('pbc-out-booking'), booking, fmtMoney);
-    $('pbc-out-drt').textContent = fmtSeconds(drt);
+    $('dbf-top-label').textContent = top.label;
+    $('dbf-top-capability').textContent = 'Maps to: ' + top.capability + '. ' + top.capabilityDesc;
 
-    $('pbc-framing').textContent = 'Today, that’s roughly ' + fmtMoney(supTax) + ' in supervisor tax, ' + fmtMoney(ramp) + ' in ramp cost, ' + Math.round(drt) + ' seconds per decision, and ' + fmtMoney(booking) + ' in missed-rule bookings. Based on your inputs, a 90-day pilot should test whether Agent First can materially change these four numbers, not promise a dollar figure in advance.';
+    var barsHtml = '';
+    ranked.forEach(function (q, i) {
+      var score = state.scores[q.key];
+      var pct = (score / 3) * 100;
+      var isTop = i === 0;
+      barsHtml += '<div class="field-block' + (isTop ? ' field-block-top' : '') + '">' +
+        '<div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:10px;">' +
+        '<div class="ds-body-sm" style="font-weight:750;">' + (i + 1) + '. ' + q.label + '</div>' +
+        '<div class="ds-body-sm" style="color:var(--muted);">' + score + ' of 3</div>' +
+        '</div>' +
+        '<div class="dbf-track"><div class="dbf-fill' + (isTop ? ' dbf-fill-top' : '') + '" style="width:' + pct + '%;"></div></div>' +
+        '<div class="ds-body-sm" style="color:var(--muted);margin-top:8px;">Maps to: ' + q.capability + '</div>' +
+        '</div>';
+    });
+    $('dbf-bars').innerHTML = barsHtml;
 
-    var summary = 'Pilot Business Case baseline: Supervisor Tax ' + fmtMoney(supTax) + '/yr, Ramp Cost ' + fmtMoney(ramp) + '/yr, Decision Resolution Time ' + Math.round(drt) + 's/decision, Booking Mistakes ' + fmtMoney(booking) + '/yr. Combined identified annual cost (excl. decision time): ' + fmtMoney(combined) + '. This is a baseline for a 90-day pilot to test, not a savings estimate.';
-    $('pbc-result-summary').value = summary;
+    $('dbf-after-title').textContent = 'See what changes for ' + top.label.toLowerCase() + '.';
+    $('dbf-after-desc').textContent = top.capabilityDesc;
+    $('dbf-after-link').textContent = top.cta.text;
+    $('dbf-after-link').href = top.cta.href;
+    $('dbf-after').style.display = 'flex';
 
-    $('pbc-results').style.display = 'block';
-    $('pbc-after').style.display = 'flex';
-    $('pbc-email-card').style.display = 'block';
-    $('pbc-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    var summary = 'Biggest bottleneck: ' + top.label + ' (' + state.scores[top.key] + '/3). Full breakdown: ' +
+      ranked.map(function (q) { return q.label + ' (' + state.scores[q.key] + '/3)'; }).join(', ') + '.';
+    $('dbf-result-summary').value = summary;
+    $('dbf-email-card').style.display = 'block';
+
+    $('dbf-question-card').style.display = 'none';
+    $('dbf-result').style.display = 'flex';
+    $('dbf-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  $('dbf-retake').addEventListener('click', function () {
+    state = { index: 0, scores: {} };
+    $('dbf-result').style.display = 'none';
+    $('dbf-after').style.display = 'none';
+    $('dbf-email-card').style.display = 'none';
+    $('dbf-question-card').style.display = 'block';
+    renderQuestion();
+    $('dbf-question-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
-  var emailForm = $('pbc-email-form');
+  var emailForm = $('dbf-email-form');
   emailForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('pbc-email-status');
+    var status = $('dbf-email-status');
     var original = btn.textContent;
     btn.disabled = true;
     btn.textContent = 'Sending...';
@@ -342,6 +382,8 @@
       status.style.display = 'block';
     });
   });
+
+  renderQuestion();
 })();
 </script>
 
