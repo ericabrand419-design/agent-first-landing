@@ -121,7 +121,7 @@
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
-      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
     </div>
   </div>
 
@@ -253,6 +253,8 @@
         </div>
       </div>
 
+      <div class="card" id="afIdea"></div>
+
       <div class="card" id="drtc-email-card" style="display:none;">
         <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
         <form id="drtc-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -281,6 +283,7 @@
 
 </div>
 
+<script src="/labs-capture.js"></script>
 <script>
 (function () {
   'use strict';
@@ -382,6 +385,14 @@
       agents + ' agents, ' + volume + ' decisions/agent/day -> ' + fmtNum(annualHours) + ' hours/year' + summaryCost + '.';
     $('drtc-result-summary').value = summary;
 
+    if (window.AFLabs) {
+      window.AFLabs.mount('afIdea', {
+        tool: 'Decision Resolution Time Calculator',
+        question: 'You just saw where a single decision\'s time actually goes. Which step -- find, interpret, confirm, or act -- would you eliminate first if you were building the system?',
+        context: { summary: summary }
+      });
+    }
+
     $('drtc-annual').style.display = 'block';
     $('drtc-email-card').style.display = 'block';
     $('drtc-annual').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -401,6 +412,7 @@
       body: new FormData(emailForm)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data && data.success) {
+        if (window.AFLabs) window.AFLabs.linkEmail('Decision Resolution Time Calculator', emailForm.querySelector('[name="email"]').value);
         emailForm.style.display = 'none';
         status.style.color = '#1f5c42';
         status.textContent = "Sent. I'll follow up directly too.";
