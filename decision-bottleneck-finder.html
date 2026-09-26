@@ -118,7 +118,7 @@
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
-      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
     </div>
   </div>
 
@@ -179,6 +179,8 @@
         </div>
       </div>
 
+      <div class="card" id="afIdea"></div>
+
       <div class="card" id="dbf-email-card" style="display:none;">
         <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
         <form id="dbf-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -206,6 +208,7 @@
 
 </div>
 
+<script src="/labs-capture.js"></script>
 <script>
 (function () {
   'use strict';
@@ -332,6 +335,14 @@
     var summary = 'Biggest bottleneck: ' + top.label + ' (' + state.scores[top.key] + '/3). Full breakdown: ' +
       ranked.map(function (q) { return q.label + ' (' + state.scores[q.key] + '/3)'; }).join(', ') + '.';
     $('dbf-result-summary').value = summary;
+
+    if (window.AFLabs) {
+      window.AFLabs.mount('afIdea', {
+        tool: 'Decision Bottleneck Finder',
+        question: 'That\'s your biggest bottleneck, ranked. If you could fix only that one thing about how decisions get made, what would the fix actually look like?',
+        context: { summary: summary }
+      });
+    }
     $('dbf-email-card').style.display = 'block';
 
     $('dbf-question-card').style.display = 'none';
@@ -363,6 +374,7 @@
       body: new FormData(emailForm)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data && data.success) {
+        if (window.AFLabs) window.AFLabs.linkEmail('Decision Bottleneck Finder', emailForm.querySelector('[name="email"]').value);
         emailForm.style.display = 'none';
         status.style.color = '#1f5c42';
         status.textContent = "Sent. I'll follow up directly too.";
