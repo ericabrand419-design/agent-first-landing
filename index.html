@@ -1,140 +1,923 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agent First | The Operational Decision Layer for Frontline Teams</title>
+<meta name="description" content="The right answer changes by client. Agent First resolves each account's approved rules into the right action, wording, and next step while the work is happening. Built first for multi-client contact centers.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://myagentfirst.com/">
+<meta property="og:title" content="Agent First | The Operational Decision Layer for Frontline Teams">
+<meta property="og:description" content="Same question. Different client. Different correct answer. Built first for multi-client contact centers. Take the Agent Challenge and see for yourself.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Agent First | The Operational Decision Layer for Frontline Teams">
+<meta name="twitter:description" content="Same question. Different client. Different correct answer. Built first for multi-client contact centers. Take the Agent Challenge and see for yourself.">
+<meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
 <script>
-(function(){
-  function checkPhone(){
-    var blocked = Math.min(window.innerWidth, window.innerHeight) < 700;
-    document.documentElement.classList.toggle('af-phone-blocked', blocked);
-  }
-  checkPhone();
-  window.addEventListener('resize', checkPhone);
-  window.addEventListener('orientationchange', checkPhone);
-})();
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TGQ8RPR5B1');
 </script>
 <style>
-html.af-phone-blocked body > *:not(#afDeviceGate){display:none!important}
-#afDeviceGate{display:none}
-html.af-phone-blocked #afDeviceGate{display:flex!important}
-#afDeviceGate{position:fixed;inset:0;z-index:999999;background:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);align-items:center;justify-content:center;padding:32px;text-align:center;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-#afDeviceGate .box{max-width:360px}
-#afDeviceGate h1{font-size:20px;margin:0 0 10px;color:#fff}
-#afDeviceGate p{font-size:14px;line-height:1.55;color:#c7cce0;margin:0}
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+
+  /* type scale: matches the Agent First design system's tokens.json exactly */
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-stat{font-size:22px;line-height:1.15;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:80px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-dark{background:var(--navy);border-radius:var(--radius-lg);padding:24px;color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
+  .field-label{font-size:13px;font-weight:650;color:#c7cce0}
+  .field-input,.field-textarea{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.06);color:#fff;font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease,background .14s ease}
+  .field-input::placeholder,.field-textarea::placeholder{color:#8890ab}
+  .field-input:focus,.field-textarea:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.1)}
+  .field-textarea{resize:vertical;min-height:110px}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  /* Product demo panel */
+  .demo-panel{background:#12172e;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:22px;flex:1;min-width:280px;display:flex;flex-direction:column;gap:14px;}
+  .demo-panel .demo-client{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8890ab;}
+  .demo-panel .demo-q{color:#e7eaf3;font-size:15px;line-height:1.5;}
+  .demo-verdict{display:inline-flex;align-items:center;padding:6px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;width:fit-content;}
+  .demo-outcome{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:rgba(124,58,237,.22);color:#d3b6ff;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;width:fit-content;margin-bottom:8px;}
+  .demo-say{color:#c7cce0;font-size:14px;line-height:1.55;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;}
+  .demo-source{color:#8890ab;font-size:12px;line-height:1.5;margin-top:8px;}
+  .demo-activeprofile{font-size:13px;line-height:1.5;margin-bottom:10px;color:#fff;font-weight:750;}
+  .demo-section-label{font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;color:#8890ab;}
+
+  /* Interactive homepage widget */
+  .demo-tab{padding:8px 14px;border-radius:var(--radius-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#e7eaf3;font-size:13px;font-weight:650;cursor:pointer;transition:transform .14s ease,border-color .14s ease,background .14s ease;font-family:var(--font-sans);}
+  .demo-tab:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);transform:translateY(-1px);}
+  .demo-tab.active{background:var(--grad-primary);border-color:transparent;color:#fff;}
+  #widgetAsk{padding:12px 18px;white-space:nowrap;}
+
+  /* Scroll-reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .grid > .reveal:nth-child(1){transition-delay:0s}
+  .grid > .reveal:nth-child(2){transition-delay:.07s}
+  .grid > .reveal:nth-child(3){transition-delay:.14s}
+  .grid > .reveal:nth-child(4){transition-delay:.21s}
+  .grid > .reveal:nth-child(5){transition-delay:.28s}
+  .grid > .reveal:nth-child(6){transition-delay:.35s}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* Hover polish */
+  .card{transition:transform .18s ease,box-shadow .18s ease;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(64,47,112,.14),0 4px 10px rgba(20,22,45,.05);}
+  .card-dark{transition:transform .18s ease,box-shadow .18s ease;}
+  .card-dark:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.28);}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
+  .nav-link:hover::after{right:0;}
+
+  /* Subtle background texture */
+  .bg-texture-light{background-image:radial-gradient(rgba(23,26,43,.12) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-tint{background-image:radial-gradient(rgba(124,58,237,.14) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-dark{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px)!important;background-size:22px 22px!important;background-color:var(--navy)!important;}
+  .bg-texture-darkgrad{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px),var(--grad-navy)!important;background-size:22px 22px,auto!important;}
+
+  @media (max-width:900px){
+    .section{padding:56px 24px}
+    .ds-display{font-size:34px}
+    .ds-hero{font-size:26px}
+  }
 </style>
-<title>Agent First — Norcross Volvo of Memphis</title>
-<link rel="stylesheet" href="/styles.css">
-<style id="afSessionGate">body{visibility:hidden}</style>
-<script>
-(function(){
-  fetch('/api/portal?action=session',{credentials:'same-origin'}).then(function(r){
-    if(!r.ok) throw new Error('auth');
-    return r.json();
-  }).then(function(j){
-    window.AF_PORTAL_USER=j.user||null;
-    var g=document.getElementById('afSessionGate'); if(g) g.remove();
-  }).catch(function(){ location.replace('/portal.html'); });
-})();
-</script>
 </head>
 <body>
-<div id="afDeviceGate"><div class="box"><h1>Please use a larger screen</h1><p>Agent First isn't supported on a phone. Open this link on an iPad, laptop, or desktop instead.</p></div></div>
-<header>
-  <div class="brandArea">
-    <div class="brandMark" aria-hidden="true"><svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Keep the human. Upgrade the agent.</div></div>
+
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
+    </div>
   </div>
-  <div class="topActions">
-    <button class="topGhost" type="button" onclick="location.href='/portal.html'">▦&nbsp;&nbsp;Portal</button>
-    <div style="position:relative">
-      <button class="topGhost" id="agentSettingsBtn" onclick="toggleAgentSettings()" type="button">⚙&nbsp;&nbsp;Agent</button>
-      <div id="agentSettingsPanel" class="settingsPanel" style="left:auto;right:0;padding:12px;min-width:230px">
-        <label style="text-transform:none;font-size:var(--fs-1);color:#555a73;font-weight:800">Your name (optional)</label>
-        <input id="agentNameInput" type="text" placeholder="e.g. Erica" style="margin-bottom:8px">
-        <label style="text-transform:none;font-size:var(--fs-1);color:#555a73;font-weight:800">Closing phrase</label>
-        <input id="agentClosingInput" type="text" placeholder="Have a great day!">
-        <div class="tiny" style="margin-top:6px;color:#8c91a8">Only changes how you sound to the customer — never what's scheduled or authorized.</div>
-        <button type="button" id="agentSettingsSaveBtn" class="primary" style="margin-top:10px;width:100%" onclick="saveAgentSettings()">Save</button>
+
+  <!-- HERO -->
+  <div style="width:100%;background:var(--grad-navy);padding:88px 48px 72px;display:flex;justify-content:center;">
+    <div class="reveal" style="width:100%;max-width:820px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;">
+      <div class="ds-label eyebrow-c">The operational decision layer for rules-heavy frontline work</div>
+      <div style="display:inline-flex;align-items:center;padding:7px 18px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;font-size:12px;font-weight:900;letter-spacing:.09em;box-shadow:0 8px 20px rgba(176,57,217,.22);">RIGHT CLIENT. RIGHT ACTION.</div>
+      <h1 class="ds-display" style="color:#fff;">Keep the human.<br>Upgrade the agent.</h1>
+      <div class="ds-heading" style="color:#e7eaf3;font-weight:650;max-width:620px;">The right answer changes by who you're serving.</div>
+      <p class="ds-body" style="color:#c7cce0;max-width:620px;">Agent First resolves each account's approved rules into the right action, wording, and next step while the work is happening, not after. Built first for multi-client contact centers, where getting the wrong client's rule is especially costly, and unusually easy to measure.</p>
+      <div class="ds-body" style="color:#fff;font-weight:750;max-width:600px;">Same question. Different client. Different correct answer.</div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+        <a href="#demo" class="btn btn-primary">See Agent First Work</a>
+        <a href="sample-client-profile.html" class="btn btn-ghost-dark">Build a Sample Client Profile</a>
+        <a href="agent-challenge.html" class="btn btn-ghost-dark">Take the Agent Challenge</a>
       </div>
     </div>
-    <button class="topGhost" onclick="clearHistory()">↶&nbsp;&nbsp;Clear History</button><button class="newCall" onclick="newCall()">☎&nbsp;&nbsp;Clear Call / New Call</button>
-  </div>
-</header>
-<main class="app">
-<section class="left">
-  <div class="panel dealerBar">
-    <div class="inputWrap"><label>Dealership</label><input id="dealer" value="Acura of Austin North" autocomplete="off"><div id="dealerMenu" class="dealerMenu"></div></div>
-    <button class="ghost hoursBtn" type="button" onclick="generateHoursAddress()" title="Add a customer-facing line to the call space with this dealership's address, hours, and express-lane info">📍&nbsp;&nbsp;Hours &amp; Location</button>
   </div>
 
-  <div class="panel activeMemoryPanel">
-    <div class="sectionHead"><div><div class="ey">ACTIVE CALL MEMORY</div><div class="sm">Everything here remains part of the decision until you remove it.</div></div><button class="ghost" onclick="clearMemory()">Clear all</button></div>
-    <div id="memory" class="memory"><span class="sm">Nothing carried forward yet.</span></div>
-    <div id="overall" class="overallBox"><strong>STANDARD SCHEDULING</strong><div>Continue scheduling</div></div>
-    <div class="memoryActions"><button class="blueBtn" onclick="generateCurrentScript()">Current Script</button><button class="schedulerBtn" onclick="generateSchedulerNote()">Scheduler Note</button><button class="amberBtn" onclick="generateAlert()">Generate Alert</button><button class="ghost" onclick="generateClosing()">Closing Script</button></div>
-  </div>
-
-  <div id="leftScrollArea">
-  <div class="panel callProfile">
-    <div class="sectionHead"><div><div class="ey">CALL PROFILE</div><div class="sm" id="callProfileSubtitle">Acura of Austin North — current call context</div></div><span id="profileDecision" class="badge ok">SCHEDULABLE</span></div>
-    <div class="grid2 profileGrid">
-      <div class="wide"><label>Vehicle</label><input id="vehicle" placeholder="Year Make Model"><div class="vinInline"><div class="vinField"><label for="vinInput">VIN PHONETIC READER</label><input id="vinInput" maxlength="17" spellcheck="false" autocomplete="off" placeholder="17-character VIN"></div><button id="vinReadbackBtn" class="vinBtn" type="button" onclick="generateVinReadback()" disabled>Read VIN</button><button id="vinRecallBtn" class="vinBtn" type="button" onclick="checkVinRecalls()" disabled>Recalls</button></div><div id="vinDisplay" class="vinBar"><span class="vinHint">0/17 characters</span></div></div>
-      <div class="wide"><label>Contact / Directory</label><div class="contactLine" id="contactLine"><b>Main / Parts 901-373-3000</b><span>Levy 901-347-4206 • Gibbs x4202 • Frederick x4203 • Stukenborg x4201</span></div></div>
-    </div>
-    <div class="dealerMeta"><div class="dealerName" id="dealerNameDisplay">Norcross Volvo of Memphis</div></div>
-    <div class="dealerFacts"><div class="factMini"><b>REPAIR / DIAG DAYS</b><span id="factRepairDiag">M-F morning drop-off • Saturday requires advisor approval</span></div><div class="factMini"><b>OTHER DEPARTMENTS</b><span id="factOtherDept">Sales Mon-Sat 9 AM-6 PM • Parts hours not listed</span></div></div>
-    <div class="ruleStrip"><div class="ruleBox transfer"><strong>TRANSFER RULE</strong><span id="ruleTransfer">Emergency transfer only unless a specific rule directs transfer.</span></div><div class="ruleBox"><strong>ADVISOR REQUIREMENT</strong><span id="ruleAdvisor">No specific advisor requirement.</span></div></div>
-    <div class="openingQa"><b>Opening QA</b><label><input type="checkbox"> Phone</label><label><input type="checkbox"> Email</label><label><input type="checkbox"> Welcome back</label></div>
-  </div>
-
-  <div class="panel">
-    <div class="sectionHead"><div><div class="ey">ACTIVE SERVICE DETAIL</div><div class="sm">Decision details for the current memory state.</div></div><span id="serviceDetailBadge" class="badge ok">SCHEDULABLE</span></div>
-    <div id="activeServiceDetails" class="serviceDetails"><div class="sm">Add a service to see its scheduling, OP-code guidance, price, time, wait/drop, and weekend details.</div></div>
-  </div>
-
-  <div class="panel">
-    <div class="ey">POLICIES — CLICK FOR CUSTOMER SCRIPT</div>
-    <div class="policyGrid" id="policyGrid"></div>
-  </div>
-
-  <div class="panel">
-    <div class="ey">DIRECTORY — CLICK TO SELECT A TRANSFER TARGET</div>
-    <div class="directory" id="directoryGrid"></div>
-  </div>
-
-  <div class="panel">
-    <div class="sectionHead"><div><div class="ey" id="serviceGuideHeading">COMPLETE NORCROSS SERVICE GUIDE</div><div class="sm">Full service/pricing reference. Active services are highlighted. Click any row to select it.</div></div><span class="badge info">SCROLL</span></div>
-    <div class="searchWrap" style="margin-top:8px"><input id="serviceGuideSearch" type="text" placeholder="Search services…" autocomplete="off"><button id="serviceGuideSearchClear" class="searchClear" type="button" onclick="clearServiceSearch()" aria-label="Clear search" title="Clear search">×</button></div>
-    <div class="guideWrap"><table class="serviceTable"><thead><tr><th>SERVICE</th><th>OFFERED</th><th>SCHEDULE</th><th>OP CODE</th><th>STARTS AT</th><th>MINIMUM</th><th>NOTES</th></tr></thead><tbody id="serviceGuideBody"></tbody></table></div>
-  </div>
-  </div>
-</section>
-
-<aside class="right">
-  <div class="panel workspace">
-    <div class="workspaceHead"><div><div class="ey">RUNNING CALL WORKSPACE</div></div><div id="liveDecision" class="badge ok">SCHEDULABLE</div></div>
-    <div id="feed" class="feed"><div class="empty">No call updates yet.</div></div>
-    <div class="composer">
-      <label>Customer says / your request</label>
-      <textarea id="input" placeholder="Paste or type anything here — service, question, timing, transportation, vehicle, or call context."></textarea>
-      <div id="understood" class="understood"></div>
-      <div class="modeHelp"><span class="modePill" title="Start your entry with ? to get a ready-made customer-facing script"><b>?</b> Customer script</span><span class="modePill" title="Start your entry with ! to generate a Service alert for this call"><b>!</b> Alert</span><span class="modePill" title="No ? or ! — internal guidance for you only, not something to read to the customer"><b>No ? or !</b> Agent guidance</span></div>
-      <div class="popularBar"><span class="ey">QUICK SERVICES</span><div class="popularQuick"><button onclick="hotService('oil_change')">OIL CHANGE</button><button onclick="hotService('tire_rotation')">TIRE ROTATION</button><button onclick="hotService('brake_concern')">BRAKE DIAGNOSTIC</button><button onclick="hotService('engine_diag')">ENGINE DIAGNOSTIC</button><button onclick="hotService('diagnostic')">OTHER DIAGNOSTIC</button><button onclick="hotService('tire_repair')">TIRE REPAIR</button><button class="warn" onclick="hotService('recall')">RECALL</button></div></div>
-      <div class="quickLabel ey">TRANSPORTATION</div><div class="quick"><button onclick="quick('wait')">WAIT</button><button onclick="quick('drop off')">DROP OFF</button><button onclick="quick('shuttle')">SHUTTLE</button><button onclick="quick('loaner')">LOANER</button><button onclick="quick('rental')">RENTAL</button><button onclick="quick('uber or lyft')">UBER / LYFT</button><button onclick="quick('night drop')">NIGHT DROP</button><button class="warn" onclick="quick('valet')">VALET</button></div>
-      <div class="quickLabel ey">COMMON QUESTIONS / POLICIES</div><div class="quick"><button onclick="quick('today?')">TODAY</button><button onclick="quick('Saturday?')">SATURDAY</button><button onclick="quick('price?')">PRICE</button><button onclick="quick('how long?')">TIME</button><button onclick="quick('warranty?')">WARRANTY</button><button onclick="quick('express?')">EXPRESS</button><button onclick="quick('hours?')">HOURS</button><button onclick="quick('last appointment?')">LAST APPT</button><button onclick="quick('state inspection?')">STATE INSPECTION</button><button onclick="quick('emissions?')">EMISSIONS</button></div>
-      <div class="quickLabel ey">CALL SITUATIONS</div><div class="quick"><button class="important" onclick="quick('emergency')">EMERGENCY</button><button onclick="quick('existing appointment')">EXISTING APPT</button><button onclick="quick('no earlier appointment')">NO EARLIER APPT</button><button class="warn" onclick="quick('tow in')">TOW-IN</button><button class="warn" onclick="quick('roadside assistance')">ROADSIDE</button><button onclick="quick('transfer')">TRANSFER</button></div>
-      <div class="composerFooter"><button class="primary" onclick="applyUpdate()">Apply Update</button></div>
+  <!-- PRODUCT DEMO (interactive) -->
+  <div class="section bg-texture-dark" id="demo" style="background:var(--navy);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:10px;max-width:720px;">
+        <div class="ds-label eyebrow-c">Try it yourself</div>
+        <h2 class="ds-hero" style="color:#fff;">Same question. Different client. Different correct answer.</h2>
+        <p class="ds-body-sm" style="color:#c7cce0;">A simplified, illustrative version of how Agent First actually resolves a rule. Pick an industry, then a client, to see the Active Profile in action.</p>
+      </div>
+      <div class="demo-panel" style="max-width:620px;margin:0 auto;width:100%;gap:16px;">
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="demo-section-label">Industry</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetIndustries"></div>
+        </div>
+        <div class="demo-client" id="widgetScenario"></div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div class="demo-section-label">Active Profile</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetClientTabs"></div>
+        </div>
+        <div>
+          <div class="demo-activeprofile" id="widgetActiveProfile" style="display:none;"></div>
+          <div class="demo-outcome" id="widgetOutcome" style="display:none;"></div>
+          <div class="demo-verdict" id="widgetVerdict" style="background:rgba(255,255,255,.08);color:#8890ab;">Pick a client above to see the answer</div>
+          <div class="demo-say" id="widgetSay" style="border-top:none;padding-top:0;">&nbsp;</div>
+          <div class="demo-source" id="widgetSource"></div>
+        </div>
+        <div id="widgetTopicsWrap" style="border-top:1px solid rgba(255,255,255,.08);padding-top:14px;display:flex;flex-direction:column;gap:10px;">
+          <div class="ds-body-sm" style="color:#8890ab;">Or ask this client about something else:</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;" id="widgetTopics"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;">
+            <input id="widgetType" class="field-input" type="text" placeholder="Or type a question, e.g. &quot;do they need ID&quot;" style="border-color:rgba(255,255,255,.2);flex:1;min-width:180px;">
+            <button type="button" id="widgetAsk" class="btn btn-ghost-dark">Ask</button>
+          </div>
+          <div id="widgetHint" class="ds-body-sm" style="color:#f0a6ea;min-height:18px;"></div>
+        </div>
+      </div>
+      <div>
+        <a href="agent-challenge.html" class="btn btn-primary">Play the full Agent Challenge &rarr;</a>
+      </div>
     </div>
   </div>
-</aside>
-</main>
-<script src="/app.js"></script>
+
+  <script>
+  (function(){
+    var INDUSTRIES = {
+      contact: {
+        label: 'Contact Center',
+        scenario: 'A customer calls: “I need to cancel my appointment tomorrow. Will I be charged?”',
+        interactive: true,
+        clients: {
+          A: { name:'Harborview', rules:[
+            { text:'Cancellations within 48 hours of a scheduled appointment: no fee.', outcome:'ALLOW' },
+            { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+            { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+            { text:'Standard callback window for an open issue: 24 hours.', outcome:'DISCLOSE' }
+          ]},
+          B: { name:'Westfield', rules:[
+            { text:'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.', outcome:'ALLOW' },
+            { text:'ID verification is NOT required for general account questions, only for changes.', outcome:'ALLOW' },
+            { text:'Refunds over $200 can be processed by any agent, no sign-off required.', outcome:'ALLOW' },
+            { text:'Standard callback window for an open issue: 4 hours.', outcome:'DISCLOSE' }
+          ]},
+          C: { name:'Northgate', rules:[
+            { text:'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.', outcome:'VERIFY' },
+            { text:'ID verification required before discussing any account details.', outcome:'VERIFY' },
+            { text:'Refunds over $200 require a supervisor sign-off before processing.', outcome:'TRANSFER / ESCALATE' },
+            { text:'Standard callback window for an open issue: 24 hours, except weekends (next business day).', outcome:'DISCLOSE' }
+          ]}
+        },
+        topics: [
+          { ruleIndex:0, label:'Cancellation Fee', keywords:['cancel','cancellation','reschedul','fee'] },
+          { ruleIndex:1, label:'ID Verification', keywords:['id','verify','verification','identity'] },
+          { ruleIndex:2, label:'Refund Sign-Off', keywords:['refund','sign-off','signoff','sign off','supervisor','200'] },
+          { ruleIndex:3, label:'Callback Window', keywords:['callback','call back','window','hour'] }
+        ]
+      },
+      insurance: {
+        label: 'Insurance',
+        scenario: 'A policyholder calls to report a minor collision (rear-ended at a stoplight, no injuries) and asks whether they can get a rental car right away.',
+        interactive: false,
+        clients: {
+          A: { name:'Meridian Auto Insurance', outcome:'ALLOW', label:'Rental Car Request',
+            text:"Rental reimbursement is included at your coverage tier. I can approve up to $35/day for up to 5 days right now, as long as it's one of our three approved rental partners for the direct-bill rate.",
+            source:"Source: Meridian Auto Insurance’s approved rental-reimbursement rule" },
+          B: { name:'Harbor Mutual Insurance', outcome:'VERIFY → TRANSFER / ESCALATE', label:'Rental Car Request',
+            text:"Let me check whether rental coverage is on your policy first, since that's a separate add-on here. If it isn't clearly on file, I'll need to get a claims adjuster on the line rather than quote you a rate myself.",
+            source:"Source: Harbor Mutual Insurance’s approved rental-coverage verification rule" }
+        }
+      },
+      healthcare: {
+        label: 'Healthcare',
+        scenario: 'A parent calls saying their child has had a 101.5°F fever since last night, is still eating and drinking normally, and asks to be seen today.',
+        interactive: false,
+        clients: {
+          A: { name:'Riverside Family Clinic', outcome:'ALLOW', label:'Same-Day Visit',
+            text:"I can get her in today. We hold same-day sick slots for exactly this kind of case. I can't give medical advice over the phone, but I'll pass these details to the provider before your visit.",
+            source:"Source: Riverside Family Clinic’s approved same-day scheduling list" },
+          B: { name:'Sunridge Pediatrics', outcome:'TRANSFER / ESCALATE', label:'Same-Day Visit',
+            text:"For any same-day sick-child call, I need to connect you with our after-hours nurse triage line first. Once they've spoken with you, we'll get her scheduled.",
+            source:"Source: Sunridge Pediatrics’ approved triage-first rule" }
+        }
+      },
+      homeServices: {
+        label: 'Home Services',
+        scenario: 'A customer calls at 9:40pm reporting no hot water and asks if someone can come tonight or if it has to wait until morning.',
+        interactive: false,
+        clients: {
+          A: { name:'Apex Plumbing & Drain', outcome:'ALLOW', label:'After-Hours Dispatch',
+            text:"No hot water qualifies for tonight's emergency dispatch here. There's a $150 after-hours trip fee, and I can get a tech out to you tonight.",
+            source:"Source: Apex Plumbing & Drain’s approved emergency-dispatch list" },
+          B: { name:'Coastal Heating & Air', outcome:'DO NOT ALLOW', label:'After-Hours Dispatch',
+            text:"We don't dispatch after-hours for hot water alone, so the next available slot is the standard path. If you're seeing any water actively leaking, though, that changes things, and I can page our on-call tech right now.",
+            source:"Source: Coastal Heating & Air’s approved after-hours exception rule" }
+        }
+      },
+      propertyManagement: {
+        label: 'Property Management',
+        scenario: "A tenant calls at 11pm reporting no heat in their unit; it's 38°F outside tonight.",
+        interactive: false,
+        clients: {
+          A: { name:'Lockwood Management', outcome:'ALLOW', label:'Emergency Dispatch',
+            text:"No heat in this cold counts as a must-act-tonight issue on this property. I'm dispatching our on-call HVAC vendor now, and you should expect them within about 2 hours.",
+            source:"Source: Lockwood Management’s approved emergency-dispatch rule" },
+          B: { name:'GreenPark Properties', outcome:'TRANSFER / ESCALATE', label:'Emergency Dispatch',
+            text:"I don't have the authority to dispatch a vendor directly here, so I'm paging our on-call property manager right now to get a person on the line with you. Let's stay on while that page goes out.",
+            source:"Source: GreenPark Properties’ approved after-hours escalation rule" }
+        }
+      }
+    };
+
+    var industriesEl = document.getElementById('widgetIndustries');
+    var clientTabsEl = document.getElementById('widgetClientTabs');
+    var scenarioEl = document.getElementById('widgetScenario');
+    var activeProfileEl = document.getElementById('widgetActiveProfile');
+    var topicsWrapEl = document.getElementById('widgetTopicsWrap');
+    var topicsEl = document.getElementById('widgetTopics');
+    var verdictEl = document.getElementById('widgetVerdict');
+    var outcomeEl = document.getElementById('widgetOutcome');
+    var sayEl = document.getElementById('widgetSay');
+    var sourceEl = document.getElementById('widgetSource');
+    var hintEl = document.getElementById('widgetHint');
+    var typeEl = document.getElementById('widgetType');
+    var askBtn = document.getElementById('widgetAsk');
+    if (!industriesEl || !clientTabsEl || !verdictEl) return;
+
+    var state = { industry: 'contact', client: null, topicIndex: 0 };
+
+    function activeProfileLabel(name, industryLabel){
+      return '<span style="color:#8890ab;font-weight:650;">Active Profile:</span> ' + name + ' — ' + industryLabel;
+    }
+
+    function resetPanel(){
+      activeProfileEl.style.display = 'none';
+      outcomeEl.style.display = 'none';
+      verdictEl.style.background = 'rgba(255,255,255,.08)';
+      verdictEl.style.color = '#8890ab';
+      verdictEl.textContent = 'Pick a client above to see the answer';
+      sayEl.textContent = ' ';
+      sayEl.style.borderTop = 'none';
+      sayEl.style.paddingTop = '0';
+      sourceEl.textContent = '';
+      hintEl.textContent = '';
+    }
+
+    function showScenario(c, ind){
+      hintEl.textContent = '';
+      outcomeEl.style.display = 'inline-flex';
+      outcomeEl.textContent = c.outcome;
+      verdictEl.style.background = 'rgba(124,58,237,.2)';
+      verdictEl.style.color = '#d3b6ff';
+      verdictEl.textContent = c.label;
+      sayEl.textContent = c.text;
+      sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
+      sayEl.style.paddingTop = '12px';
+      sourceEl.textContent = c.source;
+    }
+
+    function lookup(ruleIndex, label){
+      hintEl.textContent = '';
+      if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
+      state.topicIndex = ruleIndex;
+      var ind = INDUSTRIES[state.industry];
+      var c = ind.clients[state.client];
+      var rule = c.rules[ruleIndex];
+      outcomeEl.style.display = 'inline-flex';
+      outcomeEl.textContent = rule.outcome;
+      verdictEl.style.background = 'rgba(124,58,237,.2)';
+      verdictEl.style.color = '#d3b6ff';
+      verdictEl.textContent = label;
+      sayEl.textContent = rule.text;
+      sayEl.style.borderTop = '1px solid rgba(255,255,255,.08)';
+      sayEl.style.paddingTop = '12px';
+      sourceEl.textContent = 'Source: ' + c.name + '’s approved ' + label + ' rule';
+    }
+
+    function setActiveClientTab(key){
+      var tabs = clientTabsEl.querySelectorAll('.demo-tab');
+      tabs.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-client') === key); });
+    }
+
+    function renderClientTabs(){
+      var ind = INDUSTRIES[state.industry];
+      clientTabsEl.innerHTML = '';
+      Object.keys(ind.clients).forEach(function(key){
+        var c = ind.clients[key];
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'demo-tab';
+        b.setAttribute('data-client', key);
+        b.textContent = c.name;
+        b.addEventListener('click', function(){
+          state.client = key;
+          setActiveClientTab(key);
+          activeProfileEl.style.display = 'block';
+          activeProfileEl.innerHTML = activeProfileLabel(c.name, ind.label);
+          if (ind.interactive) {
+            lookup(state.topicIndex, ind.topics[state.topicIndex].label);
+          } else {
+            showScenario(c, ind);
+          }
+        });
+        clientTabsEl.appendChild(b);
+      });
+    }
+
+    function renderTopics(){
+      var ind = INDUSTRIES[state.industry];
+      topicsEl.innerHTML = '';
+      ind.topics.forEach(function(t){
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'demo-tab';
+        b.textContent = t.label;
+        b.addEventListener('click', function(){ lookup(t.ruleIndex, t.label); });
+        topicsEl.appendChild(b);
+      });
+    }
+
+    function matchTyped(raw){
+      var text = (raw || '').toLowerCase();
+      var topics = INDUSTRIES[state.industry].topics || [];
+      for (var i = 0; i < topics.length; i++) {
+        var t = topics[i];
+        for (var j = 0; j < t.keywords.length; j++) {
+          if (text.indexOf(t.keywords[j]) !== -1) return t;
+        }
+      }
+      return null;
+    }
+
+    function submitTyped(){
+      var val = typeEl.value.trim();
+      if (!state.client) { hintEl.textContent = 'Pick a client first.'; return; }
+      if (!val) { hintEl.textContent = 'Type a question, or use a quick button.'; return; }
+      var t = matchTyped(val);
+      if (!t) { hintEl.textContent = "Couldn't tell what that's about. Try a quick button instead."; return; }
+      lookup(t.ruleIndex, t.label);
+      typeEl.value = '';
+    }
+
+    function setActiveIndustryPill(key){
+      var pills = industriesEl.querySelectorAll('.demo-tab');
+      pills.forEach(function(b){ b.classList.toggle('active', b.getAttribute('data-industry') === key); });
+    }
+
+    function switchIndustry(key){
+      state.industry = key;
+      state.client = null;
+      state.topicIndex = 0;
+      setActiveIndustryPill(key);
+      scenarioEl.textContent = INDUSTRIES[key].scenario;
+      renderClientTabs();
+      resetPanel();
+      var ind = INDUSTRIES[key];
+      topicsWrapEl.style.display = ind.interactive ? 'flex' : 'none';
+      if (ind.interactive) renderTopics();
+      typeEl.value = '';
+    }
+
+    function renderIndustryPills(){
+      industriesEl.innerHTML = '';
+      Object.keys(INDUSTRIES).forEach(function(key){
+        var ind = INDUSTRIES[key];
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'demo-tab';
+        b.setAttribute('data-industry', key);
+        b.textContent = ind.label;
+        b.addEventListener('click', function(){ switchIndustry(key); });
+        industriesEl.appendChild(b);
+      });
+    }
+
+    askBtn.addEventListener('click', submitTyped);
+    typeEl.addEventListener('keydown', function(e){
+      if (e.key === 'Enter') { e.preventDefault(); submitTyped(); }
+    });
+
+    renderIndustryPills();
+    switchIndustry('contact');
+  })();
+  </script>
+
+  <!-- WHAT IT IS NOT -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:24px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">For clarity</div>
+        <h2 class="ds-hero">What Agent First is not.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a knowledge base</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It doesn't just retrieve a policy.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a generic assistant</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It works from approved client rules and can return NOT SPECIFIED.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Not a replacement contact-center platform</div>
+          <div class="ds-body-sm" style="color:var(--muted);">It is the operational decision layer behind the agent.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div id="how-it-works" class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:36px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">How it works</div>
+        <h2 class="ds-hero">Each client's rules, entered once. A clear answer when the configured rules cover the situation.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">1</div>
+          <div class="ds-body" style="font-weight:750;">Configure once</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A client's rules get entered once into a structured Client Profile: a real rule set the system checks against on every call, not a document the agent has to search.</div>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">2</div>
+          <div class="ds-body" style="font-weight:750;">Ask, on the live call</div>
+          <div class="ds-body-sm" style="color:var(--muted);">The agent tells Agent First who they're talking to and what the customer wants. No searching, no second system to check.</div>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-heading" style="width:36px;height:36px;border-radius:var(--radius-full);background:var(--grad-primary);color:#fff;display:flex;align-items:center;justify-content:center;">3</div>
+          <div class="ds-body" style="font-weight:750;">Get a verdict and the words</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First hands back a clear decision, plus approved or configured wording. The agent still decides. It does not talk to the customer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROOF / OUTCOMES -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:40px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">What changes</div>
+        <h2 class="ds-hero">Less searching. Faster answers. More consistent decisions.</h2>
+        <p class="ds-body" style="color:var(--muted);">The work an agent actually does under time pressure breaks into three steps: find the right client's information, interpret what it means for this situation, and act on it correctly. Agent First collapses those three steps into one working answer, so adding a client shifts more of the client-specific knowledge burden into configuration instead of repeated agent retraining.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr));">
+        <div class="card-dark reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--coral);">Find the answer faster</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Instead of jumping between documents, systems, and tabs, the current client's rule is already in view.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Ramp faster</div>
+          <div class="ds-body-sm" style="color:var(--muted);">New agents have less to memorize before they're trusted with a real call, and policy changes reach agents once an approved Client Profile update is published. What if you didn't have to teach every rule before the first call that counts? That's a hypothesis a pilot is built to test, not a claim already proven. <a href="ramp-cost-estimator.html" style="color:var(--violet);font-weight:650;">See what ramp costs today &rarr;</a></div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Apply the right client's rule</div>
+          <div class="ds-body-sm" style="color:var(--muted);">The Active Profile shows exactly whose rules are in force right now, whatever your team calls that unit: client, account, or location.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Reduce supervisor pull-ins</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agents don't have to escalate routine questions simply because the answer was hard to locate. Curious what that's costing you today? <a href="supervisor-tax-calculator.html" style="color:var(--violet);font-weight:650;">Run the numbers &rarr;</a></div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Answer consistently</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Every agent works from the same approved Client Profile, reducing variation in how the same client rule is handled across agents. The agent still reads the answer and decides what to say.</div>
+        </div>
+      </div>
+      <div class="card reveal" style="background:var(--purplebg);border:none;">
+        <div class="ds-label" style="color:var(--muted);font-weight:650;letter-spacing:0;text-transform:none;margin-bottom:10px;">The search problem gets more expensive when the workforce keeps changing. See it in your own numbers, not an industry average.</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="ramp-cost-estimator.html" class="btn btn-ghost-light">Estimate ramp cost &rarr;</a>
+          <a href="supervisor-tax-calculator.html" class="btn btn-ghost-light">Run the Supervisor Tax Calculator &rarr;</a>
+          <a href="chaos-cost-calculator.html" class="btn btn-ghost-light">Calculate your Total Chaos Cost &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT DECIDES -->
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">How it decides</div>
+        <h2 class="ds-hero">Agent First doesn't just retrieve the rule. It resolves the decision.</h2>
+        <p class="ds-body" style="color:var(--muted);">Finding the policy is only half the job. Agent First resolves what that policy means for this client, this customer, and this call, right now. Every answer resolves to one of a small set of plain outcomes, not a paragraph to interpret.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">ALLOW / DO NOT ALLOW</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Whether the agent can proceed on their own.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">VERIFY</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A detail to confirm before deciding anything else.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">DISCLOSE</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">A specific line this client requires the agent to say out loud.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">DOCUMENT</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">Something that has to be logged or recorded before the call ends.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">TRANSFER / ESCALATE</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">When the call, or the decision, belongs with someone else.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;color:var(--violet);">NOT SPECIFIED</div>
+          <div class="ds-body-sm" style="color:var(--muted);margin-top:6px;">This client hasn't set a rule for this situation. Agent First says so instead of guessing, and routes it to a person.</div>
+        </div>
+      </div>
+      <p class="ds-body-sm" style="color:var(--muted);max-width:720px;font-weight:650;">Agent First works from the client's approved operating rules. It can help interpret the request. It doesn't get to invent the policy.</p>
+      <p class="ds-body-sm" style="color:var(--muted);max-width:720px;">Inside one industry, adding a client is genuinely configuration: real rules entered once, running on the same engine already live today.</p>
+      <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+        <div class="ds-label eyebrow-v" style="text-align:center;">The trust model, in one line</div>
+        <div class="card reveal" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;padding:22px 24px;width:100%;">
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Approved rules</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Active Profile</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Explicit outcome</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Source shown</span>
+          <span style="color:var(--muted);font-size:14px;">&rarr;</span>
+          <span style="display:inline-flex;align-items:center;padding:7px 16px;border-radius:var(--radius-full);background:var(--purplebg);color:var(--violet);font-size:12px;font-weight:750;white-space:nowrap;">Human decides</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INDUSTRY EXAMPLES -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">What this could look like elsewhere</div>
+        <h2 class="ds-hero">One engine. Different operating environments.</h2>
+        <p class="ds-body-sm" style="color:var(--muted);">A Profile can represent a client account, a location, a practice, a branch, a program, or any other operating unit with its own approved rules. The examples below are illustrative. The companies are not real and the rules are not verified against how these industries actually operate today.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Insurance</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: a minor accident, no injuries, asking about a rental car.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile lets the agent approve a rental on the spot, up to a daily cap. Another requires verifying a coverage add-on first, then escalating to an adjuster.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Healthcare</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: a parent asking for a same-day visit for a mild fever.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile lets the agent book directly against a defined list of non-urgent symptoms. Another sends every same-day sick call to nurse triage first.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Home services</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: no hot water, reported at 9:40pm.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile treats it as an after-hours emergency and dispatches a tech tonight. Another holds it for the next available slot unless there's active water damage.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Property management</div>
+          <div class="ds-body-sm" style="font-weight:650;margin-bottom:8px;">Same call: no heat, 38&deg;F outside, reported at 11pm.</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One client's profile authorizes the agent to dispatch the on-call vendor directly. Another escalates every after-hours emergency to a live manager.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULING -->
+  <div class="section bg-texture-tint" style="background:var(--purplebg);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">Beyond contact centers: scheduling</div>
+        <h2 class="ds-hero">AN OPEN SLOT ISN'T ALWAYS THE RIGHT APPOINTMENT.</h2>
+        <p class="ds-body" style="color:var(--muted);">A calendar shows an open slot. It doesn't know whether this customer, this service, and this account are actually allowed to use it. That's a rules problem before it's a calendar problem, and it's the same kind of decision Agent First resolves on a call.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal"><div class="ds-body-sm">Does this client require a deposit before the slot is held?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Is this date inside a blackout window for this specific client?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Does the customer meet the eligibility rule for this service?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Is this request inside the allowed cancellation or rescheduling window?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Does this appointment type need a longer slot than the calendar is showing?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Does booking it require a specific credential or certification?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Does this request need a supervisor or manager sign-off before it's confirmed?</div></div>
+        <div class="card reveal"><div class="ds-body-sm">Is there a required disclosure the customer needs to hear before the booking is confirmed?</div></div>
+      </div>
+      <div class="card-dark reveal">
+        <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:#fff;">Agent First handles the operational decision, whether this is the right slot for this client, this customer, this request. Your existing scheduling system still handles the calendar itself.</div>
+        <div class="ds-body-sm" style="color:#c7cce0;">It doesn't replace your booking software. It decides whether the slot your booking software is about to hold is the right one to hold.</div>
+        <div style="margin-top:16px;">
+          <a href="can-i-book-it.html" class="btn btn-primary">Run the Can I Book It? calculator &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE / FOUNDER STORY -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;justify-content:center;">
+      <div style="max-width:680px;display:flex;flex-direction:column;gap:16px;">
+        <div class="ds-label eyebrow-v">Why I'm building this</div>
+        <p class="ds-heading" style="font-weight:650;">I'm not trying to replace the agent on the call. I'm trying to make sure they never have to guess.</p>
+        <p class="ds-body" style="color:var(--ink);">I watched a good agent give a customer the wrong answer, not because they didn't care, but because the right answer was buried three documents deep and the customer was still waiting. I also watched new agents get handed folders of client policies and then be expected to navigate all of it under pressure. A new agent shouldn't need weeks of institutional knowledge in their head before they can be trusted with a real answer. That gap is what Agent First closes. It runs live today, built and rebuilt against real calls and more than a dozen real client profiles.</p>
+        <p class="ds-body" style="color:var(--ink);font-weight:650;">I accept a limited number of pilot partners at a time: multi-client operations and other rules-heavy frontline teams ready to test it against their own rules and their own calls.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HANDS-ON SUPPORT -->
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">Not a self-serve tool</div>
+        <h2 class="ds-hero">Hands-on implementation and support, the whole way through.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Hands-on implementation</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Your real policy language gets built into a Client Profile with you, not handed off to a self-service form.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Launch support</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Someone is there for the first real calls, not just the setup call.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Rule-change support</div>
+          <div class="ds-body-sm" style="color:var(--muted);">When a client's policy changes, the Client Profile gets updated with you, not left for your team to figure out alone.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Direct support during the pilot</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A direct line, not a ticket queue, for the length of the pilot.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RUN YOUR OWN NUMBERS -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">Don't take our word for it</div>
+        <h2 class="ds-hero">RUN YOUR OWN NUMBERS.</h2>
+        <p class="ds-body" style="color:var(--muted);">Four short, free tools, each built around a number you already have somewhere. No email required to start any of them.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-body" style="font-weight:900;">What is supervisor interruption costing you?</div>
+          <div class="ds-heading">Supervisor Tax Calculator</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Enter your agent count and pull-in rate to see the hours and cost.</div>
+          <a href="supervisor-tax-calculator.html" class="btn btn-primary" style="justify-content:center;">Run the numbers</a>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-body" style="font-weight:900;">What does new-hire ramp actually cost?</div>
+          <div class="ds-heading">Ramp Cost Estimator</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Enter your hiring numbers and today's ramp time to see the annual cost.</div>
+          <a href="ramp-cost-estimator.html" class="btn btn-primary" style="justify-content:center;">Estimate the cost</a>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-body" style="font-weight:900;">Where does decision time actually go?</div>
+          <div class="ds-heading">Decision Resolution Time Calculator</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Drag four sliders for find, interpret, confirm, and act, then turn it into an annual number.</div>
+          <a href="decision-resolution-time-calculator.html" class="btn btn-primary" style="justify-content:center;">Break it down</a>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:12px;">
+          <div class="ds-body" style="font-weight:900;">What do missed booking rules cost?</div>
+          <div class="ds-heading">Can I Book It?</div>
+          <div class="ds-body-sm" style="color:var(--muted);flex:1;">Enter your booking volume and how often a Profile-specific rule gets missed.</div>
+          <a href="can-i-book-it.html" class="btn btn-primary" style="justify-content:center;">Run the numbers</a>
+        </div>
+      </div>
+      <div class="card-dark reveal">
+        <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:#fff;">Run all four, then turn them into one baseline.</div>
+        <div class="ds-body-sm" style="color:#c7cce0;">Not a savings estimate. A directional read on your own numbers, before a pilot measures whether it actually moves.</div>
+        <div style="margin-top:16px;">
+          <a href="pilot-business-case-builder.html" class="btn btn-primary">Turn all four into a pilot business case &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MID CTA -->
+  <div class="section" style="background:var(--grad-navy);padding:72px 48px;">
+    <div class="reveal" style="width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
+      <div class="ds-label eyebrow-c">Ready when you are</div>
+      <div class="ds-stat" style="color:#fff;line-height:1.45;">See Agent First run against your own rules.</div>
+      <a href="#contact" class="btn btn-primary" style="margin-top:6px;">Apply for the pilot program</a>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:32px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:720px;">
+        <div class="ds-label eyebrow-v">Questions</div>
+        <h2 class="ds-hero">A few things people ask first.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;">
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Does this replace agents?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">No. The agent stays on every call and has the final word every time. Agent First hands them a decision and approved or configured wording. It does not talk to the customer.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What does setup look like for a new client?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A client's real rules get entered once into a structured Client Profile. It's a configuration process, not a software build, though the time it takes depends on how many exceptions that client's real rules actually have.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What happens to a client's rules once they're entered?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Each client's Client Profile is its own configuration. One client's rules are never visible in another client's calls, even when the same agent works both.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">Are you looking for pilot partners?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Yes, but only a limited number at a time. The Starter tier is built for exactly that: a pilot to test Agent First against real rules and real calls before deciding whether to expand further. Applications are reviewed individually, not accepted automatically.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">How is this different from a script or a knowledge base?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">A script or knowledge base can hold the same information. Agent First resolves which client's rule applies and what to do about it right now, instead of leaving the agent to find and interpret it live.</div>
+        </div>
+        <div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;">What happens if a client hasn't specified a rule for something?</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Agent First says so instead of guessing at what the client would want. That situation resolves to NOT SPECIFIED and routes to a person, and it becomes a clear signal for which rule that client's profile needs next.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="contact" class="section bg-texture-darkgrad" style="background:var(--grad-navy);padding:96px 48px;">
+    <div class="reveal" style="width:100%;max-width:560px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px;">
+      <div class="ds-label eyebrow-c">A limited pilot program</div>
+      <h2 class="ds-hero" style="color:#fff;">Let's see whether Agent First fits your operation.</h2>
+      <p class="ds-body" style="color:#c7cce0;">Agent First accepts a limited number of pilot partners at a time, so applications are reviewed individually rather than accepted automatically. Fill this out to apply, and I will follow up directly.</p>
+      <a href="pilot-program.html" class="ds-body-sm" style="color:#c7cce0;text-decoration:underline;">See exactly what the pilot includes &rarr;</a>
+      <a href="sample-client-profile.html" class="ds-body-sm" style="color:#c7cce0;text-decoration:underline;">Not ready for a pilot? Build a free sample Client Profile first &rarr;</a>
+
+      <form id="af-contact-form" style="width:100%;margin-top:20px;display:flex;flex-direction:column;gap:16px;text-align:left;">
+        <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
+        <input type="hidden" name="subject" value="New pilot program application, Agent First">
+        <input type="hidden" name="from_name" value="Agent First website">
+        <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+
+        <div class="field-row">
+          <label class="field-label" for="af-name">Name</label>
+          <input class="field-input" id="af-name" name="name" type="text" required>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="af-email">Work email</label>
+          <input class="field-input" id="af-email" name="email" type="email" required>
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="af-company">Company</label>
+          <input class="field-input" id="af-company" name="company" type="text">
+        </div>
+        <div class="field-row">
+          <label class="field-label" for="af-message">Tell me about your operation</label>
+          <textarea class="field-textarea" id="af-message" name="message" placeholder="How many agents or staff, how many clients, accounts, or locations, and what's prompting the interest right now."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="justify-content:center;margin-top:4px;">Send</button>
+        <div id="af-form-status" class="ds-body-sm" style="display:none;"></div>
+      </form>
+
+      <p class="ds-body-sm" style="color:#8890ab;margin-top:4px;">Prefer email? Write to <a href="mailto:info@myagentfirst.com" style="color:#c7cce0;text-decoration:underline;">info@myagentfirst.com</a> directly.</p>
+    </div>
+  </div>
+
+  <script>
+  (function(){
+    var form = document.getElementById('af-contact-form');
+    if(!form) return;
+    var status = document.getElementById('af-form-status');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var btn = form.querySelector('button[type="submit"]');
+      var originalLabel = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+      status.style.display = 'none';
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      }).then(function(res){ return res.json(); }).then(function(data){
+        if (data && data.success) {
+          form.reset();
+          form.style.display = 'none';
+          status.style.color = '#a8f0c6';
+          status.textContent = "Thanks, your application is in. Taking you to the pilot program details...";
+          status.style.display = 'block';
+          setTimeout(function(){ window.location.href = 'pilot-program.html'; }, 900);
+        } else {
+          btn.disabled = false;
+          btn.textContent = originalLabel;
+          status.style.color = '#ffb4b4';
+          status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+          status.style.display = 'block';
+        }
+      }).catch(function(){
+        btn.disabled = false;
+        btn.textContent = originalLabel;
+        status.style.color = '#ffb4b4';
+        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
+        status.style.display = 'block';
+      });
+    });
+  })();
+  </script>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <div class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </div>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+  </div>
+
+</div>
+
 <script>
-window.addEventListener('load',function(){
-  var id=new URLSearchParams(location.search).get('client');
-  if(id&&window.AF&&typeof window.AF.setActiveClip==='function') window.AF.setActiveClip(id);
-});
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
 </script>
 </body>
 </html>
