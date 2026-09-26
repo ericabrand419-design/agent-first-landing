@@ -151,7 +151,7 @@
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
-      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
     </div>
   </div>
 
@@ -281,6 +281,8 @@
         </div>
       </div>
 
+      <div class="card" id="afIdea"></div>
+
       <div class="card" id="emailCard">
         <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
         <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -311,6 +313,7 @@
 
 <div class="baf-flash" id="flash"></div>
 
+<script src="/labs-capture.js"></script>
 <script>
 (function () {
   'use strict';
@@ -606,6 +609,14 @@
     $('shareText').value = shareLine;
     $('resultSummaryField').value = shareLine;
 
+    if (window.AFLabs) {
+      window.AFLabs.mount('afIdea', {
+        tool: 'Beat Agent First',
+        question: 'You just raced a deterministic match-and-apply system. If you were building the thing that made lookup unnecessary in the first place, what would it need to handle that a search never could?',
+        context: { result: shareLine }
+      });
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -646,6 +657,7 @@
       body: new FormData(emailForm)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data && data.success) {
+        if (window.AFLabs) window.AFLabs.linkEmail('Beat Agent First', emailForm.querySelector('[name="email"]').value);
         emailForm.style.display = 'none';
         status.style.color = '#1f5c42';
         status.textContent = "Sent. I'll follow up directly too.";
