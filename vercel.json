@@ -1,0 +1,7 @@
+{
+  "redirects": [
+    { "source": "/client-resolution.html", "destination": "/decision-resolution-time-calculator.html", "permanent": true },
+    { "source": "/pilot-buisness-case-builder.html", "destination": "/pilot-business-case-builder.html", "permanent": true },
+    { "source": "/insurance.html", "destination": "/for-insurance.html", "permanent": true }
+  ]
+}
