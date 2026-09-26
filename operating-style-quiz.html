@@ -113,7 +113,7 @@
       <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
       <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
       <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
-      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Become a pilot partner</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
     </div>
   </div>
 
@@ -149,6 +149,8 @@
           <a id="oq-result-cta" class="btn btn-primary" href="#">--</a>
         </div>
 
+        <div class="card" id="afIdea"></div>
+
         <div class="card" id="oq-email-card">
           <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want your full breakdown emailed, including how you compare to the other 3 styles?</div>
           <form id="oq-email-form" style="display:flex;gap:10px;flex-wrap:wrap;">
@@ -180,6 +182,7 @@
 
 </div>
 
+<script src="/labs-capture.js"></script>
 <script>
 (function () {
   'use strict';
@@ -289,6 +292,13 @@
 
   var LABELS = { firefighter: "Firefighter", improviser: "Improviser", librarian: "Librarian", decision: "Decision Layer" };
 
+  var IDEA_QUESTIONS = {
+    firefighter: "You're running on escalation right now. If the safety net could catch things before they ever needed a supervisor, what would it need to know or do first?",
+    improviser: "Your agents are making the call in the moment, every time. If they had exactly one thing in front of them at that second, what would turn the guess into a sure answer?",
+    librarian: "The answers exist, they just don't arrive in time. What would have to be true for the right rule to just show up, instead of needing to be found?",
+    decision: "You're already thinking in decision-layer terms. If you were designing the system from scratch, what's the one thing it should do that nothing you've used so far actually does?"
+  };
+
   var state = { index: 0, scores: { firefighter: 0, improviser: 0, librarian: 0, decision: 0 } };
 
   function renderQuestion() {
@@ -346,6 +356,14 @@
     $('oq-result-breakdown').textContent = 'Full breakdown: ' + breakdown + '.';
     $('oq-result-summary').value = r.badge + ': ' + breakdown;
 
+    if (window.AFLabs) {
+      window.AFLabs.mount('afIdea', {
+        tool: 'Operating Style Quiz',
+        question: IDEA_QUESTIONS[key],
+        context: { badge: r.badge, scores: state.scores }
+      });
+    }
+
     $('oq-quiz').style.display = 'none';
     $('oq-result').style.display = 'flex';
     $('oq-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -373,6 +391,7 @@
       body: new FormData(emailForm)
     }).then(function (r) { return r.json(); }).then(function (data) {
       if (data && data.success) {
+        if (window.AFLabs) window.AFLabs.linkEmail('Operating Style Quiz', emailForm.querySelector('[name="email"]').value);
         emailForm.style.display = 'none';
         status.style.color = '#1f5c42';
         status.textContent = "Sent. I'll follow up directly too.";
