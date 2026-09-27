@@ -329,7 +329,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       source:'Existing product overview, How It Works page, Agent Challenge, and the private working demo.',
       purpose:'Show that Agent First is a working interaction model, not simply an AI concept or a new search box.',
       next:'Next: Pilot explains how to put this into a real workflow with controlled scope and measurable outcomes.',
-      material:{label:'Open Product Overview',url:'index.html#demo',status:'LIVE'},
+      material:{label:'Open Private Product Demo',url:'https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app/portal.html',status:'LIVE'},
       related:['pilot','problem','vision']
     },
     pilot:{
@@ -506,7 +506,6 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     security:{
       name:'Security & Data',short:'Security',status:'LIVE',badge:'live',
-      permission:'diligence',
       hero:'Use only the data the workflow actually needs.',
       pitch:'Agent First should make its data boundaries legible: what information enters the system, which approved sources drive guidance, who can change rules, what is logged, and what the product does not need to collect.',
       lede:'Early buyers do not need inflated compliance claims. They need an accurate explanation of the current security posture, data flow, access model, rule governance, AI usage, and the controls that will mature with deployment.',
@@ -519,7 +518,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       source:'The buyer-facing pilot security/data overview is documented. Architecture-specific hosting, encryption, subprocessors, retention, and regulated-data requirements must still be verified before contractual representation.',
       purpose:'Give a buyer a clear, accurate diligence answer without pretending early-stage controls are certifications they are not.',
       next:'Next: use the buyer overview for pilot diligence, then verify architecture-specific controls before making contractual security commitments.',
-      material:{label:'Security & Data Overview',url:'pilot-operations.html#security',status:'LIVE'},
+      material:{label:'Security, Data & Pilot FAQ',url:'pilot-security-faq.html',status:'LIVE'},
       related:['implementation','product','pilot']
     },
     vision:{
@@ -615,10 +614,13 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   };
 
   var materials=[
+    {id:'private-demo',name:'Private Product Demo',roles:['client','investor','partner'],status:'LIVE',url:'https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app/portal.html',kind:'open'},
     {id:'product-overview',name:'Interactive Product Overview',roles:['client','investor','partner'],status:'LIVE',url:'index.html#demo',kind:'open'},
     {id:'how-it-works',name:'How Agent First Works',roles:['client','partner'],status:'LIVE',url:'how-it-works.html',kind:'open'},
     {id:'pilot-program',name:'Pilot Program',roles:['client','investor','partner'],status:'LIVE',url:'pilot-program.html',kind:'open'},
     {id:'pilot-prospectus',name:'Pilot Prospectus',roles:['client','investor','partner'],status:'LIVE',url:'pilot-prospectus.html',kind:'open'},
+    {id:'pilot-operations',name:'Pilot Operating Package',roles:['client','investor','partner'],status:'LIVE',url:'pilot-operations.html',kind:'open'},
+    {id:'pilot-sow',name:'Pilot SOW Framework',roles:['client','partner'],status:'LIVE',url:'pilot-operations.html#sow',kind:'open'},
     {id:'pilot-measurement',name:'Pilot Measurement Plan',roles:['client','investor','partner'],status:'LIVE',url:'pilot-operations.html#measurement',kind:'open'},
     {id:'pilot-faq',name:'Pilot FAQ',roles:['client','partner'],status:'LIVE',url:'pilot-operations.html#faq',kind:'open'},
     {id:'pricing',name:'Pricing',roles:['client'],status:'LIVE',url:'pricing.html',kind:'open'},
@@ -626,7 +628,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'sample-profile',name:'Sample Client Profile',roles:['client','partner'],status:'LIVE',url:'sample-client-profile.html',kind:'open'},
     {id:'profile-checklist',name:'Client Profile Checklist',roles:['client','partner'],status:'LIVE',url:'agent-first-client-profile-checklist.pdf',kind:'download'},
     {id:'implementation',name:'Implementation Guide',roles:['client'],status:'LIVE',url:'pilot-operations.html#implementation',kind:'open'},
-    {id:'security',name:'Security / Data Overview',roles:['client','investor'],status:'LIVE',url:'pilot-operations.html#security',kind:'open',permission:'diligence'},
+    {id:'security',name:'Security, Data & Pilot FAQ',roles:['client','investor'],status:'LIVE',url:'pilot-security-faq.html',kind:'open'},
     {id:'business-plan',name:'Business Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
     {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
