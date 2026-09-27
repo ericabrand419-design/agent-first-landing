@@ -1012,15 +1012,31 @@
     status.style.color='#6b7084';
     status.textContent='Requesting private demo access...';
 
-    fetch('/api/demo-invite',{
+    var name=document.getElementById('af-demo-name').value.trim();
+    var company=document.getElementById('af-demo-company').value.trim();
+    var delivery=new FormData();
+    delivery.append('access_key','7207f464-b77a-4a0c-b6b7-3a747ab11496');
+    delivery.append('subject','Private Agent First demo request');
+    delivery.append('from_name','Agent First website');
+    delivery.append('name',name);
+    delivery.append('email',email);
+    delivery.append('company',company);
+    delivery.append('message','Requested access to the private Agent First interactive demo.');
+
+    fetch('https://api.web3forms.com/submit',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({
-        action:'issue',
-        name:document.getElementById('af-demo-name').value.trim(),
-        email:email,
-        company:document.getElementById('af-demo-company').value.trim()
-      })
+      headers:{'Accept':'application/json'},
+      body:delivery
+    }).then(function(res){
+      return res.json().then(function(data){return {ok:res.ok,data:data};});
+    }).then(function(delivered){
+      if(!delivered.ok||!delivered.data||!delivered.data.success)throw new Error('We could not submit the demo request. Please try again.');
+      status.textContent='Request received. Preparing your private demo...';
+      return fetch('/api/demo-invite',{
+        method:'POST',
+        headers:{'Content-Type':'application/json','Accept':'application/json'},
+        body:JSON.stringify({action:'issue',name:name,email:email,company:company})
+      });
     }).then(function(res){
       return res.json().then(function(data){return {ok:res.ok,data:data};});
     }).then(function(result){
