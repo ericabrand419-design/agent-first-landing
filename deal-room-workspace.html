@@ -122,7 +122,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <div class="brandMark" aria-hidden="true">
       <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.5 · Updated Sep 27, 2026</div></div>
+    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.6 · Updated Sep 27, 2026</div></div>
   </div>
   <div class="topActions">
     <a href="/deal-room-v1">◫ Archive v1</a>
@@ -343,14 +343,14 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Baseline first','Define what happens today before claiming improvement.'],
         ['Decision at the end','Expand, revise, or stop based on what the pilot actually shows.']
       ],
-      source:'Existing Agent First Pilot Program page plus the pilot-onboarding process being developed.',
+      source:'Pilot Prospectus, Pilot Operations Package, public Pilot Program page, and the pilot scorecard system are now documented. Real outcome evidence will come from live pilots.',
       purpose:'Give a prospective customer a low-risk, serious path from “interesting demo” to “measurable operational test.”',
       next:'Next: Measurement defines what the pilot should prove. Pricing explains the current commercial entry point.',
-      material:{label:'Open Pilot Program',url:'pilot-program.html',status:'LIVE'},
+      material:{label:'Pilot Prospectus',url:'pilot-prospectus.html',status:'LIVE'},
       related:['measurement','pricing','product']
     },
     measurement:{
-      name:'Measurement',short:'Measurement',status:'BUILDING',badge:'build',
+      name:'Measurement',short:'Measurement',status:'LIVE',badge:'live',
       hero:'Measure operational change, not just whether people like the interface.',
       pitch:'The pilot should measure agreed operational outcomes—such as decision speed, navigation burden, consistency, escalation, training dependency, or error patterns—rather than relying on whether people say they like the interface.',
       lede:'This section becomes strongest once the first pilot target is known, because the correct measures depend on the workflow and the data the organization can actually observe.',
@@ -360,10 +360,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Operational evidence','Track the real measures the client already cares about where access is available.'],
         ['Qualitative evidence','Capture worker and supervisor observations without treating opinion as the only proof.']
       ],
-      source:'Measurement framework is being developed for the pilot package; real case-study numbers do not exist yet.',
+      source:'The baseline plan, controlled test protocol, success scorecard, weekly tracker, and final-report structure are documented in the Pilot Operations Package. Real case-study results do not exist yet.',
       purpose:'Prevent Agent First from becoming a “cool tool” whose value cannot be defended after the novelty wears off.',
-      next:'Next: the first pilot scorecard should lock the exact metrics before launch.',
-      material:{label:'Pilot Measurement Plan',url:null,status:'BUILDING'},
+      next:'Next: at kickoff, choose the applicable metrics, record the baseline method, and lock targets before live use begins.',
+      material:{label:'Pilot Measurement Plan',url:'pilot-operations.html#measurement',status:'LIVE'},
       related:['pilot','financials','evidence']
     },
     market:{
@@ -488,7 +488,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['pilot','measurement','financials']
     },
     implementation:{
-      name:'Implementation',short:'Implementation',status:'BUILDING',badge:'build',
+      name:'Implementation',short:'Implementation',status:'LIVE',badge:'live',
       hero:'Fit Agent First around the workflow—not the workflow around Agent First.',
       pitch:'Implementation starts with a bounded workflow and approved source material, then configures the client profile, guidance, scripts, roles, and measurement plan around the operation that already exists.',
       lede:'A pilot should not require an organization to redesign its operation simply to test the product. The implementation plan should make required inputs, responsibilities, timing, and change management explicit.',
@@ -498,14 +498,14 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Validation','Review the configured workflow with the client before putting it in front of pilot users.'],
         ['Launch','Train only on the new interaction model, establish support channels, and begin measurement against the agreed baseline.']
       ],
-      source:'Implementation process is being formalized from the pilot onboarding roadmap.',
+      source:'The implementation checklist, onboarding timeline, responsibilities matrix, source intake, workflow map, and launch gates are documented in the Pilot Operations Package.',
       purpose:'Answer the buyer question: “What will you need from us, how disruptive is this, and how long until people can use it?”',
       next:'Next: Security explains data and governance boundaries; Pilot explains how the implementation is bounded and measured.',
-      material:{label:'Implementation Guide',url:null,status:'BUILDING'},
+      material:{label:'Implementation Guide',url:'pilot-operations.html#implementation',status:'LIVE'},
       related:['pilot','security','measurement']
     },
     security:{
-      name:'Security & Data',short:'Security',status:'BUILDING',badge:'build',
+      name:'Security & Data',short:'Security',status:'LIVE',badge:'live',
       permission:'diligence',
       hero:'Use only the data the workflow actually needs.',
       pitch:'Agent First should make its data boundaries legible: what information enters the system, which approved sources drive guidance, who can change rules, what is logged, and what the product does not need to collect.',
@@ -516,10 +516,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Access','Agent and Admin capabilities should be separated, with sensitive materials protected by role.'],
         ['AI boundary','Language models can help determine or generate what is shown, but are not the authoritative source of organizational policy.']
       ],
-      source:'Security/data documentation is being assembled for pilot diligence and will be revised as infrastructure matures.',
+      source:'The buyer-facing pilot security/data overview is documented. Architecture-specific hosting, encryption, subprocessors, retention, and regulated-data requirements must still be verified before contractual representation.',
       purpose:'Give a buyer a clear, accurate diligence answer without pretending early-stage controls are certifications they are not.',
-      next:'Next: Implementation explains operational setup; full security documentation will become a downloadable buyer artifact.',
-      material:{label:'Security & Data Overview',url:null,status:'BUILDING'},
+      next:'Next: use the buyer overview for pilot diligence, then verify architecture-specific controls before making contractual security commitments.',
+      material:{label:'Security & Data Overview',url:'pilot-operations.html#security',status:'LIVE'},
       related:['implementation','product','pilot']
     },
     vision:{
@@ -618,12 +618,15 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'product-overview',name:'Interactive Product Overview',roles:['client','investor','partner'],status:'LIVE',url:'index.html#demo',kind:'open'},
     {id:'how-it-works',name:'How Agent First Works',roles:['client','partner'],status:'LIVE',url:'how-it-works.html',kind:'open'},
     {id:'pilot-program',name:'Pilot Program',roles:['client','investor','partner'],status:'LIVE',url:'pilot-program.html',kind:'open'},
+    {id:'pilot-prospectus',name:'Pilot Prospectus',roles:['client','investor','partner'],status:'LIVE',url:'pilot-prospectus.html',kind:'open'},
+    {id:'pilot-measurement',name:'Pilot Measurement Plan',roles:['client','investor','partner'],status:'LIVE',url:'pilot-operations.html#measurement',kind:'open'},
+    {id:'pilot-faq',name:'Pilot FAQ',roles:['client','partner'],status:'LIVE',url:'pilot-operations.html#faq',kind:'open'},
     {id:'pricing',name:'Pricing',roles:['client'],status:'LIVE',url:'pricing.html',kind:'open'},
     {id:'agent-challenge',name:'Agent Challenge',roles:['client','partner'],status:'LIVE',url:'agent-challenge.html',kind:'open'},
     {id:'sample-profile',name:'Sample Client Profile',roles:['client','partner'],status:'LIVE',url:'sample-client-profile.html',kind:'open'},
     {id:'profile-checklist',name:'Client Profile Checklist',roles:['client','partner'],status:'LIVE',url:'agent-first-client-profile-checklist.pdf',kind:'download'},
-    {id:'implementation',name:'Implementation Guide',roles:['client'],status:'BUILDING',url:null,kind:'open'},
-    {id:'security',name:'Security / Data Overview',roles:['client','investor'],status:'BUILDING',url:null,kind:'open',permission:'diligence'},
+    {id:'implementation',name:'Implementation Guide',roles:['client'],status:'LIVE',url:'pilot-operations.html#implementation',kind:'open'},
+    {id:'security',name:'Security / Data Overview',roles:['client','investor'],status:'LIVE',url:'pilot-operations.html#security',kind:'open',permission:'diligence'},
     {id:'business-plan',name:'Business Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
     {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
