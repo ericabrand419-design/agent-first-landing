@@ -33,7 +33,9 @@ module.exports=async function handler(req,res){
   }
   if(action!=='issue') return res.status(400).json({ok:false,error:'Unsupported action'});
 
-  const result=await auth('invite',{email});
+  const approvalCode=String(body.approvalCode||'');
+  if(!approvalCode) return res.status(403).json({ok:false,error:'Owner approval is required before private access can be issued.'});
+  const result=await auth('invite',{email,approvalCode});
   if(!result.ok||!result.data||!result.data.token){
     return res.status(502).json({ok:false,error:'Could not create private access. Please try again.'});
   }
