@@ -726,6 +726,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     history=[current];
     renderRole();
     renderSection();
+    localStorage.setItem('af_deal_room_role',role);
     trackEvent('Role Selected',{role:role});
   };
   window.selectSection=function(k){if(!sections[k])return;current=k;history.push(k);renderSection();trackEvent('Section Opened',{section:k,role:role});};
@@ -742,8 +743,17 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   window.copyOutput=function(){if(navigator.clipboard)navigator.clipboard.writeText(document.getElementById('outputText').textContent);};
 
   function trackEvent(name,data){
+    var payload={name:name,data:data||{}};
     try{
-      if(window.va) window.va('event',{name:name,data:data||{}});
+      if(window.va) window.va('event',payload);
+    }catch(e){}
+    try{
+      fetch('/api/deal-room-event',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload),
+        keepalive:true
+      }).catch(function(){});
     }catch(e){}
   }
   window.trackMaterial=function(id,action){
@@ -771,6 +781,25 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       });
     });
   });
+
+  var savedRole=localStorage.getItem('af_deal_room_role');
+  if(savedRole && roles[savedRole]){
+    role=savedRole;
+    current=roles[role].first;
+    history=[current];
+  }
+
+  fetch('/api/deal-room-session',{cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(s){
+      if(s.authEnabled && s.authenticated && roles[s.role] && s.role!==role){
+        role=s.role;
+        current=roles[role].first;
+        history=[current];
+        renderRole();renderSection();
+      }
+    })
+    .catch(function(){});
 
   renderRole();renderSection();
 })();
