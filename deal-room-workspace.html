@@ -8,6 +8,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;650;700;750;800;900&display=swap" rel="stylesheet">
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
 *{box-sizing:border-box}
 :root{
@@ -25,7 +29,8 @@ button,input,select{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
 header{min-height:56px;padding:8px 18px;background:var(--navygrad);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:14px;position:sticky;top:0;z-index:50;box-shadow:0 5px 22px rgba(13,17,41,.16)}
-.brandArea{display:flex;align-items:center;gap:10px;min-width:0}.brandStack{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.brandMark{width:22px;height:28px;display:grid;place-items:center;flex:0 0 auto}.brandMark svg{width:22px;height:27px}.brand{font-size:11px;letter-spacing:.2em;font-weight:900;white-space:nowrap}.tag{font-size:11px;color:#d9d8e7}
+.brandArea{display:flex;align-items:center;gap:10px;min-width:0}
+.versionMeta{font-size:10px;color:#979eb8;padding-left:10px;border-left:1px solid rgba(255,255,255,.12);white-space:nowrap}.brandStack{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.brandMark{width:22px;height:28px;display:grid;place-items:center;flex:0 0 auto}.brandMark svg{width:22px;height:27px}.brand{font-size:11px;letter-spacing:.2em;font-weight:900;white-space:nowrap}.tag{font-size:11px;color:#d9d8e7}
 .topActions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.topActions button,.topActions a{height:32px;border-radius:9px;padding:0 12px;border:1px solid rgba(255,255,255,.17);background:rgba(255,255,255,.045);color:#fff;font-weight:800;font-size:12px;display:inline-flex;align-items:center;justify-content:center}.topActions .primaryTop{border:0;background:var(--grad)}
 .app{display:grid;grid-template-columns:minmax(310px,25%) minmax(480px,46%) minmax(330px,29%);gap:14px;padding:14px 16px 20px;max-width:1840px;margin:auto;align-items:start}
 .appColumn{min-width:0;height:calc(100vh - 84px);overflow-y:auto;scrollbar-color:#c6c2d4 transparent;scrollbar-width:thin;padding-right:2px}
@@ -116,10 +121,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <div class="brandMark" aria-hidden="true">
       <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div></div>
+    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.4 · Updated Sep 27, 2026</div></div>
   </div>
   <div class="topActions">
-    <a href="deal-room.html">◫ Version A</a>
+    <a href="/deal-room-v1">◫ Archive v1</a>
     <button type="button" id="clientTop" onclick="setRole('client')">Client</button>
     <button type="button" id="investorTop" onclick="setRole('investor')">Investor</button>
     <button type="button" id="partnerTop" onclick="setRole('partner')">Partner</button>
@@ -252,6 +257,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       <div class="sectionHead">
         <div><div class="ey">Complete materials guide</div><div class="sm">Everything we would eventually present to a serious client, investor, or partner.</div></div>
       </div>
+      <div class="tiny" id="materialsAudience" style="margin-top:8px"></div>
       <div class="guideWrap">
         <table class="serviceTable">
           <thead><tr><th>Material</th><th>Audience</th><th>Status</th><th>Open</th></tr></thead>
@@ -477,6 +483,40 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       material:{label:'Case Studies & Results',url:null,status:'BUILDING'},
       related:['pilot','measurement','financials']
     },
+    implementation:{
+      name:'Implementation',short:'Implementation',status:'BUILDING',badge:'build',
+      hero:'Fit Agent First around the workflow—not the workflow around Agent First.',
+      pitch:'Implementation starts with a bounded workflow and approved source material, then configures the client profile, guidance, scripts, roles, and measurement plan around the operation that already exists.',
+      lede:'A pilot should not require an organization to redesign its operation simply to test the product. The implementation plan should make required inputs, responsibilities, timing, and change management explicit.',
+      detail:[
+        ['Inputs','Approved rules, scripts, contacts, workflow context, exceptions, and the people who can validate them.'],
+        ['Configuration','Translate approved material into the active client profile and the guidance workers will actually use.'],
+        ['Validation','Review the configured workflow with the client before putting it in front of pilot users.'],
+        ['Launch','Train only on the new interaction model, establish support channels, and begin measurement against the agreed baseline.']
+      ],
+      source:'Implementation process is being formalized from the pilot onboarding roadmap.',
+      purpose:'Answer the buyer question: “What will you need from us, how disruptive is this, and how long until people can use it?”',
+      next:'Next: Security explains data and governance boundaries; Pilot explains how the implementation is bounded and measured.',
+      material:{label:'Implementation Guide',url:null,status:'BUILDING'},
+      related:['pilot','security','measurement']
+    },
+    security:{
+      name:'Security & Data',short:'Security',status:'BUILDING',badge:'build',
+      hero:'Use only the data the workflow actually needs.',
+      pitch:'Agent First should make its data boundaries legible: what information enters the system, which approved sources drive guidance, who can change rules, what is logged, and what the product does not need to collect.',
+      lede:'Early buyers do not need inflated compliance claims. They need an accurate explanation of the current security posture, data flow, access model, rule governance, AI usage, and the controls that will mature with deployment.',
+      detail:[
+        ['Data minimization','Collect only the information necessary to resolve the active workflow and measure the pilot.'],
+        ['Rule ownership','The organization owns approved policy; Agent First surfaces it rather than silently replacing it.'],
+        ['Access','Agent and Admin capabilities should be separated, with sensitive materials protected by role.'],
+        ['AI boundary','Language models can help determine or generate what is shown, but are not the authoritative source of organizational policy.']
+      ],
+      source:'Security/data documentation is being assembled for pilot diligence and will be revised as infrastructure matures.',
+      purpose:'Give a buyer a clear, accurate diligence answer without pretending early-stage controls are certifications they are not.',
+      next:'Next: Implementation explains operational setup; full security documentation will become a downloadable buyer artifact.',
+      material:{label:'Security & Data Overview',url:null,status:'BUILDING'},
+      related:['implementation','product','pilot']
+    },
     vision:{
       name:'Vision',short:'Vision',status:'LIVE',badge:'live',
       hero:'Make organizations easier for humans to operate.',
@@ -531,28 +571,62 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   };
 
   var roles={
-    client:{title:'Prospective Client',meta:'Product, pilot, implementation, outcomes',note:'Show me what this does, how I would test it, what changes for my team, and what it costs.',time:'7 MIN',path:[['Product','product'],['Pilot','pilot'],['Measurement','measurement'],['Pricing','pricing']]},
-    investor:{title:'Investor / Accelerator',meta:'Company, market, model, evidence, financials, ask',note:'Show me the thesis, the wedge, what is built, what is proved, how this becomes a business, and what capital would unlock.',time:'10 MIN',path:[['Executive Summary','exec'],['Market','market'],['Business Model','business'],['Financials','financials'],['Investment Ask','ask']]},
-    partner:{title:'Partner / Advisor',meta:'Vision, product, proof plan, roadmap',note:'Show me where this is going, what exists today, what the next proof points are, and where outside expertise could matter.',time:'8 MIN',path:[['Vision','vision'],['Product','product'],['Pilot','pilot'],['Roadmap','roadmap']]},
-    all:{title:'Explore Everything',meta:'No prescribed path',note:'Browse the company as a living knowledge base. Every section leads to the short answer first and deeper material underneath.',time:'OPEN',path:[['Company','exec'],['Product','product'],['Business','business'],['Evidence','evidence']]}
+    client:{
+      title:'Prospective Client',
+      meta:'Product, pilot, implementation, outcomes',
+      note:'Show me what this does, how I would test it, what changes for my team, what you need from us, and what it costs.',
+      time:'7 MIN',
+      first:'product',
+      sections:['product','problem','pilot','measurement','pricing','implementation','security','evidence','roadmap'],
+      path:[['See the Product','product'],['Pilot Structure','pilot'],['How We Measure','measurement'],['Implementation','implementation'],['Pricing','pricing']]
+    },
+    investor:{
+      title:'Investor / Accelerator',
+      meta:'Company, market, model, evidence, financials, ask',
+      note:'Show me the thesis, wedge, product, what is actually proved, how this becomes a business, and what capital would unlock.',
+      time:'10 MIN',
+      first:'exec',
+      sections:['exec','problem','product','market','business','evidence','financials','ask','roadmap','founder','vision'],
+      path:[['Company Thesis','exec'],['Market Wedge','market'],['Business Model','business'],['Evidence','evidence'],['Financials','financials'],['Investment Ask','ask']]
+    },
+    partner:{
+      title:'Partner / Advisor',
+      meta:'Vision, product, proof plan, roadmap, collaboration',
+      note:'Show me the operating philosophy, what exists today, the next proof points, and where outside expertise or distribution could matter.',
+      time:'8 MIN',
+      first:'vision',
+      sections:['vision','product','problem','pilot','measurement','evidence','roadmap','founder','market'],
+      path:[['Vision','vision'],['Product','product'],['Pilot Proof Plan','pilot'],['Evidence','evidence'],['Roadmap','roadmap']]
+    },
+    all:{
+      title:'Explore Everything',
+      meta:'Full company knowledge base',
+      note:'Browse the company in any order. Every section starts with the shortest useful answer and preserves the deeper source beneath it.',
+      time:'OPEN',
+      first:'exec',
+      sections:['exec','problem','product','pilot','measurement','implementation','security','market','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap'],
+      path:[['Company','exec'],['Product','product'],['Pilot','pilot'],['Business','business'],['Evidence','evidence'],['Vision','vision']]
+    }
   };
 
   var materials=[
-    {name:'Interactive Product Overview',aud:'Client · Investor',status:'LIVE',url:'index.html#demo'},
-    {name:'How Agent First Works',aud:'Client · Partner',status:'LIVE',url:'how-it-works.html'},
-    {name:'Pilot Program',aud:'Client · Investor',status:'LIVE',url:'pilot-program.html'},
-    {name:'Pricing',aud:'Client',status:'LIVE',url:'pricing.html'},
-    {name:'Agent Challenge',aud:'Client · Partner',status:'LIVE',url:'agent-challenge.html'},
-    {name:'Sample Client Profile',aud:'Client',status:'LIVE',url:'sample-client-profile.html'},
-    {name:'Business Plan',aud:'Investor · Advisor',status:'BUILDING',url:null},
-    {name:'Financial Model',aud:'Investor',status:'BUILDING',url:null},
-    {name:'Investor Pitch Deck',aud:'Investor',status:'BUILDING',url:null},
-    {name:'Investment Ask / Use of Funds',aud:'Investor',status:'BUILDING',url:null},
-    {name:'Marketing / GTM Plan',aud:'Investor · Advisor',status:'BUILDING',url:null},
-    {name:'Security / Data / Implementation',aud:'Client',status:'BUILDING',url:null},
-    {name:'Case Studies & Pilot Results',aud:'Client · Investor',status:'BUILDING',url:null},
-    {name:'Founder Story / Video',aud:'Investor · Partner',status:'BUILDING',url:null},
-    {name:'Operating Roadmap',aud:'Investor · Partner',status:'BUILDING',url:null}
+    {id:'product-overview',name:'Interactive Product Overview',roles:['client','investor','partner'],status:'LIVE',url:'index.html#demo',kind:'open'},
+    {id:'how-it-works',name:'How Agent First Works',roles:['client','partner'],status:'LIVE',url:'how-it-works.html',kind:'open'},
+    {id:'pilot-program',name:'Pilot Program',roles:['client','investor','partner'],status:'LIVE',url:'pilot-program.html',kind:'open'},
+    {id:'pricing',name:'Pricing',roles:['client'],status:'LIVE',url:'pricing.html',kind:'open'},
+    {id:'agent-challenge',name:'Agent Challenge',roles:['client','partner'],status:'LIVE',url:'agent-challenge.html',kind:'open'},
+    {id:'sample-profile',name:'Sample Client Profile',roles:['client','partner'],status:'LIVE',url:'sample-client-profile.html',kind:'open'},
+    {id:'profile-checklist',name:'Client Profile Checklist',roles:['client','partner'],status:'LIVE',url:'agent-first-client-profile-checklist.pdf',kind:'download'},
+    {id:'implementation',name:'Implementation Guide',roles:['client'],status:'BUILDING',url:null,kind:'open'},
+    {id:'security',name:'Security / Data Overview',roles:['client','investor'],status:'BUILDING',url:null,kind:'open'},
+    {id:'business-plan',name:'Business Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
+    {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download'},
+    {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download'},
+    {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'BUILDING',url:null,kind:'open'},
+    {id:'gtm-plan',name:'Marketing / GTM Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
+    {id:'case-studies',name:'Case Studies & Pilot Results',roles:['client','investor','partner'],status:'BUILDING',url:null,kind:'open'},
+    {id:'founder-story',name:'Founder Story / Video',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
+    {id:'roadmap',name:'Operating Roadmap',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'}
   ];
 
   var directoryOrder=['exec','problem','product','pilot','measurement','market','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap'];
@@ -560,7 +634,8 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function renderDirectory(){
-    document.getElementById('directory').innerHTML=directoryOrder.map(function(k){
+    var visibleSections=roles[role].sections || directoryOrder;
+    document.getElementById('directory').innerHTML=visibleSections.map(function(k){
       var s=sections[k]; return '<button type="button" class="'+(k===current?'active':'')+'" onclick="selectSection(\''+k+'\')"><strong>'+esc(s.short)+'</strong><span>'+esc(s.name)+'</span></button>';
     }).join('');
   }
@@ -577,6 +652,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     ['client','investor','partner'].forEach(function(k){var el=document.getElementById(k+'Top');if(el) el.style.background=k===role?'rgba(255,255,255,.15)':'rgba(255,255,255,.045)';});
     renderPath();
     renderMemory();
+    renderMaterials();
   }
   function renderMemory(){
     var unique=[];history.forEach(function(k){if(unique.indexOf(k)<0) unique.push(k);});
@@ -626,27 +702,77 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     Array.prototype.slice.call(document.querySelectorAll('.outputTab')).forEach(function(b){b.classList.toggle('active',b.getAttribute('data-tab')===output);});
   }
   function renderMaterials(){
-    document.getElementById('materialsBody').innerHTML=materials.map(function(m){
+    var visible=role==='all'?materials:materials.filter(function(m){return m.roles.indexOf(role)>-1;});
+    document.getElementById('materialsAudience').textContent=role==='all'?'Showing the complete material library.':'Showing material relevant to '+roles[role].title+'. Switch to Explore Everything for the full library.';
+    document.getElementById('materialsBody').innerHTML=visible.map(function(m){
       var status='<span class="badge '+(m.status==='LIVE'?'live':'build')+'">'+m.status+'</span>';
-      var open=m.url?'<a class="materialLink" href="'+m.url+'" target="_blank" rel="noopener">OPEN ↗</a>':'<span class="materialLink disabled">—</span>';
-      return '<tr><td><strong>'+esc(m.name)+'</strong></td><td>'+esc(m.aud)+'</td><td>'+status+'</td><td>'+open+'</td></tr>';
+      var audience=m.roles.map(function(r){return roles[r] ? roles[r].title.replace(' / Accelerator','').replace(' / Advisor','') : r;}).join(' · ');
+      var open='';
+      if(m.url && m.kind==='download'){
+        open='<a class="materialLink" href="'+m.url+'" download data-material="'+m.id+'" onclick="trackMaterial(\''+m.id+'\',\'download\')">DOWNLOAD ↓</a>';
+      } else if(m.url){
+        open='<a class="materialLink" href="'+m.url+'" target="_blank" rel="noopener" data-material="'+m.id+'" onclick="trackMaterial(\''+m.id+'\',\'open\')">OPEN ↗</a>';
+      } else {
+        open='<span class="materialLink disabled">—</span>';
+      }
+      return '<tr><td><strong>'+esc(m.name)+'</strong></td><td>'+esc(audience)+'</td><td>'+status+'</td><td>'+open+'</td></tr>';
     }).join('');
   }
 
-  window.setRole=function(v){role=v;renderRole();};
-  window.selectSection=function(k){if(!sections[k])return;current=k;history.push(k);renderSection();};
-  window.setOutput=function(v){output=v;renderOutput();};
+  window.setRole=function(v){
+    role=v;
+    current=roles[role].first;
+    output='pitch';
+    history=[current];
+    renderRole();
+    renderSection();
+    trackEvent('Role Selected',{role:role});
+  };
+  window.selectSection=function(k){if(!sections[k])return;current=k;history.push(k);renderSection();trackEvent('Section Opened',{section:k,role:role});};
+  window.setOutput=function(v){output=v;renderOutput();trackEvent('Output Viewed',{output:v,section:current,role:role});};
   window.clearHistory=function(){history=[current];renderMemory();};
   window.toggleFocus=function(){
     document.body.classList.toggle('focusMode');
     var b=document.getElementById('focusBtn');
     if(b) b.textContent=document.body.classList.contains('focusMode')?'↙ Exit Focus':'⛶ Focus View';
+    trackEvent('Focus Toggled',{state:document.body.classList.contains('focusMode')?'on':'off',section:current,role:role});
   };
-  window.resetWorkspace=function(){role='client';current='exec';output='pitch';history=['exec'];document.body.classList.remove('focusMode');var b=document.getElementById('focusBtn');if(b)b.textContent='⛶ Focus View';renderRole();renderSection();};
+  window.resetWorkspace=function(){role='client';current='exec';output='pitch';history=['exec'];document.body.classList.remove('focusMode');var b=document.getElementById('focusBtn');if(b)b.textContent='⛶ Focus View';renderRole();renderSection();renderMaterials();trackEvent('Briefing Restarted',{role:role});};
   window.copyPitch=function(){if(navigator.clipboard)navigator.clipboard.writeText(sections[current].pitch);};
   window.copyOutput=function(){if(navigator.clipboard)navigator.clipboard.writeText(document.getElementById('outputText').textContent);};
 
-  renderMaterials();renderRole();renderSection();
+  function trackEvent(name,data){
+    try{
+      if(window.va) window.va('event',{name:name,data:data||{}});
+    }catch(e){}
+  }
+  window.trackMaterial=function(id,action){
+    trackEvent('Material '+(action==='download'?'Downloaded':'Opened'),{material:id,role:role,section:current});
+  };
+
+  var visitCount=parseInt(localStorage.getItem('af_deal_room_visits')||'0',10)+1;
+  localStorage.setItem('af_deal_room_visits',String(visitCount));
+  trackEvent('Deal Room Visit',{returning:visitCount>1?'yes':'no',visitCount:String(visitCount)});
+
+  document.addEventListener('click',function(e){
+    var link=e.target.closest('a');
+    if(link && link.href && /index\.html#demo|pilot-program\.html|pricing\.html|how-it-works\.html|agent-challenge\.html|sample-client-profile\.html/.test(link.getAttribute('href')||'')){
+      trackEvent('Deal Room Link Click',{href:link.getAttribute('href'),role:role,section:current});
+    }
+  });
+
+  document.querySelectorAll('video[data-material]').forEach(function(video){
+    var sent={};
+    video.addEventListener('timeupdate',function(){
+      if(!video.duration) return;
+      var pct=Math.floor(video.currentTime/video.duration*100);
+      [25,50,75,100].forEach(function(mark){
+        if(pct>=mark && !sent[mark]){sent[mark]=true;trackEvent('Video Progress',{material:video.dataset.material,percent:String(mark),role:role});}
+      });
+    });
+  });
+
+  renderRole();renderSection();
 })();
 </script>
 </body>
