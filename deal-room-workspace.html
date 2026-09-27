@@ -622,7 +622,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       detail:[
         ['Available now','Business Plan, Financial Model, Investment Ask, investor decks/briefs, pilot package, security FAQ, private product demo, Deal Room, regression/evaluation evidence.'],
         ['Corporate / cap table','Formal incorporation, governing, capitalization and prior-financing records remain pending in this package.'],
-        ['IP / legal / security','Assignments, license inventory, formal security policies, architecture/data flow, subprocessors, penetration testing and related diligence remain to be formalized as applicable.'],
+        ['IP / legal / security','Assignments and license inventory remain pending. Security readiness is now a named pre-production workstream: threat model/data-flow map, isolation/RBAC testing, ASVS mapping, remediation record, incident/retention/recovery procedures, vendor/subprocessor review, and targeted penetration testing become diligence artifacts as completed.'],
         ['Access principle','Sensitive bank, cap-table, contract, personal, and source-code material should be shared only at the appropriate diligence stage.']
       ],
       source:'Agent First Due Diligence Index v1.0.',
@@ -650,19 +650,19 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     security:{
       name:'Security & Data',short:'Security',status:'LIVE',badge:'live',
-      hero:'Use only the data the workflow actually needs.',
-      pitch:'Agent First should make its data boundaries legible: what information enters the system, which approved sources drive guidance, who can change rules, what is logged, and what the product does not need to collect.',
-      lede:'Early buyers do not need inflated compliance claims. They need an accurate explanation of the current security posture, data flow, access model, rule governance, AI usage, and the controls that will mature with deployment.',
+      hero:'Right information. Right client. Right moment. Right person.',
+      pitch:'Security is now a formal gate between controlled evaluation and production pilot use. Agent First can continue demos and testing with fictional/de-identified material, but proprietary production client information does not enter a live pilot until an experienced security reviewer has assessed the actual architecture and critical findings have been remediated.',
+      lede:'The immediate job is not to rush into SOC 2. It is to complete a focused security architecture/application-security engagement, test server-side access and tenant isolation, document data/model-provider flows, remediate critical issues, and establish a hardened pilot environment before asking a customer to trust Agent First with proprietary production information.',
       detail:[
-        ['Data minimization','Collect only the information necessary to resolve the active workflow and measure the pilot.'],
-        ['Rule ownership','The organization owns approved policy; Agent First surfaces it rather than silently replacing it.'],
-        ['Access','Agent and Admin capabilities should be separated, with sensitive materials protected by role.'],
-        ['AI boundary','Language models can help determine or generate what is shown, but are not the authoritative source of organizational policy.']
+        ['Before the gate','Use fictional/de-identified scenarios and the minimum non-sensitive approved material needed for controlled evaluation.'],
+        ['Security engagement','Threat model + data-flow map; auth/sessions; server-side RBAC/tenant isolation; APIs/database; secrets; uploads; AI-provider flow; logging; backups; dependencies; retention/deletion; incident response.'],
+        ['Verification','Map against OWASP ASVS 5.0, prioritize OWASP Top 10 risks including Broken Access Control, remediate critical/high findings, and retest.'],
+        ['After the gate','Only the specific proprietary production data categories authorized for the scoped pilot may enter the hardened environment.']
       ],
-      source:'The buyer-facing pilot security/data overview is documented. Architecture-specific hosting, encryption, subprocessors, retention, and regulated-data requirements must still be verified before contractual representation.',
-      purpose:'Give a buyer a clear, accurate diligence answer without pretending early-stage controls are certifications they are not.',
-      next:'Next: use the buyer overview for pilot diligence, then verify architecture-specific controls before making contractual security commitments.',
-      material:{label:'Security, Data & Pilot FAQ',url:'pilot-security-faq.html',status:'LIVE'},
+      source:'Security Readiness Plan v1.0 plus the buyer-facing Security/Data FAQ. OWASP Top 10:2025, OWASP ASVS 5.0, and NIST SP 800-218 SSDF are used as security references; they are not certifications.',
+      purpose:'Give a buyer a clear answer about what can be tested now, what must happen before proprietary production data, and how Agent First will harden without pretending certifications it has not earned.',
+      next:'Next: complete the independent security review and remediation gate before any production pilot accepts proprietary client information.',
+      material:{label:'Security Readiness Plan',url:'security-readiness.html',status:'LIVE'},
       related:['implementation','product','pilot']
     },
     vision:{
@@ -702,15 +702,15 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     roadmap:{
       name:'Roadmap',short:'Roadmap',status:'LIVE',badge:'live',
       hero:'Sequence proof before scale.',
-      pitch:'The roadmap should move from product stabilization to a deliberately selected pilot, measurable evidence, repeatable onboarding, and then controlled expansion—not from feature accumulation to feature accumulation.',
+      pitch:'The roadmap now inserts a formal Security Readiness Phase between controlled evaluation and the first proprietary-data production pilot: review the architecture, remediate critical findings, harden the pilot environment, then prove the workflow.',
       lede:'The point of the roadmap is to sequence risk reduction. Each stage should answer a question the company needs answered before scaling the next thing.',
       detail:[
-        ['Now','Stabilize the private demo, Deal Room, pilot offer, onboarding, and measurement framework.'],
-        ['Pilot stage','Select a strong design partner and prove one workflow end to end.'],
-        ['Repeatability','Reduce configuration effort and standardize onboarding, governance, and reporting.'],
-        ['Expansion','Broaden customers, workflows, integrations, and product capabilities once the core motion is working.']
+        ['Now','Stabilize private demo, Deal Room, pilot offer, onboarding, measurement, and fictional/de-identified controlled evaluation.'],
+        ['Security Readiness','Bring in an experienced security-minded SaaS engineer/appsec consultant; produce threat model/data-flow map, test isolation/RBAC and other controls, remediate critical findings, and sign off the hardened pilot environment.'],
+        ['Production pilot','Only after the gate, run one bounded paid pilot with authorized production data where required and measure the workflow end to end.'],
+        ['Repeatability','Reduce configuration effort and standardize onboarding, security governance, and reporting before controlled expansion.']
       ],
-      source:'Business Plan v1.1 contains the stage-gated operating roadmap from presentation readiness through design-partner proof, repeatability, production hardening, expansion, and category-platform development.',
+      source:'Business Plan v1.2 contains the revised sequence: controlled demo/evaluation → security architecture review → critical remediation → hardened pilot environment → real production pilots → formal compliance/assurance as buyer requirements justify it.',
       purpose:'Show that the company knows the next sequence of proof rather than simply maintaining a long wish list.',
       next:'Next: tie roadmap milestones to the Financial Model and any eventual Investment Ask.',
       material:{label:'Operating Roadmap',url:'business-plan.html#roadmap',status:'LIVE'},
