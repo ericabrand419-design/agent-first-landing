@@ -919,5 +919,125 @@
   els.forEach(function(el){ io.observe(el); });
 })();
 </script>
+
+<style>
+#af-demo-edge{
+  position:fixed;right:0;top:52%;z-index:90;transform:translateY(-50%);
+  border:1px solid rgba(255,255,255,.18);border-right:0;border-radius:12px 0 0 12px;
+  background:#11162c;color:#fff;padding:11px 8px;font-size:10px;font-weight:900;
+  letter-spacing:.08em;text-transform:uppercase;writing-mode:vertical-rl;box-shadow:0 10px 30px rgba(15,17,36,.18);
+}
+#af-demo-edge:hover{background:#1a2140}
+#af-demo-drawer{
+  position:fixed;inset:0 0 0 auto;z-index:100;width:min(410px,calc(100vw - 24px));
+  background:#fff;border-left:1px solid #e3e0ec;box-shadow:-24px 0 70px rgba(21,23,47,.18);
+  padding:26px;overflow:auto;
+}
+#af-demo-drawer[hidden]{display:none}
+.af-demo-close{position:absolute;right:18px;top:16px;border:0;background:#f4f2f8;border-radius:999px;width:32px;height:32px;font-size:18px}
+.af-demo-kicker{font-size:10px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#7c3aed}
+#af-demo-drawer h2{font-size:30px;line-height:1.08;margin:8px 0 10px;color:#171a2b}
+#af-demo-drawer p{color:#6b7084;line-height:1.55}
+.af-demo-form{display:grid;gap:12px;margin-top:20px}
+.af-demo-form label{font-size:10px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:#6f7488}
+.af-demo-form input{width:100%;border:1px solid #ddd9e7;border-radius:10px;padding:11px 12px;font:inherit}
+.af-demo-form input:focus{outline:none;border-color:#9c6df1;box-shadow:0 0 0 3px rgba(124,58,237,.09)}
+.af-demo-submit{border:0;border-radius:10px;padding:12px 14px;color:#fff;font-weight:850;background:linear-gradient(102deg,#ff7352,#e94ea7 47%,#8b37f4)}
+.af-demo-status{font-size:12px;min-height:18px}
+.af-demo-return{margin-top:22px;padding-top:18px;border-top:1px solid #ece8f1}
+.af-demo-return button{border:1px solid #ddd8e8;background:#faf9fd;color:#4e536a;border-radius:10px;padding:9px 11px;font-weight:800}
+@media(max-width:700px){#af-demo-edge{top:auto;bottom:18px;transform:none;writing-mode:horizontal-tb;border-right:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 12px}}
+</style>
+
+<button id="af-demo-edge" type="button" aria-controls="af-demo-drawer" aria-expanded="false">Private Demo</button>
+<aside id="af-demo-drawer" hidden aria-label="Private demo access">
+  <button class="af-demo-close" id="af-demo-close" type="button" aria-label="Close demo access">×</button>
+  <div class="af-demo-kicker">Private interactive demo</div>
+  <h2>See Agent First from the inside.</h2>
+  <p>Request private demo access with your work email. That email becomes your demo identity. No password is required.</p>
+
+  <form id="af-demo-request-form" class="af-demo-form">
+    <div>
+      <label for="af-demo-name">Name</label>
+      <input id="af-demo-name" name="name" type="text" autocomplete="name" required>
+    </div>
+    <div>
+      <label for="af-demo-email">Work email</label>
+      <input id="af-demo-email" name="email" type="email" autocomplete="email" required>
+    </div>
+    <div>
+      <label for="af-demo-company">Company</label>
+      <input id="af-demo-company" name="company" type="text" autocomplete="organization">
+    </div>
+    <button class="af-demo-submit" type="submit">Request access and enter demo</button>
+    <div id="af-demo-status" class="af-demo-status" aria-live="polite"></div>
+  </form>
+
+  <div class="af-demo-return">
+    <p style="margin:0 0 9px;font-size:12px;">Already entered the demo on this browser?</p>
+    <button id="af-demo-return-btn" type="button">Open demo login</button>
+  </div>
+</aside>
+
+<script>
+(function(){
+  var edge=document.getElementById('af-demo-edge');
+  var drawer=document.getElementById('af-demo-drawer');
+  var close=document.getElementById('af-demo-close');
+  var form=document.getElementById('af-demo-request-form');
+  var status=document.getElementById('af-demo-status');
+  var returnBtn=document.getElementById('af-demo-return-btn');
+  var portal='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app/portal.html';
+
+  function openDrawer(){
+    drawer.hidden=false;
+    edge.setAttribute('aria-expanded','true');
+    setTimeout(function(){document.getElementById('af-demo-email').focus();},20);
+  }
+  function closeDrawer(){
+    drawer.hidden=true;
+    edge.setAttribute('aria-expanded','false');
+  }
+  edge.addEventListener('click',openDrawer);
+  close.addEventListener('click',closeDrawer);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!drawer.hidden)closeDrawer();});
+  returnBtn.addEventListener('click',function(){window.location.href=portal;});
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=form.querySelector('button[type="submit"]');
+    var email=document.getElementById('af-demo-email').value.trim().toLowerCase();
+    btn.disabled=true;
+    btn.textContent='Preparing demo...';
+    status.style.color='#6b7084';
+    status.textContent='Requesting private demo access...';
+
+    fetch('/api/demo-invite',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        action:'issue',
+        name:document.getElementById('af-demo-name').value.trim(),
+        email:email,
+        company:document.getElementById('af-demo-company').value.trim()
+      })
+    }).then(function(res){
+      return res.json().then(function(data){return {ok:res.ok,data:data};});
+    }).then(function(result){
+      if(!result.ok||!result.data||!result.data.portalUrl)throw new Error(result.data&&result.data.error||'Unable to create demo access.');
+      try{localStorage.setItem('agentFirst.demoRequestEmail',email);}catch(e){}
+      status.style.color='#177a55';
+      status.textContent='Access ready. Opening the private demo...';
+      window.location.href=result.data.portalUrl;
+    }).catch(function(err){
+      btn.disabled=false;
+      btn.textContent='Request access and enter demo';
+      status.style.color='#b42318';
+      status.textContent=err&&err.message?err.message:'Something went wrong. Please try again.';
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
