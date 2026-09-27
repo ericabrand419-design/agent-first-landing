@@ -23,4 +23,4 @@ export default async function middleware(request){
   url.searchParams.set('returnTo',new URL(request.url).pathname);
   return Response.redirect(url,302);
 }
-export const config={matcher:['/deal-room','/deal-room-workspace.html','/business-plan.html']};
+export const config={matcher:['/deal-room','/deal-room-workspace.html','/business-plan.html','/financial-model.html','/investment-ask.html']};
