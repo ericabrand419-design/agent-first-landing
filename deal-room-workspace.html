@@ -178,11 +178,11 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         <div><div class="ey">Quick links</div><div class="sm">Existing public Agent First materials.</div></div>
       </div>
       <div class="quick">
-        <a href="index.html#demo" target="_blank" rel="noopener">Product Overview ↗</a>
-        <a href="how-it-works.html" target="_blank" rel="noopener">How It Works ↗</a>
-        <a href="pilot-program.html" target="_blank" rel="noopener">Pilot Program ↗</a>
-        <a href="pricing.html" target="_blank" rel="noopener">Pricing ↗</a>
-        <a href="agent-challenge.html" target="_blank" rel="noopener">Agent Challenge ↗</a>
+        <a href="index.html#demo" target="_blank" rel="noopener" onclick="trackMaterial('product-overview','open');trackSpecialLink('demo')">Product Overview ↗</a>
+        <a href="how-it-works.html" target="_blank" rel="noopener" onclick="trackMaterial('how-it-works','open')">How It Works ↗</a>
+        <a href="pilot-program.html" target="_blank" rel="noopener" onclick="trackMaterial('pilot-program','open');trackSpecialLink('pilot')">Pilot Program ↗</a>
+        <a href="pricing.html" target="_blank" rel="noopener" onclick="trackMaterial('pricing','open')">Pricing ↗</a>
+        <a href="agent-challenge.html" target="_blank" rel="noopener" onclick="trackMaterial('agent-challenge','open')">Agent Challenge ↗</a>
       </div>
     </div>
   </section>
@@ -705,7 +705,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     if(output==='pitch'){text=s.pitch;actions='<button type="button" class="ghostBtn" onclick="copyOutput()">Copy one-liner</button>';}
     if(output==='facts'){text=s.detail.map(function(d){return d[0]+': '+d[1];}).join('\\n\\n');actions='<button type="button" class="ghostBtn" onclick="copyOutput()">Copy facts</button>';}
     if(output==='material'){
-      if(s.material.url){text=s.material.label+' is available now. Open it in a separate window to go deeper without losing your place in the Deal Room.';actions='<a class="primaryBtn" href="'+s.material.url+'" target="_blank" rel="noopener">Open '+esc(s.material.label)+' ↗</a>';}
+      if(s.material.url){text=s.material.label+' is available now. Open it in a separate window to go deeper without losing your place in the Deal Room.';actions='<a class="primaryBtn" href="'+s.material.url+'" target="_blank" rel="noopener" onclick="trackMaterial(\''+current+'-supporting-material\',\'open\')">Open '+esc(s.material.label)+' ↗</a>';}
       else{text=s.material.label+' is not published yet. This is intentionally marked '+s.material.status+' rather than filled with placeholder evidence or invented numbers.';actions='<button type="button" class="softBtn" onclick="selectSection(\''+(s.related[0]||'exec')+'\')">Continue with available briefing</button>';}
     }
     if(output==='next'){text=s.next;actions=s.related.slice(0,2).map(function(k){return '<button type="button" class="softBtn" onclick="selectSection(\''+k+'\')">Go to '+esc(sections[k].short)+'</button>';}).join('');}
@@ -789,6 +789,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   }
   window.trackMaterial=function(id,action){
     trackEvent('Material '+(action==='download'?'Downloaded':'Opened'),{material:id,role:role,section:current});
+  };
+  window.trackSpecialLink=function(kind){
+    if(kind==='demo') trackEvent('Demo Clicked',{role:role,section:current});
+    if(kind==='pilot') trackEvent('Pilot Page Clicked',{role:role,section:current});
   };
 
   var visitCount=parseInt(localStorage.getItem('af_deal_room_visits')||'0',10)+1;
