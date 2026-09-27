@@ -1002,6 +1002,9 @@
   close.addEventListener('click',closeDrawer);
   document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!drawer.hidden)closeDrawer();});
   returnBtn.addEventListener('click',function(){window.location.href=portal;});
+  try{
+    if(new URL(location.href).searchParams.get('demo')==='request') openDrawer();
+  }catch(e){}
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
