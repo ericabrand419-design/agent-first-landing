@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Agent First · Company Deal Room Workspace</title>
 <meta name="description" content="Agent First company briefing and deal room presented in the interaction model of the Agent First program.">
+<meta name="robots" content="noindex,nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;650;700;750;800;900&display=swap" rel="stylesheet">
@@ -418,6 +419,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     financials:{
       name:'Financials',short:'Financials',status:'BUILDING',badge:'build',
+      permission:'investor_diligence',
       hero:'Turn the strategy into assumptions that can be challenged.',
       pitch:'The financial model will translate the pilot-to-subscription strategy into explicit scenarios for revenue, implementation cost, recurring margin, hiring, runway, conversion, and expansion—without presenting unvalidated guesses as facts.',
       lede:'This is intentionally marked BUILDING. A serious investor should be able to see exactly which assumptions drive the model and change them rather than receiving a decorative forecast.',
@@ -452,6 +454,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     ask:{
       name:'Investment Ask',short:'Investment',status:'BUILDING',badge:'build',
+      permission:'investor_diligence',
       hero:'Raise against milestones, not an arbitrary number.',
       pitch:'The investment ask should be derived from the milestones Agent First needs to reach—not chosen first and rationalized afterward.',
       lede:'The Deal Room will eventually connect the amount sought directly to product hardening, pilot delivery, evidence generation, go-to-market learning, and the runway required to reach the next financing or sustainability milestone.',
@@ -503,6 +506,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     security:{
       name:'Security & Data',short:'Security',status:'BUILDING',badge:'build',
+      permission:'diligence',
       hero:'Use only the data the workflow actually needs.',
       pitch:'Agent First should make its data boundaries legible: what information enters the system, which approved sources drive guidance, who can change rules, what is logged, and what the product does not need to collect.',
       lede:'Early buyers do not need inflated compliance claims. They need an accurate explanation of the current security posture, data flow, access model, rule governance, AI usage, and the controls that will mature with deployment.',
@@ -636,14 +640,21 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function renderDirectory(){
-    var visibleSections=roles[role].sections || directoryOrder;
+    var visibleSections=(roles[role].sections || directoryOrder).filter(function(k){
+      var s=sections[k];
+      return !(authActive && s.permission && sessionPermissions.indexOf(s.permission)<0);
+    });
     document.getElementById('directory').innerHTML=visibleSections.map(function(k){
       var s=sections[k]; return '<button type="button" class="'+(k===current?'active':'')+'" onclick="selectSection(\''+k+'\')"><strong>'+esc(s.short)+'</strong><span>'+esc(s.name)+'</span></button>';
     }).join('');
   }
   function renderPath(){
     var r=roles[role]; document.getElementById('pathTime').textContent=r.time;
-    document.getElementById('pathList').innerHTML=r.path.map(function(p,i){return '<button type="button" class="pathItem" onclick="selectSection(\''+p[1]+'\')" style="width:100%;text-align:left"><span class="pathNum">0'+(i+1)+'</span><span><strong>'+esc(p[0])+'</strong><span>'+esc(sections[p[1]].pitch.slice(0,88))+'…</span></span></button>';}).join('');
+    document.getElementById('pathList').innerHTML=r.path.map(function(p,i){
+      var s=sections[p[1]], locked=Boolean(authActive && s.permission && sessionPermissions.indexOf(s.permission)<0);
+      if(locked) return '<div class="pathItem" style="opacity:.62"><span class="pathNum">0'+(i+1)+'</span><span><strong>'+esc(p[0])+' · Locked</strong><span>Additional permission required for this material.</span></span></div>';
+      return '<button type="button" class="pathItem" onclick="selectSection(\''+p[1]+'\')" style="width:100%;text-align:left"><span class="pathNum">0'+(i+1)+'</span><span><strong>'+esc(p[0])+'</strong><span>'+esc(s.pitch.slice(0,88))+'…</span></span></button>';
+    }).join('');
   }
   function renderRole(){
     var r=roles[role];
@@ -736,6 +747,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   };
   window.selectSection=function(k){
     if(!sections[k])return;
+    if(authActive && sections[k].permission && sessionPermissions.indexOf(sections[k].permission)<0){
+      trackEvent('Locked Section Attempt',{section:k,role:role});
+      return;
+    }
     current=k;history.push(k);renderSection();
     trackEvent('Section Opened',{section:k,role:role});
     if(k==='financials') trackEvent('Financials Viewed',{role:role});
