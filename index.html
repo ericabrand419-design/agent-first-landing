@@ -954,7 +954,7 @@
   <button class="af-demo-close" id="af-demo-close" type="button" aria-label="Close demo access">×</button>
   <div class="af-demo-kicker">Private interactive demo</div>
   <h2>See Agent First from the inside.</h2>
-  <p>Request private access with your work email. We’ll create an invitation for that email, then you’ll set one password for the Deal Room and private product demo.</p>
+  <p>Request private access with your work email. Requests are reviewed before access is issued. Once approved, you’ll receive one activation link and set one password for the Deal Room and private product demo.</p>
 
   <form id="af-demo-request-form" class="af-demo-form">
     <div>
@@ -1036,20 +1036,15 @@
       return res.json().then(function(data){return {ok:res.ok,data:data};});
     }).then(function(delivered){
       if(!delivered.ok||!delivered.data||!delivered.data.success)throw new Error('We could not submit the demo request. Please try again.');
-      return fetch('/api/demo-invite',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify({action:'issue',email:email})
-      }).then(function(r){return r.json().then(function(data){if(!r.ok)throw new Error(data.error||'Could not create private access.');return data;});});
-    }).then(function(access){
+      return delivered.data;
+    }).then(function(){
       form.reset();
       btn.disabled=true;
-      btn.textContent='Invitation created';
+      btn.textContent='Request received';
       status.style.color='#177a55';
-      status.textContent='Your invitation is ready. Activate it once, set your password, then use the same account for the Deal Room and demo.';
-      activate.href=access.dealRoomUrl||access.portalUrl;
-      activate.hidden=false;
-      activate.style.display='inline-flex';
+      status.textContent='Your request was received. Agent First reviews private demo requests before issuing access. If approved, you’ll receive an activation link for the Deal Room and product demo.';
+      activate.hidden=true;
+      activate.removeAttribute('href');
     }).catch(function(err){
       btn.disabled=false;
       btn.textContent='Request private demo access';
