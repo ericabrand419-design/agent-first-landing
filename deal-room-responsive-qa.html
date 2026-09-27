@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Agent First Deal Room Responsive QA</title>
+<style>
+body{font:14px/1.5 system-ui;margin:24px;background:#f6f5fb;color:#171a2b}
+h1{margin:0 0 8px}.muted{color:#6d728b}.wrap{max-width:1100px;margin:auto}
+table{width:100%;border-collapse:collapse;background:#fff;border:1px solid #ddd9ea;margin-top:18px}
+th,td{padding:9px 10px;border-bottom:1px solid #eeebf4;text-align:left;font-size:12px}
+.pass{color:#177a55;font-weight:800}.fail{color:#b42318;font-weight:800}.running{color:#8a5c15}
+#stage{margin-top:22px;position:relative;height:520px;border:1px solid #ddd9ea;background:#fff;overflow:hidden;border-radius:14px}
+iframe{border:0;transform-origin:0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Deal Room Responsive QA</h1>
+<div class="muted">Automated same-origin viewport checks for overflow, hero clipping, controls, role switching, and Quick Actions visibility.</div>
+<table><thead><tr><th>Viewport</th><th>Result</th><th>Checks</th></tr></thead><tbody id="results"></tbody></table>
+<div id="stage"></div>
+</div>
+<script>
+const sizes=[[1536,960],[1440,900],[1366,768],[1280,800],[1024,768],[820,1180],[768,1024],[390,844]];
+const roles=['client','investor','partner','all'];
+const tbody=document.getElementById('results');
+const stage=document.getElementById('stage');
+function addRow(w,h){const tr=document.createElement('tr');tr.innerHTML='<td>'+w+'×'+h+'</td><td class="running">RUNNING</td><td>Loading…</td>';tbody.appendChild(tr);return tr;}
+function wait(ms){return new Promise(r=>setTimeout(r,ms));}
+async function testSize(w,h,row){
+  const frame=document.createElement('iframe');
+  frame.src='/deal-room-workspace.html?qa=1&v='+Date.now();
+  frame.style.width=w+'px';frame.style.height=h+'px';
+  const scale=Math.min(1,1040/w,500/h);
+  frame.style.transform='scale('+scale+')';
+  stage.innerHTML='';stage.appendChild(frame);
+  await new Promise((resolve,reject)=>{frame.onload=resolve;setTimeout(()=>reject(new Error('load timeout')),12000);});
+  await wait(700);
+  const win=frame.contentWindow, doc=frame.contentDocument;
+  const failures=[], notes=[];
+  for(const role of roles){
+    if(typeof win.setRole==='function') win.setRole(role);
+    await wait(80);
+    const de=doc.documentElement;
+    if(de.scrollWidth>de.clientWidth+2) failures.push(role+': horizontal overflow '+de.scrollWidth+'>'+de.clientWidth);
+    const hero=doc.querySelector('.stageCard');
+    if(hero && hero.scrollHeight>hero.clientHeight+3) failures.push(role+': hero clips '+hero.scrollHeight+'>'+hero.clientHeight);
+    const composer=doc.querySelector('.composer');
+    const top=doc.querySelector('.topActions');
+    const quick=doc.querySelector('#quickActions');
+    if(!quick || quick.querySelectorAll('button,a').length<2) failures.push(role+': Quick Actions missing');
+    if(w>820 && composer){
+      const r=composer.getBoundingClientRect();
+      if(r.bottom>h+2) failures.push(role+': Quick Actions below viewport');
+    }
+    if(w>820 && top && getComputedStyle(top).display!=='none'){
+      const r=top.getBoundingClientRect();
+      if(r.right>w+2) failures.push(role+': header actions overflow right');
+    }
+    const active=doc.querySelector('.directory button.active');
+    if(!active) failures.push(role+': no active directory section');
+  }
+  notes.push('4 roles','hero','header','Quick Actions','horizontal overflow');
+  row.children[1].textContent=failures.length?'FAIL':'PASS';
+  row.children[1].className=failures.length?'fail':'pass';
+  row.children[2].textContent=failures.length?failures.join(' | '):notes.join(' · ');
+}
+(async()=>{
+ for(const [w,h] of sizes){
+   const row=addRow(w,h);
+   try{await testSize(w,h,row);}catch(e){row.children[1].textContent='FAIL';row.children[1].className='fail';row.children[2].textContent=e.message;}
+ }
+ const all=[...tbody.querySelectorAll('tr')].every(r=>r.children[1].textContent==='PASS');
+ const p=document.createElement('p');p.id='overall';p.className=all?'pass':'fail';p.textContent=all?'OVERALL PASS':'OVERALL FAIL';tbody.closest('table').after(p);
+})();
+</script>
+</body></html>
