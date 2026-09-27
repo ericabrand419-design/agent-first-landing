@@ -1,55 +1,26 @@
-function b64urlToBytes(input) {
-  const normalized = input.replace(/-/g, '+').replace(/_/g, '/');
-  const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
-  const binary = atob(padded);
-  return Uint8Array.from(binary, c => c.charCodeAt(0));
+const AUTH_ORIGIN='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app';
+function readCookie(request,name){
+  const raw=request.headers.get('cookie')||'';
+  const pair=raw.split(';').map(v=>v.trim()).find(v=>v.startsWith(name+'='));
+  return pair?decodeURIComponent(pair.slice(name.length+1)):'';
 }
-
-function bytesToB64url(bytes) {
-  let binary = '';
-  bytes.forEach(b => binary += String.fromCharCode(b));
-  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+async function valid(token){
+  if(!token)return false;
+  try{
+    const r=await fetch(AUTH_ORIGIN+'/api/auth',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+token},
+      body:JSON.stringify({action:'session'})
+    });
+    const data=await r.json().catch(()=>({}));
+    return !!(r.ok&&data&&data.authenticated&&Array.isArray(data.permissions)&&data.permissions.includes('deal_room'));
+  }catch(e){return false;}
 }
-
-async function validSession(token, secret) {
-  try {
-    if (!token || !secret) return false;
-    const parts = token.split('.');
-    if (parts.length !== 2) return false;
-    const key = await crypto.subtle.importKey(
-      'raw',
-      new TextEncoder().encode(secret),
-      { name:'HMAC', hash:'SHA-256' },
-      false,
-      ['sign']
-    );
-    const sig = new Uint8Array(await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(parts[0])));
-    if (bytesToB64url(sig) !== parts[1]) return false;
-    const payload = JSON.parse(new TextDecoder().decode(b64urlToBytes(parts[0])));
-    return Boolean(payload.exp && Date.now() < Number(payload.exp));
-  } catch {
-    return false;
-  }
+export default async function middleware(request){
+  const ok=await valid(readCookie(request,'af_private_access'));
+  if(ok)return;
+  const url=new URL('/deal-room-access.html',request.url);
+  url.searchParams.set('returnTo',new URL(request.url).pathname);
+  return Response.redirect(url,302);
 }
-
-function cookieValue(request, name) {
-  const raw = request.headers.get('cookie') || '';
-  const pair = raw.split(';').map(v => v.trim()).find(v => v.startsWith(name + '='));
-  return pair ? decodeURIComponent(pair.slice(name.length + 1)) : '';
-}
-
-export default async function middleware(request) {
-  if (String(process.env.DEAL_ROOM_AUTH_ENABLED || '').toLowerCase() !== 'true') {
-    return;
-  }
-  const ok = await validSession(cookieValue(request, 'af_deal_room'), process.env.DEAL_ROOM_SESSION_SECRET);
-  if (ok) return;
-
-  const url = new URL('/deal-room-access.html', request.url);
-  url.searchParams.set('returnTo', new URL(request.url).pathname);
-  return Response.redirect(url, 302);
-}
-
-export const config = {
-  matcher: ['/deal-room', '/deal-room-workspace.html'],
-};
+export const config={matcher:['/deal-room','/deal-room-workspace.html']};
