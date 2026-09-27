@@ -122,7 +122,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <div class="brandMark" aria-hidden="true">
       <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.6 · Updated Sep 27, 2026</div></div>
+    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.7 · Updated Sep 27, 2026</div></div>
   </div>
   <div class="topActions">
     <a href="/deal-room-v1">◫ Archive v1</a>
@@ -180,6 +180,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       <div class="quick">
         <a href="index.html#demo" target="_blank" rel="noopener" onclick="trackMaterial('product-overview','open');trackSpecialLink('demo')">Product Overview ↗</a>
         <a href="how-it-works.html" target="_blank" rel="noopener" onclick="trackMaterial('how-it-works','open')">How It Works ↗</a>
+        <a href="business-plan.html" target="_blank" rel="noopener" onclick="trackMaterial('business-plan','open')">Full Business Plan ↗</a>
         <a href="pilot-prospectus.html" target="_blank" rel="noopener" onclick="trackMaterial('pilot-prospectus','open');trackSpecialLink('pilot')">Pilot Prospectus ↗</a>
         <a href="pilot-operations.html" target="_blank" rel="noopener" onclick="trackMaterial('pilot-operations','open')">Pilot Package ↗</a>
         <a href="pilot-security-faq.html" target="_blank" rel="noopener" onclick="trackMaterial('security','open')">Security / FAQ ↗</a>
@@ -294,10 +295,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Design principle','AI behind the agent. The organization owns the rules; the human remains the operator.'],
         ['Commercial thesis','Enter through bounded paid pilots, then expand into recurring software when operational value is demonstrated.']
       ],
-      source:'This Deal Room briefing is the current short-form company narrative. The full Business Plan is still being built.',
+      source:'The Full Business Plan v1.0 is now the canonical long-form company document behind this Deal Room.',
       purpose:'Give a serious visitor the entire company in one minute before they decide where to go deeper.',
       next:'Next: choose Product for how it works, Pilot for how it gets tested, or Business Model for how it is intended to make money.',
-      material:{label:'Business Plan',url:null,status:'BUILDING'},
+      material:{label:'Full Business Plan',url:'business-plan.html',status:'LIVE'},
       related:['problem','product','pilot','business']
     },
     problem:{
@@ -369,7 +370,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['pilot','financials','evidence']
     },
     market:{
-      name:'Market Opportunity',short:'Market',status:'BUILDING',badge:'build',
+      name:'Market Opportunity',short:'Market',status:'LIVE',badge:'live',
       hero:'Start with a sharp wedge. Expand where the same decision problem repeats.',
       pitch:'Agent First is beginning with multi-client contact-center operations, but the underlying problem appears anywhere frontline workers must apply changing rules, exceptions, and scripts across complex operating environments.',
       lede:'The long-term market argument should be built from the category of work, not from a claim that Agent First is “for everyone.” The first job is to define the wedge precisely and quantify it credibly.',
@@ -379,27 +380,27 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Expansion logic','The common denominator is not industry. It is repeated human decisions under organizational complexity.'],
         ['Still needed','Sourced market sizing, buyer segmentation, budget ownership, sales-cycle evidence, and adoption constraints.']
       ],
-      source:'Market sizing and buyer research have not yet been published in the Deal Room.',
+      source:'The sourced market framing, wedge, labor-scale proxy, bottom-up seat scenarios, adjacent environments, and validation requirements are documented in Business Plan v1.0.',
       purpose:'Show where the first sales motion is focused while preserving a credible path beyond the initial wedge.',
       next:'Next: build the sourced Market section of the Business Plan before converting this into investor slides.',
-      material:{label:'Market Analysis',url:null,status:'BUILDING'},
+      material:{label:'Market Analysis',url:'business-plan.html#market',status:'LIVE'},
       related:['business','marketing','vision']
     },
     business:{
-      name:'Business Model',short:'Business',status:'BUILDING',badge:'build',
+      name:'Business Model',short:'Business',status:'LIVE',badge:'live',
       hero:'Enter through pilots. Grow through recurring usefulness.',
       pitch:'The intended model is pilot-to-subscription B2B software: a paid implementation validates one workflow, then successful customers expand through recurring access and additional teams, workflows, locations, or client profiles.',
-      lede:'The structure is clear; the numbers are not yet something the Deal Room should pretend are settled.',
+      lede:'The long-form model is documented. Pilot price, conversion, retention, implementation cost, and margin remain explicit working assumptions until real customer evidence replaces them.',
       detail:[
         ['Entry motion','Paid, bounded pilot tied to a defined operational use case.'],
         ['Recurring core','Software access plus maintained organizational knowledge and configuration.'],
         ['Expansion paths','Additional workflows, teams, locations, profiles, and eventually integrations.'],
         ['Still to validate','Deployment labor, gross margin, conversion, retention, sales cycle, and expansion rate beyond the current $5,000 Founding Design Partner pilot.']
       ],
-      source:'Business-model assumptions are in development and must be reconciled with the Financial Model.',
+      source:'Business Plan v1.0 documents the pilot-to-subscription model, pricing logic, expansion thesis, operating assumptions, and the inputs the future Financial Model must test.',
       purpose:'Explain how product usage could become a durable business without dressing assumptions up as traction.',
       next:'Next: Financials turns this structure into scenarios and makes the assumptions explicit.',
-      material:{label:'Business Plan — Model',url:null,status:'BUILDING'},
+      material:{label:'Business Plan — Model',url:'business-plan.html#model',status:'LIVE'},
       related:['financials','pricing','market']
     },
     pricing:{
@@ -558,7 +559,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['vision','problem','product']
     },
     roadmap:{
-      name:'Roadmap',short:'Roadmap',status:'BUILDING',badge:'build',
+      name:'Roadmap',short:'Roadmap',status:'LIVE',badge:'live',
       hero:'Sequence proof before scale.',
       pitch:'The roadmap should move from product stabilization to a deliberately selected pilot, measurable evidence, repeatable onboarding, and then controlled expansion—not from feature accumulation to feature accumulation.',
       lede:'The point of the roadmap is to sequence risk reduction. Each stage should answer a question the company needs answered before scaling the next thing.',
@@ -568,10 +569,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Repeatability','Reduce configuration effort and standardize onboarding, governance, and reporting.'],
         ['Expansion','Broaden customers, workflows, integrations, and product capabilities once the core motion is working.']
       ],
-      source:'Operating roadmap is being developed from the pilot plan.',
+      source:'Business Plan v1.0 contains the stage-gated operating roadmap from presentation readiness through design-partner proof, repeatability, production hardening, expansion, and category-platform development.',
       purpose:'Show that the company knows the next sequence of proof rather than simply maintaining a long wish list.',
       next:'Next: tie roadmap milestones to the Financial Model and any eventual Investment Ask.',
-      material:{label:'Operating Roadmap',url:null,status:'BUILDING'},
+      material:{label:'Operating Roadmap',url:'business-plan.html#roadmap',status:'LIVE'},
       related:['pilot','financials','ask']
     }
   };
@@ -631,7 +632,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'profile-checklist',name:'Client Profile Checklist',roles:['client','partner'],status:'LIVE',url:'agent-first-client-profile-checklist.pdf',kind:'download'},
     {id:'implementation',name:'Implementation Guide',roles:['client'],status:'LIVE',url:'pilot-operations.html#implementation',kind:'open'},
     {id:'security',name:'Security, Data & Pilot FAQ',roles:['client','investor'],status:'LIVE',url:'pilot-security-faq.html',kind:'open'},
-    {id:'business-plan',name:'Business Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
+    {id:'business-plan',name:'Full Business Plan',roles:['client','investor','partner'],status:'LIVE',url:'business-plan.html',kind:'open'},
     {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
     {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
     {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'BUILDING',url:null,kind:'open',permission:'investor_diligence'},
