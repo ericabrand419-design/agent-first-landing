@@ -1,18 +1,26 @@
-const {
-  authEnabled, verifySession, readCookie,
-} = require('../lib/deal-room-auth');
-
-module.exports = async function handler(req, res) {
-  res.setHeader('Cache-Control', 'no-store');
-  const enabled = authEnabled();
-  if (!enabled) return res.status(200).json({ authEnabled:false, authenticated:false });
-  const payload = verifySession(readCookie(req, 'af_deal_room'));
-  if (!payload) return res.status(200).json({ authEnabled:true, authenticated:false });
-  return res.status(200).json({
-    authEnabled:true,
-    authenticated:true,
-    visitorId:payload.visitorId,
-    role:payload.role,
-    permissions:payload.permissions || [],
-  });
+const AUTH_ORIGIN='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app';
+function readCookie(req,name){
+  const raw=req.headers.cookie||'';
+  const pair=raw.split(';').map(v=>v.trim()).find(v=>v.startsWith(name+'='));
+  return pair?decodeURIComponent(pair.slice(name.length+1)):'';
+}
+module.exports=async function handler(req,res){
+  res.setHeader('Cache-Control','no-store');
+  const token=readCookie(req,'af_private_access');
+  if(!token) return res.status(200).json({authEnabled:true,authenticated:false});
+  try{
+    const upstream=await fetch(AUTH_ORIGIN+'/api/auth',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json','Authorization':'Bearer '+token},
+      body:JSON.stringify({action:'session'})
+    });
+    const data=await upstream.json().catch(()=>({}));
+    if(!upstream.ok||!data.authenticated) return res.status(200).json({authEnabled:true,authenticated:false});
+    return res.status(200).json({
+      authEnabled:true,authenticated:true,
+      email:data.email,roles:data.roles||[],permissions:data.permissions||[]
+    });
+  }catch(e){
+    return res.status(200).json({authEnabled:true,authenticated:false});
+  }
 };
