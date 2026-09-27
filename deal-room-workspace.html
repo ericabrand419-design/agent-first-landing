@@ -55,6 +55,8 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 .compareBar{max-width:1840px;margin:0 auto 18px;padding:0 16px}.compareInner{border:1px solid #e3dfec;border-radius:14px;background:#fff;padding:10px 12px;display:flex;justify-content:space-between;gap:12px;align-items:center;box-shadow:var(--shadow)}.compareInner strong{font-size:12px}.compareInner span{font-size:11px;color:#777b91}.compareInner a{font-size:11px;font-weight:850;color:#6c35d4}
 @media(max-width:1440px){
   .app{grid-template-columns:minmax(285px,23%) minmax(540px,51%) minmax(285px,26%)}
+  .appColumn{height:calc(100dvh - 104px)}
+  .brandStack,.topActions{flex-wrap:nowrap}
   .stageTitle{font-size:clamp(23px,2.35vw,36px);max-width:16ch}
   .stagePitch{font-size:14px;line-height:1.5}
   .stageInner{padding:20px 21px 18px}
@@ -62,10 +64,12 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   .composer{padding:9px 12px 10px}
 }
 @media(max-width:1180px){
+  .topActions a[href="/deal-room-v1"],#clientTop,#investorTop,#partnerTop{display:none}
+  .versionMeta{display:none}
   .app{grid-template-columns:minmax(290px,34%) minmax(500px,66%)}.rightCol{grid-column:1/-1;height:auto;overflow:visible;display:grid;grid-template-columns:1fr 1fr;gap:12px}.rightCol .panel{margin-bottom:0}.leftCol,.centerCol{height:calc(100vh - 84px)}
 }
 @media(max-width:820px){
-  header{position:relative;align-items:flex-start}.topActions{display:none}.tag{display:none}.app{display:block;padding:10px}.appColumn,.leftCol,.centerCol,.rightCol{height:auto;overflow:visible;display:block}.rightCol .panel{margin-bottom:12px}.workspace{height:auto}.feed{min-height:auto;max-height:none}.directory,.factGrid{grid-template-columns:1fr}.compareInner{align-items:flex-start;flex-direction:column}.compareBar{padding:0 10px}
+  header{position:relative;align-items:flex-start}.topActions{display:none}.appColumn{height:auto}.tag{display:none}.app{display:block;padding:10px}.appColumn,.leftCol,.centerCol,.rightCol{height:auto;overflow:visible;display:block}.rightCol .panel{margin-bottom:12px}.workspace{height:auto}.feed{min-height:auto;max-height:none}.directory,.factGrid{grid-template-columns:1fr}.compareInner{align-items:flex-start;flex-direction:column}.compareBar{padding:0 10px}
 }
 
 /* Version B refinement: preserve the Agent First cockpit while giving major ideas presentation-scale room. */
