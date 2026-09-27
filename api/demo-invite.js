@@ -41,25 +41,6 @@ function cors(res){
   res.setHeader('Access-Control-Allow-Headers','Content-Type');
   res.setHeader('Cache-Control','no-store');
 }
-async function sendRequestNotice({name,email,company}){
-  const payload={
-    access_key:WEB3FORMS_KEY,
-    subject:'Private Agent First demo request',
-    from_name:'Agent First website',
-    name:name||'Demo visitor',
-    email,
-    company:company||'',
-    message:'Requested access to the private Agent First interactive demo.'
-  };
-  const response=await fetch('https://api.web3forms.com/submit',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Accept':'application/json'},
-    body:JSON.stringify(payload)
-  });
-  const data=await response.json().catch(()=>null);
-  return !!(response.ok && data && data.success);
-}
-
 module.exports = async function handler(req,res){
   cors(res);
   if(req.method==='OPTIONS')return res.status(204).end();
@@ -80,16 +61,6 @@ module.exports = async function handler(req,res){
 
   if(action!=='issue'){
     return res.status(400).json({ok:false,error:'Unsupported action'});
-  }
-
-  const noticeSent=await sendRequestNotice({
-    name:String(body.name||'').slice(0,120),
-    email,
-    company:String(body.company||'').slice(0,160)
-  }).catch(()=>false);
-
-  if(!noticeSent){
-    return res.status(502).json({ok:false,error:'We could not submit the demo request. Please try again.'});
   }
 
   const token=signInvite(email);
