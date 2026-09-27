@@ -1,3 +1,5 @@
+const { verifySession, readCookie } = require('../lib/deal-room-auth');
+
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -12,10 +14,12 @@ module.exports = async function handler(req, res) {
     const v = data[key];
     if (['string','number','boolean'].includes(typeof v)) safe[k] = String(v).slice(0,300);
   });
+  const session = verifySession(readCookie(req, 'af_deal_room'));
   console.log(JSON.stringify({
     event:'deal_room_event',
     name,
     data:safe,
+    visitor:session ? { visitorId:session.visitorId || null, role:session.role || null } : { visitorId:null, role:safe.role || null },
     at:new Date().toISOString(),
     userAgent:String(req.headers['user-agent'] || '').slice(0,300)
   }));
