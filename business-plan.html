@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="authPending">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow,noarchive">
@@ -8,7 +8,21 @@
 <style>
 :root{--ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--navy:#0b1025;--violet:#7c3aed;--coral:#ff6b54;--soft:#faf9ff;--grad:linear-gradient(102deg,#ff7352,#e94ea7 47%,#8b37f4);--navygrad:linear-gradient(105deg,#090e21,#0e1430 60%,#14103a)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.65 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:var(--violet);text-decoration:none}.top{position:sticky;top:0;z-index:20;height:58px;background:rgba(9,14,33,.97);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;gap:12px}.brand{font-size:11px;font-weight:900;letter-spacing:.18em}.actions{display:flex;gap:8px}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(255,255,255,.2);border-radius:9px;padding:8px 11px;color:#fff;font-size:11px;font-weight:850;background:rgba(255,255,255,.05)}.btn.primary{border:0;background:var(--grad)}.hero{background:var(--navygrad);color:#fff;padding:70px 26px}.heroIn{max-width:1160px;margin:auto}.ey{font-size:10px;font-weight:900;letter-spacing:.11em;text-transform:uppercase;color:#efa7e5}.hero h1{font-size:clamp(42px,7vw,76px);line-height:.94;letter-spacing:-.05em;margin:10px 0 18px;max-width:900px}.hero p{font-size:18px;color:#c8cde0;max-width:850px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.chip{border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);border-radius:999px;padding:6px 9px;font-size:10px;font-weight:850}.layout{max-width:1320px;margin:auto;display:grid;grid-template-columns:270px minmax(0,1fr);gap:18px;padding:20px}.toc{position:sticky;top:76px;align-self:start;max-height:calc(100vh - 92px);overflow:auto;background:#fff;border:1px solid var(--line);border-radius:15px;padding:10px}.toc b{display:block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--violet);padding:7px}.toc a{display:flex;gap:8px;padding:6px 7px;border-radius:7px;color:#444a62;font-size:11px;font-weight:720}.toc a:hover{background:#f4efff}.toc span{color:var(--violet);font-weight:900;min-width:20px}.section{background:#fff;border:1px solid var(--line);border-radius:17px;padding:28px;margin-bottom:14px;box-shadow:0 10px 28px rgba(55,43,95,.045)}.section>.ey{color:var(--coral)}h2{font-size:31px;line-height:1.05;letter-spacing:-.03em;margin:7px 0 4px}h3{font-size:18px;line-height:1.2;color:var(--violet);margin:22px 0 6px}.sub{color:var(--muted);font-style:italic;margin:0 0 16px}.section p,.section li{max-width:940px}.section li{margin:5px 0}.callout{background:#f5f0ff;border:1px solid #ded2fa;border-radius:12px;padding:13px 15px;margin:14px 0;max-width:960px}.callout.warn{background:#fff8e8;border-color:#efdfb4}.callout strong{display:block;color:var(--violet);font-size:10px;letter-spacing:.08em;text-transform:uppercase}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff}.card b{display:block;margin-bottom:4px}.table{overflow:auto;border:1px solid var(--line);border-radius:12px;margin:12px 0}table{width:100%;border-collapse:collapse;min-width:650px}th{background:var(--navy);color:#fff;text-align:left;font-size:10px;padding:9px}td{vertical-align:top;padding:9px;border-bottom:1px solid #efedf5;font-size:11px}tbody tr:nth-child(even){background:#fbfafd}.footer{text-align:center;background:#080c1b;color:#959db7;padding:28px}@media(max-width:900px){.layout{display:block;padding:12px}.toc{position:static;max-height:none;margin-bottom:12px}.grid{grid-template-columns:1fr}.actions .hideSm{display:none}.section{padding:20px}.hero{padding:48px 20px}}@media print{.top,.toc{display:none}.layout{display:block;max-width:none;padding:0}.section{box-shadow:none;border:0;break-inside:auto;padding:18px 0}.hero{background:#fff;color:#000;padding:25px 0;border-bottom:2px solid #000}.hero p{color:#333}.chips{display:none}}
-</style></head>
+.authPending body{visibility:hidden}</style>
+<script>
+(function(){
+  fetch('/api/deal-room-session',{credentials:'same-origin',cache:'no-store'})
+    .then(function(r){return r.json();})
+    .then(function(s){
+      if(!s||!s.authenticated||!Array.isArray(s.permissions)||s.permissions.indexOf('deal_room')<0){
+        location.replace('/deal-room-access.html?returnTo='+encodeURIComponent('/business-plan.html'));
+        return;
+      }
+      document.documentElement.classList.remove('authPending');
+    })
+    .catch(function(){location.replace('/deal-room-access.html?returnTo='+encodeURIComponent('/business-plan.html'));});
+})();
+</script></head>
 <body>
 <header class="top"><a class="brand" href="/deal-room" style="color:#fff">AGENT FIRST</a><div class="actions"><a class="btn hideSm" href="pilot-prospectus.html">Pilot Prospectus</a><a class="btn hideSm" href="pricing.html">Pricing</a><a class="btn" href="/deal-room">Back to Deal Room</a><button class="btn primary" onclick="window.print()">Print / Save PDF</button></div></header>
 <section class="hero"><div class="heroIn"><div class="ey">Private Deal Room · Canonical Company Plan · Version 1.0</div><h1>Agent First Business Plan</h1><p>Operational decision support for rules-heavy frontline work. AI behind the agent. Keep the human. Upgrade the agent.</p><div class="chips"><span class="chip">Founder · Erica Love</span><span class="chip">September 27, 2026</span><span class="chip">Working assumptions clearly labeled</span><span class="chip">No fabricated traction</span></div></div></section>
