@@ -628,7 +628,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 
   var directoryOrder=['exec','problem','product','pilot','measurement','market','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap'];
   var current='exec', role='client', output='pitch', history=['exec'];
-  var authActive=false, sessionEmail='', sessionPermissions=[];
+  var authActive=false, sessionVisitorId='', sessionPermissions=[];
 
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function renderDirectory(){
@@ -741,7 +741,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   window.clearHistory=function(){history=[current];renderMemory();};
   window.handleAccessState=function(){
     if(!authActive){location.href='/deal-room-access.html';return;}
-    if(sessionEmail){
+    if(sessionVisitorId){
       fetch('/api/deal-room-logout',{method:'POST'}).finally(function(){location.href='/deal-room-access.html';});
     } else {
       location.href='/deal-room-access.html';
@@ -808,11 +808,11 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     .then(function(r){return r.json();})
     .then(function(s){
       authActive=Boolean(s.authEnabled);
-      sessionEmail=s.authenticated ? (s.email||'') : '';
+      sessionVisitorId=s.authenticated ? (s.visitorId||'') : '';
       sessionPermissions=Array.isArray(s.permissions)?s.permissions:[];
       var access=document.getElementById('accessState');
       if(access){
-        access.textContent=authActive?(sessionEmail?'Signed In · Log Out':'Access Required'):'Private Preview';
+        access.textContent=authActive?(sessionVisitorId?'Signed In · Log Out':'Access Required'):'Private Preview';
       }
       if(s.authEnabled && s.authenticated && roles[s.role] && s.role!==role){
         role=s.role;
