@@ -363,11 +363,11 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       lede:'The goal is to make the buying process easier without overstating maturity. Where Agent First has not yet earned a certification, customer result, or production claim, the FAQ says so.',
       detail:[
         ['Commercial','90-day live pilot · $69 per pilot agent/month · $2,500 Client Profile fee waived · $500 conversion credit.'],
-        ['Implementation','Bound one workflow, validate sources, baseline, readiness sign-off, then start the live pilot.'],
-        ['Security','Minimize data, preserve rule authority, separate roles, and avoid claiming certifications not earned.'],
+        ['Implementation','Bound one workflow, validate sources, baseline and users; use fictional/de-identified controlled evaluation until both operational readiness and the Security Readiness Gate are complete.'],
+        ['Security','Proprietary production data waits on the Security Readiness Gate: independent review, isolation/RBAC testing, remediation/retest, documented data boundary and reviewer sign-off.'],
         ['Evidence','Product/readiness evidence exists; customer ROI, testimonials, and case studies remain pending until real pilots produce them.']
       ],
-      source:'Agent First Customer FAQ v1.0.',
+      source:'Agent First Customer FAQ v1.1.',
       purpose:'Reduce repeated diligence questions while keeping customer-facing claims consistent across the sales process.',
       next:'Next: if the workflow fits, move to the Pilot Prospectus and discovery/qualification conversation.',
       material:{label:'Open Customer FAQ',url:'customer-faq.html',status:'LIVE'},
@@ -384,7 +384,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Design principle','AI behind the agent. The organization owns the rules; the human remains the operator.'],
         ['Commercial thesis','Enter through bounded paid pilots, then expand into recurring software when operational value is demonstrated.']
       ],
-      source:'The Full Business Plan v1.1 is now the canonical long-form company document behind this Deal Room.',
+      source:'The Full Business Plan v1.2 is now the canonical long-form company document behind this Deal Room.',
       purpose:'Give a serious visitor the entire company in one minute before they decide where to go deeper.',
       next:'Next: choose Product for how it works, Pilot for how it gets tested, or Business Model for how it is intended to make money.',
       material:{label:'Full Business Plan',url:'business-plan.html',status:'LIVE'},
@@ -486,7 +486,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Expansion logic','The common denominator is not industry. It is repeated human decisions under organizational complexity.'],
         ['Still needed','Sourced market sizing, buyer segmentation, budget ownership, sales-cycle evidence, and adoption constraints.']
       ],
-      source:'The sourced market framing, wedge, labor-scale proxy, bottom-up seat scenarios, adjacent environments, and validation requirements are documented in Business Plan v1.1.',
+      source:'The sourced market framing, wedge, labor-scale proxy, bottom-up seat scenarios, adjacent environments, and validation requirements are documented in Business Plan v1.2.',
       purpose:'Show where the first sales motion is focused while preserving a credible path beyond the initial wedge.',
       next:'Next: build the sourced Market section of the Business Plan before converting this into investor slides.',
       material:{label:'Market Analysis',url:'business-plan.html#market',status:'LIVE'},
@@ -503,7 +503,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Workflow platforms','Salesforce, ServiceNow and Pega can own broad case/workflow automation and AI.'],
         ['Enterprise search','Glean and related tools make organizational knowledge searchable; Agent First must prove the value of decision-first operational context.']
       ],
-      source:'Business Plan v1.1 and Investor Pitch Deck v1.0, with competitive examples grounded in official vendor product pages.',
+      source:'Business Plan v1.2 and Investor Pitch Deck v1.1, with competitive examples grounded in official vendor product pages.',
       purpose:'Show investors exactly where feature overlap exists and what Agent First still needs to prove to earn a distinct position.',
       next:'Next: Evidence separates current product/readiness proof from customer-market proof.',
       material:{label:'Open Competitive Landscape',url:'business-plan.html#competition',status:'LIVE'},
@@ -520,7 +520,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Expansion paths','Additional workflows, teams, locations, profiles, and eventually integrations.'],
         ['Still to validate','Deployment labor, gross margin, conversion, retention, sales cycle, and expansion rate under the current 90-day seat-based pilot model.']
       ],
-      source:'Business Plan v1.1 documents the pilot-to-subscription model, pricing logic, expansion thesis, operating assumptions, and the inputs the future Financial Model must test.',
+      source:'Business Plan v1.2 documents the pilot-to-subscription model, pricing logic, expansion thesis, operating assumptions, and the inputs the future Financial Model must test.',
       purpose:'Explain how product usage could become a durable business without dressing assumptions up as traction.',
       next:'Next: Financials turns this structure into scenarios and makes the assumptions explicit.',
       material:{label:'Business Plan — Model',url:'business-plan.html#model',status:'LIVE'},
@@ -529,7 +529,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     pricing:{
       name:'Pricing',short:'Pricing',status:'LIVE',badge:'live',
       hero:'Make the first commitment small enough to test and serious enough to matter.',
-      pitch:'Accepted founding pilot partners use Agent First at the standard $69 per agent per month Starter rate during a live pilot of up to 90 days, with a 10-seat minimum, the standard $2,500 Client Profile implementation fee waived, and a $500 credit on the first post-pilot invoice if they convert.',
+      pitch:'Accepted pilot partners use Agent First at the standard $69 per agent per month Starter rate during a proposed live pilot of up to 90 days, with the standard $2,500 Client Profile implementation fee waived and a $500 credit on the first post-pilot invoice if they convert.',
       lede:'Pricing should eventually connect directly to implementation effort, recurring value, buyer budget, and the expansion model—not simply to what similar software charges.',
       detail:[
         ['Current source','The public Pricing page is the live commercial reference.'],
@@ -587,10 +587,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       detail:[
         ['Amount','$650,000 pre-seed planning target.'],
         ['Use of funds','$200K product/engineering; $110K security/infrastructure; $110K pilot delivery/CS; $100K founder-led GTM; $50K legal/finance/ops; $80K reserve.'],
-        ['Milestone logic','Paid pilot proof → recurring conversion → repeatable implementation → production/security readiness → enough evidence to choose the next financing or operating path.'],
+        ['Milestone logic','Security Readiness Gate → paid production-pilot proof → recurring conversion → repeatable implementation → enough evidence to choose the next financing or operating path.'],
         ['Terms','Instrument, valuation/cap, minimum check, and governance terms remain TBD with counsel and investors.']
       ],
-      source:'Agent First Investment Ask & Use of Funds v1.0, derived from Financial Model v1.0. The $650K amount is a management planning target, not a securities offering or forecast.',
+      source:'Agent First Investment Ask & Use of Funds v1.1, derived from Financial Model v1.0. The $650K amount is a management planning target, not a securities offering or forecast.',
       purpose:'Give investors a transparent explanation of what capital would accomplish and what proof should exist afterward.',
       next:'Next: pair this memo with the Investor Pitch Deck and replace planning assumptions with paid-pilot evidence as it arrives.',
       material:{label:'Investment Ask & Use of Funds',url:'investment-ask.html',status:'LIVE'},
@@ -607,7 +607,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Case-study standard','Show baseline, intervention, sample, duration, measured result, limitations, and client context.'],
         ['Evidence library','Pilot scorecards, testimonials, recordings, usage analytics, and case studies will live here as they become available.']
       ],
-      source:'Investor Pitch Deck v1.0 and Business Plan v1.1 now contain the current built-vs-proved evidence register. External case studies and customer results remain pending until a real pilot produces them.',
+      source:'Investor Pitch Deck v1.1 and Business Plan v1.2 now contain the current built-vs-proved evidence register. External case studies and customer results remain pending until a real pilot produces them.',
       purpose:'Make diligence easier by showing exactly what is built, what remains hypothesis, and which external evidence must come from paid pilots.',
       next:'Next: the first pilot should generate the first credible evidence package.',
       material:{label:'Case Studies & Results',url:null,status:'BUILDING'},
