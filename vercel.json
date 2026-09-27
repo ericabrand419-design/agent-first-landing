@@ -24,6 +24,14 @@
     {
       "source": "/deal-room-v1",
       "destination": "/deal-room-v1.html"
+    },
+    {
+      "source": "/pilot-prospectus",
+      "destination": "/pilot-prospectus.html"
+    },
+    {
+      "source": "/pilot-operations",
+      "destination": "/pilot-operations.html"
     }
   ]
 }
