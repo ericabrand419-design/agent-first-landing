@@ -122,7 +122,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <div class="brandMark" aria-hidden="true">
       <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.8 · Updated Sep 27, 2026 · Seat-based pilot restored</div></div>
+    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.9 · Updated Sep 27, 2026 · Financial Model live</div></div>
   </div>
   <div class="topActions">
     <a href="/deal-room-v1">◫ Archive v1</a>
@@ -421,21 +421,21 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['business','financials','pilot']
     },
     financials:{
-      name:'Financials',short:'Financials',status:'BUILDING',badge:'build',
+      name:'Financials',short:'Financials',status:'LIVE',badge:'live',
       permission:'investor_diligence',
       hero:'Turn the strategy into assumptions that can be challenged.',
-      pitch:'The financial model will translate the pilot-to-subscription strategy into explicit scenarios for revenue, implementation cost, recurring margin, hiring, runway, conversion, and expansion—without presenting unvalidated guesses as facts.',
-      lede:'This is intentionally marked BUILDING. A serious investor should be able to see exactly which assumptions drive the model and change them rather than receiving a decorative forecast.',
+      pitch:'Financial Model v1.0 translates the 90-day seat-based pilot into conservative, base, and upside scenarios for pilot volume, conversion, recurring seats, implementation cost, gross margin, operating spend, and capital need.',
+      lede:'The model is intentionally scenario-driven rather than presented as a forecast. Every material driver is exposed so the first real pilot can replace management assumptions with observed data.',
       detail:[
-        ['Revenue model','Paid pilots, recurring software, and expansion assumptions.'],
-        ['Cost model','Configuration, product development, hosting, support, sales, and operating costs.'],
-        ['Scenario planning','Conservative, base, and upside cases tied to transparent inputs.'],
-        ['Investor use','Runway, milestone financing, use of funds, and the relationship between capital and proof.']
+        ['Canonical pilot','$69 per pilot agent per month for a 90-day live pilot; $2,500 Client Profile fee waived; no Growth discount; $500 first-invoice conversion credit.'],
+        ['Base planning case','Year 3 revenue about $324K, exit MRR about $27.7K, 15.4 ending subscription accounts, and about 67% gross margin under current placeholder inputs.'],
+        ['Capital signal','The Base case produces roughly $502K of peak cumulative cash need under the current illustrative operating plan; the model does not force profitability to make the story prettier.'],
+        ['Scenario discipline','Conservative, Base, and Upside cases change pilot starts, seats, conversion, pricing mix, churn, delivery cost, support cost, and operating spend.']
       ],
-      source:'No final financial model has been published yet.',
-      purpose:'Turn the company story into a model that can be challenged line by line.',
-      next:'Next: build the Financial Model before finalizing the Investment Ask or investor deck.',
-      material:{label:'Financial Model',url:null,status:'BUILDING'},
+      source:'Agent First Financial Model v1.0 workbook and private Financial Model summary. Outputs are planning scenarios, not traction or forecasts.',
+      purpose:'Give investors and the company a model that can be challenged line by line and updated with real pilot economics as soon as they exist.',
+      next:'Next: use the model and roadmap to build the Investment Ask and milestone-based use of funds.',
+      material:{label:'Open Financial Model',url:'financial-model.html',status:'LIVE'},
       related:['business','ask','evidence']
     },
     marketing:{
@@ -633,7 +633,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'implementation',name:'Implementation Guide',roles:['client'],status:'LIVE',url:'pilot-operations.html#implementation',kind:'open'},
     {id:'security',name:'Security, Data & Pilot FAQ',roles:['client','investor'],status:'LIVE',url:'pilot-security-faq.html',kind:'open'},
     {id:'business-plan',name:'Full Business Plan',roles:['client','investor','partner'],status:'LIVE',url:'business-plan.html',kind:'open'},
-    {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
+    {id:'financial-model',name:'Financial Model',roles:['investor'],status:'LIVE',url:'financial-model.html',kind:'open',permission:'investor_diligence'},
     {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
     {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'BUILDING',url:null,kind:'open',permission:'investor_diligence'},
     {id:'gtm-plan',name:'Marketing / GTM Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
