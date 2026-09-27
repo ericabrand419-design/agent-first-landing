@@ -11,7 +11,7 @@ module.exports = async function handler(req, res) {
   return res.status(200).json({
     authEnabled:true,
     authenticated:true,
-    email:payload.email,
+    visitorId:payload.visitorId,
     role:payload.role,
     permissions:payload.permissions || [],
   });
