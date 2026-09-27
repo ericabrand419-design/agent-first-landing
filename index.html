@@ -971,7 +971,7 @@
     </div>
     <button class="af-demo-submit" type="submit">Request private demo access</button>
     <div id="af-demo-status" class="af-demo-status" aria-live="polite"></div>
-    <a id="af-demo-activate" class="af-demo-submit" href="#" hidden style="display:inline-flex;text-decoration:none;justify-content:center">Activate private access →</a>
+    <a id="af-demo-activate" class="af-demo-submit" href="#" hidden style="text-decoration:none;justify-content:center">Activate private access →</a>
   </form>
 
   <div class="af-demo-return">
@@ -1026,7 +1026,7 @@
     delivery.append('name',name);
     delivery.append('email',email);
     delivery.append('company',company);
-    delivery.append('message','Requested access to the private Agent First interactive demo. Review and approve manually before issuing access.');
+    delivery.append('message','Requested access to the private Agent First interactive demo. A time-limited activation invitation was created for this email.');
 
     fetch('https://api.web3forms.com/submit',{
       method:'POST',
