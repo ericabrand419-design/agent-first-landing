@@ -52,6 +52,12 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 .materialLink{display:inline-flex;padding:6px 8px;border-radius:8px;background:#171a2b;color:#fff;font-weight:800;font-size:10px}.materialLink.disabled{background:#efedf4;color:#9995a6;cursor:not-allowed}
 .note{padding:9px 10px;border-radius:11px;background:#fff8e6;color:#76531a;border:1px solid #f1dfaf;font-size:11px;line-height:1.5;margin-top:9px}
 .compareBar{max-width:1840px;margin:0 auto 18px;padding:0 16px}.compareInner{border:1px solid #e3dfec;border-radius:14px;background:#fff;padding:10px 12px;display:flex;justify-content:space-between;gap:12px;align-items:center;box-shadow:var(--shadow)}.compareInner strong{font-size:12px}.compareInner span{font-size:11px;color:#777b91}.compareInner a{font-size:11px;font-weight:850;color:#6c35d4}
+@media(max-width:1440px){
+  .app{grid-template-columns:minmax(285px,23%) minmax(540px,51%) minmax(285px,26%)}
+  .stageTitle{font-size:clamp(23px,2.35vw,36px);max-width:16ch}
+  .stagePitch{font-size:14px;line-height:1.5}
+  .stageInner{padding:20px 21px 18px}
+}
 @media(max-width:1180px){
   .app{grid-template-columns:minmax(290px,34%) minmax(500px,66%)}.rightCol{grid-column:1/-1;height:auto;overflow:visible;display:grid;grid-template-columns:1fr 1fr;gap:12px}.rightCol .panel{margin-bottom:0}.leftCol,.centerCol{height:calc(100vh - 84px)}
 }
@@ -60,13 +66,13 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 }
 
 /* Version B refinement: preserve the Agent First cockpit while giving major ideas presentation-scale room. */
-.stageCard{margin:11px 12px 0;border-radius:18px;overflow:hidden;background:var(--navygrad);color:#fff;position:relative;box-shadow:0 16px 38px rgba(18,18,48,.16);border:1px solid rgba(255,255,255,.06)}
+.stageCard{margin:11px 12px 0;border-radius:18px;overflow:hidden;background:var(--navygrad);color:#fff;position:relative;box-shadow:0 16px 38px rgba(18,18,48,.16);border:1px solid rgba(255,255,255,.06);flex-shrink:0}
 .stageCard:after{content:"";position:absolute;right:-80px;top:-90px;width:250px;height:250px;border-radius:50%;background:radial-gradient(circle,rgba(228,71,213,.34),transparent 67%);pointer-events:none}
 .stageInner{position:relative;z-index:1;padding:23px 24px 21px}
 .stageTop{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .stageKicker{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#f2a7eb}
 .stageAudience{font-size:11px;color:#adb4ca;font-weight:700}
-.stageTitle{font-size:clamp(27px,3vw,39px);line-height:1.05;letter-spacing:-.035em;font-weight:900;margin-top:12px;max-width:780px}
+.stageTitle{font-size:clamp(24px,2.5vw,42px);line-height:1.04;letter-spacing:-.035em;font-weight:900;margin-top:12px;max-width:15ch;text-wrap:balance}
 .stagePitch{font-size:16px;line-height:1.58;color:#d9dced;margin-top:13px;max-width:820px}
 .stageActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
 .stageActions button{border-radius:10px;padding:8px 11px;font-weight:850;font-size:12px}
@@ -267,6 +273,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   var sections = {
     exec:{
       name:'Executive Summary',short:'Company',status:'LIVE',badge:'live',
+      hero:'Knowledge isn’t useful until it becomes usable in the moment.',
       pitch:'Agent First is an operational decision-support layer for rules-heavy frontline teams: it turns approved organizational knowledge into the right guidance for the specific context in front of a human worker.',
       lede:'The company is being built around a simple operating problem: knowledge can exist everywhere and still be unusable at the moment someone has to make a decision.',
       detail:[
@@ -283,6 +290,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     problem:{
       name:'The Problem',short:'Problem',status:'LIVE',badge:'live',
+      hero:'Frontline workers should not have to become human search engines.',
       pitch:'Frontline workers are often forced to become human search engines—finding, comparing, remembering, and translating rules while they are simultaneously serving a customer.',
       lede:'The problem is not merely “knowledge management.” It is the gap between stored information and the exact action a person should take in a live situation.',
       detail:[
@@ -299,6 +307,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     product:{
       name:'The Product',short:'Product',status:'LIVE',badge:'live',
+      hero:'The right guidance should appear while the work is happening.',
       pitch:'Agent First organizes approved rules around the active context and puts the answer, wording, exceptions, source, and next step in front of the worker while the work is happening.',
       lede:'The product behaves like a decision cockpit rather than a document library. The worker does not have to infer which page, policy, or client rule matters before getting useful guidance.',
       detail:[
@@ -315,6 +324,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     pilot:{
       name:'Pilot Program',short:'Pilot',status:'LIVE',badge:'live',
+      hero:'Start with one workflow. Prove value before broad adoption.',
       pitch:'Agent First starts with one bounded workflow: configure the approved rules, establish a baseline, put the system in front of real users, and measure whether the work becomes faster, clearer, or more consistent.',
       lede:'The pilot is not intended to prove that a demo is impressive. It is intended to answer a specific operational question with enough structure that the client can make a continuation decision.',
       detail:[
@@ -331,6 +341,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     measurement:{
       name:'Measurement',short:'Measurement',status:'BUILDING',badge:'build',
+      hero:'Measure operational change, not just whether people like the interface.',
       pitch:'The pilot should measure agreed operational outcomes—such as decision speed, navigation burden, consistency, escalation, training dependency, or error patterns—rather than relying on whether people say they like the interface.',
       lede:'This section becomes strongest once the first pilot target is known, because the correct measures depend on the workflow and the data the organization can actually observe.',
       detail:[
@@ -347,6 +358,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     market:{
       name:'Market Opportunity',short:'Market',status:'BUILDING',badge:'build',
+      hero:'Start with a sharp wedge. Expand where the same decision problem repeats.',
       pitch:'Agent First is beginning with multi-client contact-center operations, but the underlying problem appears anywhere frontline workers must apply changing rules, exceptions, and scripts across complex operating environments.',
       lede:'The long-term market argument should be built from the category of work, not from a claim that Agent First is “for everyone.” The first job is to define the wedge precisely and quantify it credibly.',
       detail:[
@@ -363,6 +375,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     business:{
       name:'Business Model',short:'Business',status:'BUILDING',badge:'build',
+      hero:'Enter through pilots. Grow through recurring usefulness.',
       pitch:'The intended model is pilot-to-subscription B2B software: a paid implementation validates one workflow, then successful customers expand through recurring access and additional teams, workflows, locations, or client profiles.',
       lede:'The structure is clear; the numbers are not yet something the Deal Room should pretend are settled.',
       detail:[
@@ -379,6 +392,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     pricing:{
       name:'Pricing',short:'Pricing',status:'LIVE',badge:'live',
+      hero:'Make the first commitment small enough to test and serious enough to matter.',
       pitch:'Agent First uses a commercial entry point that can be discussed before a full enterprise commitment, with the public pricing page serving as the current reference while pilot economics are refined.',
       lede:'Pricing should eventually connect directly to implementation effort, recurring value, buyer budget, and the expansion model—not simply to what similar software charges.',
       detail:[
@@ -395,6 +409,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     financials:{
       name:'Financials',short:'Financials',status:'BUILDING',badge:'build',
+      hero:'Turn the strategy into assumptions that can be challenged.',
       pitch:'The financial model will translate the pilot-to-subscription strategy into explicit scenarios for revenue, implementation cost, recurring margin, hiring, runway, conversion, and expansion—without presenting unvalidated guesses as facts.',
       lede:'This is intentionally marked BUILDING. A serious investor should be able to see exactly which assumptions drive the model and change them rather than receiving a decorative forecast.',
       detail:[
@@ -411,6 +426,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     marketing:{
       name:'Marketing & GTM',short:'Marketing',status:'BUILDING',badge:'build',
+      hero:'Teach the problem. Show the product. Earn the pilot.',
       pitch:'The go-to-market strategy should lead with the operational problem and a hands-on proof path: founder-led education, targeted pilot outreach, interactive tools, and evidence from real deployments.',
       lede:'Agent First already has a strong “show, do not merely claim” direction. The GTM plan needs to turn that into an acquisition system with a clearly defined buyer and follow-up process.',
       detail:[
@@ -427,6 +443,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     ask:{
       name:'Investment Ask',short:'Investment',status:'BUILDING',badge:'build',
+      hero:'Raise against milestones, not an arbitrary number.',
       pitch:'The investment ask should be derived from the milestones Agent First needs to reach—not chosen first and rationalized afterward.',
       lede:'The Deal Room will eventually connect the amount sought directly to product hardening, pilot delivery, evidence generation, go-to-market learning, and the runway required to reach the next financing or sustainability milestone.',
       detail:[
@@ -443,6 +460,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     evidence:{
       name:'Traction & Evidence',short:'Evidence',status:'BUILDING',badge:'build',
+      hero:'Separate what has been built from what has been proved.',
       pitch:'Agent First should separate what has been built from what has been proved: product functionality can be demonstrated now, while business impact, retention, and deployment economics require real pilot evidence.',
       lede:'That distinction makes the story stronger, not weaker. The Deal Room should make it obvious which claims are demonstrated, which are measured, and which remain hypotheses.',
       detail:[
@@ -459,6 +477,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     vision:{
       name:'Vision',short:'Vision',status:'LIVE',badge:'live',
+      hero:'Make organizations easier for humans to operate.',
       pitch:'Agent First is ultimately about making organizations easier for humans to operate: software should absorb more of the rule complexity so frontline workers can focus on people, judgment, and action.',
       lede:'The long-term product is not “better scripts.” It is an interface between organizational rules and human action.',
       detail:[
@@ -475,6 +494,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     founder:{
       name:'Founder Story',short:'Founder',status:'BUILDING',badge:'build',
+      hero:'Build from the frontline workflow outward.',
       pitch:'Agent First grew from direct observation of frontline work where agents were expected to deliver confident answers while navigating fragmented client-specific rules and tools.',
       lede:'The founder story should explain the insight and operating perspective without depending on confidential employer material or making the company about one workplace.',
       detail:[
@@ -491,6 +511,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     },
     roadmap:{
       name:'Roadmap',short:'Roadmap',status:'BUILDING',badge:'build',
+      hero:'Sequence proof before scale.',
       pitch:'The roadmap should move from product stabilization to a deliberately selected pilot, measurable evidence, repeatable onboarding, and then controlled expansion—not from feature accumulation to feature accumulation.',
       lede:'The point of the roadmap is to sequence risk reduction. Each stage should answer a question the company needs answered before scaling the next thing.',
       detail:[
@@ -577,7 +598,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   function renderSection(){
     var s=sections[current];
     document.getElementById('stageKicker').textContent=s.name;
-    document.getElementById('stageTitle').textContent=s.lede;
+    document.getElementById('stageTitle').textContent=s.hero || s.name;
     document.getElementById('pitchText').textContent=s.pitch;
     document.getElementById('pitchMeta').textContent='For '+roles[role].title;
     var cs=document.getElementById('currentStatus');cs.textContent=s.status;cs.className='badge '+s.badge;
