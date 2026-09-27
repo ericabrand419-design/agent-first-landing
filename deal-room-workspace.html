@@ -178,7 +178,11 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         <div><div class="ey">Quick links</div><div class="sm">Existing public Agent First materials.</div></div>
       </div>
       <div class="quick">
-        <a href="index.html#demo" target="_blank" rel="noopener" onclick="trackMaterial('product-overview','open');trackSpecialLink('demo')">Product Overview ↗</a>
+        <a href="customer-overview.html" target="_blank" rel="noopener" onclick="trackMaterial('customer-one-pager','open')">Customer Overview ↗</a>
+        <a href="customer-product-video.html" target="_blank" rel="noopener" onclick="trackMaterial('product-video','open')">Product Video ↗</a>
+        <a href="roi-calculator.html" target="_blank" rel="noopener" onclick="trackMaterial('roi-tool','open')">ROI Tool ↗</a>
+        <a href="industry-use-cases.html" target="_blank" rel="noopener" onclick="trackMaterial('industry-use-cases','open')">Use Cases ↗</a>
+        <a href="customer-faq.html" target="_blank" rel="noopener" onclick="trackMaterial('customer-faq','open')">Customer FAQ ↗</a>
         <a href="how-it-works.html" target="_blank" rel="noopener" onclick="trackMaterial('how-it-works','open')">How It Works ↗</a>
         <a href="business-plan.html" target="_blank" rel="noopener" onclick="trackMaterial('business-plan','open')">Full Business Plan ↗</a>
         <a href="pilot-prospectus.html" target="_blank" rel="noopener" onclick="trackMaterial('pilot-prospectus','open');trackSpecialLink('pilot')">Pilot Prospectus ↗</a>
@@ -284,6 +288,91 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 <script>
 (function(){
   var sections = {
+    customerPackage:{
+      name:'Customer Sales Package',short:'Start Here',status:'LIVE',badge:'live',
+      hero:'One private link should answer the questions that matter before a buyer agrees to a pilot.',
+      pitch:'The customer package now brings the product overview, short video, private demo, 90-day pilot, ROI/business case, implementation, security/data, pricing, industry use cases, sample Client Profile, and FAQ into one guided Deal Room path.',
+      lede:'A serious buyer should not have to hunt through attachments. Start with the problem and product, let them experience the interaction model, then give operations, finance, IT/security, and procurement the deeper material they need.',
+      detail:[
+        ['Start fast','Customer overview and 75-second product walkthrough explain the problem, interaction model, and who Agent First fits.'],
+        ['Prove it','The private demo and 90-day pilot let the buyer test one bounded workflow using approved rules and an agreed baseline.'],
+        ['Build the case','The ROI tool uses the customer’s own workflow inputs and treats released time as capacity value—not guaranteed payroll savings.'],
+        ['Support the buying committee','Implementation, security/data, pricing, FAQ, use-case sheets, and a sample Client Profile are available without sending separate attachments.']
+      ],
+      source:'Agent First Customer Sales Package v1.0.',
+      purpose:'Give a prospective customer one coherent evaluation path instead of a folder full of disconnected sales collateral.',
+      next:'Next: watch the Product Video, then open the private Demo or jump directly to the Pilot Prospectus and ROI tool.',
+      material:{label:'Open Customer Overview',url:'customer-overview.html',status:'LIVE'},
+      related:['productVideo','product','pilot','roi']
+    },
+    productVideo:{
+      name:'Product Video',short:'Video',status:'LIVE',badge:'live',
+      hero:'See the interaction model in about 75 seconds.',
+      pitch:'The product walkthrough shows the core flow: make context explicit, resolve the request, surface the decision and customer wording, keep the next action close, switch profiles safely, train and measure, and govern approved rules.',
+      lede:'The current private web walkthrough is a branded storyboard. The downloadable customer package also contains a 72-second rough-cut video and the final narration/shot list. After deployment verification, the finished version should replace storyboard moments with real private-demo screen capture.',
+      detail:[
+        ['Context','The active Client Profile is visible before guidance is resolved.'],
+        ['Answer first','Decision, What to Say, Next Step, and Source are treated as the core worker outputs.'],
+        ['Operations','Quick Actions and workflow tools keep relevant logistics close to the decision.'],
+        ['Governance','Supervisor/Test Mode and Admin/Implementation make training, testing, rule review, and publication part of the product story.']
+      ],
+      source:'Agent First Product Video Script & Storyboard v1.0 and customer product-video rough cut.',
+      purpose:'Give a buyer enough product understanding to decide whether opening the interactive demo is worth their time.',
+      next:'Next: open the Private Product Demo for the real interactive experience.',
+      material:{label:'Watch Product Overview',url:'customer-product-video.html',status:'LIVE'},
+      related:['product','customerPackage','pilot']
+    },
+    roi:{
+      name:'ROI / Business Case',short:'Business Case',status:'LIVE',badge:'live',
+      hero:'Use the customer’s baseline—not generic ROI claims.',
+      pitch:'The business-case tool converts workflow volume, current search time, supervisor assists, rework, labor cost, and improvement assumptions into an illustrative capacity-value case, then compares it with the 90-day pilot software cost.',
+      lede:'The defaults are only examples. Before using the output externally, replace the inputs with the customer’s own baseline and agree the pilot measures before results are visible.',
+      detail:[
+        ['Value model','Agent capacity released + supervisor capacity released + avoidable rework value.'],
+        ['Pilot cost','90 days at $69 per pilot agent per month; the standard $2,500 Client Profile fee is waived for accepted pilot partners.'],
+        ['What is excluded','Revenue lift, retention, compliance, and customer-experience value unless the buyer can support those inputs.'],
+        ['Interpretation','Released time is capacity value; it is not automatically cash savings or a headcount reduction.']
+      ],
+      source:'Agent First ROI / Business-Case Tool v1.0.',
+      purpose:'Let operations and finance test whether the workflow is economically worth piloting without pretending unvalidated savings are facts.',
+      next:'Next: agree the 2–3 pilot measures that would make continuation rational.',
+      material:{label:'Open Interactive Business Case',url:'roi-calculator.html',status:'LIVE'},
+      related:['pilot','measurement','pricing']
+    },
+    useCases:{
+      name:'Industry Use Cases',short:'Use Cases',status:'LIVE',badge:'live',
+      hero:'Different industries. The same operating problem: rules change by context.',
+      pitch:'Illustrative use-case sheets show how the Agent First interaction model maps to automotive service, healthcare administration, insurance service/claims intake, home-services dispatch, and property management.',
+      lede:'These are not customer case studies. They are examples of where repeated decisions, context switching, approved rules, customer wording, and next-action guidance can be tested.',
+      detail:[
+        ['Automotive','Service, express eligibility, diagnostics, recalls, advisors, transportation, roadside/towing, transfer rules.'],
+        ['Healthcare admin','Scheduling, forms, records, non-clinical routing, administrative coverage requirements, escalation boundaries.'],
+        ['Insurance','Claims/service intake, documentation, routing, program differences, transfer/escalation paths.'],
+        ['Home / property','Dispatch, after-hours triage, geography, property-specific rules, emergency paths, vendor contacts, customer/resident wording.']
+      ],
+      source:'Agent First Industry Use-Case Sheets v1.0.',
+      purpose:'Help a buyer see whether its workflow has the same structural problem without pretending a fictional example is customer evidence.',
+      next:'Next: choose one real workflow and compare it with the Pilot qualification criteria.',
+      material:{label:'Explore Industry Use Cases',url:'industry-use-cases.html',status:'LIVE'},
+      related:['product','pilot','customerFAQ']
+    },
+    customerFAQ:{
+      name:'Customer FAQ',short:'FAQ',status:'LIVE',badge:'live',
+      hero:'Give operations, finance, IT, security, and procurement the same answers.',
+      pitch:'The customer FAQ covers what Agent First is, what it is not, pilot pricing, implementation, measurement, multi-client support, data boundaries, rule changes, security posture, continuation, and the absence of fabricated case studies.',
+      lede:'The goal is to make the buying process easier without overstating maturity. Where Agent First has not yet earned a certification, customer result, or production claim, the FAQ says so.',
+      detail:[
+        ['Commercial','90-day live pilot · $69 per pilot agent/month · $2,500 Client Profile fee waived · $500 conversion credit.'],
+        ['Implementation','Bound one workflow, validate sources, baseline, readiness sign-off, then start the live pilot.'],
+        ['Security','Minimize data, preserve rule authority, separate roles, and avoid claiming certifications not earned.'],
+        ['Evidence','Product/readiness evidence exists; customer ROI, testimonials, and case studies remain pending until real pilots produce them.']
+      ],
+      source:'Agent First Customer FAQ v1.0.',
+      purpose:'Reduce repeated diligence questions while keeping customer-facing claims consistent across the sales process.',
+      next:'Next: if the workflow fits, move to the Pilot Prospectus and discovery/qualification conversation.',
+      material:{label:'Open Customer FAQ',url:'customer-faq.html',status:'LIVE'},
+      related:['security','implementation','pricing','pilot']
+    },
     exec:{
       name:'Executive Summary',short:'Company',status:'LIVE',badge:'live',
       hero:'Knowledge isn’t useful until it becomes usable in the moment.',
@@ -634,10 +723,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       title:'Prospective Client',
       meta:'Product, pilot, implementation, outcomes',
       note:'Show me what this does, how I would test it, what changes for my team, what you need from us, and what it costs.',
-      time:'8 MIN',
-      first:'product',
-      sections:['product','problem','pilot','measurement','pricing','implementation','security','evidence','roadmap'],
-      path:[['See the Product','product'],['Pilot Prospectus','pilot'],['How We Measure','measurement'],['Implementation','implementation'],['Security & Data','security'],['Pricing','pricing']]
+      time:'10 MIN',
+      first:'customerPackage',
+      sections:['customerPackage','productVideo','product','useCases','pilot','roi','measurement','implementation','security','pricing','customerFAQ','evidence'],
+      path:[['Start Here','customerPackage'],['Product Video','productVideo'],['Private Demo','product'],['Pilot Prospectus','pilot'],['Business Case','roi'],['Implementation','implementation'],['Security & Data','security'],['Pricing','pricing'],['FAQ','customerFAQ']]
     },
     investor:{
       title:'Investor / Accelerator',
@@ -663,14 +752,19 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       note:'Browse the company in any order. Every section starts with the shortest useful answer and preserves the deeper source beneath it.',
       time:'OPEN',
       first:'exec',
-      sections:['investorPackage','exec','problem','product','pilot','measurement','implementation','security','market','competition','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap','diligence'],
+      sections:['customerPackage','productVideo','useCases','roi','customerFAQ','investorPackage','exec','problem','product','pilot','measurement','implementation','security','market','competition','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap','diligence'],
       path:[['Company','exec'],['Product','product'],['Pilot','pilot'],['Business','business'],['Evidence','evidence'],['Vision','vision']]
     }
   };
 
   var materials=[
     {id:'private-demo',name:'Private Product Demo',roles:['client','investor','partner'],status:'LIVE',url:'https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app/portal.html',kind:'open'},
-    {id:'product-overview',name:'Interactive Product Overview',roles:['client','investor','partner'],status:'LIVE',url:'index.html#demo',kind:'open'},
+    {id:'customer-one-pager',name:'Customer One-Pager / Overview',roles:['client'],status:'LIVE',url:'customer-overview.html',kind:'open'},
+    {id:'product-video',name:'75-Second Product Video',roles:['client'],status:'LIVE',url:'customer-product-video.html',kind:'open'},
+    {id:'product-overview',name:'Product Overview',roles:['client','investor','partner'],status:'LIVE',url:'customer-overview.html#product',kind:'open'},
+    {id:'roi-tool',name:'ROI / Business-Case Tool',roles:['client'],status:'LIVE',url:'roi-calculator.html',kind:'open'},
+    {id:'industry-use-cases',name:'Industry Use Cases',roles:['client','partner'],status:'LIVE',url:'industry-use-cases.html',kind:'open'},
+    {id:'customer-faq',name:'Customer FAQ',roles:['client'],status:'LIVE',url:'customer-faq.html',kind:'open'},
     {id:'how-it-works',name:'How Agent First Works',roles:['client','partner'],status:'LIVE',url:'how-it-works.html',kind:'open'},
     {id:'pilot-program',name:'Pilot Program',roles:['client','investor','partner'],status:'LIVE',url:'pilot-program.html',kind:'open'},
     {id:'pilot-prospectus',name:'Pilot Prospectus',roles:['client','investor','partner'],status:'LIVE',url:'pilot-prospectus.html',kind:'open'},
@@ -693,12 +787,12 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'due-diligence',name:'Due Diligence Index',roles:['investor'],status:'LIVE',url:'due-diligence.html',kind:'open',permission:'investor_diligence'},
     {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'LIVE',url:'investment-ask.html',kind:'open',permission:'investor_diligence'},
     {id:'gtm-plan',name:'Marketing / GTM Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
-    {id:'case-studies',name:'Case Studies & Pilot Results',roles:['client','investor','partner'],status:'BUILDING',url:null,kind:'open'},
+    {id:'case-studies',name:'Case Studies & Testimonials',roles:['client','investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'founder-story',name:'Founder Story / Video',roles:['investor','partner'],status:'LIVE',url:'founder-story.html',kind:'open'},
     {id:'roadmap',name:'Operating Roadmap',roles:['investor','partner'],status:'LIVE',url:'business-plan.html#roadmap',kind:'open'}
   ];
 
-  var directoryOrder=['investorPackage','exec','problem','product','pilot','measurement','market','competition','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap','diligence'];
+  var directoryOrder=['customerPackage','productVideo','product','useCases','pilot','roi','measurement','implementation','security','pricing','customerFAQ','investorPackage','exec','problem','market','competition','business','financials','marketing','ask','evidence','vision','founder','roadmap','diligence'];
   var current='exec', role='client', output='pitch', history=['exec'];
   var authActive=false, sessionVisitorId='', sessionPermissions=[];
 
