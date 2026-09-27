@@ -301,6 +301,23 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       material:{label:'Full Business Plan',url:'business-plan.html',status:'LIVE'},
       related:['problem','product','pilot','business']
     },
+    investorPackage:{
+      name:'Investor Package',short:'Investor',status:'LIVE',badge:'live',
+      hero:'The company story, financial logic, ask, and diligence path now live in one place.',
+      pitch:'The investor package includes the pitch deck, one-pager, Business Plan, Financial Model, Financial Summary, Investment Ask, founder narrative, FAQ, product/demo access, roadmap, evidence register, and protected diligence index.',
+      lede:'The package is deliberately layered: a fast narrative first, then the underlying model, assumptions, and diligence material for investors who want to go deeper.',
+      detail:[
+        ['Pitch Deck','16-slide core investor narrative with problem, product, market, business model, evidence, financials, ask, founder, and close.'],
+        ['One-Pager','Single-page investor brief for first-pass evaluation or forwarding.'],
+        ['Financial Summary','Six-slide summary of canonical pilot economics, Base case, scenario sensitivity, capital need, and milestones.'],
+        ['Diligence','Protected index separates what exists now from incorporation, capitalization, IP, legal, financial, and security records still to be formalized.']
+      ],
+      source:'Agent First Investor Package v1.0.',
+      purpose:'Give an investor a clear first read, then a controlled path into the evidence and assumptions behind it.',
+      next:'Next: review Market and Competition, then Evidence, Financials, the Ask, Founder, and protected Diligence.',
+      material:{label:'Open Investor Pitch Deck',url:'investor-deck.html',status:'LIVE'},
+      related:['market','competition','evidence','financials','ask','founder']
+    },
     problem:{
       name:'The Problem',short:'Problem',status:'LIVE',badge:'live',
       hero:'Frontline workers should not have to become human search engines.',
@@ -385,6 +402,23 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       next:'Next: build the sourced Market section of the Business Plan before converting this into investor slides.',
       material:{label:'Market Analysis',url:'business-plan.html#market',status:'LIVE'},
       related:['business','marketing','vision']
+    },
+    competition:{
+      name:'Competitive Landscape',short:'Competition',status:'LIVE',badge:'live',
+      hero:'Agent First is entering a crowded category on purpose.',
+      pitch:'Five9, Genesys, NiCE, Cresta, Observe.AI, Salesforce, ServiceNow, Glean and others already offer overlapping guidance, knowledge, workflow, or AI capabilities. Agent First must prove a narrower operational wedge rather than claim the category is empty.',
+      lede:'The differentiation hypothesis is profile-first, decision-first guidance for client-specific rules: explicit context switching, governed source authority, built-in testing/measurement, and lightweight coexistence with the customer stack.',
+      detail:[
+        ['CCaaS / agent assist','Five9, Genesys and NiCE already surface real-time guidance, knowledge and next actions.'],
+        ['AI-native contact center','Cresta, Observe.AI and Balto overlap on coaching, scripts, prompts, QA and conversation intelligence.'],
+        ['Workflow platforms','Salesforce, ServiceNow and Pega can own broad case/workflow automation and AI.'],
+        ['Enterprise search','Glean and related tools make organizational knowledge searchable; Agent First must prove the value of decision-first operational context.']
+      ],
+      source:'Business Plan v1.1 and Investor Pitch Deck v1.0, with competitive examples grounded in official vendor product pages.',
+      purpose:'Show investors exactly where feature overlap exists and what Agent First still needs to prove to earn a distinct position.',
+      next:'Next: Evidence separates current product/readiness proof from customer-market proof.',
+      material:{label:'Open Competitive Landscape',url:'business-plan.html#competition',status:'LIVE'},
+      related:['market','product','evidence']
     },
     business:{
       name:'Business Model',short:'Business',status:'LIVE',badge:'live',
@@ -474,7 +508,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['financials','roadmap','evidence']
     },
     evidence:{
-      name:'Traction & Evidence',short:'Evidence',status:'BUILDING',badge:'build',
+      name:'Traction & Evidence',short:'Evidence',status:'LIVE',badge:'live',
       hero:'Separate what has been built from what has been proved.',
       pitch:'Agent First should separate what has been built from what has been proved: product functionality can be demonstrated now, while business impact, retention, and deployment economics require real pilot evidence.',
       lede:'That distinction makes the story stronger, not weaker. The Deal Room should make it obvious which claims are demonstrated, which are measured, and which remain hypotheses.',
@@ -484,11 +518,29 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Case-study standard','Show baseline, intervention, sample, duration, measured result, limitations, and client context.'],
         ['Evidence library','Pilot scorecards, testimonials, recordings, usage analytics, and case studies will live here as they become available.']
       ],
-      source:'No fabricated case studies. This section stays explicit about the difference between prototype evidence and market evidence.',
-      purpose:'Make due diligence easier and protect the company from overclaiming during an early stage.',
+      source:'Investor Pitch Deck v1.0 and Business Plan v1.1 now contain the current built-vs-proved evidence register. External case studies and customer results remain pending until a real pilot produces them.',
+      purpose:'Make diligence easier by showing exactly what is built, what remains hypothesis, and which external evidence must come from paid pilots.',
       next:'Next: the first pilot should generate the first credible evidence package.',
       material:{label:'Case Studies & Results',url:null,status:'BUILDING'},
       related:['pilot','measurement','financials']
+    },
+    diligence:{
+      name:'Due Diligence',short:'Diligence',status:'LIVE',badge:'live',
+      permission:'investor_diligence',
+      hero:'Separate available diligence from records that still need to be formalized.',
+      pitch:'The protected diligence index lists current company, financial, product, security, commercial, founder, and investor materials, while incorporation, cap table, IP, legal, banking, historical financial, and formal security records remain explicitly pending until they exist or are supplied.',
+      lede:'The goal is controlled transparency without inventing documents or exposing highly sensitive records to every Deal Room visitor.',
+      detail:[
+        ['Available now','Business Plan, Financial Model, Investment Ask, investor decks/briefs, pilot package, security FAQ, private product demo, Deal Room, regression/evaluation evidence.'],
+        ['Corporate / cap table','Formal incorporation, governing, capitalization and prior-financing records remain pending in this package.'],
+        ['IP / legal / security','Assignments, license inventory, formal security policies, architecture/data flow, subprocessors, penetration testing and related diligence remain to be formalized as applicable.'],
+        ['Access principle','Sensitive bank, cap-table, contract, personal, and source-code material should be shared only at the appropriate diligence stage.']
+      ],
+      source:'Agent First Due Diligence Index v1.0.',
+      purpose:'Give investors an honest diligence map while preserving appropriate access controls.',
+      next:'Next: add each formal corporate/legal/security record only when it exists and has been reviewed.',
+      material:{label:'Open Due Diligence Index',url:'due-diligence.html',status:'LIVE'},
+      related:['financials','ask','founder']
     },
     implementation:{
       name:'Implementation',short:'Implementation',status:'LIVE',badge:'live',
@@ -542,7 +594,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['market','product','founder']
     },
     founder:{
-      name:'Founder Story',short:'Founder',status:'BUILDING',badge:'build',
+      name:'Founder Story',short:'Founder',status:'LIVE',badge:'live',
       hero:'Build from the frontline workflow outward.',
       pitch:'Agent First grew from direct observation of frontline work where agents were expected to deliver confident answers while navigating fragmented client-specific rules and tools.',
       lede:'The founder story should explain the insight and operating perspective without depending on confidential employer material or making the company about one workplace.',
@@ -550,12 +602,12 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         ['Origin insight','The product began from observing the gap between what organizations know and what frontline workers can use in the moment.'],
         ['Builder perspective','The system is being shaped from the workflow outward rather than from a generic AI capability inward.'],
         ['Thought-leadership opportunity','“Agent First” can become a broader human-centered design and management philosophy for AI-enabled operations.'],
-        ['Still to package','Founder bio, short video, origin narrative, and the point-of-view essay set.']
+        ['Packaged now','Short/medium founder bio, longer origin narrative, 90-second investor video script, and 60-second product-video shot list are complete.']
       ],
-      source:'Founder narrative is still being packaged for external use.',
+      source:'Founder Story & Video Scripts v1.0 and private Founder Story page. The founder video itself should be recorded directly by Erica; no synthetic founder voice or likeness is used.',
       purpose:'Give investors, partners, and customers a credible reason this founder is obsessed with this problem and sees it differently.',
-      next:'Next: turn the company origin and Agent First philosophy into a concise founder page and video.',
-      material:{label:'Founder Story',url:null,status:'BUILDING'},
+      next:'Next: record the founder video directly and replace the current script/storyboard status with the finished recording.',
+      material:{label:'Founder Story & Video',url:'founder-story.html',status:'LIVE'},
       related:['vision','problem','product']
     },
     roadmap:{
@@ -591,10 +643,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       title:'Investor / Accelerator',
       meta:'Company, market, model, evidence, financials, ask',
       note:'Show me the thesis, wedge, product, what is actually proved, how this becomes a business, and what capital would unlock.',
-      time:'10 MIN',
-      first:'exec',
-      sections:['exec','problem','product','market','business','evidence','financials','ask','roadmap','founder','vision'],
-      path:[['Company Thesis','exec'],['Market Wedge','market'],['Business Model','business'],['Evidence','evidence'],['Financials','financials'],['Investment Ask','ask']]
+      time:'12 MIN',
+      first:'investorPackage',
+      sections:['investorPackage','exec','product','market','competition','business','evidence','financials','ask','roadmap','founder','diligence','vision'],
+      path:[['Investor Deck','investorPackage'],['Market','market'],['Competition','competition'],['Evidence','evidence'],['Financials','financials'],['Investment Ask','ask'],['Founder','founder'],['Diligence','diligence']]
     },
     partner:{
       title:'Partner / Advisor',
@@ -611,7 +663,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       note:'Browse the company in any order. Every section starts with the shortest useful answer and preserves the deeper source beneath it.',
       time:'OPEN',
       first:'exec',
-      sections:['exec','problem','product','pilot','measurement','implementation','security','market','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap'],
+      sections:['investorPackage','exec','problem','product','pilot','measurement','implementation','security','market','competition','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap','diligence'],
       path:[['Company','exec'],['Product','product'],['Pilot','pilot'],['Business','business'],['Evidence','evidence'],['Vision','vision']]
     }
   };
@@ -634,15 +686,19 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'security',name:'Security, Data & Pilot FAQ',roles:['client','investor'],status:'LIVE',url:'pilot-security-faq.html',kind:'open'},
     {id:'business-plan',name:'Full Business Plan',roles:['client','investor','partner'],status:'LIVE',url:'business-plan.html',kind:'open'},
     {id:'financial-model',name:'Financial Model',roles:['investor'],status:'LIVE',url:'financial-model.html',kind:'open',permission:'investor_diligence'},
-    {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
+    {id:'pitch-deck',name:'Investor Pitch Deck (Web)',roles:['investor'],status:'LIVE',url:'investor-deck.html',kind:'open'},
+    {id:'investor-one-pager',name:'Investor One-Pager',roles:['investor'],status:'LIVE',url:'investor-brief.html',kind:'open'},
+    {id:'financial-summary',name:'Financial Summary',roles:['investor'],status:'LIVE',url:'financial-summary.html',kind:'open',permission:'investor_diligence'},
+    {id:'investor-faq',name:'Investor FAQ',roles:['investor'],status:'LIVE',url:'investor-faq.html',kind:'open'},
+    {id:'due-diligence',name:'Due Diligence Index',roles:['investor'],status:'LIVE',url:'due-diligence.html',kind:'open',permission:'investor_diligence'},
     {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'LIVE',url:'investment-ask.html',kind:'open',permission:'investor_diligence'},
     {id:'gtm-plan',name:'Marketing / GTM Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'case-studies',name:'Case Studies & Pilot Results',roles:['client','investor','partner'],status:'BUILDING',url:null,kind:'open'},
-    {id:'founder-story',name:'Founder Story / Video',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
-    {id:'roadmap',name:'Operating Roadmap',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'}
+    {id:'founder-story',name:'Founder Story / Video',roles:['investor','partner'],status:'LIVE',url:'founder-story.html',kind:'open'},
+    {id:'roadmap',name:'Operating Roadmap',roles:['investor','partner'],status:'LIVE',url:'business-plan.html#roadmap',kind:'open'}
   ];
 
-  var directoryOrder=['exec','problem','product','pilot','measurement','market','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap'];
+  var directoryOrder=['investorPackage','exec','problem','product','pilot','measurement','market','competition','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap','diligence'];
   var current='exec', role='client', output='pitch', history=['exec'];
   var authActive=false, sessionVisitorId='', sessionPermissions=[];
 
