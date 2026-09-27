@@ -954,7 +954,7 @@
   <button class="af-demo-close" id="af-demo-close" type="button" aria-label="Close demo access">×</button>
   <div class="af-demo-kicker">Private interactive demo</div>
   <h2>See Agent First from the inside.</h2>
-  <p>Request private demo access with your work email. That email becomes your demo identity. No password is required.</p>
+  <p>Request private demo access with your work email. Requests are reviewed individually. If approved, you'll receive a private access link. No password is required.</p>
 
   <form id="af-demo-request-form" class="af-demo-form">
     <div>
@@ -969,7 +969,7 @@
       <label for="af-demo-company">Company</label>
       <input id="af-demo-company" name="company" type="text" autocomplete="organization">
     </div>
-    <button class="af-demo-submit" type="submit">Request access and enter demo</button>
+    <button class="af-demo-submit" type="submit">Request private demo access</button>
     <div id="af-demo-status" class="af-demo-status" aria-live="polite"></div>
   </form>
 
@@ -1008,9 +1008,9 @@
     var btn=form.querySelector('button[type="submit"]');
     var email=document.getElementById('af-demo-email').value.trim().toLowerCase();
     btn.disabled=true;
-    btn.textContent='Preparing demo...';
+    btn.textContent='Sending request...';
     status.style.color='#6b7084';
-    status.textContent='Requesting private demo access...';
+    status.textContent='Submitting your private demo request...';
 
     var name=document.getElementById('af-demo-name').value.trim();
     var company=document.getElementById('af-demo-company').value.trim();
@@ -1021,7 +1021,7 @@
     delivery.append('name',name);
     delivery.append('email',email);
     delivery.append('company',company);
-    delivery.append('message','Requested access to the private Agent First interactive demo.');
+    delivery.append('message','Requested access to the private Agent First interactive demo. Review and approve manually before issuing access.');
 
     fetch('https://api.web3forms.com/submit',{
       method:'POST',
@@ -1031,23 +1031,14 @@
       return res.json().then(function(data){return {ok:res.ok,data:data};});
     }).then(function(delivered){
       if(!delivered.ok||!delivered.data||!delivered.data.success)throw new Error('We could not submit the demo request. Please try again.');
-      status.textContent='Request received. Preparing your private demo...';
-      return fetch('/api/demo-invite',{
-        method:'POST',
-        headers:{'Content-Type':'application/json','Accept':'application/json'},
-        body:JSON.stringify({action:'issue',name:name,email:email,company:company})
-      });
-    }).then(function(res){
-      return res.json().then(function(data){return {ok:res.ok,data:data};});
-    }).then(function(result){
-      if(!result.ok||!result.data||!result.data.portalUrl)throw new Error(result.data&&result.data.error||'Unable to create demo access.');
-      try{localStorage.setItem('agentFirst.demoRequestEmail',email);}catch(e){}
+      form.reset();
+      btn.disabled=true;
+      btn.textContent='Request received';
       status.style.color='#177a55';
-      status.textContent='Access ready. Opening the private demo...';
-      window.location.href=result.data.portalUrl;
+      status.textContent='Your request is in. Access is reviewed individually. If approved, you will receive a private demo link.';
     }).catch(function(err){
       btn.disabled=false;
-      btn.textContent='Request access and enter demo';
+      btn.textContent='Request private demo access';
       status.style.color='#b42318';
       status.textContent=err&&err.message?err.message:'Something went wrong. Please try again.';
     });
