@@ -3,66 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Agent First · Deal Room Access</title>
 <meta name="robots" content="noindex,nofollow">
+<title>Agent First · Private Access</title>
 <style>
-*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 12% 8%,rgba(255,107,84,.11),transparent 25%),radial-gradient(circle at 88% 10%,rgba(124,58,237,.13),transparent 28%),#f7f6fc;color:#171a2b;font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.card{width:min(480px,100%);background:#fff;border:1px solid #e5e4f1;border-radius:24px;padding:28px;box-shadow:0 20px 65px rgba(44,35,85,.12)}.brand{font-size:11px;letter-spacing:.2em;font-weight:900}.ey{margin-top:28px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:#7c3aed}h1{font-size:34px;line-height:1.03;letter-spacing:-.035em;margin:7px 0 10px}.muted{color:#6d728b}label{display:block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#6d728b;margin:14px 0 5px}input,select{width:100%;padding:11px 12px;border:1px solid #dcd9e8;border-radius:11px;background:#fff;font:inherit}input:focus,select:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px rgba(137,70,242,.1)}button{width:100%;margin-top:18px;padding:12px 14px;border:0;border-radius:11px;color:#fff;background:linear-gradient(102deg,#ff7352,#e94ea7 47%,#8b37f4);font:inherit;font-weight:850;cursor:pointer}.msg{min-height:22px;margin-top:10px;font-size:12px;color:#b42318}.fine{margin-top:18px;padding-top:15px;border-top:1px solid #efedf5;font-size:11px;color:#888ca1}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:28px;background:radial-gradient(circle at 12% 8%,rgba(255,107,84,.11),transparent 25%),radial-gradient(circle at 88% 10%,rgba(124,58,237,.13),transparent 28%),#f7f6fc;color:#171a2b;font:15px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.card{width:min(500px,100%);background:#fff;border:1px solid #e5e4f1;border-radius:24px;padding:28px;box-shadow:0 20px 65px rgba(44,35,85,.12)}.brand{font-size:11px;letter-spacing:.2em;font-weight:900}.ey{margin-top:28px;font-size:11px;text-transform:uppercase;letter-spacing:.1em;font-weight:900;color:#7c3aed}h1{font-size:34px;line-height:1.03;letter-spacing:-.035em;margin:7px 0 10px}.muted{color:#6d728b}label{display:block;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:#6d728b;margin:14px 0 5px}input,select{width:100%;padding:11px 12px;border:1px solid #dcd9e8;border-radius:11px;background:#fff;font:inherit}input:focus,select:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px rgba(137,70,242,.1)}button{width:100%;margin-top:18px;padding:12px 14px;border:0;border-radius:11px;color:#fff;background:linear-gradient(102deg,#ff7352,#e94ea7 47%,#8b37f4);font:inherit;font-weight:850;cursor:pointer}.secondary{background:#f6f3ff;color:#6236c7;border:1px solid #ddd2fb}.msg{min-height:22px;margin-top:10px;font-size:12px;color:#b42318}.fine{margin-top:18px;padding-top:15px;border-top:1px solid #efedf5;font-size:11px;color:#888ca1}.modeLink{margin-top:10px;text-align:center;font-size:12px;color:#6c35d4;font-weight:750;cursor:pointer}.hidden{display:none}
 </style>
 </head>
 <body>
 <main class="card">
   <div class="brand">AGENT FIRST</div>
-  <div class="ey">Private company briefing</div>
-  <h1>Enter the Deal Room.</h1>
-  <p class="muted">Use the email and password attached to your invitation, then choose the perspective you are evaluating from.</p>
-  <form id="accessForm">
-    <label for="email">Email</label>
-    <input id="email" name="email" type="email" autocomplete="email" required>
-    <label for="password">Password</label>
-    <input id="password" name="password" type="password" autocomplete="current-password" required>
-    <label for="role">I am evaluating Agent First as a…</label>
-    <select id="role" name="role">
-      <option value="client">Prospective Client</option>
-      <option value="investor">Investor / Accelerator</option>
-      <option value="partner">Partner / Advisor</option>
-      <option value="all">Other / Explore Everything</option>
-    </select>
-    <button type="submit">Enter Deal Room →</button>
-    <div class="msg" id="msg" aria-live="polite"></div>
-  </form>
-  <div class="fine">Access sessions expire automatically. Sensitive diligence materials can be restricted separately as the library grows.</div>
+
+  <section id="loginMode">
+    <div class="ey">PRIVATE COMPANY BRIEFING</div>
+    <h1>Sign in to the Deal Room.</h1>
+    <p class="muted">Use the same invited Agent First account you use for the private product demo.</p>
+    <form id="loginForm">
+      <label for="loginEmail">Email</label>
+      <input id="loginEmail" type="email" autocomplete="email" required>
+      <label for="loginPassword">Password</label>
+      <input id="loginPassword" type="password" autocomplete="current-password" required>
+      <label for="loginRole">I am evaluating Agent First as a…</label>
+      <select id="loginRole">
+        <option value="client">Prospective Client</option>
+        <option value="investor">Investor / Accelerator</option>
+        <option value="partner">Partner / Advisor</option>
+        <option value="all">Other / Explore Everything</option>
+      </select>
+      <button type="submit">Enter Deal Room →</button>
+      <div class="msg" id="loginMsg" aria-live="polite"></div>
+    </form>
+    <div class="modeLink" id="showActivate">Have an invitation link? Activate it here.</div>
+  </section>
+
+  <section id="activateMode" class="hidden">
+    <div class="ey">ACTIVATE INVITATION</div>
+    <h1>Create your private access.</h1>
+    <p class="muted">Set one password for the Agent First Deal Room and private product demo.</p>
+    <form id="activateForm">
+      <label for="activateEmail">Email</label>
+      <input id="activateEmail" type="email" autocomplete="email" required>
+      <label for="activatePassword">Create password</label>
+      <input id="activatePassword" type="password" minlength="10" autocomplete="new-password" required>
+      <label for="activateConfirm">Confirm password</label>
+      <input id="activateConfirm" type="password" minlength="10" autocomplete="new-password" required>
+      <label for="activateRole">I am evaluating Agent First as a…</label>
+      <select id="activateRole">
+        <option value="client">Prospective Client</option>
+        <option value="investor">Investor / Accelerator</option>
+        <option value="partner">Partner / Advisor</option>
+        <option value="all">Other / Explore Everything</option>
+      </select>
+      <button type="submit">Activate & enter →</button>
+      <div class="msg" id="activateMsg" aria-live="polite"></div>
+    </form>
+    <div class="modeLink" id="showLogin">Already activated? Sign in.</div>
+  </section>
+
+  <div class="fine">Invitation links expire after seven days. Signed-in sessions expire after twelve hours. Sensitive diligence material can require additional permission.</div>
 </main>
 <script>
-(async function(){
-  const qs=new URLSearchParams(location.search);
-  const returnTo=qs.get('returnTo') || '/deal-room';
-  try{
-    const s=await fetch('/api/deal-room-session',{cache:'no-store'}).then(r=>r.json());
-    if(s.authEnabled && s.authenticated){location.replace(returnTo);return;}
-    if(!s.authEnabled){
-      document.getElementById('msg').style.color='#177a55';
-      document.getElementById('msg').textContent='Access control is staged but not activated yet.';
-    }
-  }catch(e){}
+(function(){
+  var q=new URLSearchParams(location.search);
+  var returnTo=q.get('returnTo')||'/deal-room';
+  var inviteEmail=(q.get('invite_email')||q.get('email')||'').trim().toLowerCase();
+  var inviteToken=(q.get('invite_token')||'').trim();
+  var login=document.getElementById('loginMode'), activate=document.getElementById('activateMode');
+  function mode(which){login.classList.toggle('hidden',which!=='login');activate.classList.toggle('hidden',which!=='activate');}
+  function saveRole(id){var v=document.getElementById(id).value;localStorage.setItem('af_deal_room_role',v);}
+  function msg(id,text,good){var el=document.getElementById(id);el.style.color=good?'#177a55':'#b42318';el.textContent=text||'';}
+  document.getElementById('showActivate').onclick=function(){mode('activate');};
+  document.getElementById('showLogin').onclick=function(){mode('login');};
 
-  document.getElementById('accessForm').addEventListener('submit',async function(e){
-    e.preventDefault();
-    const msg=document.getElementById('msg');
-    msg.style.color='#6d728b';msg.textContent='Checking access…';
-    const payload={
-      email:document.getElementById('email').value,
-      password:document.getElementById('password').value,
-      role:document.getElementById('role').value
-    };
+  fetch('/api/deal-room-session',{cache:'no-store'}).then(function(r){return r.json();}).then(function(s){
+    if(s.authenticated){location.replace(returnTo);}
+  }).catch(function(){});
+
+  if(inviteEmail&&inviteToken){
+    document.getElementById('activateEmail').value=inviteEmail;
+    document.getElementById('loginEmail').value=inviteEmail;
+    mode('activate');
+  }
+
+  document.getElementById('loginForm').addEventListener('submit',async function(e){
+    e.preventDefault();msg('loginMsg','');
     try{
-      const res=await fetch('/api/deal-room-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-      const data=await res.json();
-      if(!res.ok){msg.style.color='#b42318';msg.textContent=data.error || 'Access denied.';return;}
-      localStorage.setItem('af_deal_room_role',data.role || payload.role);
-      location.assign(returnTo);
-    }catch(err){
-      msg.style.color='#b42318';msg.textContent='Could not verify access.';
-    }
+      var r=await fetch('/api/deal-room-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',email:document.getElementById('loginEmail').value,password:document.getElementById('loginPassword').value})});
+      var data=await r.json();
+      if(!r.ok)throw new Error(data.error||'Could not sign in.');
+      saveRole('loginRole');location.assign(returnTo);
+    }catch(err){msg('loginMsg',err.message||'Could not sign in.');}
+  });
+
+  document.getElementById('activateForm').addEventListener('submit',async function(e){
+    e.preventDefault();msg('activateMsg','');
+    var p=document.getElementById('activatePassword').value,c=document.getElementById('activateConfirm').value;
+    if(p.length<10){msg('activateMsg','Use at least 10 characters.');return;}
+    if(p!==c){msg('activateMsg','Those passwords do not match.');return;}
+    if(!inviteToken){msg('activateMsg','Open the invitation link you received from Agent First.');return;}
+    try{
+      var r=await fetch('/api/deal-room-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',email:document.getElementById('activateEmail').value,password:p,inviteToken:inviteToken})});
+      var data=await r.json();
+      if(!r.ok)throw new Error(data.error||'Could not activate access.');
+      saveRole('activateRole');location.assign(returnTo);
+    }catch(err){msg('activateMsg',err.message||'Could not activate access.');}
   });
 })();
 </script>
