@@ -117,7 +117,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <div class="brandMark" aria-hidden="true">
       <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.4 · Updated Sep 27, 2026</div></div>
+    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v0.5 · Updated Sep 27, 2026</div></div>
   </div>
   <div class="topActions">
     <a href="/deal-room-v1">◫ Archive v1</a>
@@ -125,6 +125,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <button type="button" id="investorTop" onclick="setRole('investor')">Investor</button>
     <button type="button" id="partnerTop" onclick="setRole('partner')">Partner</button>
     <button type="button" id="focusBtn" onclick="toggleFocus()">⛶ Focus View</button>
+    <button type="button" id="accessState" onclick="handleAccessState()">Private Preview</button>
     <button type="button" class="primaryTop" onclick="resetWorkspace()">↶ Restart Briefing</button>
   </div>
 </header>
@@ -614,11 +615,11 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'sample-profile',name:'Sample Client Profile',roles:['client','partner'],status:'LIVE',url:'sample-client-profile.html',kind:'open'},
     {id:'profile-checklist',name:'Client Profile Checklist',roles:['client','partner'],status:'LIVE',url:'agent-first-client-profile-checklist.pdf',kind:'download'},
     {id:'implementation',name:'Implementation Guide',roles:['client'],status:'BUILDING',url:null,kind:'open'},
-    {id:'security',name:'Security / Data Overview',roles:['client','investor'],status:'BUILDING',url:null,kind:'open'},
+    {id:'security',name:'Security / Data Overview',roles:['client','investor'],status:'BUILDING',url:null,kind:'open',permission:'diligence'},
     {id:'business-plan',name:'Business Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
-    {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download'},
-    {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download'},
-    {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'BUILDING',url:null,kind:'open'},
+    {id:'financial-model',name:'Financial Model',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
+    {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
+    {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'BUILDING',url:null,kind:'open',permission:'investor_diligence'},
     {id:'gtm-plan',name:'Marketing / GTM Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'case-studies',name:'Case Studies & Pilot Results',roles:['client','investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'founder-story',name:'Founder Story / Video',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
@@ -627,6 +628,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 
   var directoryOrder=['exec','problem','product','pilot','measurement','market','business','pricing','financials','marketing','ask','evidence','vision','founder','roadmap'];
   var current='exec', role='client', output='pitch', history=['exec'];
+  var authActive=false, sessionEmail='', sessionPermissions=[];
 
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function renderDirectory(){
@@ -701,10 +703,13 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     var visible=role==='all'?materials:materials.filter(function(m){return m.roles.indexOf(role)>-1;});
     document.getElementById('materialsAudience').textContent=role==='all'?'Showing the complete material library.':'Showing material relevant to '+roles[role].title+'. Switch to Explore Everything for the full library.';
     document.getElementById('materialsBody').innerHTML=visible.map(function(m){
-      var status='<span class="badge '+(m.status==='LIVE'?'live':'build')+'">'+m.status+'</span>';
+      var locked=Boolean(authActive && m.permission && sessionPermissions.indexOf(m.permission)<0);
+      var status=locked?'<span class="badge private">LOCKED</span>':'<span class="badge '+(m.status==='LIVE'?'live':'build')+'">'+m.status+'</span>';
       var audience=m.roles.map(function(r){return roles[r] ? roles[r].title.replace(' / Accelerator','').replace(' / Advisor','') : r;}).join(' · ');
       var open='';
-      if(m.url && m.kind==='download'){
+      if(locked){
+        open='<span class="materialLink disabled">LOCKED</span>';
+      } else if(m.url && m.kind==='download'){
         open='<a class="materialLink" href="'+m.url+'" download data-material="'+m.id+'" onclick="trackMaterial(\''+m.id+'\',\'download\')">DOWNLOAD ↓</a>';
       } else if(m.url){
         open='<a class="materialLink" href="'+m.url+'" target="_blank" rel="noopener" data-material="'+m.id+'" onclick="trackMaterial(\''+m.id+'\',\'open\')">OPEN ↗</a>';
@@ -725,9 +730,23 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     localStorage.setItem('af_deal_room_role',role);
     trackEvent('Role Selected',{role:role});
   };
-  window.selectSection=function(k){if(!sections[k])return;current=k;history.push(k);renderSection();trackEvent('Section Opened',{section:k,role:role});};
+  window.selectSection=function(k){
+    if(!sections[k])return;
+    current=k;history.push(k);renderSection();
+    trackEvent('Section Opened',{section:k,role:role});
+    if(k==='financials') trackEvent('Financials Viewed',{role:role});
+    if(k==='pilot') trackEvent('Pilot Viewed',{role:role});
+  };
   window.setOutput=function(v){output=v;renderOutput();trackEvent('Output Viewed',{output:v,section:current,role:role});};
   window.clearHistory=function(){history=[current];renderMemory();};
+  window.handleAccessState=function(){
+    if(!authActive){location.href='/deal-room-access.html';return;}
+    if(sessionEmail){
+      fetch('/api/deal-room-logout',{method:'POST'}).finally(function(){location.href='/deal-room-access.html';});
+    } else {
+      location.href='/deal-room-access.html';
+    }
+  };
   window.toggleFocus=function(){
     document.body.classList.toggle('focusMode');
     var b=document.getElementById('focusBtn');
@@ -760,7 +779,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   document.addEventListener('click',function(e){
     var link=e.target.closest('a');
     if(link && link.href && /index\.html#demo|pilot-program\.html|pricing\.html|how-it-works\.html|agent-challenge\.html|sample-client-profile\.html/.test(link.getAttribute('href')||'')){
-      trackEvent('Deal Room Link Click',{href:link.getAttribute('href'),role:role,section:current});
+      var href=link.getAttribute('href')||'';
+      trackEvent('Deal Room Link Click',{href:href,role:role,section:current});
+      if(href.indexOf('index.html#demo')>-1) trackEvent('Demo Clicked',{role:role,section:current});
+      if(href.indexOf('pilot-program.html')>-1) trackEvent('Pilot Page Clicked',{role:role,section:current});
     }
   });
 
@@ -785,12 +807,19 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   fetch('/api/deal-room-session',{cache:'no-store'})
     .then(function(r){return r.json();})
     .then(function(s){
+      authActive=Boolean(s.authEnabled);
+      sessionEmail=s.authenticated ? (s.email||'') : '';
+      sessionPermissions=Array.isArray(s.permissions)?s.permissions:[];
+      var access=document.getElementById('accessState');
+      if(access){
+        access.textContent=authActive?(sessionEmail?'Signed In · Log Out':'Access Required'):'Private Preview';
+      }
       if(s.authEnabled && s.authenticated && roles[s.role] && s.role!==role){
         role=s.role;
         current=roles[role].first;
         history=[current];
-        renderRole();renderSection();
       }
+      renderRole();renderSection();renderMaterials();
     })
     .catch(function(){});
 
