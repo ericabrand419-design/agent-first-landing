@@ -456,21 +456,21 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       related:['market','pilot','evidence']
     },
     ask:{
-      name:'Investment Ask',short:'Investment',status:'BUILDING',badge:'build',
+      name:'Investment Ask',short:'Investment',status:'LIVE',badge:'live',
       permission:'investor_diligence',
       hero:'Raise against milestones, not an arbitrary number.',
-      pitch:'The investment ask should be derived from the milestones Agent First needs to reach—not chosen first and rationalized afterward.',
-      lede:'The Deal Room will eventually connect the amount sought directly to product hardening, pilot delivery, evidence generation, go-to-market learning, and the runway required to reach the next financing or sustainability milestone.',
+      pitch:'Agent First is currently modeling a $650,000 pre-seed raise to fund paid customer proof, recurring conversion, repeatable implementation, and production/security readiness—not premature scale.',
+      lede:'The ask is anchored to the current Financial Model: about $502K of Base-case peak cumulative cash need across the 36-month planning horizon, plus roughly $148K of timing and uncertainty cushion. It is a planning target, not a valuation or legal financing term.',
       detail:[
-        ['Amount','Not published yet.'],
-        ['Use of funds','Should map to named operating milestones and hiring or vendor needs.'],
-        ['Milestone logic','Capital should purchase specific reductions in product, market, and commercial uncertainty.'],
-        ['Dependencies','The ask should follow the Financial Model, pilot roadmap, and legal/company setup.']
+        ['Amount','$650,000 pre-seed planning target.'],
+        ['Use of funds','$200K product/engineering; $110K security/infrastructure; $110K pilot delivery/CS; $100K founder-led GTM; $50K legal/finance/ops; $80K reserve.'],
+        ['Milestone logic','Paid pilot proof → recurring conversion → repeatable implementation → production/security readiness → enough evidence to choose the next financing or operating path.'],
+        ['Terms','Instrument, valuation/cap, minimum check, and governance terms remain TBD with counsel and investors.']
       ],
-      source:'Investment ask has not been finalized.',
+      source:'Agent First Investment Ask & Use of Funds v1.0, derived from Financial Model v1.0. The $650K amount is a management planning target, not a securities offering or forecast.',
       purpose:'Give investors a transparent explanation of what capital would accomplish and what proof should exist afterward.',
-      next:'Next: complete Financials, then turn the use-of-funds logic into an investor-ready ask.',
-      material:{label:'Investment Ask',url:null,status:'BUILDING'},
+      next:'Next: pair this memo with the Investor Pitch Deck and replace planning assumptions with paid-pilot evidence as it arrives.',
+      material:{label:'Investment Ask & Use of Funds',url:'investment-ask.html',status:'LIVE'},
       related:['financials','roadmap','evidence']
     },
     evidence:{
@@ -635,7 +635,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'business-plan',name:'Full Business Plan',roles:['client','investor','partner'],status:'LIVE',url:'business-plan.html',kind:'open'},
     {id:'financial-model',name:'Financial Model',roles:['investor'],status:'LIVE',url:'financial-model.html',kind:'open',permission:'investor_diligence'},
     {id:'pitch-deck',name:'Investor Pitch Deck',roles:['investor'],status:'BUILDING',url:null,kind:'download',permission:'investor_diligence'},
-    {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'BUILDING',url:null,kind:'open',permission:'investor_diligence'},
+    {id:'investment-ask',name:'Investment Ask / Use of Funds',roles:['investor'],status:'LIVE',url:'investment-ask.html',kind:'open',permission:'investor_diligence'},
     {id:'gtm-plan',name:'Marketing / GTM Plan',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'case-studies',name:'Case Studies & Pilot Results',roles:['client','investor','partner'],status:'BUILDING',url:null,kind:'open'},
     {id:'founder-story',name:'Founder Story / Video',roles:['investor','partner'],status:'BUILDING',url:null,kind:'open'},
