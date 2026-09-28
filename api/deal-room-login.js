@@ -1,4 +1,4 @@
-const AUTH_ORIGIN='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app';
+const AUTH_ORIGIN='https://agent-first-gamma.vercel.app';
 function cookie(token){
   return 'af_private_access='+encodeURIComponent(token)+'; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age='+(60*60*12);
 }

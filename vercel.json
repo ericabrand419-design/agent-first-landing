@@ -44,6 +44,14 @@
     {
       "source": "/deal-room/media",
       "destination": "/media-library.html"
+    },
+    {
+      "source": "/deal-room/pilot",
+      "destination": "/pilot-system.html"
+    },
+    {
+      "source": "/deal-room/evidence",
+      "destination": "/evidence-register.html"
     }
   ]
 }
