@@ -1,4 +1,4 @@
-const AUTH_ORIGIN='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app';
+const AUTH_ORIGIN='https://agent-first-gamma.vercel.app';
 function readCookie(request,name){
   const raw=request.headers.get('cookie')||'';
   const pair=raw.split(';').map(v=>v.trim()).find(v=>v.startsWith(name+'='));

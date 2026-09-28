@@ -1,4 +1,4 @@
-const AUTH_ORIGIN='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app';
+const AUTH_ORIGIN='https://agent-first-gamma.vercel.app';
 const DEMO_PORTAL=AUTH_ORIGIN+'/portal.html';
 
 function normalizeEmail(value){ return String(value||'').trim().toLowerCase(); }
