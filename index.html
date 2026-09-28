@@ -127,6 +127,8 @@
   .bg-texture-darkgrad{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px),var(--grad-navy)!important;background-size:22px 22px,auto!important;}
 
   @media (max-width:900px){
+    html,body{min-height:100%;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+    body{position:static!important}
     .section{padding:56px 24px}
     .ds-display{font-size:34px}
     .ds-hero{font-size:26px}
