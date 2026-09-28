@@ -18,6 +18,10 @@
   ],
   "rewrites": [
     {
+      "source": "/consulting",
+      "destination": "/consulting.html"
+    },
+    {
       "source": "/deal-room",
       "destination": "/deal-room-workspace.html"
     },
