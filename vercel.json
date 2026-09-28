@@ -56,6 +56,38 @@
     {
       "source": "/deal-room/execution-readiness",
       "destination": "/execution-readiness.html"
+    },
+    {
+      "source": "/deal-room/pilot-operations-manual",
+      "destination": "/pilot-operations-manual.html"
+    },
+    {
+      "source": "/deal-room/security-buyer-pack",
+      "destination": "/security-buyer-pack.html"
+    },
+    {
+      "source": "/deal-room/founder-sales-system",
+      "destination": "/founder-sales-system.html"
+    },
+    {
+      "source": "/deal-room/recallya-crm",
+      "destination": "/recallya-crm-spec.html"
+    },
+    {
+      "source": "/deal-room/evidence-standard",
+      "destination": "/evidence-standard.html"
+    },
+    {
+      "source": "/deal-room/founder-narrative",
+      "destination": "/founder-investor-narrative.html"
+    },
+    {
+      "source": "/deal-room/audit",
+      "destination": "/deal-room-audit.html"
+    },
+    {
+      "source": "/deal-room/readiness-control-center",
+      "destination": "/readiness-control-center.html"
     }
   ]
 }
