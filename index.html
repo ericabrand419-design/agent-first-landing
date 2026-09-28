@@ -955,7 +955,7 @@
   <button class="af-demo-close" id="af-demo-close" type="button" aria-label="Close demo access">×</button>
   <div class="af-demo-kicker">Private interactive demo</div>
   <h2>See Agent First from the inside.</h2>
-  <p>Request private access with your work email. Requests are reviewed before access is issued. Once approved, you’ll receive one activation link and set one password for the Deal Room and private product demo.</p>
+  <p>Request private access with your work email. The private product is a controlled evaluation environment using fictional or appropriately de-identified material. Requests are reviewed before access is issued. Once approved, you’ll receive one activation link and set one password for the Deal Room and private product demo.</p>
 
   <form id="af-demo-request-form" class="af-demo-form">
     <div>
@@ -1027,7 +1027,7 @@
     delivery.append('name',name);
     delivery.append('email',email);
     delivery.append('company',company);
-    delivery.append('message','Requested access to the private Agent First interactive demo. This request requires owner approval before an activation invitation is issued.');
+    delivery.append('message','Requested access to the private Agent First controlled-evaluation demo. This request requires owner approval before an activation invitation is issued. Proprietary production data is not requested through this demo.');
 
     fetch('https://api.web3forms.com/submit',{
       method:'POST',
@@ -1043,7 +1043,7 @@
       btn.disabled=true;
       btn.textContent='Request received';
       status.style.color='#177a55';
-      status.textContent='Your request was received. Agent First reviews private demo requests before issuing access. If approved, you’ll receive an activation link for the Deal Room and product demo.';
+      status.textContent='Your request was received. Agent First reviews private demo requests before issuing access. If approved, you’ll receive an activation link for the Deal Room and controlled-evaluation product demo. Please do not upload proprietary production material into the evaluation environment.';
       activate.hidden=true;
       activate.removeAttribute('href');
     }).catch(function(err){
