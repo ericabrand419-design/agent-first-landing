@@ -122,7 +122,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     <div class="brandMark" aria-hidden="true">
       <svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTop" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottom" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTop)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottom)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
-    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v1.2 · Updated Sep 27, 2026 · Canonical plans and security-gated GTM synchronized</div></div>
+    <div class="brandStack"><div class="brand">AGENT FIRST</div><div class="tag">Company Deal Room · Keep the human. Upgrade the agent.</div><div class="versionMeta">v1.3 · Updated Sep 28, 2026 · Company operations, evidence roadmap, and media library synchronized</div></div>
   </div>
   <div class="topActions">
     <a href="/deal-room-v1">◫ Archive v1</a>
@@ -185,6 +185,9 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
         <a href="customer-faq.html" target="_blank" rel="noopener" onclick="trackMaterial('customer-faq','open')">Customer FAQ ↗</a>
         <a href="how-it-works.html" target="_blank" rel="noopener" onclick="trackMaterial('how-it-works','open')">How It Works ↗</a>
         <a href="business-plan.html" target="_blank" rel="noopener" onclick="trackMaterial('business-plan','open')">Full Business Plan ↗</a>
+        <a href="/deal-room/company-operations" target="_blank" rel="noopener" onclick="trackMaterial('company-operations','open')">Company Ops ↗</a>
+        <a href="/deal-room/roadmap" target="_blank" rel="noopener" onclick="trackMaterial('evidence-roadmap','open')">Evidence Roadmap ↗</a>
+        <a href="/deal-room/media" target="_blank" rel="noopener" onclick="trackMaterial('media-library','open')">Media Library ↗</a>
         <a href="pilot-prospectus.html" target="_blank" rel="noopener" onclick="trackMaterial('pilot-prospectus','open');trackSpecialLink('pilot')">Pilot Prospectus ↗</a>
         <a href="pilot-operations.html" target="_blank" rel="noopener" onclick="trackMaterial('pilot-operations','open')">Pilot Package ↗</a>
         <a href="pilot-security-faq.html" target="_blank" rel="noopener" onclick="trackMaterial('security','open')">Security / FAQ ↗</a>
@@ -713,7 +716,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       source:'Business Plan v1.3 contains the revised sequence: controlled demo/evaluation → security architecture review → critical remediation → hardened pilot environment → real production pilots → formal compliance/assurance as buyer requirements justify it.',
       purpose:'Show that the company knows the next sequence of proof rather than simply maintaining a long wish list.',
       next:'Next: tie roadmap milestones to the Financial Model and any eventual Investment Ask.',
-      material:{label:'Operating Roadmap',url:'business-plan.html#roadmap',status:'LIVE'},
+      material:{label:'Operating Roadmap',url:'/deal-room/roadmap',status:'LIVE'},
       related:['pilot','financials','ask']
     }
   };
@@ -778,6 +781,9 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
     {id:'profile-checklist',name:'Client Profile Checklist',roles:['client','partner'],status:'LIVE',url:'agent-first-client-profile-checklist.pdf',kind:'download'},
     {id:'implementation',name:'Implementation Guide',roles:['client'],status:'LIVE',url:'pilot-operations.html#implementation',kind:'open'},
     {id:'security',name:'Security, Data & Pilot FAQ',roles:['client','investor'],status:'LIVE',url:'pilot-security-faq.html',kind:'open'},
+    {id:'company-operations',name:'Company / Legal / Operational Infrastructure',roles:['client','investor','partner'],status:'LIVE',url:'/deal-room/company-operations',kind:'open'},
+    {id:'evidence-roadmap',name:'Roadmap & Milestones',roles:['client','investor','partner'],status:'LIVE',url:'/deal-room/roadmap',kind:'open'},
+    {id:'media-library',name:'Media & Visual Library',roles:['client','investor','partner'],status:'LIVE',url:'/deal-room/media',kind:'open'},
     {id:'marketing-plan',name:'Marketing & GTM Plan',roles:['investor','partner'],status:'LIVE',url:'marketing-plan.html',kind:'open'},
     {id:'business-plan',name:'Full Business Plan',roles:['client','investor','partner'],status:'LIVE',url:'business-plan.html',kind:'open'},
     {id:'financial-model',name:'Financial Model',roles:['investor'],status:'LIVE',url:'financial-model.html',kind:'open',permission:'investor_diligence'},

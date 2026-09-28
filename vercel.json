@@ -32,6 +32,18 @@
     {
       "source": "/pilot-operations",
       "destination": "/pilot-operations.html"
+    },
+    {
+      "source": "/deal-room/company-operations",
+      "destination": "/company-operations.html"
+    },
+    {
+      "source": "/deal-room/roadmap",
+      "destination": "/roadmap-milestones.html"
+    },
+    {
+      "source": "/deal-room/media",
+      "destination": "/media-library.html"
     }
   ]
 }
