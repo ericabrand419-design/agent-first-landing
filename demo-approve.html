@@ -44,7 +44,7 @@ code{display:block;white-space:pre-wrap;word-break:break-all;background:#11162c;
       <code id="link"></code>
       <div class="actions">
         <button id="copyBtn" class="ghost" type="button">Copy link</button>
-        <button id="openBtn" class="primary" type="button">Open demo</button>
+        <button id="openBtn" class="primary" type="button">Open Deal Room activation</button><button id="openDemoBtn" class="ghost" type="button">Open demo activation</button>
         <button id="emailBtn" class="ghost" type="button">Email link</button>
       </div>
     </div>
@@ -57,6 +57,7 @@ code{display:block;white-space:pre-wrap;word-break:break-all;background:#11162c;
   var result=document.getElementById('result');
   var linkEl=document.getElementById('link');
   var currentUrl='';
+  var currentDemoUrl='';
   var currentEmail='';
 
   form.addEventListener('submit',function(e){
@@ -75,12 +76,13 @@ code{display:block;white-space:pre-wrap;word-break:break-all;background:#11162c;
     }).then(function(res){
       return res.json().then(function(data){return {ok:res.ok,data:data};});
     }).then(function(r){
-      if(!r.ok||!r.data||!r.data.portalUrl)throw new Error(r.data&&r.data.error||'Could not create demo access.');
-      currentUrl=r.data.portalUrl;
+      if(!r.ok||!r.data||!r.data.dealRoomUrl)throw new Error(r.data&&r.data.error||'Could not create private access.');
+      currentUrl=r.data.dealRoomUrl;
+      currentDemoUrl=r.data.portalUrl||'';
       linkEl.textContent=currentUrl;
       document.getElementById('expires').textContent='This invitation expires in '+(r.data.expiresInDays||7)+' days.';
       result.hidden=false;
-      status.style.color='#177a55';status.textContent='Approved.';
+      status.style.color='#177a55';status.textContent='Approved. Open the generated link to set or reset the shared Deal Room + Demo password.';
     }).catch(function(err){
       status.style.color='#b42318';status.textContent=err&&err.message?err.message:'Approval failed.';
     }).finally(function(){
@@ -95,10 +97,11 @@ code{display:block;white-space:pre-wrap;word-break:break-all;background:#11162c;
     setTimeout(()=>this.textContent='Copy link',1200);
   };
   document.getElementById('openBtn').onclick=function(){if(currentUrl)window.open(currentUrl,'_blank','noopener');};
+  document.getElementById('openDemoBtn').onclick=function(){if(currentDemoUrl)window.open(currentDemoUrl,'_blank','noopener');};
   document.getElementById('emailBtn').onclick=function(){
     if(!currentUrl||!currentEmail)return;
-    var subject=encodeURIComponent('Your private Agent First demo');
-    var body=encodeURIComponent('Your Agent First private demo is ready:\n\n'+currentUrl+'\n\nThis invitation expires in 7 days.');
+    var subject=encodeURIComponent('Your private Agent First access');
+    var body=encodeURIComponent('Your Agent First private Deal Room + Demo access is ready:\n\n'+currentUrl+'\n\nThis invitation expires in 7 days.');
     location.href='mailto:'+encodeURIComponent(currentEmail)+'?subject='+subject+'&body='+body;
   };
 })();
