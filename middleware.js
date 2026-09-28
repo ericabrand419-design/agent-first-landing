@@ -23,4 +23,4 @@ export default async function middleware(request){
   url.searchParams.set('returnTo',new URL(request.url).pathname);
   return Response.redirect(url,302);
 }
-export const config={matcher:['/deal-room','/deal-room-workspace.html','/business-plan.html','/financial-model.html','/investment-ask.html','/investor-deck.html','/investor-brief.html','/financial-summary.html','/founder-story.html','/investor-faq.html','/due-diligence.html','/customer-overview.html','/customer-product-video.html','/roi-calculator.html','/industry-use-cases.html','/customer-faq.html']};
+export const config={matcher:['/deal-room','/deal-room-workspace.html','/business-plan.html','/marketing-plan.html','/financial-model.html','/investment-ask.html','/investor-deck.html','/investor-brief.html','/financial-summary.html','/founder-story.html','/investor-faq.html','/due-diligence.html','/customer-overview.html','/customer-product-video.html','/roi-calculator.html','/industry-use-cases.html','/customer-faq.html']};
