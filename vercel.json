@@ -1,17 +1,6 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [
-        {
-          "type": "host",
-          "value": "www.myagentfirst.com"
-        }
-      ],
-      "destination": "https://myagentfirst.com/:path*",
-      "permanent": true
-    },
-    {
       "source": "/client-resolution.html",
       "destination": "/decision-resolution-time-calculator.html",
       "permanent": true
