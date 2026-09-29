@@ -15,13 +15,11 @@
 
   <section id="loginMode">
     <div class="ey">PRIVATE COMPANY BRIEFING</div>
-    <h1>Sign in to the Deal Room.</h1>
-    <p class="muted">Use the same invited Agent First account you use for the private product demo.</p>
+    <h1>Enter the Deal Room.</h1>
+    <p class="muted">Use the email address that was approved for Agent First private access. No password is required.</p>
     <form id="loginForm">
-      <label for="loginEmail">Email</label>
+      <label for="loginEmail">Approved email</label>
       <input id="loginEmail" type="email" autocomplete="email" required>
-      <label for="loginPassword">Password</label>
-      <input id="loginPassword" type="password" autocomplete="current-password" required>
       <label for="loginRole">I am evaluating Agent First as a…</label>
       <select id="loginRole">
         <option value="client">Prospective Client</option>
@@ -32,31 +30,15 @@
       <button type="submit">Enter Deal Room →</button>
       <div class="msg" id="loginMsg" aria-live="polite"></div>
     </form>
-    <div class="modeLink" id="showActivate">Have an invitation link? Activate it here.</div><a href="/demo-approve.html" style="display:block;margin-top:10px;text-align:center;font-size:12px;color:#6c35d4;font-weight:750;text-decoration:none">Owner reset access →</a><a href="/?demo=request" style="display:block;margin-top:12px;text-align:center;font-size:12px;color:#6c35d4;font-weight:750;text-decoration:none">Need access? Request the Deal Room + Private Demo →</a>
+    <a href="/demo-approve.html" style="display:block;margin-top:10px;text-align:center;font-size:12px;color:#6c35d4;font-weight:750;text-decoration:none">Owner: approve or reset access →</a>
+    <a href="/?demo=request" style="display:block;margin-top:12px;text-align:center;font-size:12px;color:#6c35d4;font-weight:750;text-decoration:none">Need access? Request the Deal Room + Private Demo →</a>
   </section>
 
   <section id="activateMode" class="hidden">
-    <div class="ey">ACTIVATE INVITATION</div>
-    <h1>Create your private access.</h1>
-    <p class="muted">Set one password for the Agent First Deal Room and private product demo.</p>
-    <form id="activateForm">
-      <label for="activateEmail">Email</label>
-      <input id="activateEmail" type="email" autocomplete="email" required>
-      <label for="activatePassword">Create password</label>
-      <input id="activatePassword" type="password" minlength="10" autocomplete="new-password" required>
-      <label for="activateConfirm">Confirm password</label>
-      <input id="activateConfirm" type="password" minlength="10" autocomplete="new-password" required>
-      <label for="activateRole">I am evaluating Agent First as a…</label>
-      <select id="activateRole">
-        <option value="client">Prospective Client</option>
-        <option value="investor">Investor / Accelerator</option>
-        <option value="partner">Partner / Advisor</option>
-        <option value="all">Other / Explore Everything</option>
-      </select>
-      <button type="submit">Activate & enter →</button>
-      <div class="msg" id="activateMsg" aria-live="polite"></div>
-    </form>
-    <div class="modeLink" id="showLogin">Already activated? Sign in.</div>
+    <div class="ey">ACTIVATING PRIVATE ACCESS</div>
+    <h1>Opening your Deal Room.</h1>
+    <p class="muted">Verifying the approved invitation and creating your private session.</p>
+    <div class="msg" id="activateMsg" aria-live="polite"></div>
   </section>
 
   <div class="fine">Invitation links expire after seven days. Signed-in sessions expire after twelve hours. Sensitive diligence material can require additional permission.</div>
@@ -68,44 +50,56 @@
   var inviteEmail=(q.get('invite_email')||q.get('email')||'').trim().toLowerCase();
   var inviteToken=(q.get('invite_token')||'').trim();
   var login=document.getElementById('loginMode'), activate=document.getElementById('activateMode');
-  function mode(which){login.classList.toggle('hidden',which!=='login');activate.classList.toggle('hidden',which!=='activate');}
-  function saveRole(id){var v=document.getElementById(id).value;localStorage.setItem('af_deal_room_role',v);}
-  function msg(id,text,good){var el=document.getElementById(id);el.style.color=good?'#177a55':'#b42318';el.textContent=text||'';}
-  document.getElementById('showActivate').onclick=function(){mode('activate');};
-  document.getElementById('showLogin').onclick=function(){mode('login');};
+
+  function show(which){
+    login.classList.toggle('hidden',which!=='login');
+    activate.classList.toggle('hidden',which!=='activate');
+  }
+  function saveRole(){
+    localStorage.setItem('af_deal_room_role',document.getElementById('loginRole').value);
+  }
+  function msg(id,text,good){
+    var el=document.getElementById(id);
+    el.style.color=good?'#177a55':'#b42318';
+    el.textContent=text||'';
+  }
+  async function send(action,payload){
+    var r=await fetch('/api/deal-room-login',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify(Object.assign({action:action},payload||{}))
+    });
+    var data=await r.json().catch(function(){return {};});
+    if(!r.ok) throw new Error(data.error||'Could not verify access.');
+    return data;
+  }
 
   fetch('/api/deal-room-session',{cache:'no-store'}).then(function(r){return r.json();}).then(function(s){
-    if(s.authenticated){location.replace(returnTo);}
+    if(s.authenticated) location.replace(returnTo);
   }).catch(function(){});
 
   if(inviteEmail&&inviteToken){
-    document.getElementById('activateEmail').value=inviteEmail;
-    document.getElementById('loginEmail').value=inviteEmail;
-    mode('activate');
+    show('activate');
+    send('activate-email',{email:inviteEmail,inviteToken:inviteToken}).then(function(){
+      location.replace(returnTo);
+    }).catch(function(err){
+      msg('activateMsg',err.message||'Could not activate this invitation.');
+    });
+  }else{
+    show('login');
   }
 
   document.getElementById('loginForm').addEventListener('submit',async function(e){
-    e.preventDefault();msg('loginMsg','');
+    e.preventDefault();
+    msg('loginMsg','');
     try{
-      var r=await fetch('/api/deal-room-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',email:document.getElementById('loginEmail').value,password:document.getElementById('loginPassword').value})});
-      var data=await r.json();
-      if(!r.ok)throw new Error(data.error||'Could not sign in.');
-      saveRole('loginRole');location.assign(returnTo);
-    }catch(err){msg('loginMsg',err.message||'Could not sign in.');}
-  });
-
-  document.getElementById('activateForm').addEventListener('submit',async function(e){
-    e.preventDefault();msg('activateMsg','');
-    var p=document.getElementById('activatePassword').value,c=document.getElementById('activateConfirm').value;
-    if(p.length<10){msg('activateMsg','Use at least 10 characters.');return;}
-    if(p!==c){msg('activateMsg','Those passwords do not match.');return;}
-    if(!inviteToken){msg('activateMsg','Open the invitation link you received from Agent First.');return;}
-    try{
-      var r=await fetch('/api/deal-room-login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'register',email:document.getElementById('activateEmail').value,password:p,inviteToken:inviteToken})});
-      var data=await r.json();
-      if(!r.ok)throw new Error(data.error||'Could not activate access.');
-      saveRole('activateRole');location.assign(returnTo);
-    }catch(err){msg('activateMsg',err.message||'Could not activate access.');}
+      var email=document.getElementById('loginEmail').value.trim().toLowerCase();
+      await send('email-login',{email:email});
+      saveRole();
+      location.assign(returnTo);
+    }catch(err){
+      msg('loginMsg',err.message||'Could not sign in.');
+    }
   });
 })();
 </script>
