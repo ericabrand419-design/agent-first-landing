@@ -5,8 +5,8 @@ function cookie(token){
 module.exports=async function handler(req,res){
   if(req.method!=='POST'){res.setHeader('Allow','POST');return res.status(405).json({ok:false,error:'Method not allowed'});}
   const body=req.body||{};
-  const action=String(body.action||'login');
-  if(!['login','register'].includes(action)) return res.status(400).json({ok:false,error:'Unsupported action'});
+  const action=String(body.action||'email-login');
+  if(!['email-login','activate-email','login','register'].includes(action)) return res.status(400).json({ok:false,error:'Unsupported action'});
   const upstream=await fetch(AUTH_ORIGIN+'/api/auth',{
     method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
     body:JSON.stringify({
