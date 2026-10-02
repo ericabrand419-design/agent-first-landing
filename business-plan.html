@@ -15,12 +15,12 @@
     .then(function(r){return r.json();})
     .then(function(s){
       if(!s||!s.authenticated||!Array.isArray(s.permissions)||s.permissions.indexOf('deal_room')<0){
-        location.replace('/deal-room-access.html?returnTo='+encodeURIComponent('/business-plan.html'));
+        location.replace('/deal-room-v1.html?access=required&returnTo='+encodeURIComponent('/business-plan.html'));
         return;
       }
       document.documentElement.classList.remove('authPending');
     })
-    .catch(function(){location.replace('/deal-room-access.html?returnTo='+encodeURIComponent('/business-plan.html'));});
+    .catch(function(){location.replace('/deal-room-v1.html?access=required&returnTo='+encodeURIComponent('/business-plan.html'));});
 })();
 </script></head>
 <body>
