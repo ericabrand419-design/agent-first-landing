@@ -46,7 +46,7 @@ module.exports=async function handler(req,res){
   const token=result.data.token;
   const q='?invite_email='+encodeURIComponent(email)+'&invite_token='+encodeURIComponent(token);
   const portalUrl=DEMO_PORTAL+q;
-  const dealRoomUrl='https://myagentfirst.com/deal-room-access.html'+q;
+  const dealRoomUrl='https://myagentfirst.com/deal-room-v1.html'+q;
   console.log(JSON.stringify({event:'demo_access_invited',emailDomain:(email.split('@')[1]||''),at:new Date().toISOString()}));
   return res.status(200).json({ok:true,portalUrl,dealRoomUrl,expiresInDays:Number(result.data.expiresInDays||7)});
 };
