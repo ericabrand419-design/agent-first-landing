@@ -145,6 +145,15 @@ button{cursor:pointer}
 .footer{padding:30px 0;background:#080c1b;color:#929ab6}
 .footer-in{display:flex;justify-content:space-between;gap:18px;align-items:center}
 .footer strong{color:#fff;font-size:11px;letter-spacing:.16em}
+.access-shell{padding:18px 0;background:#fff7e8;border-bottom:1px solid #ead8ae}
+.access-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.72fr);gap:24px;align-items:center;padding:20px 22px;background:#fff;border:1px solid #e7dfcd;border-radius:18px;box-shadow:var(--shadow)}
+.access-copy h2{margin:5px 0 7px;font-size:24px;letter-spacing:-.025em}
+.access-copy p{margin:0;color:var(--muted)}
+.access-form{display:grid;grid-template-columns:1fr auto;gap:9px}
+.access-form input{min-height:44px;border:1px solid #d9d5e5;border-radius:10px;padding:10px 12px}
+.access-status{grid-column:1/-1;min-height:18px;font-size:12px;color:var(--muted)}
+.owner-access{grid-column:1/-1;font-size:12px;color:var(--muted)}
+.owner-access a{font-weight:800;color:var(--violet)}
 .hidden{display:none!important}
 @media(max-width:900px){
   .wrap{width:min(100% - 32px,1160px)}
@@ -190,10 +199,29 @@ button{cursor:pointer}
       <a class="nav-link" href="#briefing">Start Here</a>
       <a class="nav-link" href="#company">Company</a>
       <a class="nav-link" href="#materials">Materials</a>
+      <a class="nav-link" href="?access=required#access">Private access</a>
       <a class="btn btn-primary" href="index.html#contact">Talk with Agent First</a>
     </div>
   </div>
 </nav>
+
+<section id="access" class="access-shell hidden" aria-live="polite">
+  <div class="wrap">
+    <div class="access-card">
+      <div class="access-copy">
+        <div class="label gradient-text">Private material access</div>
+        <h2 id="accessTitle">Open the material you were invited to review.</h2>
+        <p id="accessCopy">Use the approved email attached to your invitation. If you are Erica Love, owner access uses your approved owner account and returns you directly to the requested material.</p>
+      </div>
+      <form id="accessForm" class="access-form">
+        <input id="accessEmail" type="email" autocomplete="email" placeholder="Approved email" required>
+        <button class="btn btn-primary" type="submit">Continue →</button>
+        <div id="accessStatus" class="access-status"></div>
+        <div class="owner-access" id="ownerAccessNote">Owner: after signing in with your approved owner email, use <a href="/demo-approve.html">Owner approval controls</a> to issue or reset private invitations.</div>
+      </form>
+    </div>
+  </div>
+</section>
 
 <header class="hero-shell">
   <div class="wrap hero-inner">
@@ -499,6 +527,64 @@ button{cursor:pointer}
 
 <script>
 (function(){
+  var accessQuery=new URLSearchParams(location.search);
+  var accessMode=accessQuery.get('access')||'';
+  var returnTo=accessQuery.get('returnTo')||'';
+  var inviteEmail=(accessQuery.get('invite_email')||'').trim().toLowerCase();
+  var inviteToken=(accessQuery.get('invite_token')||'').trim();
+  var accessPanel=document.getElementById('access');
+  var accessForm=document.getElementById('accessForm');
+  var accessStatus=document.getElementById('accessStatus');
+
+  function accessMessage(text,good){
+    if(!accessStatus)return;
+    accessStatus.textContent=text||'';
+    accessStatus.style.color=good?'#177a55':'#8a5c15';
+  }
+  async function accessSend(action,payload){
+    var r=await fetch('/api/deal-room-login',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(Object.assign({action:action},payload||{}))
+    });
+    var data=await r.json().catch(function(){return {};});
+    if(!r.ok)throw new Error(data.error||'Could not verify private access.');
+    return data;
+  }
+  function cleanDealRoomUrl(){
+    return '/deal-room-v1.html';
+  }
+  if(accessPanel&&(accessMode==='required'||inviteEmail&&inviteToken)){
+    accessPanel.classList.remove('hidden');
+  }
+  if(inviteEmail&&inviteToken){
+    document.getElementById('accessTitle').textContent='Activating private access…';
+    document.getElementById('accessCopy').textContent='Your invitation is being verified. You will be sent to the requested Agent First material automatically.';
+    accessForm.classList.add('hidden');
+    accessSend('activate-email',{email:inviteEmail,inviteToken:inviteToken}).then(function(){
+      location.replace(returnTo||cleanDealRoomUrl());
+    }).catch(function(err){
+      accessForm.classList.remove('hidden');
+      document.getElementById('accessEmail').value=inviteEmail;
+      document.getElementById('accessTitle').textContent='This invitation needs attention.';
+      accessMessage(err.message||'Could not activate this invitation.');
+    });
+  }
+  if(accessForm){
+    accessForm.addEventListener('submit',function(e){
+      e.preventDefault();
+      var email=document.getElementById('accessEmail').value.trim().toLowerCase();
+      accessMessage('Verifying access…');
+      accessSend('email-login',{email:email}).then(function(data){
+        var isOwner=Array.isArray(data.roles)&&data.roles.indexOf('admin')>=0;
+        accessMessage(isOwner?'Owner access verified. Opening your material…':'Access verified. Opening your material…',true);
+        location.assign(returnTo||cleanDealRoomUrl());
+      }).catch(function(err){
+        accessMessage(err.message||'Could not verify access.');
+      });
+    });
+  }
+
   var roles = {
     client:{
       note:'<strong>Recommended path:</strong> Product → Pilot → Measurement → Pricing. About 7 minutes.',
