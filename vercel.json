@@ -19,7 +19,7 @@
   "rewrites": [
     {
       "source": "/deal-room",
-      "destination": "/deal-room-workspace.html"
+      "destination": "/deal-room-v1.html"
     },
     {
       "source": "/deal-room-v1",
