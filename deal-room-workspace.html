@@ -928,11 +928,11 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   window.setOutput=function(v){output=v;renderOutput();trackEvent('Output Viewed',{output:v,section:current,role:role});};
   window.clearHistory=function(){history=[current];renderMemory();};
   window.handleAccessState=function(){
-    if(!authActive){location.href='/deal-room-access.html';return;}
+    if(!authActive){location.href='/deal-room-v1.html?access=required';return;}
     if(sessionVisitorId){
-      fetch('/api/deal-room-logout',{method:'POST'}).finally(function(){location.href='/deal-room-access.html';});
+      fetch('/api/deal-room-logout',{method:'POST'}).finally(function(){location.href='/deal-room-v1.html?access=required';});
     } else {
-      location.href='/deal-room-access.html';
+      location.href='/deal-room-v1.html?access=required';
     }
   };
   window.toggleFocus=function(){
