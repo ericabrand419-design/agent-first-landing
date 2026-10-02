@@ -153,7 +153,10 @@ button{cursor:pointer}
 .access-form input{min-height:44px;border:1px solid #d9d5e5;border-radius:10px;padding:10px 12px}
 .access-status{grid-column:1/-1;min-height:18px;font-size:12px;color:var(--muted)}
 .owner-access{grid-column:1/-1;font-size:12px;color:var(--muted)}
-.owner-access a{font-weight:800;color:var(--violet)}
+.owner-access a,.owner-access button{font-weight:800;color:var(--violet)}
+.owner-toggle{border:0;background:none;padding:0;cursor:pointer}
+.owner-fields{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:2px}
+.owner-fields input{min-height:44px;border:1px solid #d9d5e5;border-radius:10px;padding:10px 12px}
 .hidden{display:none!important}
 @media(max-width:900px){
   .wrap{width:min(100% - 32px,1160px)}
@@ -217,7 +220,11 @@ button{cursor:pointer}
         <input id="accessEmail" type="email" autocomplete="email" placeholder="Approved email" required>
         <button class="btn btn-primary" type="submit">Continue →</button>
         <div id="accessStatus" class="access-status"></div>
-        <div class="owner-access" id="ownerAccessNote">Owner: after signing in with your approved owner email, use <a href="/demo-approve.html">Owner approval controls</a> to issue or reset private invitations.</div>
+        <div class="owner-access" id="ownerAccessNote"><button class="owner-toggle" id="ownerToggle" type="button">Erica Love / owner access</button> · <a href="/demo-approve.html">Invitation controls</a></div>
+        <div class="owner-fields hidden" id="ownerFields">
+          <input id="ownerCode" type="password" autocomplete="off" placeholder="Owner approval code">
+          <button class="btn btn-primary" id="ownerContinue" type="button">Owner sign in →</button>
+        </div>
       </form>
     </div>
   </div>
@@ -570,13 +577,35 @@ button{cursor:pointer}
       accessMessage(err.message||'Could not activate this invitation.');
     });
   }
+  var ownerToggle=document.getElementById('ownerToggle');
+  var ownerFields=document.getElementById('ownerFields');
+  var ownerContinue=document.getElementById('ownerContinue');
+  if(ownerToggle&&ownerFields){
+    ownerToggle.addEventListener('click',function(){ownerFields.classList.toggle('hidden');});
+  }
+  if(ownerContinue){
+    ownerContinue.addEventListener('click',function(){
+      var email=document.getElementById('accessEmail').value.trim().toLowerCase();
+      var code=document.getElementById('ownerCode').value;
+      if(!email){accessMessage('Enter the email you want to use as the owner account.');return;}
+      if(!code){accessMessage('Enter the owner approval code.');return;}
+      accessMessage('Verifying owner access…');
+      accessSend('owner-login',{email:email,approvalCode:code}).then(function(){
+        accessMessage('Erica Love owner access verified. Opening your material…',true);
+        location.assign(returnTo||cleanDealRoomUrl());
+      }).catch(function(err){
+        accessMessage(err.message||'Could not verify owner access.');
+      });
+    });
+  }
+
   if(accessForm){
     accessForm.addEventListener('submit',function(e){
       e.preventDefault();
       var email=document.getElementById('accessEmail').value.trim().toLowerCase();
       accessMessage('Verifying access…');
       accessSend('email-login',{email:email}).then(function(data){
-        var isOwner=Array.isArray(data.roles)&&data.roles.indexOf('admin')>=0;
+        var isOwner=Array.isArray(data.roles)&&data.roles.indexOf('owner')>=0;
         accessMessage(isOwner?'Owner access verified. Opening your material…':'Access verified. Opening your material…',true);
         location.assign(returnTo||cleanDealRoomUrl());
       }).catch(function(err){
