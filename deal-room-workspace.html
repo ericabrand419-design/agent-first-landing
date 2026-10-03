@@ -442,7 +442,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
       source:'Existing product overview, How It Works page, Agent Challenge, and the private working demo.',
       purpose:'Show that Agent First is a working interaction model, not simply an AI concept or a new search box.',
       next:'Next: Pilot explains how to put this into a real workflow with controlled scope and measurable outcomes.',
-      material:{label:'Open Private Product Demo',url:'https://agent-first-gamma.vercel.app/portal.html',status:'LIVE'},
+      material:{label:'Open Private Product Demo',url:'https://demo.myagentfirst.com/portal.html',status:'LIVE'},
       related:['pilot','problem','vision']
     },
     pilot:{
@@ -762,7 +762,7 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
   };
 
   var materials=[
-    {id:'private-demo',name:'Private Product Demo',roles:['client','investor','partner'],status:'LIVE',url:'https://agent-first-gamma.vercel.app/portal.html',kind:'open'},
+    {id:'private-demo',name:'Private Product Demo',roles:['client','investor','partner'],status:'LIVE',url:'https://demo.myagentfirst.com/portal.html',kind:'open'},
     {id:'customer-one-pager',name:'Customer One-Pager / Overview',roles:['client'],status:'LIVE',url:'customer-overview.html',kind:'open'},
     {id:'product-video',name:'75-Second Product Video',roles:['client'],status:'LIVE',url:'customer-product-video.html',kind:'open'},
     {id:'product-overview',name:'Product Overview',roles:['client','investor','partner'],status:'LIVE',url:'customer-overview.html#product',kind:'open'},
@@ -970,10 +970,10 @@ select:focus,input:focus{outline:none;border-color:#9b6bf2;box-shadow:0 0 0 3px 
 
   document.addEventListener('click',function(e){
     var link=e.target.closest('a');
-    if(link && link.href && /index\.html#demo|pilot-program\.html|pricing\.html|how-it-works\.html|agent-challenge\.html|sample-client-profile\.html/.test(link.getAttribute('href')||'')){
+    if(link && link.href && /customer-overview\.html#product|pilot-program\.html|pricing\.html|how-it-works\.html|agent-challenge\.html|sample-client-profile\.html/.test(link.getAttribute('href')||'')){
       var href=link.getAttribute('href')||'';
       trackEvent('Deal Room Link Click',{href:href,role:role,section:current});
-      if(href.indexOf('index.html#demo')>-1) trackEvent('Demo Clicked',{role:role,section:current});
+      if(href.indexOf('customer-overview.html#product')>-1) trackEvent('Demo Clicked',{role:role,section:current});
       if(href.indexOf('pilot-program.html')>-1) trackEvent('Pilot Page Clicked',{role:role,section:current});
     }
   });
