@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">\n<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
 <title>Agent First | Company Briefing & Deal Room</title>
 <meta name="description" content="Explore Agent First: company briefing, product, pilot program, business model, financial materials, investor materials, and supporting documents.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -537,6 +538,7 @@ button{cursor:pointer}
   var accessQuery=new URLSearchParams(location.search);
   var accessMode=accessQuery.get('access')||'';
   var returnTo=accessQuery.get('returnTo')||'';
+  if(!/^\/(?![\/\\])/.test(returnTo))returnTo='';
   var inviteEmail=(accessQuery.get('invite_email')||'').trim().toLowerCase();
   var inviteToken=(accessQuery.get('invite_token')||'').trim();
   var accessPanel=document.getElementById('access');
