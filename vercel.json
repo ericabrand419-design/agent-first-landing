@@ -1,6 +1,26 @@
 {
   "redirects": [
     {
+      "source": "/deal-room",
+      "destination": "/deal-room-v1.html",
+      "permanent": true
+    },
+    {
+      "source": "/deal-room.html",
+      "destination": "/deal-room-v1.html",
+      "permanent": true
+    },
+    {
+      "source": "/deal-room-access",
+      "destination": "/deal-room-v1.html",
+      "permanent": true
+    },
+    {
+      "source": "/deal-room-access.html",
+      "destination": "/deal-room-v1.html",
+      "permanent": true
+    },
+    {
       "source": "/client-resolution.html",
       "destination": "/decision-resolution-time-calculator.html",
       "permanent": true
@@ -17,10 +37,6 @@
     }
   ],
   "rewrites": [
-    {
-      "source": "/deal-room",
-      "destination": "/deal-room-v1.html"
-    },
     {
       "source": "/deal-room-v1",
       "destination": "/deal-room-v1.html"
@@ -91,5 +107,3 @@
     }
   ]
 }
-
-
