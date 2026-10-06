@@ -1,4 +1,4 @@
-const AUTH_ORIGIN='https://agent-first-git-demo-multi-industry-v2-ericabrand419-2140.vercel.app';
+const AUTH_ORIGIN='https://agent-first-gamma.vercel.app';
 function readCookie(req,name){const raw=req.headers.cookie||'';const p=raw.split(';').map(v=>v.trim()).find(v=>v.startsWith(name+'='));return p?decodeURIComponent(p.slice(name.length+1)):'';}
 module.exports=async function handler(req,res){
   const token=readCookie(req,'af_private_access');
