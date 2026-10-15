@@ -140,12 +140,12 @@
         <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;">
           <div class="field-row">
             <label class="field-label" for="pbc-suptax">Supervisor Tax: annual cost of supervisor interruptions</label>
-            <input class="field-input" id="pbc-suptax" type="number" min="0" step="100" value="70000">
+            <input class="field-input" id="pbc-suptax" type="number" min="0" step="100" value="41600">
             <div class="field-hint">From the <a href="supervisor-tax-calculator.html">Supervisor Tax Calculator</a>, monthly cost &times; 12, or your own estimate.</div>
           </div>
           <div class="field-row">
             <label class="field-label" for="pbc-ramp">Ramp Cost: annual cost of new-hire ramp time</label>
-            <input class="field-input" id="pbc-ramp" type="number" min="0" step="100" value="120000">
+            <input class="field-input" id="pbc-ramp" type="number" min="0" step="100" value="102000">
             <div class="field-hint">From the <a href="ramp-cost-estimator.html">New-Hire Ramp Cost Estimator</a>.</div>
           </div>
           <div class="field-row">
@@ -155,7 +155,7 @@
           </div>
           <div class="field-row">
             <label class="field-label" for="pbc-booking">Booking Mistakes: annual cost of missed-rule bookings</label>
-            <input class="field-input" id="pbc-booking" type="number" min="0" step="100" value="18000">
+            <input class="field-input" id="pbc-booking" type="number" min="0" step="100" value="19440">
             <div class="field-hint">From <a href="can-i-book-it.html">Can I Book It?</a>, if booking is part of your operation. Leave at 0 if it isn't.</div>
           </div>
         </div>
@@ -358,5 +358,6 @@
 })();
 </script>
 
+<script src="/labs-numbers.js"></script>
 </body>
 </html>

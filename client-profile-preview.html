@@ -69,6 +69,13 @@
   .pill-violet{background:var(--purplebg);color:var(--violet)}
   .pill-amber{background:var(--amberbg);color:var(--amber)}
 
+  .cpp-rule{display:flex;flex-direction:column;gap:6px;padding:10px 0;border-top:1px dashed var(--line)}
+  .cpp-rule:first-of-type{border-top:0;padding-top:2px}
+  .cpp-badges{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+  .cpp-arrow{color:var(--muted);font-size:12px;font-weight:900}
+  .cpp-badge{display:inline-block;padding:3px 8px;border-radius:999px;font-size:10.5px;font-weight:900;letter-spacing:.05em}
+  .cpp-allow{background:#ecfbf4;color:#177a55}.cpp-deny{background:#fdeaee;color:#c5364a}.cpp-verify{background:#fff6e5;color:#a15c00}
+  .cpp-transfer{background:#f4efff;color:#7c3aed}.cpp-disclose{background:#e8f1ff;color:#2459c4}.cpp-document{background:#eef0f6;color:#4f556c}.cpp-unknown{background:#fff;color:#6d728b;border:1px dashed #c9cbd8}
   .field-block{border:1px solid var(--line);border-radius:var(--radius-md);padding:16px;background:var(--soft)}
 
   @media (max-width:900px){
@@ -122,7 +129,7 @@
           <span class="pill pill-amber">Auto-drafted, needs human review</span>
         </div>
         <div id="cpp-fields" class="grid" style="gap:12px;"></div>
-        <p class="ds-body-sm" style="color:var(--muted);margin-top:16px;">This preview was sorted by simple keyword matching, not by the real Agent First reasoning engine, and it will miss nuance, exceptions, and anything not written in the pasted text. A real Client Profile is built and checked by hand against your actual rules before it's ever used on a live call.</p>
+        <p class="ds-body-sm" style="color:var(--muted);margin-top:16px;">Each line was sorted into one category and given the outcome an agent would see on a live call (ALLOW, VERIFY, TRANSFER and so on). This is simple pattern matching, not the real Agent First build process, and it will miss nuance, exceptions, and anything not written in the pasted text. A real Client Profile is built and checked by hand against your actual rules before it's ever used on a live call.</p>
       </div>
 
       <div class="card-on-dark" id="cpp-after" style="display:none;flex-direction:column;gap:14px;background:var(--navy);border:none;">
@@ -158,63 +165,60 @@
     });
   }
 
-  // Simple keyword-bucket heuristic. Not a real parser, not the product's actual
-  // reasoning engine, a rough sketch to show the shape of a Client Profile.
+  // Rough, rule-by-rule sketch. Each sentence gets ONE best-fit category (scored, word-boundary
+  // patterns, so "within 24 hours" in a fee rule stays a fee rule) and an outcome label in the
+  // same vocabulary Agent First uses on a live call. Not the product's reasoning engine.
   var BUCKETS = [
-    {
-      key: 'eligibility',
-      label: 'Services & eligibility',
-      keywords: ['eligib', 'may ', 'allowed', 'qualify', 'available', 'offer']
-    },
-    {
-      key: 'authorization',
-      label: 'Authorization levels',
-      keywords: ['approval', 'supervisor', 'manager', 'sign-off', 'sign off', 'authoriz']
-    },
-    {
-      key: 'disclosure',
-      label: 'Required language & disclosures',
-      keywords: ['must state', 'disclose', 'inform the customer', 'required to say', 'must tell']
-    },
-    {
-      key: 'escalation',
-      label: 'Escalation & transfer',
-      keywords: ['escalat', 'transfer', 'pull in', 'refer to', 'route to']
-    },
-    {
-      key: 'hours',
-      label: 'Hours, contacts & routing',
-      keywords: ['hours', 'callback', 'business day', 'window', 'contact', 'within']
-    },
-    {
-      key: 'verification',
-      label: 'Identity & verification',
-      keywords: ['id verif', 'identity', 'verify', 'confirm the customer']
-    },
-    {
-      key: 'fees',
-      label: 'Fees, refunds & cancellations',
-      keywords: ['fee', 'refund', 'cancel', 'charge', '$']
-    }
+    { key: 'fees', label: 'Fees, refunds & cancellations', patterns: [[/\b(fees?|refunds?|cancel\w*|charges?|charged|deposit|penalt\w+|waive\w*)\b/, 3], [/\$\s?\d/, 2]] },
+    { key: 'pricing', label: 'Pricing & quotes', patterns: [[/\b(price|prices|pricing|quotes?|quoting|estimates?|cost of|how much)\b/, 3]] },
+    { key: 'scheduling', label: 'Scheduling & availability', patterns: [[/\b(appointments?|schedul\w*|book\w*|same[- ]day|walk[- ]?ins?|reschedul\w*|slots?|waitlist)\b/, 3], [/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|weekends?|weekdays?)\b/, 1]] },
+    { key: 'services', label: 'Services & eligibility', patterns: [[/\b(eligib\w*|qualif\w*|loaners?|shuttle|rideshare|rental|services?|offer\w*|available|covered|coverage)\b/, 2]] },
+    { key: 'verification', label: 'Identity & verification', patterns: [[/\b(id|identity|identification|verif\w*|license|insurance card|date of birth|dob|last four|security question)\b/, 3]] },
+    { key: 'authorization', label: 'Authorization & approvals', patterns: [[/\b(approv\w*|sign[- ]?off|authoriz\w*|permission)\b/, 3], [/\b(supervisor|manager)\b/, 1]] },
+    { key: 'escalation', label: 'Escalation, transfers & alerts', patterns: [[/\b(transfer\w*|escalat\w*|route\w*|refer\w*|alert|call ?back|callback|hand ?off|pull in)\b/, 3], [/\b(send|forward)\b[^.]*\bto\b/, 2]] },
+    { key: 'disclosure', label: 'Required language & disclosures', patterns: [[/\b(disclos\w*|must (state|say|tell|inform|read|advise)|required to (say|state|read)|read (the|this) (script|statement)|recorded line)\b/, 4]] },
+    { key: 'hours', label: 'Hours & contacts', patterns: [[/\b(open|closed|hours of operation|business hours|office hours)\b/, 2], [/\b\d{1,2}(:\d{2})?\s?(am|pm)\b/, 3], [/\b(phone|extension|ext\.|email|contact)\b/, 1]] }
+  ];
+
+  var OUTCOMES = [
+    { label: 'DO NOT ALLOW', cls: 'deny', re: /\b(do not|don['’]t|never|must not|may not|cannot|can['’]t|not (allowed|permitted|offered|available|eligible|covered)|no longer|prohibited)\b/ },
+    { label: 'TRANSFER / ESCALATE', cls: 'transfer', re: /\b(transfer\w*|escalat\w*|route\w*|refer\w*|alert|hand ?off)\b|\b(send|forward)\b[^.]*\bto\b/ },
+    { label: 'DISCLOSE', cls: 'disclose', re: /\b(disclos\w*|must (state|say|tell|inform|read|advise)|required to (say|state|read)|incurs?|(fee|charge)s? (applies|apply))\b/ },
+    { label: 'VERIFY', cls: 'verify', re: /\b(verif\w*|confirm\w*|check\w*|requires?|required|must (have|be|provide)|only if|valid|eligib\w*|qualif\w*|approv\w*|sign[- ]?off)\b/ },
+    { label: 'DOCUMENT', cls: 'document', re: /\b(note|document|log|capture)\b|\brecord (the|it|this|a)\b/ },
+    { label: 'ALLOW', cls: 'allow', re: /\b(may|can|available|allowed|offer\w*|free|complimentary|no fee|included|welcome)\b/ }
   ];
 
   function splitSentences(text) {
     return text
       .replace(/\s+/g, ' ')
-      .split(/(?<=[.!?])\s+/)
-      .map(function (s) { return s.trim(); })
+      .split(/(?<=[.!?])\s+|\n+|\s+[•·]\s+/)
+      .map(function (s) { return s.replace(/^[-*•·\d.)\s]+/, '').trim(); })
       .filter(function (s) { return s.length > 8; });
   }
 
   function classify(sentence) {
     var lower = sentence.toLowerCase();
-    var hits = [];
+    var best = null, bestScore = 0;
     BUCKETS.forEach(function (b) {
-      var matched = b.keywords.some(function (k) { return lower.indexOf(k) !== -1; });
-      if (matched) hits.push(b);
+      var score = 0;
+      b.patterns.forEach(function (pair) { var m = lower.match(new RegExp(pair[0].source, 'g')); if (m) score += pair[1] * Math.min(m.length, 2); });
+      if (score > bestScore) { bestScore = score; best = b; }
     });
-    return hits;
+    return best;
   }
+
+  /* Outcomes in the order a live call would apply them, e.g. "DO NOT ALLOW → TRANSFER / ESCALATE". */
+  function outcomesFor(sentence, bucket) {
+    var lower = sentence.toLowerCase();
+    var found = OUTCOMES.filter(function (o) { return o.re.test(lower); });
+    if (found.some(function (o) { return o.label === 'DO NOT ALLOW'; })) found = found.filter(function (o) { return o.label !== 'ALLOW'; });
+    if (!found.length && bucket && DEFAULT_OUTCOME[bucket.key]) found = [OUTCOMES.find(function (o) { return o.label === DEFAULT_OUTCOME[bucket.key]; })];
+    if (!found.length) found = [{ label: 'NOT SPECIFIED', cls: 'unknown' }];
+    return found.slice(0, 2);
+  }
+  /* When a rule states a fact with no action word, the agent still has a default move. */
+  var DEFAULT_OUTCOME = { fees: 'DISCLOSE', pricing: 'DISCLOSE', scheduling: 'ALLOW', services: 'ALLOW', verification: 'VERIFY', authorization: 'VERIFY', escalation: 'TRANSFER / ESCALATE', disclosure: 'DISCLOSE', hours: 'DOCUMENT' };
 
   $('cpp-run').addEventListener('click', function () {
     var raw = $('cpp-input').value.trim();
@@ -226,12 +230,9 @@
     var unclassified = [];
 
     sentences.forEach(function (s) {
-      var hits = classify(s);
-      if (hits.length === 0) {
-        unclassified.push(s);
-      } else {
-        hits.forEach(function (b) { byBucket[b.key].push(s); });
-      }
+      var b = classify(s);
+      if (!b) unclassified.push(s);
+      else byBucket[b.key].push(s);
     });
 
     var html = '';
@@ -240,14 +241,17 @@
       if (!items.length) return;
       html += '<div class="field-block">' +
         '<div class="ds-body" style="font-weight:750;margin-bottom:8px;">' + escapeHtml(b.label) + '</div>' +
-        items.map(function (s) { return '<div class="ds-body-sm" style="margin-bottom:4px;">' + escapeHtml(s) + '</div>'; }).join('') +
+        items.map(function (s) {
+          var badges = outcomesFor(s, b).map(function (o) { return '<span class="cpp-badge cpp-' + o.cls + '">' + escapeHtml(o.label) + '</span>'; }).join('<span class="cpp-arrow">→</span>');
+          return '<div class="cpp-rule"><div class="cpp-badges">' + badges + '</div><div class="ds-body-sm">' + escapeHtml(s) + '</div></div>';
+        }).join('') +
         '</div>';
     });
 
     if (unclassified.length) {
       html += '<div class="field-block" style="border-style:dashed;">' +
         '<div class="ds-body" style="font-weight:750;margin-bottom:8px;">Needs your input</div>' +
-        '<div class="ds-body-sm" style="color:var(--muted);margin-bottom:8px;">These lines didn\'t clearly match a category above. A real build would ask you what each one means:</div>' +
+        '<div class="ds-body-sm" style="color:var(--muted);margin-bottom:8px;">These lines didn\'t clearly match a category. A real build would ask you what each one means, because Agent First never guesses at a rule:</div>' +
         unclassified.map(function (s) { return '<div class="ds-body-sm" style="margin-bottom:4px;">' + escapeHtml(s) + '</div>'; }).join('') +
         '</div>';
     }
