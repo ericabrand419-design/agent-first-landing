@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent First: Beat Agent First</title>
-<meta name="description" content="Three rounds. The same fictional clients, a shared messy knowledge base sorted by topic instead of by client, and a race against how Agent First actually resolves a rule: fast, deterministic, no guessing.">
+<title>Agent First: Can You Beat Agent First?</title>
+<meta name="description" content="Race Agent First through a shared knowledge base that grows from two clients to eight. Win the early rounds, then watch search time pile up. An Agent First Arcade game.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://myagentfirst.com/beat-agent-first.html">
-<meta property="og:title" content="Can You Beat Agent First?">
-<meta property="og:description" content="Find the right rule in a messy shared knowledge base before Agent First matches it automatically. Speed and accuracy, both tracked, both shown to you honestly.">
+<meta property="og:title" content="Agent First: Can You Beat Agent First?">
+<meta property="og:description" content="Race Agent First through a knowledge base that grows from two clients to eight. How long does your lead last?">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Can You Beat Agent First?">
-<meta name="twitter:description" content="Find the right rule before Agent First matches it automatically. Speed and accuracy, both tracked.">
+<meta name="twitter:title" content="Agent First: Can You Beat Agent First?">
+<meta name="twitter:description" content="Race Agent First through a knowledge base that grows from two clients to eight. How long does your lead last?">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,7 +67,6 @@
   .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
   .btn-ghost-dark:hover{border-color:#fff}
   .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
-  .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
 
   .logo-mark{display:block;flex:0 0 auto}
   .brand-row{display:flex;align-items:center;gap:12px}
@@ -78,61 +77,42 @@
 
   .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
   .pill-violet{background:var(--purplebg);color:var(--violet)}
-  .pill-green{background:var(--greenbg);color:var(--green)}
-  .pill-danger{background:var(--dangerbg);color:var(--danger)}
-  .pill-amber{background:var(--amberbg);color:var(--amber)}
 
-  /* race layout */
-  .baf-round-row{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
-  .baf-race-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:16px;}
-  .baf-panel-you{border-top:3px solid var(--coral);}
-  .baf-panel-agent{border-top:3px solid var(--violet);}
-  .baf-panel-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-  .baf-timer-chip{font-size:20px;font-weight:900;font-variant-numeric:tabular-nums;color:var(--ink);}
 
-  .baf-scenario-hint{color:var(--muted);margin-top:8px;}
+  /* BEAT AGENT FIRST */
+  .bt-top{display:grid;grid-template-columns:1fr 330px;gap:16px;align-items:stretch}
+  .bt-q{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-panel);padding:18px}
+  .bt-chip{display:inline-block;font-size:12px;font-weight:900;padding:4px 10px;border-radius:999px;color:#fff}
+  .bt-ask{font-size:20px;font-weight:850;line-height:1.38;margin-top:10px}
+  .bt-race{background:var(--navy);border-radius:var(--radius-lg);padding:16px 18px;color:#fff;display:flex;flex-direction:column;gap:12px;justify-content:center}
+  .bt-lane b{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+  .bt-lane b span{font-variant-numeric:tabular-nums}
+  .bt-bar{height:10px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+  .bt-bar i{display:block;height:100%;width:0;border-radius:999px}
+  .bt-you i{background:linear-gradient(90deg,#ffb547,#ff6b54)}
+  .bt-af i{background:linear-gradient(90deg,#a78bfa,#e447d5)}
+  .bt-note{font-size:11.5px;color:#8890ab;line-height:1.4}
+  .bt-kb{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-panel);overflow:hidden;position:relative}
+  .bt-kbhead{display:flex;gap:12px;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--line);background:#f6f5fb;flex-wrap:wrap}
+  .bt-doc{max-height:470px;overflow:auto;padding:6px 16px 16px}
+  .bt-sec{font-size:12px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px;position:sticky;top:0;background:#fff;padding:6px 0;z-index:1}
+  .bt-line{display:block;width:100%;text-align:left;border:1px solid transparent;border-radius:8px;padding:8px 10px;font:inherit;font-size:14.5px;line-height:1.45;background:none;cursor:pointer;color:var(--ink)}
+  .bt-line:hover{background:var(--purplebg);border-color:#e1d6ff}
+  .bt-line b{font-weight:850}
+  .bt-line .old{color:#9a9db2;font-size:12.5px;font-weight:650}
+  .bt-search{flex:1;min-width:200px;max-width:360px;padding:9px 12px;border-radius:10px;border:1.5px solid var(--line);font:inherit;font-size:14px}
+  .bt-roundsum{display:none;padding:14px 16px;border-radius:12px;font-size:15px;line-height:1.5}
+  .bt-roundsum.good{display:block;background:#ecfbf4;color:#155c40}.bt-roundsum.bad{display:block;background:#fdeaee;color:#8f2234}.bt-roundsum.warn{display:block;background:#fff6e5;color:#7a4700}
+  .bt-chart{display:flex;flex-direction:column;gap:10px}
+  .bt-row{display:grid;grid-template-columns:70px 1fr 64px;gap:10px;align-items:center;font-size:13px;font-weight:750}
+  .bt-rbar{height:14px;border-radius:999px;background:var(--bg);position:relative;overflow:visible}
+  .bt-rbar i{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#ffb547,#ff6b54)}
+  .bt-rbar u{position:absolute;top:-4px;bottom:-4px;width:3px;border-radius:2px;background:var(--violet)}
+  .bt-howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:left;max-width:800px}
+  .bt-howto .card-on-dark{padding:16px}.bt-howto b{display:block;color:#fff;font-size:15px;margin-bottom:6px}.bt-howto span{color:#c7cce0;font-size:13.5px;line-height:1.5}
+  .bt-rank{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+  @media (max-width:980px){.bt-top,.bt-howto{grid-template-columns:1fr}.section{padding:40px 16px}}
 
-  .baf-accordion-section{border:1px solid var(--line);border-radius:11px;margin-bottom:8px;overflow:hidden;}
-  .baf-accordion-header{width:100%;display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:var(--soft);border:0;cursor:pointer;font-family:inherit;font-weight:750;font-size:13.5px;color:var(--ink);}
-  .baf-accordion-header:hover{background:var(--purplebg);}
-  .baf-accordion-toggle{font-size:11px;font-weight:750;color:var(--violet);text-transform:uppercase;letter-spacing:.05em;}
-  .baf-accordion-body{display:none;flex-direction:column;gap:6px;padding:10px;}
-  .baf-accordion-body.open{display:flex;}
-
-  .baf-entry{text-align:left;padding:10px 12px;border-radius:9px;border:1px solid var(--line);background:#fff;font-size:13px;line-height:1.5;cursor:pointer;color:var(--ink);}
-  .baf-entry:hover{border-color:var(--violet);background:var(--purplebg);}
-  .baf-entry .bec{font-weight:750;display:block;margin-bottom:2px;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
-  .baf-entry.is-correct{border-color:var(--green);background:var(--greenbg);}
-  .baf-entry.is-wrong{border-color:var(--danger);background:var(--dangerbg);}
-  .baf-entry.is-disabled{cursor:default;}
-  .baf-entry:disabled{cursor:default;}
-
-  .baf-steps{display:flex;flex-direction:column;gap:10px;}
-  .baf-step{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:var(--soft);opacity:.5;transition:opacity .2s ease,border-color .2s ease,background .2s ease;}
-  .baf-step.done{opacity:1;border-color:var(--green);background:var(--greenbg);}
-  .baf-step-icon{flex:0 0 auto;width:22px;height:22px;border-radius:999px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--muted);background:#fff;}
-  .baf-step.done .baf-step-icon{border-color:var(--green);background:var(--green);color:#fff;}
-  .baf-step-text{font-size:13.5px;line-height:1.4;}
-  .baf-step-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:2px;}
-
-  .baf-summary{margin-top:18px;display:none;}
-  .baf-badge-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
-  .baf-reveal-row{padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:#fff;margin-bottom:10px;}
-  .baf-reveal-label{font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:4px;}
-
-  .baf-flash{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:40}
-  .baf-flash.show{opacity:1}
-  .baf-flash.correct{background:rgba(23,122,85,.10)}
-  .baf-flash.wrong{background:rgba(197,54,74,.12)}
-
-  @media (max-width:900px){
-    .section{padding:56px 20px}
-    .ds-display{font-size:32px}
-    .ds-hero{font-size:24px}
-  }
-  @media (max-width:860px){
-    .baf-race-grid{grid-template-columns:1fr;}
-  }
 </style>
 </head>
 <body>
@@ -157,104 +137,65 @@
 
   <!-- INTRO STAGE -->
   <div class="section" id="introStage" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:760px;align-items:center;text-align:center;">
-      <div class="ds-label eyebrow-c">Agent First Free Tools &middot; 3-round race</div>
+    <div class="wrap" style="display:flex;flex-direction:column;gap:22px;max-width:820px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Arcade &middot; 5 rounds</div>
       <h1 class="ds-display" style="color:#fff;">Can You Beat Agent First?</h1>
-      <p class="ds-body" style="color:#c7cce0;">Three rounds. The same three fictional clients you have seen throughout this site. Somewhere in a shared knowledge base, sorted by topic instead of by client, is the exact rule you need. Find it, pick it, and see how your time compares to Agent First matching the call to a Client Profile and the active rule, automatically.</p>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px;width:100%;">
-        <div class="card-on-dark">
-          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">One shared knowledge base</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Four topics, three clients each: twelve lines total, sorted by topic the way most internal documentation actually is, not sorted for you.</div>
-        </div>
-        <div class="card-on-dark">
-          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">This is not a live AI guessing</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">What races you here is the same deterministic client-and-topic match described throughout this site, animated at an illustrative simulation speed, not a measured product performance number. Nothing invented, nothing hidden.</div>
-        </div>
-        <div class="card-on-dark">
-          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">Speed and accuracy, tracked separately</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Answer first with the wrong client's rule and you still lose the round on accuracy. Both get counted, then shown to you honestly at the end.</div>
-        </div>
+      <p class="ds-body" style="color:#c7cce0;max-width:660px;">A customer asks a question. You dig through the shared knowledge base. Agent First already has the right client’s rule on screen, so its only job is reading the answer. Round one is easy to win. Then your team signs more clients.</p>
+      <div class="bt-howto">
+        <div class="card-on-dark"><b>Find the line</b><span>Click the rule that answers this customer, for this client. The wrong client’s line doesn’t count.</span></div>
+        <div class="card-on-dark"><b>The binder grows</b><span>Two clients in round one. Eight by round five, sorted by topic, with a few outdated versions mixed in.</span></div>
+        <div class="card-on-dark"><b>Agent First stays the same</b><span>About 4 seconds every round: the time it takes to read the answer that’s already on screen.</span></div>
       </div>
-      <button class="btn btn-primary" id="startBtn" style="margin-top:6px;padding:15px 34px;font-size:16px;">Start the race</button>
-      <p class="ds-body-sm" style="color:#8991b3;">Works best on a laptop or desktop screen. Nothing is recorded or sent anywhere. This runs entirely in your browser.</p>
+      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Start the race</button>
+      <div class="ds-body-sm" style="color:#8890ab;">Agent First’s 4 seconds is a reading-time simulation, not a measured product benchmark. All clients are fictional.</div>
     </div>
   </div>
 
   <!-- GAME STAGE -->
-  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:0;max-width:1000px;">
-
-      <div class="baf-round-row">
-        <div class="pill pill-violet" id="roundBadge">Round 1 of 3</div>
-        <div class="ds-body-sm" style="color:var(--muted);">Reset each round: a fresh scenario, a fresh timer, the same shared knowledge base.</div>
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;padding-top:36px;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:16px;max-width:1120px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;">
+        <span class="pill pill-violet" id="roundBadge">Round 1 of 5</span>
+        <span class="ds-body-sm" id="roundNote" style="color:var(--muted);">Two clients. Sorted by client.</span>
       </div>
-
-      <div class="card" style="margin-top:16px;">
-        <div class="ds-label eyebrow-c">Customer on the line</div>
-        <div class="ds-heading" id="scenarioText" style="margin-top:6px;">&nbsp;</div>
-        <p class="ds-body-sm baf-scenario-hint">The knowledge base below is grouped by topic, not by client. Expand the right topic, then pick the line for this client.</p>
-      </div>
-
-      <div class="baf-race-grid">
-
-        <!-- YOU -->
-        <div class="card baf-panel-you">
-          <div class="baf-panel-head">
-            <div class="pill pill-violet">You</div>
-            <div class="baf-timer-chip" id="playerTimerChip">0.0s</div>
-          </div>
-          <div id="accordionWrap"></div>
+      <div class="bt-top">
+        <div class="bt-q" id="qCard">
+          <div class="ds-label" style="color:var(--muted);">Customer on the line for</div>
+          <div style="margin-top:6px;"><span class="bt-chip" id="qClient">Client</span></div>
+          <div class="bt-ask" id="qAsk">&nbsp;</div>
         </div>
-
-        <!-- AGENT FIRST -->
-        <div class="card baf-panel-agent">
-          <div class="baf-panel-head">
-            <div class="pill pill-violet">Agent First</div>
-            <div class="baf-timer-chip" id="agentTimerChip">--</div>
-          </div>
-          <div class="baf-steps">
-            <div class="baf-step" id="agentStep1">
-              <div class="baf-step-icon">1</div>
-              <div class="baf-step-text"><span class="baf-step-label">Find</span><span id="agentStep1Text">Matching call to Client Profile...</span></div>
-            </div>
-            <div class="baf-step" id="agentStep2">
-              <div class="baf-step-icon">2</div>
-              <div class="baf-step-text"><span class="baf-step-label">Interpret</span><span id="agentStep2Text">Locating the active rule...</span></div>
-            </div>
-            <div class="baf-step" id="agentStep3">
-              <div class="baf-step-icon">3</div>
-              <div class="baf-step-text"><span class="baf-step-label">Act</span><span id="agentStep3Text">Rule applied.</span></div>
-            </div>
-          </div>
-          <p class="ds-body-sm" style="color:var(--muted);margin-top:14px;">The rule itself stays hidden until you answer, so this cannot just hand you the result. Only the timing shows.</p>
+        <div class="bt-race">
+          <div class="bt-lane bt-you"><b>You (search + read) <span id="youTime">0.0s</span></b><div class="bt-bar"><i id="youBar"></i></div></div>
+          <div class="bt-lane bt-af"><b>Agent First (read) <span id="afTime">0.0s</span></b><div class="bt-bar"><i id="afBar"></i></div></div>
+          <div class="bt-note">Agent First’s answer stays hidden until you pick, so it can’t help you.</div>
         </div>
-
       </div>
-
-      <div class="card baf-summary" id="roundSummary">
-        <div class="baf-badge-row" id="summaryBadges"></div>
-        <div class="baf-reveal-row" id="summaryYourRow"></div>
-        <div class="baf-reveal-row" id="summaryAgentRow"></div>
-        <div class="ds-body-sm" style="color:var(--muted);margin-bottom:14px;" id="summaryTimes"></div>
-        <button class="btn btn-primary" id="continueBtn">Next round</button>
+      <div class="bt-roundsum" id="roundSum"></div>
+      <div style="display:flex;justify-content:flex-end;"><button class="btn btn-primary" id="continueBtn" type="button" style="display:none;">Next round &rarr;</button></div>
+      <div class="bt-kb" id="kb">
+        <div class="bt-kbhead">
+          <div><div class="ds-label eyebrow-v">Shared knowledge base</div><div class="ds-body-sm" id="kbMeta" style="color:var(--muted);">--</div></div>
+          <input class="bt-search" id="search" type="search" placeholder="Search the knowledge base" style="display:none;">
+        </div>
+        <div class="bt-doc" id="doc"></div>
       </div>
-
     </div>
   </div>
 
   <!-- RESULTS STAGE -->
   <div class="section" id="resultsStage" style="background:#fff;display:none;">
     <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:720px;">
-
       <div class="card">
-        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Race over</div>
-        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
-          <div><div class="ds-score" id="rSpeedWins">0</div><div class="ds-body-sm" style="color:var(--muted);">Rounds you were faster</div></div>
-          <div><div class="ds-score" id="rAccuracy">0%</div><div class="ds-body-sm" style="color:var(--muted);">Your accuracy</div></div>
-          <div><div class="ds-score" id="rYourAvg">--</div><div class="ds-body-sm" style="color:var(--muted);">Your avg. time</div></div>
-          <div><div class="ds-score" id="rAgentAvg">--</div><div class="ds-body-sm" style="color:var(--muted);">Agent First avg. time</div></div>
+        <div class="bt-rank" id="rRank">Race over</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin:10px 0 16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:18px;">
+          <div><div class="ds-score" id="rWins">0</div><div class="ds-body-sm" style="color:var(--muted);">Rounds you won<span id="rBest"></span></div></div>
+          <div><div class="ds-score" id="rAcc" style="color:var(--green);">0/5</div><div class="ds-body-sm" style="color:var(--muted);">Right answers</div></div>
+          <div><div class="ds-score" id="rFirst">0s</div><div class="ds-body-sm" style="color:var(--muted);">Your time, round 1</div></div>
+          <div><div class="ds-score" id="rLast" style="color:var(--danger);">0s</div><div class="ds-body-sm" style="color:var(--muted);">Your time, round 5</div></div>
         </div>
+        <div class="ds-label" style="color:var(--muted);margin-bottom:10px;">Your time per round vs. Agent First (purple line)</div>
+        <div class="bt-chart" id="chart"></div>
       </div>
 
       <div class="card">
@@ -267,14 +208,14 @@
       </div>
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn btn-primary" id="playAgainBtn">Race again</button>
-        <a href="client-roulette.html" class="btn btn-ghost-light">Try the faster version: Client Roulette</a>
-        <a href="agent-challenge.html" class="btn btn-ghost-light">Try the original: Agent Challenge</a>
+        <button class="btn btn-primary" id="playAgainBtn">Play again</button>
+        <a href="call-from-hell.html" class="btn btn-ghost-light">Next: Call From Hell</a>
+        <a href="labs.html" class="btn btn-ghost-light">All games and tools</a>
       </div>
 
       <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">Agent First was not guessing. It was matching.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">Every round, Agent First's side resolved the same way: match the call to a Client Profile, match the request to the active rule, apply it. No search, no scrolling, no chance of grabbing the wrong client's line by accident. See what that looks like against your own rules.</p>
+        <div class="ds-body" style="font-weight:900;color:#fff;">Your search time grows with every client you sign. Agent First’s doesn’t.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">Agent First opens the right Client Profile for the call and puts the rule on screen, so the agent’s time goes to reading and answering, not searching. Adding a client adds a profile, not another place to dig.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
           <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
@@ -311,372 +252,160 @@
 
 </div>
 
-<div class="baf-flash" id="flash"></div>
-
 <script src="/labs-capture.js"></script>
+<script src="/arcade-kit.js"></script>
 <script>
 (function () {
   'use strict';
-  var $ = function (id) { return document.getElementById(id); };
-
-  var CLIENTS = {
-    A: { name: 'Harborview', rules: [
-      'Cancellations within 48 hours of a scheduled appointment: no fee.',
-      'ID verification required before discussing any account details.',
-      'Refunds over $200 require a supervisor sign-off before processing.',
-      'Standard callback window for an open issue: 24 hours.'
-    ] },
-    B: { name: 'Meridian', rules: [
-      'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.',
-      'ID verification is NOT required for general account questions, only for changes.',
-      'Refunds over $200 can be processed by any agent, no sign-off required.',
-      'Standard callback window for an open issue: 4 hours.'
-    ] },
-    C: { name: 'Northgate', rules: [
-      'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.',
-      'ID verification required before discussing any account details.',
-      'Refunds over $200 require a supervisor sign-off before processing.',
-      'Standard callback window for an open issue: 24 hours, except weekends (next business day).'
-    ] }
+  var K = window.AFArcade, $ = function (id) { return document.getElementById(id); };
+  var AF_SECONDS = 4.0, ROUNDS = 5;
+  var STALE = {
+    crestline: ['loaner', 'Free loaner for repairs over 2 hours. (2024 version)'],
+    marlowe: ['saturday', 'Saturday is open for diagnostics until noon. (old)'],
+    sunridge: ['late', 'More than 15 minutes late: offer to reschedule. (2023 handbook)'],
+    greenpark: ['no_heat', 'No heat after hours: dispatch the HVAC vendor directly. (old)'],
+    coastal: ['window', 'Two-hour arrival window. (archived)']
   };
-  var CLIENT_KEYS = Object.keys(CLIENTS);
+  var state = null, raf = null;
 
-  var CATEGORIES = [
-    { key: 'cancel', ruleIndex: 0, label: 'Cancellation Fee' },
-    { key: 'idverify', ruleIndex: 1, label: 'ID Verification' },
-    { key: 'refund', ruleIndex: 2, label: 'Refund Sign-Off' },
-    { key: 'callback', ruleIndex: 3, label: 'Callback Window' }
-  ];
+  function plan() {
+    var pairs = K.shuffle(K.PAIRS);
+    var ids = [].concat.apply([], pairs).map(K.client);
+    return [
+      { clients: ids.slice(0, 2), byTopic: false, search: false, stale: false, note: 'Two clients, sorted by client. Warm-up.' },
+      { clients: ids.slice(0, 4), byTopic: true, search: false, stale: false, note: 'Four clients now, and the knowledge base is sorted by topic.' },
+      { clients: ids.slice(0, 6), byTopic: true, search: true, stale: false, note: 'Six clients. You get a search box. Customers don’t use the knowledge base’s words.' },
+      { clients: ids.slice(0, 8), byTopic: true, search: true, stale: true, note: 'Eight clients, and a few outdated versions never got deleted.' },
+      { clients: ids.slice(0, 8), byTopic: true, search: true, stale: true, note: 'Eight clients. Last round. Make it count.' }
+    ];
+  }
 
-  var ROUNDS = [
-    { client: 'C', categoryKey: 'refund', ask: 'A Northgate customer is owed a $275 refund. What do you tell them about getting it processed?' },
-    { client: 'B', categoryKey: 'idverify', ask: 'A Meridian customer calls with a general question about their account balance. What do you tell them about ID verification?' },
-    { client: 'A', categoryKey: 'callback', ask: 'A Harborview customer has an open issue and it is a Friday afternoon. When should they expect a callback?' }
-  ];
+  function start() {
+    state = { rounds: plan(), r: 0, results: [], locked: false };
+    $('introStage').style.display = 'none'; $('resultsStage').style.display = 'none'; $('gameStage').style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    round();
+  }
 
-  function escapeHtml(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  function round() {
+    var R = state.rounds[state.r];
+    var c = K.pick(R.clients), topic = K.pick(Object.keys(c.rules));
+    state.q = { client: c, topic: topic };
+    state.locked = false; state.t0 = performance.now(); state.afDone = false;
+    $('roundBadge').textContent = 'Round ' + (state.r + 1) + ' of ' + ROUNDS; $('roundNote').textContent = R.note;
+    $('qClient').textContent = c.name; $('qClient').style.background = c.color;
+    $('qAsk').textContent = '“' + K.pick(K.TOPICS[topic].ask) + '”';
+    $('roundSum').className = 'bt-roundsum'; $('continueBtn').style.display = 'none';
+    $('search').style.display = R.search ? 'block' : 'none'; $('search').value = '';
+    buildDoc(R);
+    K.pop($('qCard')); K.sfx.ring();
+    cancelAnimationFrame(raf); raf = requestAnimationFrame(tickRace);
+  }
+
+  function buildDoc(R) {
+    var lines = [];
+    R.clients.forEach(function (c) {
+      Object.keys(c.rules).forEach(function (t) { lines.push({ c: c, t: t, text: c.rules[t], stale: false }); });
+      if (R.stale && STALE[c.id]) lines.push({ c: c, t: STALE[c.id][0], text: STALE[c.id][1], stale: true });
     });
-  }
-
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var t = a[i]; a[i] = a[j]; a[j] = t;
+    var html = '', groups = {};
+    if (R.byTopic) {
+      lines.forEach(function (l) { (groups[l.t] = groups[l.t] || []).push(l); });
+      K.shuffle(Object.keys(groups)).forEach(function (t) {
+        html += '<div class="bt-sec">' + K.esc(K.TOPICS[t].label) + '</div>' + K.shuffle(groups[t]).map(lineHtml).join('');
+      });
+    } else {
+      R.clients.forEach(function (c) {
+        html += '<div class="bt-sec" style="color:' + c.color + '">' + K.esc(c.name) + '</div>' + lines.filter(function (l) { return l.c === c; }).map(lineHtml).join('');
+      });
     }
-    return a;
+    state.lines = lines;
+    $('doc').innerHTML = html; $('doc').scrollTop = 0;
+    $('kbMeta').textContent = R.clients.length + ' clients · ' + lines.length + ' entries · ' + (R.byTopic ? 'sorted by topic' : 'sorted by client');
+  }
+  function lineHtml(l) {
+    return '<button type="button" class="bt-line" data-key="' + l.c.id + ':' + l.t + ':' + (l.stale ? 1 : 0) + '"><b>' + K.esc(l.c.name) + ':</b> ' + K.esc(l.text.replace(/ \((2024 version|old|2023 handbook|archived)\)$/, '')) + (l.stale ? ' <span class="old">' + K.esc((l.text.match(/\(([^)]+)\)$/) || ['', ''])[1]) + '</span>' : '') + '</button>';
   }
 
-  function categoryByKey(key) {
-    for (var i = 0; i < CATEGORIES.length; i++) { if (CATEGORIES[i].key === key) return CATEGORIES[i]; }
-    return null;
+  function tickRace() {
+    if (!state || state.locked) return;
+    var s = (performance.now() - state.t0) / 1000;
+    $('youTime').textContent = s.toFixed(1) + 's';
+    var scale = Math.max(AF_SECONDS * 2, s * 1.15, 8);
+    $('youBar').style.width = Math.min(100, s / scale * 100) + '%';
+    var a = Math.min(s, AF_SECONDS);
+    $('afTime').textContent = (s >= AF_SECONDS ? AF_SECONDS.toFixed(1) + 's ✓' : a.toFixed(1) + 's');
+    $('afBar').style.width = Math.min(100, a / scale * 100) + '%';
+    if (s >= AF_SECONDS && !state.afDone) { state.afDone = true; K.sfx.tick(); }
+    raf = requestAnimationFrame(tickRace);
   }
 
-  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
-  var flash = $('flash');
-  var state = null;
+  $('doc').addEventListener('click', function (e) {
+    var b = e.target.closest('.bt-line'); if (!b || state.locked) return;
+    state.locked = true; cancelAnimationFrame(raf);
+    var t = (performance.now() - state.t0) / 1000, parts = b.dataset.key.split(':');
+    var right = parts[0] === state.q.client.id && parts[1] === state.q.topic && parts[2] === '0';
+    var won = right && t < AF_SECONDS;
+    state.results.push({ t: t, right: right, won: won });
+    var sum = $('roundSum'), c = state.q.client;
+    if (right && won) { K.sfx.great(); K.flash('good'); K.confetti(); sum.className = 'bt-roundsum good'; sum.textContent = 'You beat Agent First: ' + t.toFixed(1) + 's vs ' + AF_SECONDS.toFixed(1) + 's. Enjoy it. The knowledge base is about to grow.'; }
+    else if (right) { K.sfx.good(); sum.className = 'bt-roundsum warn'; sum.textContent = 'Right answer in ' + t.toFixed(1) + 's. Agent First had it read in ' + AF_SECONDS.toFixed(1) + 's, because it never had to search.'; }
+    else {
+      K.sfx.bad(); K.flash('bad'); K.shake($('kb')); sum.className = 'bt-roundsum bad';
+      var why = parts[2] === '1' ? 'That was an outdated version that never got deleted.' : parts[0] !== c.id ? 'That line belongs to ' + K.client(parts[0]).name + ', not ' + c.name + '.' : 'Right client, wrong topic.';
+      sum.textContent = why + ' The right answer: “' + c.rules[state.q.topic] + '”';
+    }
+    b.style.background = right ? '#ecfbf4' : '#fdeaee'; b.style.borderColor = right ? '#2fbf8f' : '#ff8fa0';
+    $('continueBtn').textContent = state.r >= ROUNDS - 1 ? 'See my results →' : 'Next round →';
+    $('continueBtn').style.display = 'inline-flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 
-  function startGame() {
-    state = {
-      roundIndex: 0,
-      roundResults: [],
-      running: true,
-      locked: false,
-      playerStartTime: 0,
-      playerTickInterval: null,
-      agentTimers: [],
-      agentResolveMs: 0,
-      currentRound: null
-    };
-    introStage.style.display = 'none';
-    resultsStage.style.display = 'none';
-    gameStage.style.display = 'flex';
-    startRound();
+  $('search').addEventListener('input', function () {
+    var words = this.value.toLowerCase().split(/\s+/).filter(Boolean);
+    [].forEach.call($('doc').querySelectorAll('.bt-line'), function (b) {
+      var text = b.textContent.toLowerCase();
+      b.style.display = words.every(function (w) { return text.indexOf(w) !== -1; }) ? 'block' : 'none';
+    });
+    [].forEach.call($('doc').querySelectorAll('.bt-sec'), function (s) {
+      var n = s.nextElementSibling, any = false;
+      while (n && n.classList.contains('bt-line')) { if (n.style.display !== 'none') any = true; n = n.nextElementSibling; }
+      s.style.display = any ? 'block' : 'none';
+    });
+  });
+
+  $('continueBtn').addEventListener('click', function () {
+    if (state.r >= ROUNDS - 1) return end();
+    state.r++; round();
+  });
+
+  function end() {
+    $('gameStage').style.display = 'none'; $('resultsStage').style.display = 'flex';
+    var res = state.results, wins = res.filter(function (x) { return x.won; }).length, acc = res.filter(function (x) { return x.right; }).length;
+    var first = res[0].t, last = res[res.length - 1].t;
+    var b = K.best('beat-agent-first', wins * 1000 + acc * 100);
+    $('rRank').textContent = wins >= 3 ? 'Knowledge-base ninja' : wins >= 1 ? 'Early lead, then the binder grew' : 'The binder won';
+    $('rWins').textContent = wins + '/' + ROUNDS; $('rAcc').textContent = acc + '/' + ROUNDS;
+    $('rFirst').textContent = first.toFixed(1) + 's'; $('rLast').textContent = last.toFixed(1) + 's';
+    $('rBest').innerHTML = b.isNew && b.previous > 0 ? ' · new best' : '';
+    $('resultsHeadline').textContent = wins
+      ? 'You beat Agent First in ' + wins + ' round' + (wins === 1 ? '' : 's') + '. By round 5 you needed ' + last.toFixed(1) + 's. Agent First still needed ' + AF_SECONDS.toFixed(1) + 's.'
+      : 'Agent First answered every round in ' + AF_SECONDS.toFixed(1) + 's. Your time went from ' + first.toFixed(1) + 's to ' + last.toFixed(1) + 's as the clients piled up.';
+    var max = Math.max(AF_SECONDS * 1.5, Math.max.apply(null, res.map(function (x) { return x.t; })) * 1.05);
+    $('chart').innerHTML = res.map(function (x, i) {
+      var n = [2, 4, 6, 8, 8][i];
+      return '<div class="bt-row"><span>Round ' + (i + 1) + '<br><span style="color:var(--muted);font-weight:650;">' + n + ' clients</span></span><div class="bt-rbar"><i style="width:' + (x.t / max * 100) + '%;' + (x.right ? '' : 'background:#ff8fa0;') + '"></i><u style="left:' + (AF_SECONDS / max * 100) + '%"></u></div><span>' + x.t.toFixed(1) + 's' + (x.right ? '' : ' ✗') + '</span></div>';
+    }).join('');
+    K.sfx.end();
+    var share = 'I beat Agent First in ' + wins + ' of 5 rounds (' + acc + '/5 right). My search time went from ' + first.toFixed(1) + 's to ' + last.toFixed(1) + 's as clients piled up. Try it: myagentfirst.com/beat-agent-first.html';
+    K.results({ tool: 'Beat Agent First', share: share, question: 'Where do your agents actually look things up today, and what makes it slow?' });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function startRound() {
-    var round = ROUNDS[state.roundIndex];
-    state.currentRound = round;
-    state.locked = false;
-
-    $('roundBadge').textContent = 'Round ' + (state.roundIndex + 1) + ' of ' + ROUNDS.length;
-    $('scenarioText').textContent = round.ask;
-    $('roundSummary').style.display = 'none';
-
-    rebuildAccordion();
-    resetAgentPanel(round);
-
-    state.agentResolveMs = 1100 + Math.floor(Math.random() * 600);
-    scheduleAgentSteps(state.agentResolveMs);
-
-    state.playerStartTime = Date.now();
-    clearInterval(state.playerTickInterval);
-    updatePlayerTimerDisplay();
-    state.playerTickInterval = setInterval(updatePlayerTimerDisplay, 100);
-  }
-
-  function updatePlayerTimerDisplay() {
-    var elapsed = (Date.now() - state.playerStartTime) / 1000;
-    $('playerTimerChip').textContent = elapsed.toFixed(1) + 's';
-  }
-
-  function resetAgentPanel(round) {
-    ['agentStep1', 'agentStep2', 'agentStep3'].forEach(function (id) { $(id).classList.remove('done'); });
-    $('agentStep1Text').textContent = 'Matching call to Client Profile: ' + CLIENTS[round.client].name;
-    $('agentStep2Text').textContent = 'Locating the active rule: ' + categoryByKey(round.categoryKey).label;
-    $('agentStep3Text').textContent = 'Rule applied.';
-    $('agentTimerChip').textContent = '--';
-  }
-
-  function clearAgentTimers() {
-    state.agentTimers.forEach(function (t) { clearTimeout(t); });
-    state.agentTimers = [];
-  }
-
-  function scheduleAgentSteps(ms) {
-    clearAgentTimers();
-    var t1 = Math.round(ms * 0.32);
-    var t2 = Math.round(ms * 0.66);
-    state.agentTimers.push(setTimeout(function () { markStepDone(1); }, t1));
-    state.agentTimers.push(setTimeout(function () { markStepDone(2); }, t2));
-    state.agentTimers.push(setTimeout(function () { markStep3Resolved(ms); }, ms));
-  }
-
-  function markStepDone(n) {
-    $('agentStep' + n).classList.add('done');
-  }
-
-  function markStep3Resolved(ms) {
-    markStepDone(3);
-    $('agentStep3Text').textContent = 'Resolved in ' + (ms / 1000).toFixed(1) + 's. Answer ready.';
-    $('agentTimerChip').textContent = (ms / 1000).toFixed(1) + 's';
-  }
-
-  function rebuildAccordion() {
-    var wrap = $('accordionWrap');
-    wrap.innerHTML = '';
-    CATEGORIES.forEach(function (cat) {
-      var section = document.createElement('div');
-      section.className = 'baf-accordion-section';
-
-      var header = document.createElement('button');
-      header.type = 'button';
-      header.className = 'baf-accordion-header';
-      header.innerHTML = '<span>' + escapeHtml(cat.label) + '</span><span class="baf-accordion-toggle">Expand</span>';
-
-      var body = document.createElement('div');
-      body.className = 'baf-accordion-body';
-
-      var order = shuffle(CLIENT_KEYS);
-      order.forEach(function (ck) {
-        var ruleText = CLIENTS[ck].rules[cat.ruleIndex];
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'baf-entry';
-        btn.innerHTML = '<span class="bec">' + escapeHtml(CLIENTS[ck].name) + '</span>' + escapeHtml(ruleText);
-        btn.addEventListener('click', function () { selectAnswer(cat.key, ck, ruleText, btn); });
-        body.appendChild(btn);
-      });
-
-      header.addEventListener('click', function () {
-        var isOpen = body.classList.toggle('open');
-        header.querySelector('.baf-accordion-toggle').textContent = isOpen ? 'Collapse' : 'Expand';
-      });
-
-      section.appendChild(header);
-      section.appendChild(body);
-      wrap.appendChild(section);
-    });
-  }
-
-  function disableAllEntries() {
-    document.querySelectorAll('.baf-entry').forEach(function (b) {
-      b.disabled = true;
-      b.classList.add('is-disabled');
-    });
-  }
-
-  function flashScreen(kind) {
-    flash.className = 'baf-flash show ' + kind;
-    setTimeout(function () { flash.className = 'baf-flash'; }, 260);
-  }
-
-  function selectAnswer(categoryKey, clientKey, ruleText, btnEl) {
-    if (!state.running || state.locked) return;
-    state.locked = true;
-    clearInterval(state.playerTickInterval);
-    var playerMs = Date.now() - state.playerStartTime;
-    updatePlayerTimerDisplay();
-
-    markStepDone(1);
-    markStepDone(2);
-    markStep3Resolved(state.agentResolveMs);
-    clearAgentTimers();
-
-    var round = state.currentRound;
-    var playerCorrect = (categoryKey === round.categoryKey && clientKey === round.client);
-
-    btnEl.classList.add(playerCorrect ? 'is-correct' : 'is-wrong');
-    disableAllEntries();
-    flashScreen(playerCorrect ? 'correct' : 'wrong');
-
-    var agentMs = state.agentResolveMs;
-    var speedWinner = playerMs <= agentMs ? 'player' : 'agent';
-    var correctRuleText = CLIENTS[round.client].rules[categoryByKey(round.categoryKey).ruleIndex];
-
-    state.roundResults.push({
-      playerMs: playerMs, agentMs: agentMs, playerCorrect: playerCorrect, speedWinner: speedWinner
-    });
-
-    renderRoundSummary(CLIENTS[clientKey].name, ruleText, playerCorrect, playerMs, agentMs, speedWinner, CLIENTS[round.client].name, correctRuleText);
-  }
-
-  function renderRoundSummary(pickedClientName, pickedText, playerCorrect, playerMs, agentMs, speedWinner, correctClientName, correctText) {
-    var badges = '';
-    badges += speedWinner === 'player'
-      ? '<div class="pill pill-green">You answered first</div>'
-      : '<div class="pill pill-violet">Agent First answered first</div>';
-    badges += playerCorrect
-      ? '<div class="pill pill-green">Correct client and rule</div>'
-      : '<div class="pill pill-danger">Wrong match</div>';
-    $('summaryBadges').innerHTML = badges;
-
-    $('summaryYourRow').innerHTML =
-      '<div class="baf-reveal-label">Your answer</div>' +
-      '<div class="ds-body-sm"><span style="font-weight:750;">' + escapeHtml(pickedClientName) + ':</span> ' + escapeHtml(pickedText) + '</div>';
-
-    $('summaryAgentRow').innerHTML =
-      '<div class="baf-reveal-label">Agent First\'s match</div>' +
-      '<div class="ds-body-sm"><span style="font-weight:750;">' + escapeHtml(correctClientName) + ':</span> ' + escapeHtml(correctText) + '</div>';
-
-    $('summaryTimes').textContent = 'Your time: ' + (playerMs / 1000).toFixed(1) + 's. Agent First: ' + (agentMs / 1000).toFixed(1) + 's.';
-
-    var isLastRound = state.roundIndex + 1 >= ROUNDS.length;
-    $('continueBtn').textContent = isLastRound ? 'See your results' : 'Next round';
-
-    $('roundSummary').style.display = 'block';
-  }
-
-  function continueRound() {
-    state.roundIndex += 1;
-    if (state.roundIndex < ROUNDS.length) {
-      startRound();
-    } else {
-      endGame();
-    }
-  }
-
-  function endGame() {
-    state.running = false;
-    gameStage.style.display = 'none';
-    resultsStage.style.display = 'flex';
-
-    var speedWinsPlayer = 0, correctCount = 0, totalPlayerMs = 0, totalAgentMs = 0;
-    state.roundResults.forEach(function (r) {
-      if (r.speedWinner === 'player') speedWinsPlayer += 1;
-      if (r.playerCorrect) correctCount += 1;
-      totalPlayerMs += r.playerMs;
-      totalAgentMs += r.agentMs;
-    });
-    var speedWinsAgent = ROUNDS.length - speedWinsPlayer;
-    var accuracy = Math.round((correctCount / ROUNDS.length) * 100);
-    var avgPlayer = totalPlayerMs / ROUNDS.length / 1000;
-    var avgAgent = totalAgentMs / ROUNDS.length / 1000;
-
-    $('rSpeedWins').textContent = speedWinsPlayer + '/' + ROUNDS.length;
-    $('rAccuracy').textContent = accuracy + '%';
-    $('rYourAvg').textContent = avgPlayer.toFixed(1) + 's';
-    $('rAgentAvg').textContent = avgAgent.toFixed(1) + 's';
-
-    var headline;
-    if (correctCount < ROUNDS.length && speedWinsPlayer >= 2) {
-      headline = 'You out-ran Agent First in ' + speedWinsPlayer + ' of ' + ROUNDS.length + ' rounds, but only got ' + correctCount + ' of ' + ROUNDS.length + ' exactly right. Fast and wrong still reaches the wrong client.';
-    } else if (speedWinsPlayer === 0) {
-      headline = 'Agent First matched client and topic automatically in all ' + ROUNDS.length + ' rounds, faster than you could open the right section even once.';
-    } else if (correctCount === ROUNDS.length && speedWinsPlayer === ROUNDS.length) {
-      headline = 'Perfect accuracy, and faster than Agent First in every round. Genuinely quick work, on three calls. Now multiply that gap across a full shift.';
-    } else if (correctCount === ROUNDS.length) {
-      headline = 'You got all ' + ROUNDS.length + ' exactly right, and still lost the race on speed ' + speedWinsAgent + ' out of ' + ROUNDS.length + ' times.';
-    } else {
-      headline = 'You beat Agent First on speed in ' + speedWinsPlayer + ' of ' + ROUNDS.length + ' rounds, with ' + correctCount + ' of ' + ROUNDS.length + ' exactly right.';
-    }
-    $('resultsHeadline').textContent = headline;
-
-    var shareLine = 'I beat Agent First on speed in ' + speedWinsPlayer + ' of ' + ROUNDS.length + ' rounds (accuracy: ' + correctCount + '/' + ROUNDS.length + ') in Beat Agent First. Try it: myagentfirst.com/beat-agent-first.html';
-    $('shareText').value = shareLine;
-    $('resultSummaryField').value = shareLine;
-
-    if (window.AFLabs) {
-      window.AFLabs.mount('afIdea', {
-        tool: 'Beat Agent First',
-        question: 'You just raced a deterministic match-and-apply system. If you were building the thing that made lookup unnecessary in the first place, what would it need to handle that a search never could?',
-        context: { result: shareLine }
-      });
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  $('startBtn').addEventListener('click', startGame);
-  $('continueBtn').addEventListener('click', continueRound);
-  $('playAgainBtn').addEventListener('click', function () {
-    resultsStage.style.display = 'none';
-    startGame();
-  });
-
-  $('copyBtn').addEventListener('click', function () {
-    var field = $('shareText');
-    field.select();
-    var done = function () {
-      $('copyStatus').style.display = 'block';
-      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(field.value).then(done).catch(function () {
-        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-      });
-    } else {
-      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-    }
-  });
-
-  var emailForm = $('emailForm');
-  emailForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('emailStatus');
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(emailForm)
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      if (data && data.success) {
-        if (window.AFLabs) window.AFLabs.linkEmail('Beat Agent First', emailForm.querySelector('[name="email"]').value);
-        emailForm.style.display = 'none';
-        status.style.color = '#1f5c42';
-        status.textContent = "Sent. I'll follow up directly too.";
-        status.style.display = 'block';
-      } else {
-        btn.disabled = false;
-        btn.textContent = original;
-        status.style.color = '#c53636';
-        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-        status.style.display = 'block';
-      }
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = original;
-      status.style.color = '#c53636';
-      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-      status.style.display = 'block';
-    });
-  });
+  $('startBtn').addEventListener('click', start);
+  $('playAgainBtn').addEventListener('click', start);
+  K.wireCommon('Beat Agent First');
+  window.__beat = function () { return state; };
 })();
 </script>
 
