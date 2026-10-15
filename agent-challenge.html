@@ -308,6 +308,7 @@
 <div class="flash" id="flash"></div>
 
 <script src="/labs-capture.js"></script>
+<script src="/arcade-kit.js"></script>
 <script>
 (function () {
   'use strict';
@@ -476,6 +477,7 @@
   function askNext() {
     if (!state.running) return;
     var q = newQuestion();
+    if (window.AFArcade) window.AFArcade.sfx.ring();
     state.current = q;
     state.activeTabWhenAsked = q.client;
     q.askedAt = Date.now();
@@ -528,10 +530,12 @@
       var speedBonus = Math.max(0, 50 - Math.floor(elapsed / 200));
       state.score += 100 + speedBonus;
       flashScreen('correct');
+      if (window.AFArcade) { window.AFArcade.sfx.good(); window.AFArcade.floatText($('hudScore'), '+' + (100 + speedBonus), '#177a55'); }
       addFeedEntry(q, topic, ruleText, true, null);
     } else {
       state.wrongClientMixups += 1;
       flashScreen('wrong');
+      if (window.AFArcade) { window.AFArcade.sfx.bad(); window.AFArcade.shake($('rulesCard')); }
       addFeedEntry(q, topic, ruleText, false, state.currentTab);
     }
 
@@ -562,6 +566,7 @@
   }
 
   function endGame() {
+    if (window.AFArcade) window.AFArcade.sfx.end();
     state.running = false;
     clearInterval(timerInterval);
     gameStage.style.display = 'none';
