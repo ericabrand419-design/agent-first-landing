@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Agent First: NOT SPECIFIED, The Game</title>
-<meta name="description" content="Ten operational calls. Sometimes the client has a rule. Sometimes they never wrote one down. Can you tell the difference, and resist guessing when the answer is NOT SPECIFIED?">
+<title>Agent First: Not Specified: The Game</title>
+<meta name="description" content="Confident Carl always has an answer. Is he right, quoting the wrong client, or making up a rule nobody wrote down? Twelve calls in the Agent First Arcade.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://myagentfirst.com/not-specified-the-game.html">
-<meta property="og:title" content="Agent First: NOT SPECIFIED, The Game">
-<meta property="og:description" content="Most games reward knowing the answer. This one sometimes rewards knowing there isn't one.">
+<meta property="og:title" content="Agent First: Not Specified: The Game">
+<meta property="og:description" content="Confident Carl always has an answer. Is he right, quoting the wrong client, or making up a rule nobody wrote down?">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Agent First: NOT SPECIFIED, The Game">
-<meta name="twitter:description" content="Most games reward knowing the answer. This one sometimes rewards knowing there isn't one.">
+<meta name="twitter:title" content="Agent First: Not Specified: The Game">
+<meta name="twitter:description" content="Confident Carl always has an answer. Is he right, quoting the wrong client, or making up a rule nobody wrote down?">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,36 +77,57 @@
 
   .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
   .pill-violet{background:var(--purplebg);color:var(--violet)}
-  .pill-amber{background:var(--amberbg);color:var(--amber)}
-  .pill-green{background:var(--greenbg);color:var(--green)}
-  .pill-danger{background:var(--dangerbg);color:var(--danger)}
 
-  .nsg-progress-track{width:100%;height:8px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
-  .nsg-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--grad-primary);width:0%;transition:width .35s ease;}
-  .nsg-progress-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
 
-  .nsg-client-badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:var(--navy);color:#fff;font-size:12px;font-weight:750;}
+  /* CONFIDENT CARL */
+  .cc-hud{display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:12px 18px;border-radius:var(--radius-md);background:var(--navy);color:#fff}
+  .cc-stat{display:flex;flex-direction:column;gap:1px;min-width:60px}
+  .cc-num{font-size:22px;font-weight:900}
+  .cc-lbl{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.07em;color:#8890ab}
+  .cc-strikes{margin-left:auto;display:flex;gap:6px;align-items:center}
+  .cc-strike{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:14px}
+  .cc-strike.on{background:#c5364a}
+  .cc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+  .cc-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-panel);padding:18px;position:relative;overflow:hidden}
+  .cc-chip{display:inline-block;font-size:12px;font-weight:900;padding:4px 10px;border-radius:999px;color:#fff}
+  .cc-ask{font-size:19px;font-weight:800;line-height:1.4;margin:10px 0 0}
+  .cc-carl{display:grid;grid-template-columns:96px 1fr;gap:14px;align-items:start;margin-top:16px}
+  .cc-face{width:96px;height:96px}
+  .cc-bubble{position:relative;background:#fff7e8;border:1.5px solid #ffd28a;border-radius:16px;padding:14px 16px;font-size:16px;line-height:1.45;font-weight:650}
+  .cc-bubble:before{content:"";position:absolute;left:-9px;top:22px;border:8px solid transparent;border-right-color:#ffd28a;border-left:0}
+  .cc-bubble em{display:block;font-style:normal;font-size:12px;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#a15c00;margin-bottom:4px}
+  .cc-confidence{margin-top:10px;font-size:12px;font-weight:750;color:var(--muted)}
+  .cc-confidence i{display:inline-block;height:7px;width:120px;border-radius:999px;background:linear-gradient(90deg,#ffb547,#ff6b54);vertical-align:middle;margin-left:6px}
+  .cc-timer{height:6px;border-radius:999px;background:var(--purplebg);overflow:hidden;margin-top:16px}
+  .cc-timer > i{display:block;height:100%;width:100%;background:var(--grad-primary)}
+  .cc-binder-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:12px}
+  .cc-rule{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:10px 0;border-bottom:1px dashed var(--line)}
+  .cc-rule:last-child{border-bottom:0}
+  .cc-rule b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding-top:2px}
+  .cc-rule span{font-size:14.5px;line-height:1.45;font-weight:650}
+  .cc-rule.hl{background:#fff8ec;margin:0 -10px;padding:10px;border-radius:10px}
+  .cc-choices{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .cc-choice{border:2px solid var(--line);border-radius:14px;background:#fff;padding:16px 14px;cursor:pointer;font:inherit;text-align:left;transition:transform .08s,border-color .12s,background .12s}
+  .cc-choice:hover{transform:translateY(-2px)}
+  .cc-choice b{display:block;font-size:17px;font-weight:900;margin-bottom:4px}
+  .cc-choice span{font-size:13px;color:var(--muted);line-height:1.4}
+  .cc-choice kbd{float:right;font:800 11px Inter,sans-serif;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+  .cc-choice.right{border-color:#2fbf8f}.cc-choice.right:hover{background:#ecfbf4}
+  .cc-choice.wrong{border-color:#ff8fa0}.cc-choice.wrong:hover{background:#fdeaee}
+  .cc-choice.ns{border-color:#ffb547;border-style:dashed}.cc-choice.ns:hover{background:#fff6e5}
+  .cc-choice:disabled{opacity:.45;cursor:default;transform:none}
+  .cc-verdict{display:none;padding:16px 18px;border-radius:14px;font-size:15px;line-height:1.55}
+  .cc-verdict.good{display:block;background:#ecfbf4;color:#155c40}
+  .cc-verdict.bad{display:block;background:#fdeaee;color:#8f2234}
+  .cc-verdict b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px}
+  .cc-howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:left;max-width:780px}
+  .cc-howto .card-on-dark{padding:16px}
+  .cc-howto b{display:block;color:#fff;font-size:15px;margin-bottom:6px}
+  .cc-howto span{color:#c7cce0;font-size:13.5px;line-height:1.5}
+  .cc-rank{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+  .cc-insight{padding:14px 16px;border-radius:12px;background:var(--purplebg);color:#3d2580;font-size:15px;line-height:1.55;font-weight:650}
+  @media (max-width:980px){.cc-grid,.cc-choices,.cc-howto{grid-template-columns:1fr}.cc-rule{grid-template-columns:1fr;gap:3px}.section{padding:40px 16px}}
 
-  .nsg-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .12s ease,background .12s ease,transform .1s ease;}
-  .nsg-option:hover{border-color:var(--violet);background:var(--purplebg);}
-  .nsg-option:active{transform:scale(.99);}
-  .nsg-option-ns{border-style:dashed;border-color:var(--amber);color:var(--amber);font-weight:750;}
-  .nsg-option-ns:hover{background:var(--amberbg);border-color:var(--amber);}
-
-  .nsg-option.is-correct{border-color:var(--green);background:var(--greenbg);}
-  .nsg-option.is-wrong{border-color:var(--danger);background:var(--dangerbg);}
-  .nsg-option[disabled]{cursor:default;}
-
-  @keyframes nsg-pop{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
-  .nsg-pop{animation:nsg-pop .4s ease;}
-  @keyframes nsg-fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-  .nsg-fade{animation:nsg-fade-in .3s ease;}
-
-  @media (max-width:900px){
-    .section{padding:56px 20px}
-    .ds-display{font-size:32px}
-    .ds-hero{font-size:24px}
-  }
 </style>
 </head>
 <body>
@@ -129,46 +150,76 @@
     </div>
   </div>
 
-  <!-- INTRO -->
+  <!-- INTRO STAGE -->
   <div class="section" id="introStage" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
-      <div class="ds-label eyebrow-c">Agent First Free Tools &middot; 10 calls</div>
-      <h1 class="ds-display" style="color:#fff;">NOT SPECIFIED: The Game</h1>
-      <p class="ds-body" style="color:#c7cce0;">Ten operational calls, three fictional clients. Sometimes the client has an actual rule. Sometimes they genuinely never wrote one down. Your job isn't to sound confident. It's to tell the difference, and pick NOT SPECIFIED when that's the honest answer, even though every wrong option sounds just as plausible.</p>
-      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Take the first call</button>
-    </div>
-  </div>
-
-  <!-- GAME -->
-  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:640px;">
-
-      <div class="nsg-progress-label" id="progressLabel">Call 1 of 10</div>
-      <div class="nsg-progress-track" style="margin-top:-12px;"><div class="nsg-progress-fill" id="progressFill"></div></div>
-
-      <div class="card nsg-fade" id="questionCard">
-        <div style="margin-bottom:12px;"><span class="nsg-client-badge" id="clientBadge">--</span></div>
-        <div class="ds-heading" id="situationText" style="margin-bottom:18px;">&nbsp;</div>
-        <div id="optionsWrap" style="display:flex;flex-direction:column;gap:10px;"></div>
-        <div id="feedback" class="ds-body-sm" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);"></div>
-        <button class="btn btn-primary" id="nextBtn" style="display:none;margin-top:16px;">Next call</button>
+    <div class="wrap" style="display:flex;flex-direction:column;gap:22px;max-width:800px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Arcade &middot; 12 calls</div>
+      <h1 class="ds-display" style="color:#fff;">Not Specified: The Game</h1>
+      <p class="ds-body" style="color:#c7cce0;max-width:650px;">Meet Carl. Carl has been here six years. Carl is never unsure. On every call, Carl leans over and tells you the answer. Sometimes he’s right. Sometimes he’s quoting the wrong client. And sometimes he’s confidently making up a rule nobody ever wrote down.</p>
+      <div class="cc-howto">
+        <div class="card-on-dark"><b>Carl’s right</b><span>What Carl said matches this client’s rule.</span></div>
+        <div class="card-on-dark"><b>Carl’s wrong</b><span>The rule exists, but Carl got it wrong. Usually he’s thinking of a different client.</span></div>
+        <div class="card-on-dark"><b>Nobody wrote that down</b><span>This client has no rule for it. The honest answer is NOT SPECIFIED, not a guess.</span></div>
       </div>
-
+      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Sit down next to Carl</button>
+      <div class="ds-body-sm" style="color:#8890ab;">Three customer complaints and your shift is over. Keys 1, 2 and 3 work too. All clients are fictional.</div>
     </div>
   </div>
 
-  <!-- RESULTS -->
-  <div class="section" id="resultsStage" style="background:#fff;display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:640px;">
-
-      <div class="card">
-        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Final score</div>
-        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
-          <div><div class="ds-score" id="rCorrect">0/10</div><div class="ds-body-sm" style="color:var(--muted);">Correct calls</div></div>
-          <div><div class="ds-score" style="color:var(--danger);" id="rGuessed">0</div><div class="ds-body-sm" style="color:var(--muted);">Times you guessed instead of saying NOT SPECIFIED</div></div>
-          <div><div class="ds-score" style="color:var(--amber);" id="rOverCautious">0</div><div class="ds-body-sm" style="color:var(--muted);">Times you said NOT SPECIFIED when a rule existed</div></div>
+  <!-- GAME STAGE -->
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;padding-top:36px;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:16px;max-width:1120px;">
+      <div class="cc-hud">
+        <div class="cc-stat"><div class="cc-num" id="hudCall">1/12</div><div class="cc-lbl">Call</div></div>
+        <div class="cc-stat"><div class="cc-num" id="hudScore">0</div><div class="cc-lbl">Score</div></div>
+        <div class="cc-stat"><div class="cc-num" id="hudCaught" style="color:#9ff0cf;">0</div><div class="cc-lbl">Carl caught</div></div>
+        <div class="cc-strikes" title="Customer complaints"><span class="cc-lbl" style="margin-right:4px;">Complaints</span><div class="cc-strike" id="s0"></div><div class="cc-strike" id="s1"></div><div class="cc-strike" id="s2"></div></div>
+      </div>
+      <div class="cc-grid">
+        <div class="cc-panel" id="callPanel">
+          <div class="ds-label" style="color:var(--muted);">Customer on the line for</div>
+          <div style="margin-top:6px;"><span class="cc-chip" id="callClient">Client</span></div>
+          <div class="cc-ask" id="callAsk">&nbsp;</div>
+          <div class="cc-carl">
+            <svg class="cc-face" id="carlFace" viewBox="0 0 96 96" aria-hidden="true"><circle cx="48" cy="50" r="38" fill="#ffd7b5"/><path d="M14 44c2-22 20-32 38-30 16 2 28 12 30 26-8-8-20-11-34-10-14 1-24 6-34 14z" fill="#6b4226"/><g id="carlBrows"><path d="M28 40l12-3" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/><path d="M56 37l12 3" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/></g><circle cx="35" cy="49" r="3.6" fill="#22222e"/><circle cx="61" cy="49" r="3.6" fill="#22222e"/><path id="carlMouth" d="M34 66c8 7 20 7 28-1" stroke="#7a3b2e" stroke-width="3.5" fill="none" stroke-linecap="round"/><rect x="28" y="84" width="40" height="12" rx="4" fill="#3d5bd9"/></svg>
+            <div>
+              <div class="cc-bubble"><em>Carl, leaning over</em><span id="carlSays">&nbsp;</span></div>
+              <div class="cc-confidence">Carl’s confidence <i></i> 100%</div>
+            </div>
+          </div>
+          <div class="cc-timer"><i id="timerFill"></i></div>
         </div>
+        <div class="cc-panel" id="binder">
+          <div class="cc-binder-head">
+            <div><div class="ds-label" id="binderLabel" style="color:var(--violet);">Client Profile</div><div class="ds-heading" id="binderName">--</div></div>
+            <span class="pill pill-violet" id="binderIndustry">--</span>
+          </div>
+          <div id="binderRules"></div>
+        </div>
+      </div>
+      <div class="cc-choices" id="choices">
+        <button class="cc-choice right" data-c="right" type="button"><kbd>1</kbd><b>Carl’s right</b><span>That matches this client’s rule.</span></button>
+        <button class="cc-choice wrong" data-c="wrong" type="button"><kbd>2</kbd><b>Carl’s wrong</b><span>The rule says something different.</span></button>
+        <button class="cc-choice ns" data-c="ns" type="button"><kbd>3</kbd><b>Nobody wrote that down</b><span>NOT SPECIFIED. Route it, don’t guess.</span></button>
+      </div>
+      <div class="cc-verdict" id="verdict"></div>
+      <div style="display:flex;justify-content:flex-end;"><button class="btn btn-primary" id="nextBtn" type="button" style="display:none;">Next call &rarr;</button></div>
+    </div>
+  </div>
+
+  <!-- RESULTS STAGE -->
+  <div class="section" id="resultsStage" style="background:#fff;display:none;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:720px;">
+      <div class="card">
+        <div class="cc-rank" id="rRank">Shift over</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin:10px 0 16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:18px;">
+          <div><div class="ds-score" id="rScore">0</div><div class="ds-body-sm" style="color:var(--muted);">Score<span id="rBest"></span></div></div>
+          <div><div class="ds-score" id="rCorrect" style="color:var(--green);">0</div><div class="ds-body-sm" style="color:var(--muted);">Calls you got right</div></div>
+          <div><div class="ds-score" id="rFooled" style="color:var(--danger);">0</div><div class="ds-body-sm" style="color:var(--muted);">Times Carl fooled you</div></div>
+          <div><div class="ds-score" id="rNS">0</div><div class="ds-body-sm" style="color:var(--muted);">Made-up rules you caught</div></div>
+        </div>
+        <div class="cc-insight" id="rInsight">--</div>
       </div>
 
       <div class="card">
@@ -182,15 +233,16 @@
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <button class="btn btn-primary" id="playAgainBtn">Play again</button>
-        <a href="sample-client-profile.html" class="btn btn-ghost-light">Build my sample Client Profile</a>
+        <a href="supervisor-boss-battle.html" class="btn btn-ghost-light">Next: Supervisor Boss Battle</a>
+        <a href="labs.html" class="btn btn-ghost-light">All games and tools</a>
       </div>
 
       <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">This is a designed state, not a gap in a search index.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">When an approved Client Profile has no rule for a situation, Agent First says so plainly and hands back a safe default next step, instead of guessing or inventing a plausible-sounding answer. It has a designed NOT SPECIFIED state, instead of being required to always produce an answer.</p>
+        <div class="ds-body" style="font-weight:900;color:#fff;">Agent First is the opposite of Carl.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">When a client has a rule, Agent First shows that client’s rule and where it came from. When a client never wrote one down, it says NOT SPECIFIED and routes the question to a person, instead of handing the customer a confident guess.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
-          <a href="agent-challenge.html" class="btn btn-ghost-dark">Try the Agent Challenge</a>
+          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
+          <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
         </div>
       </div>
 
@@ -200,7 +252,7 @@
         <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this result emailed to you?</div>
         <form id="emailForm" style="display:flex;gap:10px;flex-wrap:wrap;">
           <input type="hidden" name="access_key" value="7207f464-b77a-4a0c-b6b7-3a747ab11496">
-          <input type="hidden" name="subject" value="NOT SPECIFIED: The Game result, Agent First">
+          <input type="hidden" name="subject" value="Not Specified: The Game result, Agent First">
           <input type="hidden" name="from_name" value="Agent First website">
           <input type="hidden" name="result_summary" id="resultSummaryField" value="">
           <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
@@ -225,277 +277,188 @@
 </div>
 
 <script src="/labs-capture.js"></script>
+<script src="/arcade-kit.js"></script>
 <script>
 (function () {
   'use strict';
-  var $ = function (id) { return document.getElementById(id); };
+  var K = window.AFArcade, $ = function (id) { return document.getElementById(id); };
+  var CALLS = 12;
+  var RIVAL = {}; K.PAIRS.forEach(function (p) { RIVAL[p[0]] = p[1]; RIVAL[p[1]] = p[0]; });
+  var UNWRITTEN = {
+    'Auto service': [
+      ['Can I bring my dog into the waiting room?', 'Totally. Leashed dogs are fine, everybody does it.'],
+      ['Do you price-match the dealer across town?', 'Yep, we match any written quote. Standard policy.'],
+      ['Can my 16-year-old pick up my car for me?', 'Sure, as long as they have their license on them.'],
+      ['Can I leave the car here for a week after the repair?', 'No problem. First three days of storage are free.']
+    ],
+    'Healthcare': [
+      ['Do you validate parking?', 'Yes, just bring your ticket to the front desk.'],
+      ['Can my mom come back to the exam room with me?', 'Of course. One guest is always allowed.'],
+      ['Do you give a discount if I pay cash?', 'Yep, ten percent off for cash. Everyone knows that.'],
+      ['Can I get a school note emailed today?', 'Sure, the front desk emails those same day.']
+    ],
+    'Home services': [
+      ['Do you give a senior discount?', 'Ten percent off for anyone over 65. Easy.'],
+      ['Will the tech haul away my old water heater?', 'Haul-away is always included. Always.'],
+      ['Can I get a Sunday morning appointment?', 'Sundays are open by request, just ask.'],
+      ['Can I pay the technician in cash?', 'Cash is fine, the tech carries change.']
+    ],
+    'Property': [
+      ['Can I paint my bedroom?', 'Any color is fine as long as you paint it back.'],
+      ['Can I install a dog door?', 'Yep. Maintenance does those for $75.'],
+      ['Can I sublet my unit for the summer?', 'Subletting is fine with two weeks’ notice.'],
+      ['Can I rent a second parking space?', 'Extra spaces are $40 a month.']
+    ]
+  };
+  var OPENERS = ['Easy one.', 'Trust me, I’ve been here six years.', 'Oh, I know this one.', 'Same as everywhere.', 'Don’t overthink it.', 'I’m like 99% sure.', 'Classic.', 'Pfft. Easy.'];
+  var SMUG = ['See? Told you.', 'Six years, baby.', 'Carl’s never wrong.', 'You’re welcome.'];
+  var CAUGHT_MIXUP = ['Okay, okay. Different client.', 'Huh. I was thinking of the other store.', 'Well, it USED to be that way.', 'They all blur together, man.'];
+  var CAUGHT_MADEUP = ['Huh. I could have sworn that was a rule.', 'Well, it SHOULD be a rule.', 'Who even writes these down?', 'Okay, maybe I made that one up.'];
+  function poss(n) { return /s$/.test(n) ? n + '’' : n + '’s'; }
+  var state = null, timer = null;
 
-  var CLIENT_NAMES = { A: 'Harborview', B: 'Meridian', C: 'Northgate' };
-
-  var NOT_SPECIFIED = 'NOT SPECIFIED';
-
-  var SCENARIOS = [
-    {
-      client: 'A',
-      situation: 'A long-time customer asks for a one-time exception to bring a pet into a no-pets service area.',
-      correct: 'DO NOT ALLOW. Service animals only; no discretionary pet exceptions.',
-      guesses: ['ALLOW, since they have been a customer for years.', 'ALLOW, but log it as a one-time exception.']
-    },
-    {
-      client: 'B',
-      situation: 'A customer wants to apply a discount code that expired yesterday.',
-      correct: NOT_SPECIFIED,
-      guesses: ['ALLOW, one day late is close enough.', 'Follow whatever the other client accounts do in this situation.']
-    },
-    {
-      client: 'C',
-      situation: 'A caller says their spouse handles the account and asks to discuss billing with them instead.',
-      correct: 'VERIFY the spouse independently first. The account holder\'s authorization alone does not transfer automatically.',
-      guesses: ['DISCLOSE, a spouse counts as the account holder.', 'TRANSFER to billing and let them sort it out.']
-    },
-    {
-      client: 'A',
-      situation: 'A customer wants a refund credited to a different card than the one they paid with.',
-      correct: NOT_SPECIFIED,
-      guesses: ['ALLOW, refunds to any card on file.', 'DO NOT ALLOW, refunds always go back to the original payment method.']
-    },
-    {
-      client: 'B',
-      situation: 'A customer asks to reschedule for the third time this month.',
-      correct: 'ALLOW, but ESCALATE for a supervisor note after the second reschedule in a month.',
-      guesses: ['DO NOT ALLOW, two reschedules is the hard limit.', 'ALLOW, with no limit on reschedules.']
-    },
-    {
-      client: 'C',
-      situation: 'A customer wants same-day service outside normal service hours.',
-      correct: NOT_SPECIFIED,
-      guesses: ['ALLOW with a rush fee, that is standard in the industry.', 'DO NOT ALLOW, same-day requests always need advance notice.']
-    },
-    {
-      client: 'A',
-      situation: 'A customer says a friend at another company was told their setup fee gets waived, and asks for the same deal here.',
-      correct: 'DO NOT ALLOW. This account\'s fee schedule is independent of what another company offers.',
-      guesses: ['ALLOW, to keep the customer happy.', 'NOT SPECIFIED']
-    },
-    {
-      client: 'B',
-      situation: 'A caller asks the agent to email a copy of their signed agreement to a new email address, on the spot.',
-      correct: NOT_SPECIFIED,
-      guesses: ['ALLOW, it is just a document.', 'DISCLOSE only after ID verification, same as any account change.']
-    },
-    {
-      client: 'C',
-      situation: 'A customer wants to combine two separate promotional discounts on one order.',
-      correct: 'DO NOT ALLOW. Promotional discounts do not stack; one per order.',
-      guesses: ['ALLOW, whichever gives the bigger discount.', 'NOT SPECIFIED']
-    },
-    {
-      client: 'A',
-      situation: 'A customer who is moving out of the service area asks to keep their current rate at the new address.',
-      correct: NOT_SPECIFIED,
-      guesses: ['ALLOW, rate protection is common practice.', 'DO NOT ALLOW, rates always reset at a new address.']
-    }
-  ];
-
-  function escapeHtml(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var t = a[i]; a[i] = a[j]; a[j] = t;
-    }
-    return a;
-  }
-
-  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
-  var order = [];
-  var state = null;
-
-  function startGame() {
-    order = shuffle(SCENARIOS.map(function (s, i) { return i; }));
-    state = { index: 0, correct: 0, guessedInsteadOfNS: 0, overCautiousNS: 0, locked: false };
-    introStage.style.display = 'none';
-    resultsStage.style.display = 'none';
-    gameStage.style.display = 'flex';
-    renderQuestion();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function renderQuestion() {
-    var s = SCENARIOS[order[state.index]];
-    state.locked = false;
-    $('progressLabel').textContent = 'Call ' + (state.index + 1) + ' of ' + SCENARIOS.length;
-    $('progressFill').style.width = ((state.index / SCENARIOS.length) * 100) + '%';
-    $('clientBadge').textContent = CLIENT_NAMES[s.client] + ' account';
-    $('situationText').textContent = s.situation;
-    $('feedback').style.display = 'none';
-    $('nextBtn').style.display = 'none';
-
-    var options = shuffle(s.guesses.filter(function (g) { return g !== NOT_SPECIFIED; }).concat(
-      s.correct !== NOT_SPECIFIED ? [s.correct] : []
-    ));
-    var wrap = $('optionsWrap');
-    wrap.innerHTML = '';
-    options.forEach(function (text) {
-      var btn = document.createElement('button');
-      btn.className = 'nsg-option';
-      btn.textContent = text;
-      btn.addEventListener('click', function () { selectAnswer(text, btn); });
-      wrap.appendChild(btn);
-    });
-    var nsBtn = document.createElement('button');
-    nsBtn.className = 'nsg-option nsg-option-ns';
-    nsBtn.textContent = 'NOT SPECIFIED, this client never wrote a rule for this';
-    nsBtn.addEventListener('click', function () { selectAnswer(NOT_SPECIFIED, nsBtn); });
-    wrap.appendChild(nsBtn);
-
-    var card = $('questionCard');
-    card.classList.remove('nsg-fade');
-    void card.offsetWidth;
-    card.classList.add('nsg-fade');
-  }
-
-  function selectAnswer(picked, btnEl) {
-    if (state.locked) return;
-    state.locked = true;
-    var s = SCENARIOS[order[state.index]];
-    var wasCorrect = picked === s.correct;
-
-    document.querySelectorAll('.nsg-option').forEach(function (b) { b.disabled = true; });
-
-    if (wasCorrect) {
-      state.correct += 1;
-      btnEl.classList.add('is-correct');
-    } else {
-      btnEl.classList.add('is-wrong');
-      if (s.correct === NOT_SPECIFIED) {
-        state.guessedInsteadOfNS += 1;
-      } else if (picked === NOT_SPECIFIED) {
-        state.overCautiousNS += 1;
-      }
-    }
-
-    var feedback = $('feedback');
-    feedback.style.display = 'block';
-    if (wasCorrect) {
-      feedback.innerHTML = '<span class="pill pill-green" style="margin-bottom:8px;">Correct</span><br>' +
-        (s.correct === NOT_SPECIFIED
-          ? 'This client genuinely never wrote a rule for this. Saying so, and handing back a safe default, is the right move.'
-          : 'The correct call: ' + escapeHtml(s.correct));
-    } else if (s.correct === NOT_SPECIFIED) {
-      feedback.innerHTML = '<span class="pill pill-danger" style="margin-bottom:8px;">Wrong</span><br>' +
-        'There was no rule here. That answer sounded plausible, but it was a guess, not something this client ever approved.';
-    } else {
-      feedback.innerHTML = '<span class="pill pill-amber" style="margin-bottom:8px;">Wrong</span><br>' +
-        'This one actually was specified. The correct call: ' + escapeHtml(s.correct);
-    }
-
-    $('nextBtn').style.display = 'inline-flex';
-    $('nextBtn').textContent = state.index < SCENARIOS.length - 1 ? 'Next call' : 'See my results';
-  }
-
-  $('nextBtn').addEventListener('click', function () {
-    state.index += 1;
-    if (state.index >= SCENARIOS.length) {
-      endGame();
-    } else {
-      renderQuestion();
-    }
-  });
-
-  function endGame() {
-    gameStage.style.display = 'none';
-    resultsStage.style.display = 'flex';
-
-    var headline;
-    if (state.guessedInsteadOfNS === 0 && state.correct === SCENARIOS.length) {
-      headline = 'Perfect run. ' + state.correct + ' of ' + SCENARIOS.length + ', and you never guessed when the honest answer was NOT SPECIFIED.';
-    } else if (state.guessedInsteadOfNS > 0) {
-      headline = state.correct + ' of ' + SCENARIOS.length + ' correct. ' + state.guessedInsteadOfNS + ' time' + (state.guessedInsteadOfNS === 1 ? '' : 's') + ' you guessed instead of admitting there was no rule.';
-    } else {
-      headline = state.correct + ' of ' + SCENARIOS.length + ' correct.';
-    }
-    $('resultsHeadline').textContent = headline;
-    $('rCorrect').textContent = state.correct + '/' + SCENARIOS.length;
-    $('rGuessed').textContent = state.guessedInsteadOfNS;
-    $('rOverCautious').textContent = state.overCautiousNS;
-
-    var shareLine = 'I scored ' + state.correct + '/' + SCENARIOS.length + ' on NOT SPECIFIED: The Game, and guessed instead of saying NOT SPECIFIED ' + state.guessedInsteadOfNS + ' time' + (state.guessedInsteadOfNS === 1 ? '' : 's') + '. Try it: myagentfirst.com/not-specified-the-game.html';
-    $('shareText').value = shareLine;
-    $('resultSummaryField').value = shareLine;
-
-    if (window.AFLabs) {
-      window.AFLabs.mount('afIdea', {
-        tool: 'Not Specified: The Game',
-        question: 'You just had to tell the difference between a real rule and a guess. How should a system actually handle the moments where nothing was written down?',
-        context: { result: shareLine }
-      });
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  $('startBtn').addEventListener('click', startGame);
-  $('playAgainBtn').addEventListener('click', function () {
-    resultsStage.style.display = 'none';
-    startGame();
-  });
-
-  $('copyBtn').addEventListener('click', function () {
-    var field = $('shareText');
-    field.select();
-    var done = function () {
-      $('copyStatus').style.display = 'block';
-      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(field.value).then(done).catch(function () {
-        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-      });
-    } else {
-      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-    }
-  });
-
-  var emailForm = $('emailForm');
-  emailForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('emailStatus');
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(emailForm)
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      if (data && data.success) {
-        if (window.AFLabs) window.AFLabs.linkEmail('Not Specified: The Game', emailForm.querySelector('[name="email"]').value);
-        emailForm.style.display = 'none';
-        status.style.color = '#1f5c42';
-        status.textContent = "Sent. I'll follow up directly too.";
-        status.style.display = 'block';
+  function buildCalls() {
+    var calls = [], usedUnwritten = {};
+    var kinds = K.shuffle(['right', 'right', 'right', 'right', 'wrong', 'wrong', 'wrong', 'wrong', 'ns', 'ns', 'ns', 'ns']);
+    var clients = K.shuffle(K.CLIENTS.slice());
+    kinds.forEach(function (kind, i) {
+      var c = clients[i % clients.length], rival = K.client(RIVAL[c.id]), topics = Object.keys(c.rules);
+      if (kind === 'wrong') {
+        var diff = topics.filter(function (t) { return rival.rules[t] && rival.rules[t] !== c.rules[t]; });
+        var t = K.pick(diff);
+        calls.push({ kind: 'wrong', client: c, rival: rival, topic: t, ask: K.pick(K.TOPICS[t].ask), carl: rival.rules[t] });
+      } else if (kind === 'right') {
+        var t2 = K.pick(topics);
+        calls.push({ kind: 'right', client: c, topic: t2, ask: K.pick(K.TOPICS[t2].ask), carl: c.rules[t2] });
       } else {
-        btn.disabled = false;
-        btn.textContent = original;
-        status.style.color = '#c53636';
-        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-        status.style.display = 'block';
+        var bank = UNWRITTEN[c.industry].filter(function (q) { return !usedUnwritten[q[0]]; });
+        var q = K.pick(bank); usedUnwritten[q[0]] = 1;
+        calls.push({ kind: 'ns', client: c, ask: q[0], carl: q[1] });
       }
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = original;
-      status.style.color = '#c53636';
-      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-      status.style.display = 'block';
     });
+    return calls;
+  }
+
+  function face(mood) {
+    var brows = $('carlBrows'), mouth = $('carlMouth');
+    if (mood === 'smug') { brows.innerHTML = '<path d="M28 38l12 2" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/><path d="M56 34l12-2" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/>'; mouth.setAttribute('d', 'M32 64c10 9 24 7 32-4'); }
+    else if (mood === 'caught') { brows.innerHTML = '<path d="M28 36l12 5" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/><path d="M56 41l12-5" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/>'; mouth.setAttribute('d', 'M36 70c6-5 18-5 24 0'); }
+    else { brows.innerHTML = '<path d="M28 40l12-3" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/><path d="M56 37l12 3" stroke="#4a2c18" stroke-width="3.5" stroke-linecap="round"/>'; mouth.setAttribute('d', 'M34 66c8 7 20 7 28-1'); }
+  }
+
+  function start() {
+    state = { calls: buildCalls(), i: 0, score: 0, correct: 0, fooled: 0, nsCaught: 0, strikes: 0, caught: 0, streak: 0, locked: false };
+    $('introStage').style.display = 'none'; $('resultsStage').style.display = 'none'; $('gameStage').style.display = 'flex';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    show();
+  }
+  function seconds() { return Math.max(8, 15 - state.i * 0.6); }
+
+  function show() {
+    var call = state.calls[state.i];
+    state.locked = false; face('normal');
+    $('hudCall').textContent = (state.i + 1) + '/' + CALLS;
+    $('callClient').textContent = call.client.name; $('callClient').style.background = call.client.color;
+    $('callAsk').textContent = '“' + call.ask + '”';
+    $('carlSays').textContent = K.pick(OPENERS) + ' ' + call.carl;
+    $('binderName').textContent = call.client.name; $('binderLabel').style.color = call.client.color; $('binderIndustry').textContent = call.client.industry;
+    $('binderRules').innerHTML = Object.keys(call.client.rules).map(function (t) {
+      return '<div class="cc-rule" data-t="' + t + '"><b>' + K.esc(K.TOPICS[t].label) + '</b><span>' + K.esc(call.client.rules[t]) + '</span></div>';
+    }).join('');
+    $('verdict').className = 'cc-verdict'; $('nextBtn').style.display = 'none';
+    [].forEach.call(document.querySelectorAll('.cc-choice'), function (b) { b.disabled = false; });
+    K.pop($('callPanel')); K.sfx.ring();
+    var secs = seconds(), fill = $('timerFill');
+    fill.style.transition = 'none'; fill.style.width = '100%'; void fill.offsetWidth;
+    fill.style.transition = 'width ' + secs + 's linear'; fill.style.width = '0%';
+    clearTimeout(timer); timer = setTimeout(function () { answer('timeout'); }, secs * 1000);
+    hud();
+  }
+
+  function answer(choice) {
+    if (state.locked) return; state.locked = true; clearTimeout(timer);
+    var call = state.calls[state.i];
+    $('timerFill').style.transition = 'none';
+    [].forEach.call(document.querySelectorAll('.cc-choice'), function (b) { b.disabled = true; });
+    var ok = choice === call.kind, v = $('verdict'), msg, title;
+    if (call.topic) { var row = document.querySelector('.cc-rule[data-t="' + call.topic + '"]'); if (row) row.classList.add('hl'); }
+    if (ok) {
+      state.correct++; state.streak++;
+      var pts = 100 + (state.streak >= 3 ? 50 : 0); state.score += pts;
+      if (call.kind !== 'right') { state.caught++; face('caught'); }
+      if (call.kind === 'ns') state.nsCaught++;
+      K.sfx[state.streak >= 3 ? 'great' : 'good'](); K.flash('good'); K.floatText($('choices'), '+' + pts, '#177a55');
+      title = call.kind === 'right' ? 'Right. Carl got one.' : call.kind === 'wrong' ? 'Caught him. Carl: “' + K.pick(CAUGHT_MIXUP) + '”' : 'Caught him making it up. Carl: “' + K.pick(CAUGHT_MADEUP) + '”';
+      msg = call.kind === 'right' ? poss(call.client.name) + ' rule says exactly that.'
+        : call.kind === 'wrong' ? 'Carl gave you ' + poss(call.rival.name) + ' rule. ' + call.client.name + ' says: “' + call.client.rules[call.topic] + '”'
+        : call.client.name + ' never wrote a rule for this. The honest answer is NOT SPECIFIED: tell the customer you’ll find out, and route it to a person.';
+      v.className = 'cc-verdict good';
+    } else {
+      state.streak = 0;
+      /* A complaint only happens when a wrong or made-up answer actually reaches the customer. */
+      var complaint = call.kind !== 'right' && (choice === 'right' || choice === 'timeout');
+      if (complaint) { state.fooled++; state.strikes++; face('smug'); }
+      K.sfx.bad(); K.flash('bad'); K.shake($('callPanel'));
+      K.stamp($('callPanel'), choice === 'timeout' ? 'YOU FROZE' : complaint ? 'COMPLAINT' : 'NOPE', 'bad');
+      title = choice === 'timeout' ? 'You froze, so Carl answered for you.' : (call.kind !== 'right' && choice === 'right') ? K.pick(SMUG) + ' (He was wrong.)' : 'Not this time.';
+      msg = call.kind === 'right' ? 'Carl was actually right: ' + poss(call.client.name) + ' rule says “' + call.client.rules[call.topic] + '”'
+        : call.kind === 'wrong' ? 'Carl gave you ' + poss(call.rival.name) + ' rule. ' + call.client.name + ' says: “' + call.client.rules[call.topic] + '”'
+        : call.client.name + ' never wrote a rule for this. Carl made it up. The right move was NOT SPECIFIED.';
+      if (complaint) msg += ' The customer filed a complaint.';
+      v.className = 'cc-verdict bad';
+    }
+    v.innerHTML = '<b>' + K.esc(title) + '</b>' + K.esc(msg);
+    hud();
+    if (state.strikes >= 3 || state.i >= CALLS - 1) { $('nextBtn').textContent = 'See my results →'; }
+    else $('nextBtn').innerHTML = 'Next call &rarr;';
+    $('nextBtn').style.display = 'inline-flex';
+    $('nextBtn').focus({ preventScroll: true });
+  }
+
+  function next() {
+    if (!state.locked) return;
+    if (state.strikes >= 3 || state.i >= CALLS - 1) return end();
+    state.i++; show();
+  }
+
+  function hud() {
+    $('hudScore').textContent = state.score.toLocaleString();
+    $('hudCaught').textContent = state.caught;
+    for (var i = 0; i < 3; i++) { $('s' + i).className = 'cc-strike' + (i < state.strikes ? ' on' : ''); $('s' + i).textContent = i < state.strikes ? '!' : ''; }
+  }
+
+  function end() {
+    clearTimeout(timer);
+    $('gameStage').style.display = 'none'; $('resultsStage').style.display = 'flex';
+    var played = state.i + 1;
+    var rank = state.strikes >= 3 ? 'Carl 2.0' : state.correct >= 11 ? 'Carl-proof' : state.correct >= 8 ? 'Professional skeptic' : 'Carl’s new best friend';
+    var b = K.best('not-specified', state.score);
+    $('rRank').textContent = rank;
+    $('rBest').innerHTML = b.isNew && b.previous > 0 ? ' · new best' : (b.previous > 0 ? ' · best ' + Math.max(b.previous, state.score) : '');
+    $('rScore').textContent = state.score.toLocaleString(); $('rCorrect').textContent = state.correct + '/' + played;
+    $('rFooled').textContent = state.fooled; $('rNS').textContent = state.nsCaught;
+    var carlWrong = state.calls.slice(0, played).filter(function (c) { return c.kind !== 'right'; }).length;
+    $('resultsHeadline').textContent = state.strikes >= 3 ? 'Three complaints. Carl talked you into it.' : 'Carl was confidently wrong ' + carlWrong + ' times. You caught ' + state.caught + '.';
+    $('rInsight').textContent = 'Every Carl answer sounded equally sure. The only way to tell was checking the right client’s rule, and noticing when there wasn’t one. ' +
+      (state.nsCaught ? 'You caught ' + state.nsCaught + ' made-up rule' + (state.nsCaught === 1 ? '' : 's') + '. ' : '') + 'That habit, saying NOT SPECIFIED instead of guessing, is built into Agent First.';
+    if (state.correct >= 9) K.confetti();
+    K.sfx.end();
+    var share = 'I caught Confident Carl ' + state.caught + ' times in Not Specified: The Game (' + rank + ', ' + state.correct + '/' + played + ' right). Try it: myagentfirst.com/not-specified-the-game.html';
+    K.results({ tool: 'Not Specified: The Game', share: share, question: 'Every floor has a Carl. When an agent isn’t sure of a rule on your team, what usually happens next?' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  [].forEach.call(document.querySelectorAll('.cc-choice'), function (b) { b.addEventListener('click', function () { answer(b.dataset.c); }); });
+  document.addEventListener('keydown', function (e) {
+    if (!state || $('gameStage').style.display === 'none') return;
+    if (!state.locked && (e.key === '1' || e.key === '2' || e.key === '3')) answer(['right', 'wrong', 'ns'][+e.key - 1]);
+    else if (state.locked && e.key === 'Enter') { e.preventDefault(); next(); }
   });
+  $('nextBtn').addEventListener('click', next);
+  $('startBtn').addEventListener('click', start);
+  $('playAgainBtn').addEventListener('click', start);
+  K.wireCommon('Not Specified: The Game');
+  window.__carl = function () { return state; };
 })();
 </script>
 

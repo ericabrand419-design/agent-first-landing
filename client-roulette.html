@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent First: Client Roulette</title>
-<meta name="description" content="A customer asks something. You answer. Then: client switch. Same question, different company, different rule. Survive 90 seconds without mixing up whose policy applies.">
+<meta name="description" content="Three phone lines, four clients, one rule binder. Pick up, flip to the right client, and answer before the caller hangs up. A 90-second Agent First Arcade game.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://myagentfirst.com/client-roulette.html">
 <meta property="og:title" content="Agent First: Client Roulette">
-<meta property="og:description" content="A customer asks something. You answer. Then: client switch. Same question, different company, different rule. How many switches can you survive?">
+<meta property="og:description" content="Three phone lines, four clients, one rule binder. How many callers can you answer without handing out the wrong client’s rule?">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Agent First: Client Roulette">
-<meta name="twitter:description" content="A customer asks something. You answer. Then: client switch. Same question, different company, different rule.">
+<meta name="twitter:description" content="Three phone lines, four clients, one rule binder. How many callers can you answer without handing out the wrong client’s rule?">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,49 +78,68 @@
   .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
   .pill-violet{background:var(--purplebg);color:var(--violet)}
 
-  /* HUD */
-  .rlt-hud{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:var(--radius-md);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-panel);}
-  .rlt-hud-stat{display:flex;flex-direction:column;gap:2px;}
-  .rlt-hud-num{font-size:20px;font-weight:900;}
-  .rlt-hud-label{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
-  .rlt-meter-wrap{flex:1;min-width:160px;display:flex;flex-direction:column;gap:4px;}
-  .rlt-meter-track{width:100%;height:12px;border-radius:var(--radius-full);background:var(--bg);overflow:hidden;}
-  .rlt-meter-fill{height:100%;border-radius:var(--radius-full);background:var(--green);width:100%;transition:width .3s ease,background .3s ease;}
 
-  /* active client badge */
-  .rlt-client-badge{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:var(--radius-md);background:var(--navy);color:#fff;}
-  .rlt-client-name{font-size:20px;font-weight:900;}
-
-  /* per-question timer */
-  .rlt-qtimer-track{width:100%;height:5px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
-  .rlt-qtimer-fill{height:100%;background:var(--grad-primary);width:100%;}
-
-  .rlt-option{width:100%;text-align:left;padding:16px 18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;font-weight:650;cursor:pointer;transition:border-color .12s ease,background .12s ease,transform .1s ease;}
-  .rlt-option:hover{border-color:var(--violet);background:var(--purplebg);}
-  .rlt-option:active{transform:scale(.99);}
-  .rlt-option-ask{border-style:dashed;color:var(--muted);font-weight:650;}
-
-  /* flash + switch banner */
-  .rlt-flash{position:fixed;inset:0;pointer-events:none;opacity:0;transition:opacity .15s ease;z-index:40}
-  .rlt-flash.show{opacity:1}
-  .rlt-flash.correct{background:rgba(23,122,85,.12)}
-  .rlt-flash.wrong{background:rgba(197,54,74,.14)}
-  .rlt-flash.ask{background:rgba(161,92,0,.10)}
-
-  .rlt-switch-banner{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;background:rgba(11,16,37,.92);opacity:0;pointer-events:none;transition:opacity .18s ease;z-index:50;text-align:center;padding:20px;}
-  .rlt-switch-banner.show{opacity:1;}
-  .rlt-switch-title{font-size:14px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);}
-  .rlt-switch-name{font-size:44px;font-weight:900;color:#fff;letter-spacing:-.02em;}
-
-  @keyframes rlt-pop{0%{transform:scale(1)}45%{transform:scale(1.08)}100%{transform:scale(1)}}
-  .rlt-pop{animation:rlt-pop .4s ease;}
-
-  @media (max-width:900px){
-    .section{padding:56px 20px}
-    .ds-display{font-size:32px}
-    .ds-hero{font-size:24px}
-    .rlt-switch-name{font-size:32px;}
+  /* SWITCHBOARD */
+  .sw-hud{display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:12px 18px;border-radius:var(--radius-md);background:var(--navy);color:#fff;box-shadow:var(--shadow-panel)}
+  .sw-stat{display:flex;flex-direction:column;gap:1px;min-width:62px}
+  .sw-num{font-size:22px;font-weight:900;letter-spacing:-.02em}
+  .sw-lbl{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.07em;color:#8890ab}
+  .sw-combo{margin-left:auto;font-size:15px;font-weight:900;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.08);color:#ffd28a;transition:transform .15s}
+  .sw-combo.hot{background:var(--grad-primary);color:#fff}
+  .sw-grid{display:grid;grid-template-columns:minmax(300px,380px) 1fr;gap:18px;align-items:start}
+  .sw-col{display:flex;flex-direction:column;gap:14px}
+  .sw-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-panel);padding:16px;position:relative;overflow:hidden}
+  .sw-lines{display:flex;flex-direction:column;gap:10px}
+  .sw-line{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--soft);min-height:64px}
+  .sw-led{width:14px;height:14px;border-radius:50%;background:#d6d4e6}
+  .sw-line.ringing{border-color:#ffb547;background:#fff8ec}
+  .sw-line.ringing .sw-led{background:#ff9f1c;box-shadow:0 0 0 0 rgba(255,159,28,.6);animation:sw-blink .7s infinite}
+  .sw-line.active{border-color:var(--violet);background:var(--purplebg)}
+  .sw-line.active .sw-led{background:var(--violet)}
+  @keyframes sw-blink{0%{box-shadow:0 0 0 0 rgba(255,159,28,.7)}100%{box-shadow:0 0 0 10px rgba(255,159,28,0)}}
+  .sw-line-name{font-size:13px;font-weight:750;color:var(--muted)}
+  .sw-line-client{font-size:15px;font-weight:900}
+  .sw-wait{height:5px;border-radius:999px;background:#eee;overflow:hidden;margin-top:6px}
+  .sw-wait > i{display:block;height:100%;background:#ff9f1c;width:100%}
+  .sw-pick{border:0;border-radius:10px;padding:9px 14px;font-weight:900;font-size:13px;cursor:pointer;background:var(--grad-primary);color:#fff;white-space:nowrap}
+  .sw-pick:disabled{background:#e9e8f3;color:#9a9db2;cursor:default}
+  .sw-call{min-height:178px}
+  .sw-call-idle{color:var(--muted);font-size:14px;line-height:1.55;text-align:center;padding:30px 8px}
+  .sw-caller{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .sw-avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:900;font-size:15px;flex:0 0 auto}
+  .sw-client-chip{display:inline-block;font-size:12px;font-weight:900;padding:4px 10px;border-radius:999px;color:#fff}
+  .sw-bubble{background:var(--soft);border:1px solid var(--line);border-radius:4px 16px 16px 16px;padding:14px 16px;font-size:17px;font-weight:750;line-height:1.4}
+  .sw-calltimer{height:6px;border-radius:999px;background:var(--purplebg);overflow:hidden;margin-top:12px}
+  .sw-calltimer > i{display:block;height:100%;background:var(--grad-primary);width:100%}
+  .sw-hint{font-size:12.5px;color:var(--muted);margin-top:10px}
+  .sw-binder{padding:0}
+  .sw-tabs{display:flex;flex-wrap:wrap;gap:6px;padding:12px 12px 0;background:#f2f1f8;border-bottom:1px solid var(--line)}
+  .sw-tab{border:1px solid var(--line);border-bottom:0;border-radius:10px 10px 0 0;padding:9px 12px 10px;font-weight:900;font-size:13px;cursor:pointer;background:#e9e8f3;color:#4f556c;position:relative;top:1px}
+  .sw-tab .sw-dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:6px;vertical-align:1px}
+  .sw-tab.on{background:#fff;color:var(--ink)}
+  .sw-page{padding:16px;display:flex;flex-direction:column;gap:8px}
+  .sw-page-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:4px}
+  .sw-rule{display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:start;text-align:left;width:100%;padding:11px 12px;border-radius:10px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font:inherit;color:var(--ink);transition:border-color .1s,background .1s,transform .08s}
+  .sw-rule:hover{border-color:var(--violet);background:var(--purplebg)}
+  .sw-rule:active{transform:scale(.99)}
+  .sw-rule b{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding-top:2px}
+  .sw-rule span{font-size:14.5px;line-height:1.45;font-weight:650}
+  .sw-rule:disabled{cursor:default;opacity:.55}
+  .sw-rule:disabled:hover{border-color:var(--line);background:#fff}
+  .sw-howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:left;max-width:760px}
+  .sw-howto .card-on-dark{padding:16px}
+  .sw-howto b{display:block;color:#fff;font-size:15px;margin-bottom:6px}
+  .sw-howto span{color:#c7cce0;font-size:13.5px;line-height:1.5}
+  .sw-rank{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+  .sw-best{display:inline-block;margin-left:8px;padding:3px 9px;border-radius:999px;background:#fff1c9;color:#8a5a00;font-size:11px;font-weight:900;letter-spacing:.05em}
+  .sw-insight{padding:14px 16px;border-radius:12px;background:var(--purplebg);color:#3d2580;font-size:15px;line-height:1.55;font-weight:650}
+  @media (max-width:980px){
+    .sw-grid{grid-template-columns:1fr}
+    .sw-howto{grid-template-columns:1fr}
+    .sw-rule{grid-template-columns:1fr;gap:4px}
+    .section{padding:40px 16px}
   }
+
 </style>
 </head>
 <body>
@@ -145,62 +164,75 @@
 
   <!-- INTRO STAGE -->
   <div class="section" id="introStage" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
-      <div class="ds-label eyebrow-c">Agent First Free Tools &middot; 90-second game</div>
+    <div class="wrap" style="display:flex;flex-direction:column;gap:22px;max-width:780px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Arcade &middot; 90-second shift</div>
       <h1 class="ds-display" style="color:#fff;">Client Roulette</h1>
-      <p class="ds-body" style="color:#c7cce0;">A customer asks something. You answer. Then: CLIENT SWITCH. Same question, different company, a completely different rule. The pace gets faster. Your patience meter drops on every mixup. Survive as many switches as you can.</p>
-      <div class="card" style="text-align:left;max-width:520px;">
-        <div class="ds-body-sm" style="color:var(--muted);">Three fictional clients (Harborview, Meridian, Northgate) share the same kinds of questions but different rules. Watch the badge at the top of the screen: it always tells you which account you're currently on. Pick the answer that matches <span style="font-weight:750;color:var(--ink);">that</span> client, not the last one.</div>
+      <p class="ds-body" style="color:#c7cce0;max-width:640px;">Three phone lines. Four clients. One rule binder. Every caller belongs to a different client, and the binder stays on whatever page you left it on. Answer fast, flip to the right client, and don't hand anyone the wrong company's rule.</p>
+      <div class="sw-howto">
+        <div class="card-on-dark"><b>1. Pick up a ringing line</b><span>The line shows which client the caller dialed. Waiting callers hang up if you leave them too long.</span></div>
+        <div class="card-on-dark"><b>2. Flip to that client</b><span>Click the client's tab in the binder. Same question, different client, different answer.</span></div>
+        <div class="card-on-dark"><b>3. Click the rule that answers</b><span>Right rule, right client: points and a streak bonus. Wrong client: the customer gets the wrong answer.</span></div>
       </div>
       <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Start the shift</button>
+      <div class="ds-body-sm" style="color:#8890ab;">All clients and rules are fictional. Nothing is recorded or sent anywhere. Sound can be turned off at the bottom right.</div>
     </div>
   </div>
 
   <!-- GAME STAGE -->
-  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:640px;">
-
-      <div class="rlt-hud">
-        <div class="rlt-hud-stat"><div class="rlt-hud-num" id="hudTime">1:30</div><div class="rlt-hud-label">Time left</div></div>
-        <div class="rlt-hud-stat"><div class="rlt-hud-num" id="hudSwitches">0</div><div class="rlt-hud-label">Switches</div></div>
-        <div class="rlt-hud-stat"><div class="rlt-hud-num" id="hudCorrect">0/0</div><div class="rlt-hud-label">Correct</div></div>
-        <div class="rlt-meter-wrap">
-          <div class="rlt-hud-label">Customer patience</div>
-          <div class="rlt-meter-track"><div class="rlt-meter-fill" id="patienceFill"></div></div>
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;padding-top:36px;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:16px;max-width:1180px;">
+      <div class="sw-hud">
+        <div class="sw-stat"><div class="sw-num" id="hudTime">1:30</div><div class="sw-lbl">Time left</div></div>
+        <div class="sw-stat"><div class="sw-num" id="hudScore">0</div><div class="sw-lbl">Score</div></div>
+        <div class="sw-stat"><div class="sw-num" id="hudHandled">0</div><div class="sw-lbl">Answered right</div></div>
+        <div class="sw-stat"><div class="sw-num" id="hudMixups" style="color:#ff8fa0;">0</div><div class="sw-lbl">Wrong client</div></div>
+        <div class="sw-stat"><div class="sw-num" id="hudHangups" style="color:#ffd28a;">0</div><div class="sw-lbl">Hung up</div></div>
+        <div class="sw-combo" id="hudCombo">Streak x1</div>
+      </div>
+      <div class="sw-grid">
+        <div class="sw-col">
+          <div class="sw-panel sw-call" id="callPanel">
+            <div class="sw-call-idle" id="callIdle">No one on the line. Pick up a ringing call.</div>
+            <div id="callLive" style="display:none;">
+              <div class="sw-caller">
+                <div class="sw-avatar" id="callAvatar">JP</div>
+                <div>
+                  <div class="ds-label" style="color:var(--muted);">Caller on the line for</div>
+                  <span class="sw-client-chip" id="callClient">Client</span>
+                </div>
+              </div>
+              <div class="sw-bubble" id="callAsk">&nbsp;</div>
+              <div class="sw-calltimer"><i id="callTimer"></i></div>
+              <div class="sw-hint">Find this client's tab in the binder, then click the rule that answers.</div>
+            </div>
+          </div>
+          <div class="sw-panel">
+            <div class="ds-label eyebrow-v" style="margin-bottom:10px;">Phone lines</div>
+            <div class="sw-lines" id="lines"></div>
+          </div>
+        </div>
+        <div class="sw-panel sw-binder" id="binder">
+          <div class="sw-tabs" id="tabs"></div>
+          <div class="sw-page" id="page"></div>
         </div>
       </div>
-
-      <div class="rlt-client-badge">
-        <div>
-          <div class="ds-label" style="color:#8890ab;">You are viewing</div>
-          <div class="rlt-client-name" id="activeClientName">--</div>
-        </div>
-        <div class="ds-body-sm" style="color:#8890ab;">account</div>
-      </div>
-
-      <div class="card">
-        <div class="rlt-qtimer-track" style="margin-bottom:16px;"><div class="rlt-qtimer-fill" id="qTimerFill"></div></div>
-        <div class="ds-label eyebrow-v" style="margin-bottom:8px;">Customer on the line</div>
-        <div class="ds-heading" id="questionText" style="margin-bottom:18px;">&nbsp;</div>
-        <div id="optionsWrap" style="display:flex;flex-direction:column;gap:10px;"></div>
-      </div>
-
     </div>
   </div>
 
   <!-- RESULTS STAGE -->
   <div class="section" id="resultsStage" style="background:#fff;display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:640px;">
-
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:720px;">
       <div class="card">
-        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Shift over</div>
-        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(140px,1fr));">
-          <div><div class="ds-score" id="rSwitches">0</div><div class="ds-body-sm" style="color:var(--muted);">Client switches survived</div></div>
-          <div><div class="ds-score" id="rCorrect">0</div><div class="ds-body-sm" style="color:var(--muted);">Correct answers</div></div>
-          <div><div class="ds-score" style="color:var(--danger);" id="rMixups">0</div><div class="ds-body-sm" style="color:var(--muted);">Wrong-client mixups</div></div>
-          <div><div class="ds-score" id="rAsks">0</div><div class="ds-body-sm" style="color:var(--muted);">Supervisor asks</div></div>
+        <div class="sw-rank" id="rRank">Shift over</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin:10px 0 16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:18px;">
+          <div><div class="ds-score" id="rScore">0</div><div class="ds-body-sm" style="color:var(--muted);">Score<span id="rBest"></span></div></div>
+          <div><div class="ds-score" id="rCorrect" style="color:var(--green);">0</div><div class="ds-body-sm" style="color:var(--muted);">Answered right</div></div>
+          <div><div class="ds-score" id="rMixups" style="color:var(--danger);">0</div><div class="ds-body-sm" style="color:var(--muted);">Wrong-client answers</div></div>
+          <div><div class="ds-score" id="rHangups" style="color:var(--amber);">0</div><div class="ds-body-sm" style="color:var(--muted);">Callers who hung up</div></div>
+          <div><div class="ds-score" id="rStreak">0</div><div class="ds-body-sm" style="color:var(--muted);">Best streak</div></div>
         </div>
+        <div class="sw-insight" id="rInsight">--</div>
       </div>
 
       <div class="card">
@@ -214,12 +246,13 @@
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <button class="btn btn-primary" id="playAgainBtn">Play again</button>
-        <a href="agent-challenge.html" class="btn btn-ghost-light">Try the slower version: Agent Challenge</a>
+        <a href="not-specified-the-game.html" class="btn btn-ghost-light">Next: Not Specified</a>
+        <a href="labs.html" class="btn btn-ghost-light">All games and tools</a>
       </div>
 
       <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">This is the exact mixup a connected version is designed to prevent.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">Routing context from the phone system or CRM tells Agent First which client a call belongs to automatically, so the agent never has to remember to check. See what that looks like against your own rules.</p>
+        <div class="ds-body" style="font-weight:900;color:#fff;">Agent First opens the right client before you say hello.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">The phone system or CRM already knows which client the caller dialed. Agent First uses that to open the right Client Profile and the right rule the moment the call connects, so there is no binder to flip and no wrong page to answer from.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
           <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
@@ -256,308 +289,198 @@
 
 </div>
 
-<div class="rlt-flash" id="flash"></div>
-<div class="rlt-switch-banner" id="switchBanner">
-  <div class="rlt-switch-title">Client switch</div>
-  <div class="rlt-switch-name" id="switchBannerName">--</div>
-</div>
-
 <script src="/labs-capture.js"></script>
+<script src="/arcade-kit.js"></script>
 <script>
 (function () {
   'use strict';
-  var $ = function (id) { return document.getElementById(id); };
+  var K = window.AFArcade, $ = function (id) { return document.getElementById(id); };
+  var GAME_SECONDS = 90, LINES = 3;
+  var NAMES = ['Jordan P.', 'Maria L.', 'Dev S.', 'Ana R.', 'Chris B.', 'Tasha W.', 'Omar K.', 'Lena H.', 'Sam T.', 'Grace M.', 'Luis V.', 'Priya N.'];
+  var state = null, ticker = null;
 
-  var CLIENTS = {
-    A: { name: 'Harborview', rules: [
-      'Cancellations within 48 hours of a scheduled appointment: no fee.',
-      'ID verification required before discussing any account details.',
-      'Refunds over $200 require a supervisor sign-off before processing.',
-      'Standard callback window for an open issue: 24 hours.'
-    ] },
-    B: { name: 'Meridian', rules: [
-      'Cancellations within 48 hours of a scheduled appointment: a $25 fee applies.',
-      'ID verification is NOT required for general account questions, only for changes.',
-      'Refunds over $200 can be processed by any agent, no sign-off required.',
-      'Standard callback window for an open issue: 4 hours.'
-    ] },
-    C: { name: 'Northgate', rules: [
-      'Cancellations within 48 hours of a scheduled appointment: no fee, but only twice per year.',
-      'ID verification required before discussing any account details.',
-      'Refunds over $200 require a supervisor sign-off before processing.',
-      'Standard callback window for an open issue: 24 hours, except weekends (next business day).'
-    ] }
-  };
-  var CLIENT_KEYS = Object.keys(CLIENTS);
+  function fmt(t) { t = Math.max(0, Math.ceil(t)); return Math.floor(t / 60) + ':' + (t % 60 < 10 ? '0' : '') + (t % 60); }
+  function initials(n) { return n.split(' ').map(function (x) { return x[0]; }).join('').replace('.', ''); }
 
-  var TEMPLATES = [
-    { ruleIndex: 0, ask: 'A customer wants to cancel an appointment scheduled for tomorrow. What do you tell them about a fee?' },
-    { ruleIndex: 1, ask: 'A customer calls asking a general question about their account. What do you tell them about ID verification?' },
-    { ruleIndex: 2, ask: 'A customer is owed a $350 refund. What do you tell them about getting it processed?' },
-    { ruleIndex: 3, ask: 'A customer has an open issue and asks when they\'ll hear back. What do you tell them about the callback window?' }
-  ];
-
-  var GAME_SECONDS = 90;
-  var PASSIVE_DECAY_PER_SEC = 1.1;
-
-  function escapeHtml(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
-  }
-
-  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
-  var flash = $('flash'), switchBanner = $('switchBanner');
-  var mainTimer = null, qTimer = null;
-  var state = null;
-
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var t = a[i]; a[i] = a[j]; a[j] = t;
-    }
-    return a;
-  }
-
-  function qTimeLimit() {
-    return Math.max(2.6, 6 - state.answered * 0.14);
-  }
-
-  function startGame() {
-    state = {
-      patience: 100, timeLeft: GAME_SECONDS, score: 0,
-      correct: 0, wrongClientMixups: 0, supervisorAsks: 0, timeouts: 0, answered: 0, switches: 0,
-      activeClient: CLIENT_KEYS[Math.floor(Math.random() * CLIENT_KEYS.length)],
-      running: true, locked: false
-    };
-    introStage.style.display = 'none';
-    resultsStage.style.display = 'none';
-    gameStage.style.display = 'flex';
-    updateClientBadge();
-    updateHud();
-    nextRound(false);
-    mainTimer = setInterval(tick, 1000);
+  function start() {
+    var pairs = K.shuffle(K.PAIRS).slice(0, 2);
+    var clients = K.shuffle([].concat(pairs[0], pairs[1])).map(K.client);
+    state = { clients: clients, tab: 0, lines: [], active: null, score: 0, streak: 0, bestStreak: 0, correct: 0, mixups: 0, wrong: 0, hangups: 0, lucky: 0,
+      t: 0, last: performance.now(), nextRing: 1.2, running: true, searchMs: 0, answered: 0 };
+    for (var i = 0; i < LINES; i++) state.lines.push({ call: null });
+    $('introStage').style.display = 'none'; $('resultsStage').style.display = 'none'; $('gameStage').style.display = 'flex';
+    renderTabs(); renderPage(); renderLines(); renderCall(); hud();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    clearInterval(ticker); ticker = setInterval(loop, 100);
+    K.sfx.click();
   }
 
-  function tick() {
-    if (!state.running) return;
-    state.timeLeft -= 1;
-    state.patience = Math.max(0, state.patience - PASSIVE_DECAY_PER_SEC);
-    updateHud();
-    if (state.patience <= 0) { endGame('patience'); return; }
-    if (state.timeLeft <= 0) { endGame('time'); return; }
+  /* pace: calls ring faster and callers get less patient as the shift goes on */
+  function ringGap() { var p = state.t / GAME_SECONDS; return 6 - 3.6 * p + Math.random() * 1.2; }
+  function ringPatience() { var p = state.t / GAME_SECONDS; return 13 - 5 * p; }
+  function talkPatience() { var p = state.t / GAME_SECONDS; return 15 - 5 * p; }
+
+  function newCall() {
+    var c = K.pick(state.clients), topics = Object.keys(c.rules), topic = K.pick(topics);
+    return { client: c, topic: topic, ask: K.pick(K.TOPICS[topic].ask), name: K.pick(NAMES), ringLeft: ringPatience(), ringMax: 0, talkLeft: 0, talkMax: 0, pickedAt: 0 };
   }
 
-  function updateHud() {
-    var m = Math.floor(Math.max(0, state.timeLeft) / 60);
-    var s = Math.max(0, state.timeLeft) % 60;
-    $('hudTime').textContent = m + ':' + (s < 10 ? '0' : '') + s;
-    $('hudSwitches').textContent = state.switches;
-    $('hudCorrect').textContent = state.correct + '/' + state.answered;
-    var fill = $('patienceFill');
-    fill.style.width = state.patience + '%';
-    fill.style.background = state.patience > 55 ? 'var(--green)' : (state.patience > 25 ? 'var(--amber)' : 'var(--danger)');
-  }
-
-  function updateClientBadge() {
-    $('activeClientName').textContent = CLIENTS[state.activeClient].name;
-  }
-
-  function showSwitchBanner(cb) {
-    $('switchBannerName').textContent = CLIENTS[state.activeClient].name;
-    switchBanner.classList.add('show');
-    setTimeout(function () {
-      switchBanner.classList.remove('show');
-      setTimeout(cb, 180);
-    }, 620);
-  }
-
-  function nextRound(allowSwitch) {
-    if (!state.running) return;
-    var doSwitch = allowSwitch && Math.random() < 0.82;
-    if (doSwitch) {
-      var pool = CLIENT_KEYS.filter(function (k) { return k !== state.activeClient; });
-      state.activeClient = pool[Math.floor(Math.random() * pool.length)];
-      state.switches += 1;
-      updateClientBadge();
-      updateHud();
-      showSwitchBanner(function () { renderQuestion(); });
-    } else {
-      renderQuestion();
+  function loop() {
+    if (!state || !state.running) return;
+    var now = performance.now(), dt = (now - state.last) / 1000; state.last = now;
+    state.t += dt;
+    state.nextRing -= dt;
+    if (state.nextRing <= 0) {
+      var free = state.lines.filter(function (l) { return !l.call; });
+      if (free.length) { var l = K.pick(free); l.call = newCall(); l.call.ringMax = l.call.ringLeft; K.sfx.ring(); }
+      state.nextRing = ringGap();
     }
-  }
-
-  function renderQuestion() {
-    if (!state.running) return;
-    state.locked = false;
-    var template = TEMPLATES[Math.floor(Math.random() * TEMPLATES.length)];
-    var texts = CLIENT_KEYS.map(function (k) { return CLIENTS[k].rules[template.ruleIndex]; });
-    var unique = [];
-    texts.forEach(function (t) { if (unique.indexOf(t) === -1) unique.push(t); });
-    var options = shuffle(unique);
-    var correctText = CLIENTS[state.activeClient].rules[template.ruleIndex];
-
-    $('questionText').textContent = template.ask;
-    var wrap = $('optionsWrap');
-    wrap.innerHTML = '';
-    options.forEach(function (text) {
-      var btn = document.createElement('button');
-      btn.className = 'rlt-option';
-      btn.textContent = text;
-      btn.addEventListener('click', function () { answer(text, correctText); });
-      wrap.appendChild(btn);
+    state.lines.forEach(function (l, i) {
+      if (!l.call || l.call === state.active) return;
+      l.call.ringLeft -= dt;
+      if (l.call.ringLeft <= 0) { l.call = null; hangup(lineEl(i)); }
     });
-    var askBtn = document.createElement('button');
-    askBtn.className = 'rlt-option rlt-option-ask';
-    askBtn.textContent = 'Not sure, ask a supervisor';
-    askBtn.addEventListener('click', function () { answer('__ASK__', correctText); });
-    wrap.appendChild(askBtn);
-
-    var qt = qTimeLimit();
-    var fill = $('qTimerFill');
-    fill.style.transition = 'none';
-    fill.style.width = '100%';
-    void fill.offsetWidth;
-    fill.style.transition = 'width ' + qt + 's linear';
-    fill.style.width = '0%';
-    clearTimeout(qTimer);
-    qTimer = setTimeout(function () { answer('__TIMEOUT__', correctText); }, qt * 1000);
-  }
-
-  function flashScreen(kind) {
-    flash.className = 'rlt-flash show ' + kind;
-    setTimeout(function () { flash.className = 'rlt-flash'; }, 260);
-  }
-
-  function answer(picked, correctText) {
-    if (!state.running || state.locked) return;
-    state.locked = true;
-    clearTimeout(qTimer);
-
-    if (picked === '__TIMEOUT__') {
-      state.timeouts += 1;
-      state.answered += 1;
-      state.patience = Math.max(0, state.patience - 16);
-      flashScreen('wrong');
-    } else if (picked === '__ASK__') {
-      state.supervisorAsks += 1;
-      state.answered += 1;
-      state.patience = Math.max(0, state.patience - 8);
-      flashScreen('ask');
-    } else if (picked === correctText) {
-      state.correct += 1;
-      state.answered += 1;
-      state.score += 100;
-      state.patience = Math.min(100, state.patience + 3);
-      flashScreen('correct');
-    } else {
-      state.wrongClientMixups += 1;
-      state.answered += 1;
-      state.patience = Math.max(0, state.patience - 22);
-      flashScreen('wrong');
-    }
-
-    updateHud();
-
-    if (state.patience <= 0) { endGame('patience'); return; }
-    if (state.timeLeft <= 0) { endGame('time'); return; }
-    setTimeout(function () { nextRound(true); }, 550);
-  }
-
-  function endGame(reason) {
-    state.running = false;
-    clearInterval(mainTimer);
-    clearTimeout(qTimer);
-    gameStage.style.display = 'none';
-    resultsStage.style.display = 'flex';
-
-    var headline;
-    if (reason === 'patience') {
-      headline = 'The customer hung up. Patience ran out after ' + state.switches + ' client switches.';
-    } else if (state.wrongClientMixups === 0 && state.answered > 0) {
-      headline = 'You survived ' + state.switches + ' client switches with zero wrong-client mixups.';
-    } else {
-      headline = 'You survived ' + state.switches + ' client switches. ' + state.wrongClientMixups + ' of your answers were the wrong client\'s policy.';
-    }
-    $('resultsHeadline').textContent = headline;
-    $('rSwitches').textContent = state.switches;
-    $('rCorrect').textContent = state.correct;
-    $('rMixups').textContent = state.wrongClientMixups;
-    $('rAsks').textContent = state.supervisorAsks;
-
-    var shareLine = 'I survived ' + state.switches + ' client switches in Client Roulette, with ' + state.wrongClientMixups + ' wrong-client mixups and ' + state.correct + ' correct answers. Try it: myagentfirst.com/client-roulette.html';
-    $('shareText').value = shareLine;
-    $('resultSummaryField').value = shareLine;
-
-    if (window.AFLabs) {
-      window.AFLabs.mount('afIdea', {
-        tool: 'Client Roulette',
-        question: 'You just felt what switching clients mid-call is like. What would make that switch invisible: something that just works, instead of something you have to survive?',
-        context: { result: shareLine }
-      });
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  $('startBtn').addEventListener('click', startGame);
-  $('playAgainBtn').addEventListener('click', function () {
-    resultsStage.style.display = 'none';
-    startGame();
-  });
-
-  $('copyBtn').addEventListener('click', function () {
-    var field = $('shareText');
-    field.select();
-    var done = function () {
-      $('copyStatus').style.display = 'block';
-      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(field.value).then(done).catch(function () {
-        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-      });
-    } else {
-      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-    }
-  });
-
-  var emailForm = $('emailForm');
-  emailForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('emailStatus');
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(emailForm)
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      if (data && data.success) {
-        if (window.AFLabs) window.AFLabs.linkEmail('Client Roulette', emailForm.querySelector('[name="email"]').value);
-        emailForm.style.display = 'none';
-        status.style.color = '#1f5c42';
-        status.textContent = "Sent. I'll follow up directly too.";
-        status.style.display = 'block';
-      } else {
-        btn.disabled = false;
-        btn.textContent = original;
-        status.style.color = '#c53636';
-        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-        status.style.display = 'block';
+    if (state.active) {
+      state.active.talkLeft -= dt;
+      if (state.active.talkLeft <= 0) {
+        var idx = state.lines.findIndex(function (l) { return l.call === state.active; });
+        if (idx > -1) state.lines[idx].call = null;
+        state.active = null; hangup($('callPanel')); renderCall();
       }
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = original;
-      status.style.color = '#c53636';
-      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-      status.style.display = 'block';
+    }
+    if (state.t >= GAME_SECONDS) return end();
+    renderLines(); updateCallTimer(); hud();
+  }
+
+  function lineEl(i) { return document.querySelectorAll('.sw-line')[i]; }
+  function hangup(el) {
+    state.hangups++; state.streak = 0; K.sfx.hangup(); K.flash('warn'); if (el) { K.shake(el); K.floatText(el, 'Hung up', '#a15c00'); }
+  }
+
+  function renderLines() {
+    var wrap = $('lines');
+    if (!wrap.children.length) {
+      for (var i = 0; i < LINES; i++) {
+        var d = document.createElement('div'); d.className = 'sw-line';
+        d.innerHTML = '<div class="sw-led"></div><div><div class="sw-line-name">Line ' + (i + 1) + '</div><div class="sw-line-client"></div><div class="sw-wait"><i></i></div></div><button class="sw-pick" type="button">Answer</button>';
+        (function (n) { d.querySelector('.sw-pick').addEventListener('click', function () { pickUp(n); }); })(i);
+        wrap.appendChild(d);
+      }
+    }
+    state.lines.forEach(function (l, i) {
+      var el = wrap.children[i], btn = el.querySelector('.sw-pick'), who = el.querySelector('.sw-line-client'), bar = el.querySelector('.sw-wait');
+      el.classList.toggle('ringing', !!l.call && l.call !== state.active);
+      el.classList.toggle('active', !!l.call && l.call === state.active);
+      if (!l.call) { who.textContent = 'Quiet'; who.style.color = 'var(--muted)'; bar.style.visibility = 'hidden'; btn.disabled = true; btn.textContent = 'Answer'; return; }
+      who.textContent = l.call.client.name; who.style.color = l.call.client.color;
+      if (l.call === state.active) { bar.style.visibility = 'hidden'; btn.disabled = true; btn.textContent = 'On call'; return; }
+      bar.style.visibility = 'visible'; bar.firstChild.style.width = Math.max(0, l.call.ringLeft / l.call.ringMax * 100) + '%';
+      btn.disabled = !!state.active; btn.textContent = state.active ? 'Ringing' : 'Answer';
     });
-  });
+  }
+
+  function pickUp(i) {
+    var l = state.lines[i]; if (!l.call || state.active) return;
+    state.active = l.call; l.call.talkLeft = l.call.talkMax = talkPatience(); l.call.pickedAt = performance.now();
+    K.sfx.click(); renderCall(); renderLines(); renderPage();
+  }
+
+  function renderCall() {
+    var c = state.active;
+    $('callIdle').style.display = c ? 'none' : 'block';
+    $('callLive').style.display = c ? 'block' : 'none';
+    if (!c) { $('callIdle').textContent = state.lines.some(function (l) { return l.call; }) ? 'A line is ringing. Pick it up.' : 'No one on the line. Pick up the next ringing call.'; return; }
+    $('callAvatar').textContent = initials(c.name); $('callAvatar').style.background = c.client.color;
+    $('callClient').textContent = c.client.name; $('callClient').style.background = c.client.color;
+    $('callAsk').textContent = '“' + c.ask + '”';
+    K.pop($('callPanel'));
+  }
+  function updateCallTimer() { if (state.active) $('callTimer').style.width = Math.max(0, state.active.talkLeft / state.active.talkMax * 100) + '%'; }
+
+  function renderTabs() {
+    $('tabs').innerHTML = state.clients.map(function (c, i) {
+      return '<button type="button" class="sw-tab' + (i === state.tab ? ' on' : '') + '" data-i="' + i + '"><span class="sw-dot" style="background:' + c.color + '"></span>' + K.esc(c.name) + '</button>';
+    }).join('');
+    [].forEach.call($('tabs').querySelectorAll('.sw-tab'), function (b) { b.addEventListener('click', function () { state.tab = +b.dataset.i; K.sfx.tick(); renderTabs(); renderPage(); }); });
+  }
+  function renderPage() {
+    var c = state.clients[state.tab];
+    var rows = Object.keys(c.rules).map(function (t) {
+      return '<button type="button" class="sw-rule" data-t="' + t + '"' + (state.active ? '' : ' disabled') + '><b>' + K.esc(K.TOPICS[t].label) + '</b><span>' + K.esc(c.rules[t]) + '</span></button>';
+    }).join('');
+    $('page').innerHTML = '<div class="sw-page-title"><div><div class="ds-label" style="color:' + c.color + ';">Client Profile</div><div class="ds-heading">' + K.esc(c.name) + '</div></div><span class="pill pill-violet">' + K.esc(c.industry) + '</span></div>' + rows;
+    [].forEach.call($('page').querySelectorAll('.sw-rule'), function (b) { b.addEventListener('click', function () { choose(b.dataset.t, b); }); });
+  }
+
+  function choose(topic, el) {
+    var call = state.active; if (!call) return;
+    var onClient = state.clients[state.tab];
+    var right = topic === call.topic && onClient.id === call.client.id;
+    var sameText = topic === call.topic && onClient.rules[topic] === call.client.rules[topic];
+    state.searchMs += performance.now() - call.pickedAt;
+    state.answered++;
+    if (right || sameText) {
+      state.streak++; state.bestStreak = Math.max(state.bestStreak, state.streak); state.correct++;
+      if (!right) state.lucky++;
+      var mult = Math.min(3, 1 + (state.streak - 1) * 0.25), speed = Math.round(50 * Math.max(0, call.talkLeft / call.talkMax));
+      var pts = Math.round((100 + speed) * mult);
+      state.score += pts;
+      K.sfx[state.streak >= 3 ? 'great' : 'good'](); K.flash('good');
+      K.floatText(el, '+' + pts + (right ? '' : ' (same rule here)'), '#177a55');
+    } else if (onClient.id !== call.client.id) {
+      state.mixups++; state.streak = 0; K.sfx.bad(); K.flash('bad'); K.shake($('binder'));
+      K.stamp($('binder'), 'WRONG CLIENT', 'bad');
+      K.floatText(el, 'Caller was ' + call.client.name + ', not ' + onClient.name, '#c5364a');
+    } else {
+      state.wrong++; state.streak = 0; K.sfx.bad(); K.flash('bad'); K.shake($('binder'));
+      K.stamp($('binder'), 'WRONG ANSWER', 'warn');
+    }
+    var idx = state.lines.findIndex(function (l) { return l.call === call; });
+    if (idx > -1) state.lines[idx].call = null;
+    state.active = null;
+    renderCall(); renderLines(); renderPage(); hud();
+  }
+
+  function hud() {
+    $('hudTime').textContent = fmt(GAME_SECONDS - state.t);
+    $('hudScore').textContent = state.score.toLocaleString();
+    $('hudHandled').textContent = state.correct;
+    $('hudMixups').textContent = state.mixups;
+    $('hudHangups').textContent = state.hangups;
+    var m = Math.min(3, 1 + Math.max(0, state.streak - 1) * 0.25);
+    $('hudCombo').textContent = state.streak >= 2 ? 'Streak ' + state.streak + ' · x' + m.toFixed(2).replace(/\.?0+$/, '') : 'Streak x1';
+    $('hudCombo').classList.toggle('hot', state.streak >= 3);
+  }
+
+  function end() {
+    state.running = false; clearInterval(ticker);
+    $('gameStage').style.display = 'none'; $('resultsStage').style.display = 'flex';
+    var rank = state.score >= 2400 ? 'Switchboard legend' : state.score >= 1500 ? 'Floor favorite' : state.score >= 800 ? 'Solid shift' : 'Rough Monday';
+    var b = K.best('client-roulette', state.score);
+    $('rRank').textContent = rank;
+    $('rBest').innerHTML = b.isNew && b.previous > 0 ? '<span class="sw-best">New best</span>' : (b.previous > 0 ? ' · best ' + Math.max(b.previous, state.score).toLocaleString() : '');
+    $('rScore').textContent = state.score.toLocaleString();
+    $('rCorrect').textContent = state.correct; $('rMixups').textContent = state.mixups; $('rHangups').textContent = state.hangups; $('rStreak').textContent = state.bestStreak;
+    var head;
+    if (state.mixups === 0 && state.correct > 0) head = 'You answered ' + state.correct + ' callers with zero wrong-client answers.';
+    else if (state.mixups > 0) head = state.mixups + (state.mixups === 1 ? ' caller' : ' callers') + ' got another client’s rule. On a real floor, that’s a promise someone has to walk back.';
+    else head = 'The phones won this round.';
+    $('resultsHeadline').textContent = head;
+    var secs = Math.round(state.searchMs / 1000), avg = state.answered ? (state.searchMs / state.answered / 1000).toFixed(1) : '0';
+    $('rInsight').textContent = state.answered
+      ? 'You spent ' + secs + ' seconds finding the right page and rule, about ' + avg + ' seconds a call, while ' + state.hangups + (state.hangups === 1 ? ' caller' : ' callers') + ' gave up waiting. With Agent First, the right client and rule are already open when the call connects.'
+      : 'Pick up a ringing line, flip to that caller’s client, and click the rule that answers. Give it another shift.';
+    if (state.score >= 1500 || b.isNew && state.score > 0) K.confetti();
+    K.sfx.end();
+    var share = 'I scored ' + state.score.toLocaleString() + ' in Client Roulette (' + rank + '): ' + state.correct + ' right, ' + state.mixups + ' wrong-client answers, ' + state.hangups + ' hang-ups. Try it: myagentfirst.com/client-roulette.html';
+    K.results({ tool: 'Client Roulette', share: share, question: 'You just felt what switching clients mid-call is like. On your floor, what usually causes the wrong client’s rule to get used?' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('startBtn').addEventListener('click', start);
+  $('playAgainBtn').addEventListener('click', start);
+  K.wireCommon('Client Roulette');
+  window.__roulette = function () { return state; };
 })();
 </script>
 
