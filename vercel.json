@@ -6,6 +6,16 @@
       "permanent": false
     },
     {
+      "source": "/consulting/",
+      "destination": "https://agent1stconsulting.com/",
+      "permanent": false
+    },
+    {
+      "source": "/consulting/index.html",
+      "destination": "https://agent1stconsulting.com/",
+      "permanent": false
+    },
+    {
       "source": "/consulting/:path*",
       "destination": "https://agent1stconsulting.com/:path*",
       "permanent": false
