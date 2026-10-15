@@ -18,6 +18,7 @@
     opts = opts || {};
     var tool = opts.tool || 'Free Tools';
     var ctx = opts.context && opts.context.result ? String(opts.context.result) : '';
+    el.style.display = 'block';
     el.innerHTML =
       '<div style="font-size:11px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#7c3aed;margin-bottom:8px;">One question, optional</div>' +
       '<div style="font-size:16px;font-weight:750;line-height:1.45;margin-bottom:12px;">' + esc(opts.question || 'What would have made that easier?') + '</div>' +
@@ -68,4 +69,8 @@
   function linkEmail(tool, email) { if (tool && email) linked[tool] = String(email); }
 
   window.AFLabs = { mount: mount, linkEmail: linkEmail };
+
+  /* Until a result exists, the idea card stays out of sight instead of showing as an empty box. */
+  function hideEmpty() { var el = document.getElementById('afIdea'); if (el && !el.innerHTML.trim()) el.style.display = 'none'; }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', hideEmpty); else hideEmpty();
 })();

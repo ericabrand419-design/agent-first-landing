@@ -212,7 +212,7 @@
         </div>
       </div>
 
-      <div class="card" id="afIdea"></div>
+      <div class="card" id="afIdea" style="display:none;"></div>
 
       <div class="card" id="cpb-email-card" style="display:none;">
         <div class="ds-body" style="font-weight:750;margin-bottom:10px;">Want this draft emailed to you?</div>
@@ -243,6 +243,7 @@
 
 </div>
 
+<script src="/labs-capture.js"></script>
 <script>
 (function () {
   'use strict';
@@ -428,6 +429,10 @@
     $('cpb-skip').style.display = 'none';
     $('cpb-next').style.display = 'none';
     $('cpb-review-wrap').style.display = 'flex';
+    if (window.AFLabs) {
+      $('afIdea').style.display = 'block';
+      window.AFLabs.mount('afIdea', { tool: 'Client Profile Readiness Builder', question: 'Which of these nine was hardest to answer for your real client, and why?' });
+    }
 
     var n = answeredCount();
     $('cpb-score').textContent = n + ' of ' + CATEGORIES.length + ' defined';
@@ -518,6 +523,7 @@
     $('cpb-skip').style.display = 'inline-flex';
     $('cpb-next').style.display = 'inline-flex';
     $('cpb-review-wrap').style.display = 'none';
+    $('afIdea').style.display = 'none';
     $('cpb-after').style.display = 'none';
     $('cpb-email-card').style.display = 'none';
     renderQuestion();
