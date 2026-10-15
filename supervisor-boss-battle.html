@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent First: Supervisor Boss Battle</title>
-<meta name="description" content="Ten calls, one shift. Handle it yourself or hit ASK SUPERVISOR. Every ask grows the boss meter. Can you finish the shift without summoning a monster you didn't need?">
+<meta name="description" content="Dana runs the floor, and every unnecessary pull-in raises her stress. Escalate what needs her, handle the rest, and survive the shift. An Agent First Arcade game.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://myagentfirst.com/supervisor-boss-battle.html">
 <meta property="og:title" content="Agent First: Supervisor Boss Battle">
-<meta property="og:description" content="Handle it yourself or hit ASK SUPERVISOR. Every ask grows the boss meter. Can you finish the shift without creating a monster?">
+<meta property="og:description" content="Every unnecessary pull-in raises Dana’s stress. Escalate what needs her, handle the rest, and don’t let her melt down.">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Agent First: Supervisor Boss Battle">
-<meta name="twitter:description" content="Handle it yourself or hit ASK SUPERVISOR. Every ask grows the boss meter.">
+<meta name="twitter:description" content="Every unnecessary pull-in raises Dana’s stress. Escalate what needs her, handle the rest, and don’t let her melt down.">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,49 +77,54 @@
 
   .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
   .pill-violet{background:var(--purplebg);color:var(--violet)}
-  .pill-amber{background:var(--amberbg);color:var(--amber)}
-  .pill-green{background:var(--greenbg);color:var(--green)}
-  .pill-danger{background:var(--dangerbg);color:var(--danger)}
 
-  .nsg-progress-track{width:100%;height:8px;border-radius:var(--radius-full);background:var(--purplebg);overflow:hidden;}
-  .sbb-progress-fill{height:100%;border-radius:var(--radius-full);background:var(--grad-primary);width:0%;transition:width .35s ease;}
-  .sbb-progress-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
 
-  .sbb-client-badge{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:var(--navy);color:#fff;font-size:12px;font-weight:750;}
+  /* SUPERVISOR BOSS BATTLE */
+  .sb-hud{display:flex;gap:18px;flex-wrap:wrap;align-items:center;padding:12px 18px;border-radius:var(--radius-md);background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-panel)}
+  .sb-stat{display:flex;flex-direction:column;gap:1px;min-width:60px}
+  .sb-num{font-size:22px;font-weight:900}
+  .sb-lbl{font-size:10px;font-weight:750;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  .sb-fires{margin-left:auto;display:flex;gap:6px;align-items:center}
+  .sb-fire{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:var(--bg);font-size:16px;filter:grayscale(1);opacity:.4}
+  .sb-fire.on{filter:none;opacity:1;background:#fff1e6}
+  .sb-grid{display:grid;grid-template-columns:minmax(300px,400px) 1fr;gap:18px;align-items:start}
+  .sb-boss{background:var(--grad-navy);border-radius:var(--radius-lg);padding:20px;color:#fff;position:relative;overflow:hidden;min-height:430px;display:flex;flex-direction:column;gap:14px;transition:background .3s}
+  .sb-boss.hot{background:linear-gradient(105deg,#2a0d18 0%,#3a0f1f 60%,#4a1020 100%)}
+  .sb-dana{width:150px;height:150px;margin:0 auto;display:block;transition:transform .2s}
+  .sb-boss.hot .sb-dana{animation:sb-wobble .35s infinite}
+  @keyframes sb-wobble{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+  .sb-name{text-align:center;font-weight:900;font-size:18px}
+  .sb-mood{text-align:center;font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#ffd28a}
+  .sb-track{height:16px;border-radius:999px;background:rgba(255,255,255,.12);overflow:hidden}
+  .sb-fill{height:100%;width:10%;border-radius:999px;background:linear-gradient(90deg,#2fbf8f,#ffb547 55%,#ff4d4d);background-size:400px 100%;transition:width .35s ease}
+  .sb-says{min-height:48px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:10px 14px;font-size:14.5px;line-height:1.45;color:#e8eaf6}
+  .sb-hands{display:flex;flex-wrap:wrap;gap:6px;min-height:30px}
+  .sb-hand{font-size:12px;font-weight:750;padding:5px 9px;border-radius:999px;background:rgba(255,181,71,.18);color:#ffd28a;animation:sb-in .3s ease}
+  @keyframes sb-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .sb-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-panel);padding:18px;position:relative;overflow:hidden}
+  .sb-chip{display:inline-block;font-size:12px;font-weight:900;padding:4px 10px;border-radius:999px;color:#fff}
+  .sb-sit{font-size:20px;font-weight:850;line-height:1.38;margin:10px 0 4px}
+  .sb-timer{height:6px;border-radius:999px;background:var(--purplebg);overflow:hidden;margin-top:12px}
+  .sb-timer > i{display:block;height:100%;width:100%;background:var(--grad-primary)}
+  .sb-card{margin-top:14px;border:1px dashed #c9cbd8;border-radius:12px;padding:12px 14px;background:var(--soft)}
+  .sb-card li{font-size:14px;line-height:1.5;margin:3px 0;font-weight:650}
+  .sb-choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  .sb-btn{border:2px solid var(--line);border-radius:14px;padding:16px;font:inherit;cursor:pointer;background:#fff;text-align:left;transition:transform .08s}
+  .sb-btn:hover{transform:translateY(-2px)}
+  .sb-btn b{display:block;font-size:18px;font-weight:900}
+  .sb-btn span{font-size:13px;color:var(--muted)}
+  .sb-btn kbd{float:right;font:800 11px Inter,sans-serif;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 6px}
+  .sb-handle{border-color:#2fbf8f}.sb-handle:hover{background:#ecfbf4}
+  .sb-esc{border-color:#ffb547}.sb-esc:hover{background:#fff6e5}
+  .sb-btn:disabled{opacity:.45;cursor:default;transform:none}
+  .sb-verdict{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:14.5px;line-height:1.5;display:none}
+  .sb-verdict.good{display:block;background:#ecfbf4;color:#155c40}.sb-verdict.bad{display:block;background:#fdeaee;color:#8f2234}.sb-verdict.warn{display:block;background:#fff6e5;color:#7a4700}
+  .sb-howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:left;max-width:800px}
+  .sb-howto .card-on-dark{padding:16px}.sb-howto b{display:block;color:#fff;font-size:15px;margin-bottom:6px}.sb-howto span{color:#c7cce0;font-size:13.5px;line-height:1.5}
+  .sb-rank{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
+  .sb-insight{padding:14px 16px;border-radius:12px;background:var(--purplebg);color:#3d2580;font-size:15px;line-height:1.55;font-weight:650}
+  @media (max-width:980px){.sb-grid,.sb-howto{grid-template-columns:1fr}.sb-boss{min-height:0}.section{padding:40px 16px}}
 
-  /* boss meter */
-  .sbb-boss-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border-radius:var(--radius-lg);background:var(--navy);}
-  .sbb-boss-stage{width:100%;height:130px;display:flex;align-items:center;justify-content:center;}
-  .sbb-boss-blob{transition:transform .35s cubic-bezier(.34,1.4,.64,1),fill .35s ease;transform:scale(.55);}
-  .sbb-boss-tier-0 .sbb-boss-blob{transform:scale(.5);}
-  .sbb-boss-tier-1 .sbb-boss-blob{transform:scale(.68);}
-  .sbb-boss-tier-2 .sbb-boss-blob{transform:scale(.85);}
-  .sbb-boss-tier-3 .sbb-boss-blob{transform:scale(1.02);}
-  .sbb-boss-tier-4 .sbb-boss-blob{transform:scale(1.2);}
-  .sbb-boss-tier-5 .sbb-boss-blob{transform:scale(1.4);}
-  @keyframes sbb-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-4px)}40%{transform:translateX(4px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
-  .sbb-shake{animation:sbb-shake .4s ease;}
-  .sbb-boss-label{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#fff;}
-  .sbb-boss-sub{font-size:12px;color:#8890ab;}
-
-  .sbb-choice-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px;}
-  .sbb-choice-btn{flex:1;min-width:200px;padding:18px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;font-family:var(--font-sans);font-weight:750;font-size:15px;cursor:pointer;text-align:center;transition:border-color .12s ease,background .12s ease,transform .1s ease;}
-  .sbb-choice-btn:hover{transform:translateY(-1px);}
-  .sbb-choice-self:hover{border-color:var(--violet);background:var(--purplebg);}
-  .sbb-choice-ask{border-style:dashed;border-color:var(--amber);color:var(--amber);}
-  .sbb-choice-ask:hover{background:var(--amberbg);}
-  .sbb-choice-btn[disabled]{cursor:default;}
-  .sbb-choice-btn.is-correct{border-color:var(--green);background:var(--greenbg);color:var(--ink);}
-  .sbb-choice-btn.is-wrong{border-color:var(--danger);background:var(--dangerbg);color:var(--ink);}
-
-  @keyframes sbb-fade-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
-  .sbb-fade{animation:sbb-fade-in .3s ease;}
-
-  @media (max-width:900px){
-    .section{padding:56px 20px}
-    .ds-display{font-size:32px}
-    .ds-hero{font-size:24px}
-  }
 </style>
 </head>
 <body>
@@ -142,66 +147,80 @@
     </div>
   </div>
 
-  <!-- INTRO -->
+  <!-- INTRO STAGE -->
   <div class="section" id="introStage" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
-      <div class="ds-label eyebrow-c">Agent First Free Tools &middot; 10 calls</div>
+    <div class="wrap" style="display:flex;flex-direction:column;gap:22px;max-width:820px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Arcade &middot; 14 calls</div>
       <h1 class="ds-display" style="color:#fff;">Supervisor Boss Battle</h1>
-      <p class="ds-body" style="color:#c7cce0;">Ten calls, one shift. For each one: handle it yourself, or hit ASK SUPERVISOR. Every ask grows the boss meter, whether you actually needed it or not. Some calls genuinely do need a supervisor. In this game, most don't. Can you tell which is which?</p>
-      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Start the shift</button>
+      <p class="ds-body" style="color:#c7cce0;max-width:660px;">Dana runs the floor. Every time someone pulls her in, her stress goes up, and the rest of the floor keeps raising hands too. Some calls really need her. Most don’t. Escalate the ones that do, handle the rest yourself, and don’t let Dana melt down.</p>
+      <div class="sb-howto">
+        <div class="card-on-dark"><b>Read the client’s card</b><span>Each client sets its own limits. A $150 credit is fine at one company and needs Dana at another.</span></div>
+        <div class="card-on-dark"><b>Handle it or escalate</b><span>Pull Dana in when you don’t need her and her stress spikes. Skip her when you did, and you start a compliance fire.</span></div>
+        <div class="card-on-dark"><b>Survive the shift</b><span>Dana hits 100% stress or you start three fires, and the shift is over.</span></div>
+      </div>
+      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Clock in</button>
+      <div class="ds-body-sm" style="color:#8890ab;">Keys: H to handle, E to escalate. All clients are fictional.</div>
     </div>
   </div>
 
-  <!-- GAME -->
-  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:640px;">
-
-      <div class="sbb-progress-label" id="progressLabel">Call 1 of 10</div>
-      <div class="nsg-progress-track" style="margin-top:-12px;"><div class="sbb-progress-fill" id="progressFill"></div></div>
-
-      <div class="sbb-boss-wrap" id="bossWrap">
-        <div class="sbb-boss-stage">
-          <svg class="sbb-boss-blob" id="bossBlob" width="90" height="90" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="52" r="40" fill="#7c3aed"/>
-            <circle cx="36" cy="46" r="7" fill="#fff"/>
-            <circle cx="64" cy="46" r="7" fill="#fff"/>
-            <circle cx="36" cy="46" r="3.2" fill="#0b1025"/>
-            <circle cx="64" cy="46" r="3.2" fill="#0b1025"/>
-            <path d="M34 66 Q50 78 66 66" stroke="#0b1025" stroke-width="4" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="sbb-boss-label" id="bossLabel">Dormant</div>
-        <div class="sbb-boss-sub" id="bossSub">No interruptions yet</div>
+  <!-- GAME STAGE -->
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;padding-top:36px;">
+    <div class="wrap" style="display:flex;flex-direction:column;gap:16px;max-width:1140px;">
+      <div class="sb-hud">
+        <div class="sb-stat"><div class="sb-num" id="hudCall">1/14</div><div class="sb-lbl">Call</div></div>
+        <div class="sb-stat"><div class="sb-num" id="hudScore">0</div><div class="sb-lbl">Score</div></div>
+        <div class="sb-stat"><div class="sb-num" id="hudPulls">0</div><div class="sb-lbl">Times you pulled Dana in</div></div>
+        <div class="sb-fires" title="Compliance fires"><span class="sb-lbl" style="margin-right:4px;">Compliance fires</span><div class="sb-fire" id="f0">🔥</div><div class="sb-fire" id="f1">🔥</div><div class="sb-fire" id="f2">🔥</div></div>
       </div>
-
-      <div class="card sbb-fade" id="questionCard">
-        <div style="margin-bottom:12px;"><span class="sbb-client-badge" id="clientBadge">--</span></div>
-        <div class="ds-heading" id="situationText" style="margin-bottom:8px;">&nbsp;</div>
-
-        <div class="sbb-choice-row" id="choiceRow">
-          <button class="sbb-choice-btn sbb-choice-self" id="selfBtn">Handle it myself</button>
-          <button class="sbb-choice-btn sbb-choice-ask" id="askBtn">ASK SUPERVISOR</button>
+      <div class="sb-grid">
+        <div class="sb-boss" id="boss">
+          <svg class="sb-dana" id="dana" viewBox="0 0 150 150" aria-hidden="true">
+  <circle cx="75" cy="40" r="20" fill="#3b2418"/>
+  <circle cx="75" cy="82" r="48" id="danaSkin" fill="#c98a5e"/>
+  <path d="M28 78c0-30 20-48 47-48s47 18 47 48c-8-16-24-26-47-26S36 62 28 78z" fill="#3b2418"/>
+  <path d="M30 86a45 45 0 0 0 10 22" stroke="#22222e" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <rect x="36" y="104" width="14" height="8" rx="4" fill="#22222e"/>
+  <g id="danaBrows"><path d="M50 70l14 2" stroke="#2a1a10" stroke-width="4" stroke-linecap="round"/><path d="M86 72l14-2" stroke="#2a1a10" stroke-width="4" stroke-linecap="round"/></g>
+  <circle cx="58" cy="84" r="4.5" fill="#1d1d28"/><circle cx="92" cy="84" r="4.5" fill="#1d1d28"/>
+  <path id="danaMouth" d="M60 108c8 6 22 6 30 0" stroke="#5a2a20" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <g id="danaSweat" opacity="0"><path d="M118 64c-4 7-4 11 0 13 4-2 4-6 0-13z" fill="#7fd3ff"/><path d="M30 60c-3 5-3 8 0 10 3-2 3-5 0-10z" fill="#7fd3ff"/></g>
+  <g id="danaSteam" opacity="0"><path d="M40 28c-6-8 6-12 0-20" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/><path d="M110 28c-6-8 6-12 0-20" stroke="#fff" stroke-width="3" fill="none" opacity=".7"/></g>
+</svg>
+          <div><div class="sb-name">Dana, floor supervisor</div><div class="sb-mood" id="danaMood">Calm</div></div>
+          <div><div class="sb-track"><div class="sb-fill" id="stressFill"></div></div><div style="display:flex;justify-content:space-between;font-size:11px;color:#8890ab;margin-top:5px;font-weight:750;"><span>STRESS</span><span id="stressPct">10%</span></div></div>
+          <div class="sb-says" id="danaSays">“Morning. Let’s have a smooth one.”</div>
+          <div><div class="sb-lbl" style="color:#8890ab;margin-bottom:6px;">Hands up on the floor</div><div class="sb-hands" id="hands"></div></div>
         </div>
-
-        <div id="feedback" class="ds-body-sm" style="display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--line);"></div>
-        <button class="btn btn-primary" id="nextBtn" style="display:none;margin-top:16px;">Next call</button>
+        <div class="sb-panel" id="callPanel">
+          <div class="ds-label" style="color:var(--muted);">Customer on the line for</div>
+          <div style="margin-top:6px;"><span class="sb-chip" id="callClient">Client</span></div>
+          <div class="sb-sit" id="callSit">&nbsp;</div>
+          <div class="sb-timer"><i id="timerFill"></i></div>
+          <div class="sb-card"><div class="ds-label" id="cardLabel" style="color:var(--violet);margin-bottom:4px;">Escalation rules</div><ul id="cardRules" style="margin:0;padding-left:18px;"></ul></div>
+          <div class="sb-choices">
+            <button class="sb-btn sb-handle" id="handleBtn" type="button"><kbd>H</kbd><b>Handle it</b><span>You’ve got this one.</span></button>
+            <button class="sb-btn sb-esc" id="escBtn" type="button"><kbd>E</kbd><b>Get Dana</b><span>This one needs a supervisor.</span></button>
+          </div>
+          <div class="sb-verdict" id="verdict"></div>
+        </div>
       </div>
-
     </div>
   </div>
 
-  <!-- RESULTS -->
+  <!-- RESULTS STAGE -->
   <div class="section" id="resultsStage" style="background:#fff;display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:640px;">
-
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:720px;">
       <div class="card">
-        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Shift complete</div>
-        <div class="ds-hero" id="resultsHeadline" style="margin-bottom:16px;">--</div>
-        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr));">
-          <div><div class="ds-score" id="rCorrect">0/10</div><div class="ds-body-sm" style="color:var(--muted);">Right call</div></div>
-          <div><div class="ds-score" style="color:var(--amber);" id="rUnnecessary">0</div><div class="ds-body-sm" style="color:var(--muted);">Unnecessary escalations</div></div>
-          <div><div class="ds-score" style="color:var(--danger);" id="rMissed">0</div><div class="ds-body-sm" style="color:var(--muted);">Times you should have asked but didn't</div></div>
+        <div class="sb-rank" id="rRank">Shift over</div>
+        <div class="ds-hero" id="resultsHeadline" style="margin:10px 0 16px;">--</div>
+        <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:18px;">
+          <div><div class="ds-score" id="rScore">0</div><div class="ds-body-sm" style="color:var(--muted);">Score<span id="rBest"></span></div></div>
+          <div><div class="ds-score" id="rCorrect" style="color:var(--green);">0</div><div class="ds-body-sm" style="color:var(--muted);">Right calls</div></div>
+          <div><div class="ds-score" id="rUnneeded" style="color:var(--amber);">0</div><div class="ds-body-sm" style="color:var(--muted);">Times you didn’t need Dana</div></div>
+          <div><div class="ds-score" id="rFires" style="color:var(--danger);">0</div><div class="ds-body-sm" style="color:var(--muted);">Compliance fires</div></div>
+          <div><div class="ds-score" id="rStress">0%</div><div class="ds-body-sm" style="color:var(--muted);">Dana’s final stress</div></div>
         </div>
+        <div class="sb-insight" id="rInsight">--</div>
       </div>
 
       <div class="card">
@@ -215,15 +234,16 @@
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
         <button class="btn btn-primary" id="playAgainBtn">Play again</button>
-        <a href="supervisor-tax-calculator.html" class="btn btn-ghost-light">See what this costs for real: Supervisor Tax Calculator</a>
+        <a href="supervisor-tax-calculator.html" class="btn btn-ghost-light">Put a number on it: Supervisor Tax Calculator</a>
+        <a href="labs.html" class="btn btn-ghost-light">All games and tools</a>
       </div>
 
       <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">This is why escalation is part of the decision, not a separate hunt for a person.</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">When a request needs a supervisor, Agent First surfaces that as part of the decision itself, ESCALATE, instead of leaving an agent to guess whether this is one of those situations.</p>
+        <div class="ds-body" style="font-weight:900;color:#fff;">Most supervisor pull-ins are rule lookups.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">When the right client’s limit is on screen at the moment of the call, agents handle what they’re allowed to handle and escalate what they should. Supervisors get their time back for the calls that actually need them.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
-          <a href="pilot-program.html" class="btn btn-primary">See what a pilot includes</a>
-          <a href="sample-client-profile.html" class="btn btn-ghost-dark">Build my sample Client Profile</a>
+          <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
+          <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
         </div>
       </div>
 
@@ -258,209 +278,177 @@
 </div>
 
 <script src="/labs-capture.js"></script>
+<script src="/arcade-kit.js"></script>
 <script>
 (function () {
   'use strict';
-  var $ = function (id) { return document.getElementById(id); };
+  var K = window.AFArcade, $ = function (id) { return document.getElementById(id); };
+  var CALLS = 14;
+  var RULES = {
+    crestline: { limit: 200, manager: 'handle', card: ['Credits or refunds over $200: get the supervisor.', 'Asks for a manager, nothing urgent: send a callback alert. You handle it.', 'Safety problems or legal threats: get the supervisor now.'] },
+    marlowe: { limit: 100, manager: 'escalate', card: ['Credits or refunds over $100: get the supervisor.', 'Asks for a manager: get the supervisor.', 'Safety problems or legal threats: get the supervisor now.'] },
+    riverside: { limit: 50, manager: 'handle', card: ['Billing adjustments over $50: get the supervisor.', 'Asks for a manager: take a message for the Practice Manager. You handle it.', 'Urgent symptoms or legal threats: get the supervisor now.'] },
+    sunridge: { limit: 0, manager: 'escalate', card: ['Any billing adjustment: get the supervisor.', 'Asks for a manager: get the supervisor.', 'Urgent symptoms or legal threats: get the supervisor now.'] },
+    lockwood: { limit: 150, manager: 'handle', card: ['Rent credits over $150: get the supervisor.', 'Asks for a manager: send an alert to the Property Manager. You handle it.', 'Gas smell, flooding, or legal threats: get the supervisor now.'] },
+    greenpark: { limit: 75, manager: 'escalate', card: ['Rent credits over $75: get the supervisor.', 'Asks for a manager: get the supervisor.', 'Gas smell, flooding, or legal threats: get the supervisor now.'] }
+  };
+  var SAFETY = { 'Auto service': 'My brakes are grinding and the car pulls hard to one side. Is it safe to drive in?', 'Healthcare': 'My dad has chest pain and he’s short of breath. Can he come in this afternoon?', 'Property': 'I smell gas in my kitchen. What should I do?' };
+  var ROUTINE = {
+    'Auto service': ['Can I move my appointment from Tuesday to Thursday?', 'What time do you open Saturday?', 'Can I add a tire rotation to my visit?'],
+    'Healthcare': ['Can I move my appointment to next week?', 'What should I bring to my first visit?', 'Can I update my phone number?'],
+    'Property': ['Can I schedule a maintenance visit for my leaky faucet?', 'When is rent due this month?', 'How do I get a new parking pass?']
+  };
+  var CREDIT = { 'Auto service': 'goodwill credit on the repair', 'Healthcare': 'billing adjustment on the visit', 'Property': 'rent credit for the outage' };
+  var NAMES = ['Jordan', 'Riley', 'Sam', 'Alex', 'Priya', 'Marcus', 'Lena', 'Omar', 'Tasha', 'Dev'];
+  var LINES = {
+    good: ['“Nice. Didn’t even need me.”', '“That’s what I like to see.”', '“Perfect. Keep going.”'],
+    goodEsc: ['“Good call bringing that to me.”', '“Yep, that’s mine. Thanks.”', '“Glad you flagged it.”'],
+    unneeded: ['“You had that one! It’s on the card!”', '“Again? That’s under the limit.”', '“I’m on three other calls…”', '“Read the card, please.”'],
+    fire: ['“Wait, you handled THAT yourself?”', '“That needed me. Now it’s a problem.”', '“Compliance is going to call me about this.”']
+  };
+  var state = null, timer = null, handsTimer = null, decay = null;
 
-  var CLIENT_NAMES = { A: 'Harborview', B: 'Meridian', C: 'Northgate' };
-
-  var TIER_NAMES = ['Dormant', 'Slack message', 'Hold time', 'Callback', 'Escalation', 'QA review'];
-  var TIER_COLORS = ['#7c3aed', '#7c3aed', '#e447d5', '#ff6b54', '#c5364a', '#8a0f24'];
-
-  var SCENARIOS = [
-    { client: 'A', situation: 'A customer wants a $180 refund processed.', requiresSupervisor: false, why: 'Harborview only requires sign-off over $200. This one is under the line, an agent can process it directly.' },
-    { client: 'B', situation: 'A customer wants a $410 refund processed.', requiresSupervisor: false, why: 'Meridian never requires sign-off on refunds, any amount, any agent.' },
-    { client: 'C', situation: 'A customer wants a $275 refund processed.', requiresSupervisor: true, why: 'Northgate requires sign-off over $200. This one needs it.' },
-    { client: 'B', situation: 'A customer wants to cancel an appointment scheduled for tomorrow, and asks about a fee.', requiresSupervisor: false, why: 'This is a standard, published rule (a $25 fee applies). No approval needed to quote it.' },
-    { client: 'A', situation: 'A customer\'s account shows a service credit that is not explained anywhere in their file.', requiresSupervisor: true, why: 'An unexplained credit with no documentation behind it needs a second set of eyes before anyone touches it.' },
-    { client: 'C', situation: 'A customer asks to combine two separate promotional discounts on one order.', requiresSupervisor: false, why: 'The rule against stacking discounts is already written down. No approval needed, just explain it.' },
-    { client: 'A', situation: 'A customer is threatening to cancel their whole account unless they get a discount that does not exist in the system.', requiresSupervisor: true, why: 'A customer asking for something outside any written policy, with account risk attached, is exactly what escalation exists for.' },
-    { client: 'B', situation: 'A customer asks whether ID verification is required just to check their account balance.', requiresSupervisor: false, why: 'Meridian\'s rule is published and simple: not required for general questions. No need to check with anyone.' },
-    { client: 'C', situation: 'A customer wants same-day service outside normal service hours, something with genuinely no written rule either way.', requiresSupervisor: true, why: 'When nothing is written down and the customer is pushing for an exception, that is a decision above an agent\'s own authority.' },
-    { client: 'B', situation: 'A customer wants to reschedule for the third time this month.', requiresSupervisor: true, why: 'Meridian requires a supervisor note after the second reschedule in a month. This is the third.' }
-  ];
-
-  var introStage = document.getElementById('introStage'), gameStage = document.getElementById('gameStage'), resultsStage = document.getElementById('resultsStage');
-  var state = null;
-
-  function startGame() {
-    state = { index: 0, correct: 0, unnecessary: 0, missed: 0, bossTier: 0, locked: false };
-    introStage.style.display = 'none';
-    resultsStage.style.display = 'none';
-    gameStage.style.display = 'flex';
-    updateBoss();
-    renderQuestion();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function updateBoss() {
-    var wrap = $('bossWrap');
-    wrap.className = 'sbb-boss-wrap sbb-boss-tier-' + state.bossTier;
-    $('bossLabel').textContent = TIER_NAMES[state.bossTier];
-    $('bossSub').textContent = state.bossTier === 0 ? 'No interruptions yet' : (state.bossTier + ' interruption' + (state.bossTier === 1 ? '' : 's') + ' so far');
-    $('bossBlob').querySelector('circle').setAttribute('fill', TIER_COLORS[state.bossTier]);
-  }
-
-  function growBoss() {
-    state.bossTier = Math.min(5, state.bossTier + 1);
-    updateBoss();
-    var wrap = $('bossWrap');
-    wrap.classList.add('sbb-shake');
-    setTimeout(function () { wrap.classList.remove('sbb-shake'); }, 420);
-  }
-
-  function renderQuestion() {
-    var s = SCENARIOS[state.index];
-    state.locked = false;
-    $('progressLabel').textContent = 'Call ' + (state.index + 1) + ' of ' + SCENARIOS.length;
-    $('progressFill').style.width = ((state.index / SCENARIOS.length) * 100) + '%';
-    $('clientBadge').textContent = CLIENT_NAMES[s.client] + ' account';
-    $('situationText').textContent = s.situation;
-    $('feedback').style.display = 'none';
-    $('nextBtn').style.display = 'none';
-    $('selfBtn').disabled = false;
-    $('askBtn').disabled = false;
-    $('selfBtn').classList.remove('is-correct', 'is-wrong');
-    $('askBtn').classList.remove('is-correct', 'is-wrong');
-
-    var card = $('questionCard');
-    card.classList.remove('sbb-fade');
-    void card.offsetWidth;
-    card.classList.add('sbb-fade');
-  }
-
-  function choose(choseAsk) {
-    if (state.locked) return;
-    state.locked = true;
-    var s = SCENARIOS[state.index];
-    var wasCorrect = choseAsk === s.requiresSupervisor;
-
-    $('selfBtn').disabled = true;
-    $('askBtn').disabled = true;
-
-    var btn = choseAsk ? $('askBtn') : $('selfBtn');
-    btn.classList.add(wasCorrect ? 'is-correct' : 'is-wrong');
-
-    if (wasCorrect) {
-      state.correct += 1;
-    } else if (choseAsk && !s.requiresSupervisor) {
-      state.unnecessary += 1;
-    } else if (!choseAsk && s.requiresSupervisor) {
-      state.missed += 1;
-    }
-
-    if (choseAsk) growBoss();
-
-    var feedback = $('feedback');
-    feedback.style.display = 'block';
-    var badge = wasCorrect ? '<span class="pill pill-green" style="margin-bottom:8px;">Right call</span><br>' : '<span class="pill pill-danger" style="margin-bottom:8px;">Wrong call</span><br>';
-    feedback.innerHTML = badge + s.why;
-
-    $('nextBtn').style.display = 'inline-flex';
-    $('nextBtn').textContent = state.index < SCENARIOS.length - 1 ? 'Next call' : 'See my results';
-  }
-
-  $('selfBtn').addEventListener('click', function () { choose(false); });
-  $('askBtn').addEventListener('click', function () { choose(true); });
-
-  $('nextBtn').addEventListener('click', function () {
-    state.index += 1;
-    if (state.index >= SCENARIOS.length) {
-      endGame();
-    } else {
-      renderQuestion();
-    }
-  });
-
-  function endGame() {
-    gameStage.style.display = 'none';
-    resultsStage.style.display = 'flex';
-
-    var headline;
-    if (state.unnecessary === 0 && state.missed === 0) {
-      headline = 'Perfect shift. ' + state.correct + ' of ' + SCENARIOS.length + ' right, and the boss meter only grew when it genuinely had to.';
-    } else if (state.unnecessary > 0) {
-      headline = 'You finished the shift, but summoned the supervisor unnecessarily ' + state.unnecessary + ' time' + (state.unnecessary === 1 ? '' : 's') + '.';
-    } else {
-      headline = state.correct + ' of ' + SCENARIOS.length + ' right calls this shift.';
-    }
-    $('resultsHeadline').textContent = headline;
-    $('rCorrect').textContent = state.correct + '/' + SCENARIOS.length;
-    $('rUnnecessary').textContent = state.unnecessary;
-    $('rMissed').textContent = state.missed;
-
-    var shareLine = 'I made it through Supervisor Boss Battle with ' + state.correct + '/' + SCENARIOS.length + ' right calls and ' + state.unnecessary + ' unnecessary escalation' + (state.unnecessary === 1 ? '' : 's') + '. Try it: myagentfirst.com/supervisor-boss-battle.html';
-    $('shareText').value = shareLine;
-    $('resultSummaryField').value = shareLine;
-
-    if (window.AFLabs) {
-      window.AFLabs.mount('afIdea', {
-        tool: 'Supervisor Boss Battle',
-        question: 'You just made the handle-it-or-escalate call, over and over. What would need to be true for that call to be obvious instead of a judgment call every time?',
-        context: { result: shareLine }
-      });
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  $('startBtn').addEventListener('click', startGame);
-  $('playAgainBtn').addEventListener('click', function () {
-    resultsStage.style.display = 'none';
-    startGame();
-  });
-
-  $('copyBtn').addEventListener('click', function () {
-    var field = $('shareText');
-    field.select();
-    var done = function () {
-      $('copyStatus').style.display = 'block';
-      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(field.value).then(done).catch(function () {
-        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-      });
-    } else {
-      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-    }
-  });
-
-  var emailForm = $('emailForm');
-  emailForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('emailStatus');
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(emailForm)
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      if (data && data.success) {
-        if (window.AFLabs) window.AFLabs.linkEmail('Supervisor Boss Battle', emailForm.querySelector('[name="email"]').value);
-        emailForm.style.display = 'none';
-        status.style.color = '#1f5c42';
-        status.textContent = "Sent. I'll follow up directly too.";
-        status.style.display = 'block';
+  function money(n) { return '$' + n; }
+  function buildCalls() {
+    var ids = Object.keys(RULES), types = K.shuffle(['credit', 'credit', 'credit', 'credit', 'credit', 'credit', 'manager', 'manager', 'manager', 'legal', 'safety', 'routine', 'routine', 'routine']);
+    var order = [], seen = {}, offsets = K.shuffle([-80, -60, -45, -25, -15, 35, 70]);
+    while (order.length < types.length) order = order.concat(K.shuffle(ids));
+    return types.map(function (type, i) {
+      var c = K.client(order[i]), r = RULES[c.id], ind = c.industry, call = { client: c, rules: r, type: type };
+      if (type === 'credit' && r.limit === 0) { c = K.client('riverside'); r = RULES.riverside; call.client = c; call.rules = r; }
+      if (type === 'credit') {
+        var amt;
+        do { amt = Math.max(15, Math.round((r.limit + offsets[(i + Math.floor(Math.random() * 7)) % offsets.length] + (Math.random() * 10 - 5)) / 5) * 5); } while (seen[c.id + amt] && Math.random() < 0.9);
+        seen[c.id + amt] = 1;
+        call.text = 'Customer wants a ' + money(amt) + ' ' + CREDIT[ind] + '.';
+        call.need = amt > r.limit; call.why = call.need ? money(amt) + ' is over this client’s ' + money(r.limit) + ' limit.' : money(amt) + ' is under this client’s ' + money(r.limit) + ' limit. You can handle it.';
+        if (r.limit === 0) call.why = 'This client sends every billing adjustment to a supervisor.';
+      } else if (type === 'manager') {
+        call.text = 'Customer is frustrated about the wait and asks to speak to a manager. Nothing urgent.';
+        call.need = r.manager === 'escalate'; call.why = call.need ? 'This client wants every manager request escalated.' : 'At this client you handle it: send the alert and tell them when to expect a call.';
+      } else if (type === 'legal') {
+        call.text = '“If this isn’t fixed today, I’m calling my lawyer.”'; call.need = true; call.why = 'Legal threats always go to a supervisor, at every client.';
+      } else if (type === 'safety') {
+        call.text = SAFETY[ind]; call.need = true; call.why = 'Safety problems are an immediate escalation.';
       } else {
-        btn.disabled = false;
-        btn.textContent = original;
-        status.style.color = '#c53636';
-        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-        status.style.display = 'block';
+        call.text = K.pick(ROUTINE[ind]); call.need = false; call.why = 'Routine request. No supervisor needed.';
       }
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = original;
-      status.style.color = '#c53636';
-      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-      status.style.display = 'block';
+      return call;
     });
+  }
+
+  function start() {
+    state = { calls: buildCalls(), i: 0, stress: 10, score: 0, correct: 0, unneeded: 0, fires: 0, pulls: 0, locked: false, streak: 0 };
+    $('introStage').style.display = 'none'; $('resultsStage').style.display = 'none'; $('gameStage').style.display = 'flex';
+    $('hands').innerHTML = ''; say('“Morning. Let’s have a smooth one.”');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    clearInterval(handsTimer); handsTimer = setInterval(floorHand, 5200);
+    clearInterval(decay); decay = setInterval(function () { if (state && !state.over) { setStress(state.stress - 0.6); } }, 1000);
+    show();
+  }
+
+  function floorHand() {
+    if (!state || state.over) return;
+    var n = K.pick(NAMES), h = document.createElement('span');
+    h.className = 'sb-hand'; h.textContent = '✋ ' + n + ' has a question';
+    var wrap = $('hands'); wrap.appendChild(h); while (wrap.children.length > 4) wrap.removeChild(wrap.firstChild);
+    setStress(state.stress + 3 + state.i * 0.25);
+    if (state.stress >= 100) end('meltdown');
+  }
+
+  function say(t) { $('danaSays').textContent = t; }
+  function setStress(v) {
+    state.stress = Math.max(0, Math.min(100, v));
+    var s = state.stress;
+    $('stressFill').style.width = s + '%'; $('stressFill').style.backgroundPosition = (-(s / 100) * 260) + 'px 0';
+    $('stressPct').textContent = Math.round(s) + '%';
+    $('danaMood').textContent = s < 30 ? 'Calm' : s < 60 ? 'Busy' : s < 85 ? 'Frazzled' : 'About to melt down';
+    $('boss').classList.toggle('hot', s >= 85);
+    $('danaSweat').setAttribute('opacity', s >= 60 ? '1' : '0');
+    $('danaSteam').setAttribute('opacity', s >= 85 ? '1' : '0');
+    $('danaSkin').setAttribute('fill', s >= 85 ? '#d9765a' : '#c98a5e');
+    $('danaMouth').setAttribute('d', s < 30 ? 'M60 108c8 6 22 6 30 0' : s < 60 ? 'M60 110h30' : 'M60 113c8-6 22-6 30 0');
+    $('danaBrows').innerHTML = s < 60 ? '<path d="M50 70l14 2" stroke="#2a1a10" stroke-width="4" stroke-linecap="round"/><path d="M86 72l14-2" stroke="#2a1a10" stroke-width="4" stroke-linecap="round"/>'
+      : '<path d="M50 66l14 7" stroke="#2a1a10" stroke-width="4" stroke-linecap="round"/><path d="M86 73l14-7" stroke="#2a1a10" stroke-width="4" stroke-linecap="round"/>';
+  }
+
+  function seconds() { return Math.max(7, 11 - state.i * 0.3); }
+  function show() {
+    var call = state.calls[state.i];
+    state.locked = false;
+    $('hudCall').textContent = (state.i + 1) + '/' + CALLS;
+    $('callClient').textContent = call.client.name; $('callClient').style.background = call.client.color;
+    $('callSit').textContent = call.text;
+    $('cardLabel').textContent = call.client.name + ': escalation rules'; $('cardLabel').style.color = call.client.color;
+    $('cardRules').innerHTML = call.rules.card.map(function (l) { return '<li>' + K.esc(l) + '</li>'; }).join('');
+    $('verdict').className = 'sb-verdict';
+    $('handleBtn').disabled = false; $('escBtn').disabled = false;
+    K.pop($('callPanel')); K.sfx.ring();
+    var secs = seconds(), fill = $('timerFill');
+    fill.style.transition = 'none'; fill.style.width = '100%'; void fill.offsetWidth;
+    fill.style.transition = 'width ' + secs + 's linear'; fill.style.width = '0%';
+    clearTimeout(timer); timer = setTimeout(function () { decide('timeout'); }, secs * 1000);
+    setStress(state.stress); hud();
+  }
+
+  function decide(choice) {
+    if (!state || state.locked || state.over) return; state.locked = true; clearTimeout(timer);
+    $('timerFill').style.transition = 'none';
+    $('handleBtn').disabled = true; $('escBtn').disabled = true;
+    var call = state.calls[state.i], v = $('verdict'), esc = choice === 'escalate';
+    if (esc) state.pulls++;
+    if (esc && call.need) { state.correct++; state.streak++; state.score += 100; setStress(state.stress + 6); say(K.pick(LINES.goodEsc)); K.sfx.good(); K.flash('good'); v.className = 'sb-verdict good'; v.textContent = 'Right call. ' + call.why; K.floatText($('escBtn'), '+100', '#177a55'); }
+    else if (!esc && !call.need && choice !== 'timeout') { state.correct++; state.streak++; var pts = 100 + (state.streak >= 3 ? 25 : 0); state.score += pts; setStress(state.stress - 6); say(K.pick(LINES.good)); K.sfx[state.streak >= 3 ? 'great' : 'good'](); K.flash('good'); v.className = 'sb-verdict good'; v.textContent = 'Handled. ' + call.why; K.floatText($('handleBtn'), '+' + pts, '#177a55'); }
+    else if (esc && !call.need) { state.unneeded++; state.streak = 0; setStress(state.stress + 20); say(K.pick(LINES.unneeded)); K.sfx.bad(); K.flash('warn'); K.shake($('boss')); v.className = 'sb-verdict warn'; v.textContent = 'You didn’t need Dana. ' + call.why; }
+    else {
+      state.streak = 0;
+      if (call.need) { state.fires++; setStress(state.stress + 10); say(K.pick(LINES.fire)); K.sfx.alarm(); K.flash('bad'); K.shake($('callPanel')); K.stamp($('callPanel'), 'COMPLIANCE FIRE', 'bad'); v.className = 'sb-verdict bad'; v.textContent = (choice === 'timeout' ? 'You froze and never escalated. ' : 'That one needed Dana. ') + call.why; }
+      else { K.sfx.bad(); v.className = 'sb-verdict warn'; v.textContent = 'You left the customer on hold too long. ' + call.why; setStress(state.stress + 4); }
+    }
+    hud();
+    if (state.stress >= 100) return setTimeout(function () { end('meltdown'); }, 900);
+    if (state.fires >= 3) return setTimeout(function () { end('fires'); }, 900);
+    setTimeout(function () { if (state.over) return; if (state.i >= CALLS - 1) end('done'); else { state.i++; show(); } }, 1700);
+  }
+
+  function hud() {
+    $('hudScore').textContent = state.score.toLocaleString(); $('hudPulls').textContent = state.pulls;
+    for (var i = 0; i < 3; i++) $('f' + i).className = 'sb-fire' + (i < state.fires ? ' on' : '');
+  }
+
+  function end(reason) {
+    if (state.over) return; state.over = true;
+    clearTimeout(timer); clearInterval(handsTimer); clearInterval(decay);
+    $('gameStage').style.display = 'none'; $('resultsStage').style.display = 'flex';
+    var played = Math.min(CALLS, state.i + 1);
+    var rank = reason === 'meltdown' ? 'Dana melted down' : reason === 'fires' ? 'Audit failed' : state.correct >= 13 ? 'Dana’s favorite' : state.correct >= 10 ? 'Trusted on the floor' : 'Needs a coaching session';
+    var bonus = reason === 'done' ? Math.round((100 - state.stress) * 5) : 0; state.score += bonus;
+    var b = K.best('boss-battle', state.score);
+    $('rRank').textContent = rank;
+    $('rBest').innerHTML = b.isNew && b.previous > 0 ? ' · new best' : (b.previous > 0 ? ' · best ' + Math.max(b.previous, state.score).toLocaleString() : '');
+    $('rScore').textContent = state.score.toLocaleString(); $('rCorrect').textContent = state.correct + '/' + played;
+    $('rUnneeded').textContent = state.unneeded; $('rFires').textContent = state.fires; $('rStress').textContent = Math.round(state.stress) + '%';
+    $('resultsHeadline').textContent = reason === 'meltdown' ? 'Dana hit 100% stress after ' + played + ' calls.' : reason === 'fires' ? 'Three calls that needed Dana never reached her.' : 'Shift survived. Dana finished at ' + Math.round(state.stress) + '% stress' + (bonus ? ', +' + bonus + ' calm bonus.' : '.');
+    $('rInsight').textContent = state.unneeded
+      ? 'You pulled Dana in ' + state.pulls + ' time' + (state.pulls === 1 ? '' : 's') + ', and ' + state.unneeded + ' of those were answers already on the client’s card. One agent doing that is a nuisance. A floor of 25 doing it is a supervisor’s whole day.'
+      : 'Every time you pulled Dana in, she was actually needed. That’s the goal: when the right client’s limits are on screen, supervisors spend their time on real escalations instead of rule lookups.';
+    if (reason === 'done' && state.fires === 0) K.confetti();
+    K.sfx.end();
+    var share = 'Supervisor Boss Battle: ' + rank + '. ' + state.correct + '/' + played + ' right calls, ' + state.unneeded + ' unneeded pull-ins, ' + state.fires + ' compliance fires. Try it: myagentfirst.com/supervisor-boss-battle.html';
+    K.results({ tool: 'Supervisor Boss Battle', share: share, question: 'On your floor, what do agents most often pull a supervisor in for that they could have handled themselves?' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  $('handleBtn').addEventListener('click', function () { decide('handle'); });
+  $('escBtn').addEventListener('click', function () { decide('escalate'); });
+  document.addEventListener('keydown', function (e) {
+    if (!state || state.over || $('gameStage').style.display === 'none') return;
+    var k = e.key.toLowerCase(); if (k === 'h') decide('handle'); else if (k === 'e') decide('escalate');
   });
+  $('startBtn').addEventListener('click', start);
+  $('playAgainBtn').addEventListener('click', start);
+  K.wireCommon('Supervisor Boss Battle');
+  window.__boss = function () { return state; };
 })();
 </script>
 
