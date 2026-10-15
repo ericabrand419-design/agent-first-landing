@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent First: Call From Hell</title>
-<meta name="description" content="One angry customer, one branching call. Apologize first, escalate first, or promise first: every choice feels reasonable in the moment. See which of six modeled endings you land on.">
+<meta name="description" content="A furious caller, two stores on one phone line, and seven possible endings. Watch his mood, beat the clock, and find the legendary save. An Agent First Arcade game.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://myagentfirst.com/call-from-hell.html">
 <meta property="og:title" content="Agent First: Call From Hell">
-<meta property="og:description" content="One angry customer. A handful of choices, each reasonable on its own. Clean Resolution, Supervisor Rescue, Compliance Disaster, Accidental Promise, Wrong Client, or Customer Hung Up: which one do you land on?">
+<meta property="og:description" content="A furious caller, two stores on one phone line, seven endings. Can you find the legendary save?">
 <meta property="og:image" content="https://myagentfirst.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Agent First: Call From Hell">
-<meta name="twitter:description" content="One angry customer. A handful of choices, each reasonable on its own. Which of six endings do you land on?">
+<meta name="twitter:description" content="A furious caller, two stores on one phone line, seven endings. Can you find the legendary save?">
 <meta name="twitter:image" content="https://myagentfirst.com/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,33 +75,52 @@
   .field-input{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;color:var(--ink);font-family:var(--font-sans);font-size:15px;transition:border-color .14s ease}
   .field-input:focus{outline:none;border-color:var(--violet)}
 
-  .pill{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);font-size:12px;font-weight:750}
+  .pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:var(--radius-full);font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.04em;flex:0 0 auto;}
   .pill-violet{background:var(--purplebg);color:var(--violet)}
-  .pill-green{background:var(--greenbg);color:var(--green)}
-  .pill-danger{background:var(--dangerbg);color:var(--danger)}
-  .pill-amber{background:var(--amberbg);color:var(--amber)}
 
-  /* transcript feed */
-  .cfh-feed{display:flex;flex-direction:column;gap:10px;margin-bottom:8px;max-height:440px;overflow-y:auto;padding-right:4px;}
-  .cfh-feed-entry{border-radius:12px;padding:12px 14px;font-size:14px;line-height:1.55;max-width:100%;}
-  .cfh-feed-entry.call{background:var(--soft);border:1px solid var(--line);color:var(--ink);}
-  .cfh-feed-entry.you{background:var(--purplebg);border:1px solid transparent;color:#4c2a99;font-weight:650;align-self:flex-end;max-width:86%;}
-  .cfh-feed-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);display:block;margin-bottom:4px;}
 
-  .cfh-choice-btn{width:100%;text-align:left;padding:14px 16px;border-radius:var(--radius-md);border:1.5px solid var(--line);background:#fff;font-size:14.5px;font-weight:650;color:var(--ink);cursor:pointer;transition:border-color .12s ease,background .12s ease,transform .1s ease;margin-bottom:10px;}
-  .cfh-choice-btn:hover{border-color:var(--violet);background:var(--purplebg);transform:translateY(-1px);}
-  .cfh-choice-btn:active{transform:scale(.99);}
-  .cfh-choice-btn:last-child{margin-bottom:0;}
+  /* CALL FROM HELL */
+  .ch-grid{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+  .ch-panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-panel);padding:18px;position:relative}
+  .ch-feed{display:flex;flex-direction:column;gap:10px;min-height:340px;max-height:56vh;overflow:auto;padding-right:4px}
+  .ch-msg{max-width:86%;padding:12px 14px;border-radius:16px;font-size:15.5px;line-height:1.5;animation:ch-in .25s ease}
+  @keyframes ch-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .ch-msg small{display:block;font-size:10.5px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin-bottom:3px;opacity:.75}
+  .ch-them{align-self:flex-start;background:#fff1ee;border:1px solid #ffd2c8;border-radius:4px 16px 16px 16px;color:#5a1f12}
+  .ch-you{align-self:flex-end;background:var(--purplebg);border:1px solid #e1d6ff;border-radius:16px 4px 16px 16px;color:#3d2580;font-weight:650}
+  .ch-sys{align-self:center;max-width:94%;background:var(--soft);border:1px dashed #c9cbd8;color:#4f556c;font-size:14px}
+  .ch-sys b{color:var(--ink)}
+  .ch-typing{align-self:flex-start;padding:10px 14px;border-radius:16px;background:#fff1ee;border:1px solid #ffd2c8;display:none}
+  .ch-typing i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e0866f;margin:0 2px;animation:ch-dot 1s infinite}
+  .ch-typing i:nth-child(2){animation-delay:.15s}.ch-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes ch-dot{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+  .ch-choices{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .ch-choice{width:100%;text-align:left;padding:14px 16px;border-radius:12px;border:1.5px solid var(--line);background:#fff;font:inherit;font-size:15px;font-weight:650;cursor:pointer;transition:border-color .1s,background .1s,transform .08s}
+  .ch-choice:hover{border-color:var(--violet);background:var(--purplebg)}
+  .ch-choice:active{transform:scale(.99)}
+  .ch-side{display:flex;flex-direction:column;gap:14px;position:sticky;top:90px}
+  .ch-mood{display:flex;align-items:center;gap:12px}
+  .ch-face{font-size:40px;line-height:1;transition:transform .2s}
+  .ch-track{height:12px;border-radius:999px;background:var(--bg);overflow:hidden;margin-top:6px}
+  .ch-fill{height:100%;border-radius:999px;transition:width .4s ease,background .4s ease}
+  .ch-timer{height:8px;border-radius:999px;background:var(--purplebg);overflow:hidden;margin-top:8px}
+  .ch-timer > i{display:block;height:100%;width:100%;background:var(--grad-primary)}
+  .ch-rulebtn{width:100%;border:1.5px dashed #c9cbd8;background:var(--soft);border-radius:12px;padding:12px 14px;font:inherit;font-weight:750;cursor:pointer;text-align:left}
+  .ch-rulebtn:disabled{opacity:.5;cursor:default}
+  .ch-rulecard{display:none;border-radius:12px;padding:12px 14px;background:#fffbea;border:1px solid #ffe08a;font-size:13.5px;line-height:1.5}
+  .ch-rulecard b{display:block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+  .ch-flags{display:flex;flex-wrap:wrap;gap:6px}
+  .ch-flag{font-size:11.5px;font-weight:750;padding:4px 9px;border-radius:999px;background:var(--bg);color:var(--muted)}
+  .ch-flag.on{background:#ecfbf4;color:#177a55}
+  .ch-endings{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+  .ch-end{border-radius:12px;padding:12px;border:1px solid var(--line);background:var(--soft);font-size:13px;line-height:1.4}
+  .ch-end b{display:block;font-size:14px;margin-bottom:2px}
+  .ch-end.locked{color:#a5a8bb;border-style:dashed}
+  .ch-end.now{border-color:var(--violet);background:var(--purplebg)}
+  .ch-howto{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;text-align:left;max-width:800px}
+  .ch-howto .card-on-dark{padding:16px}.ch-howto b{display:block;color:#fff;font-size:15px;margin-bottom:6px}.ch-howto span{color:#c7cce0;font-size:13.5px;line-height:1.5}
+  @media (max-width:980px){.ch-grid,.ch-howto{grid-template-columns:1fr}.ch-side{position:static}.ch-feed{max-height:none}.section{padding:40px 16px}}
 
-  .cfh-path-list{display:flex;flex-direction:column;gap:8px;}
-  .cfh-path-item{display:flex;gap:10px;font-size:13.5px;color:var(--muted);line-height:1.5;}
-  .cfh-path-num{flex:0 0 auto;font-weight:900;color:var(--violet);}
-
-  @media (max-width:900px){
-    .section{padding:56px 20px}
-    .ds-display{font-size:32px}
-    .ds-hero{font-size:24px}
-  }
 </style>
 </head>
 <body>
@@ -126,59 +145,70 @@
 
   <!-- INTRO STAGE -->
   <div class="section" id="introStage" style="background:var(--grad-navy);">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:20px;max-width:720px;align-items:center;text-align:center;">
-      <div class="ds-label eyebrow-c">Agent First Free Tools &middot; Choose your response</div>
+    <div class="wrap" style="display:flex;flex-direction:column;gap:22px;max-width:820px;align-items:center;text-align:center;">
+      <div class="ds-label eyebrow-c">Agent First Arcade &middot; one call, seven endings</div>
       <h1 class="ds-display" style="color:#fff;">Call From Hell</h1>
-      <p class="ds-body" style="color:#c7cce0;">One customer. One call. A handful of choices, each of them reasonable on its own: apologize first, escalate first, promise first. There is no score here, just a transcript of exactly what you did, and which of six modeled endings, each based on a recognizable operational failure mode, it led to.</p>
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px;width:100%;">
-        <div class="card-on-dark">
-          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">One call, several ways to go wrong</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Every choice feels defensible in the moment. That is exactly what makes the wrong ones easy to pick.</div>
-        </div>
-        <div class="card-on-dark">
-          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">No score, just an ending</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">No points to chase. Just your path through the call, and the ending it actually earned.</div>
-        </div>
-        <div class="card-on-dark">
-          <div class="ds-body" style="font-weight:750;color:#fff;margin-bottom:4px;">The endings are not random</div>
-          <div class="ds-body-sm" style="color:#c7cce0;">Clean Resolution, Supervisor Rescue, Compliance Disaster, Accidental Promise, Wrong Client, Customer Hung Up: each one maps to a specific, real failure mode.</div>
-        </div>
+      <p class="ds-body" style="color:#c7cce0;max-width:660px;">Dennis is furious. He says he was promised a free loaner, and now there’s a $135 charge on his bill. You answer for a dealer group with two stores on one phone line. Every choice sounds reasonable in the moment. Only one path gets the legendary ending.</p>
+      <div class="ch-howto">
+        <div class="card-on-dark"><b>Watch his mood</b><span>Every answer moves Dennis’s mood. If it hits zero, he hangs up.</span></div>
+        <div class="card-on-dark"><b>The clock is running</b><span>Take too long to decide and he snaps: “Hello? Are you still there?”</span></div>
+        <div class="card-on-dark"><b>Checking costs hold time</b><span>You can look up the rule, but he’s on hold while you do. Sometimes it’s worth it.</span></div>
       </div>
-      <button class="btn btn-primary" id="startBtn" style="margin-top:6px;padding:15px 34px;font-size:16px;">Take the call</button>
-      <p class="ds-body-sm" style="color:#8991b3;">Nothing is recorded or sent anywhere. This runs entirely in your browser.</p>
+      <button class="btn btn-primary" id="startBtn" style="padding:15px 34px;font-size:16px;">Take the call</button>
+      <div class="ds-body-sm" style="color:#8890ab;">Endings you’ve found are saved in this browser. All names and stores are fictional.</div>
     </div>
   </div>
 
   <!-- GAME STAGE -->
-  <div class="section" id="gameStage" style="background:var(--soft);display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:0;max-width:680px;">
-      <div class="card">
-        <div class="ds-label eyebrow-c" style="margin-bottom:12px;">The call</div>
-        <div id="feed" class="cfh-feed"></div>
-        <div id="choicesWrap" style="border-top:1px solid var(--line);padding-top:16px;"></div>
+  <div class="section" id="gameStage" style="background:var(--soft);display:none;padding-top:36px;">
+    <div class="wrap" style="max-width:1120px;">
+      <div class="ch-grid">
+        <div class="ch-panel">
+          <div class="ds-label eyebrow-c" style="margin-bottom:12px;">Live call &middot; Crestline Toyota and Marlowe Ford service line</div>
+          <div class="ch-feed" id="feed"></div>
+          <div class="ch-typing" id="typing"><i></i><i></i><i></i></div>
+          <div class="ch-choices" id="choices"></div>
+        </div>
+        <div class="ch-side">
+          <div class="ch-panel">
+            <div class="ds-label" style="color:var(--muted);">Dennis’s mood</div>
+            <div class="ch-mood"><div class="ch-face" id="moodFace">😡</div><div style="flex:1;"><div style="font-weight:900;" id="moodLabel">Furious</div><div class="ch-track"><div class="ch-fill" id="moodFill"></div></div></div></div>
+            <div class="ds-label" style="color:var(--muted);margin-top:14px;">Time to answer</div>
+            <div class="ch-timer"><i id="timerFill"></i></div>
+          </div>
+          <div class="ch-panel">
+            <button class="ch-rulebtn" id="ruleBtn" type="button">📖 Check the rule <span style="font-weight:650;color:var(--muted);">(puts Dennis on hold)</span></button>
+            <div class="ch-rulecard" id="ruleCard" style="margin-top:10px;"></div>
+          </div>
+          <div class="ch-panel">
+            <div class="ds-label" style="color:var(--muted);margin-bottom:8px;">What you’ve done so far</div>
+            <div class="ch-flags">
+              <span class="ch-flag" id="flagVerify">Verified ID</span>
+              <span class="ch-flag" id="flagStore">Confirmed the store</span>
+              <span class="ch-flag" id="flagRule">Checked the rule</span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- RESULTS STAGE -->
   <div class="section" id="resultsStage" style="background:#fff;display:none;">
-    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:680px;">
-
+    <div class="wrap" style="display:flex;flex-direction:column;gap:24px;max-width:720px;">
       <div class="card">
-        <div class="ds-label eyebrow-c" style="margin-bottom:10px;">Your ending</div>
-        <div id="endingBadgeRow" style="margin-bottom:12px;"></div>
-        <div class="ds-hero" id="endingTitle" style="margin-bottom:12px;">--</div>
-        <p class="ds-body" id="endingBody" style="color:var(--muted);">--</p>
+        <div class="ds-label eyebrow-c" id="rBadge">Your ending</div>
+        <div class="ds-hero" id="endingTitle" style="margin:10px 0 10px;">--</div>
+        <p class="ds-body" id="endingBody" style="color:var(--ink);margin-bottom:14px;">--</p>
+        <div style="padding:14px 16px;border-radius:12px;background:var(--purplebg);color:#3d2580;font-size:15px;line-height:1.55;font-weight:650;" id="endingAngle">--</div>
       </div>
-
-      <div class="card" style="border-color:var(--violet);background:var(--purplebg);">
-        <div class="ds-body" style="font-weight:900;margin-bottom:8px;">With Agent First</div>
-        <p class="ds-body-sm" id="endingAngle" style="color:#4c2a99;">--</p>
-      </div>
-
       <div class="card">
-        <div class="ds-body" style="font-weight:750;margin-bottom:12px;">Your path through the call</div>
-        <div class="cfh-path-list" id="pathList"></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap;"><div class="ds-body" style="font-weight:900;">Endings found</div><div class="ds-body-sm" id="endCount" style="color:var(--muted);">0 of 7</div></div>
+        <div class="ch-endings" id="endingsGrid"></div>
+      </div>
+      <div class="card">
+        <div class="ds-body" style="font-weight:900;margin-bottom:10px;">Your path through the call</div>
+        <ol id="pathList" style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:14.5px;line-height:1.5;"></ol>
       </div>
 
       <div class="card">
@@ -191,16 +221,17 @@
       </div>
 
       <div style="display:flex;gap:12px;flex-wrap:wrap;">
-        <button class="btn btn-primary" id="playAgainBtn">Take the call again</button>
-        <a href="client-roulette.html" class="btn btn-ghost-light">Try another game: Client Roulette</a>
+        <button class="btn btn-primary" id="playAgainBtn">Play again</button>
+        <a href="client-roulette.html" class="btn btn-ghost-light">Next: Client Roulette</a>
+        <a href="labs.html" class="btn btn-ghost-light">All games and tools</a>
       </div>
 
       <div class="card-on-dark" style="flex-direction:column;gap:14px;background:var(--navy);border:none;display:flex;">
-        <div class="ds-body" style="font-weight:900;color:#fff;">See your own rules handled this way</div>
-        <p class="ds-body-sm" style="color:#c7cce0;">Send 1-2 pages of anonymized policy, SOP, script, or FAQ material from one real client, and see how those exact rules could appear inside Agent First.</p>
+        <div class="ds-body" style="font-weight:900;color:#fff;">The right rule, for the right store, before you say a word.</div>
+        <p class="ds-body-sm" style="color:#c7cce0;">Most of the bad endings here come from the same gap: the agent had to guess which client the caller belonged to, or what that client allows. Agent First puts the right Client Profile, the rule, and who to alert on screen the moment the call connects.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a href="sample-client-profile.html" class="btn btn-primary">Build my sample Client Profile</a>
-          <a href="pilot-program.html" class="btn btn-ghost-dark">See the pilot program</a>
+          <a href="pilot-program.html" class="btn btn-ghost-dark">See what a pilot includes</a>
         </div>
       </div>
 
@@ -235,254 +266,204 @@
 </div>
 
 <script src="/labs-capture.js"></script>
+<script src="/arcade-kit.js"></script>
 <script>
 (function () {
   'use strict';
-  var $ = function (id) { return document.getElementById(id); };
-
-  var NODES = {
-    start: {
-      text: 'A customer calls in, sharp and fast: "I was told my cancellation was free, and now I am looking at a $25 charge on my card. I want this fixed. Right now."',
-      choices: [
-        { label: 'Apologize, and pull up the account to check what actually applies.', next: 'pull_account' },
-        { label: 'Tell them the fee is standard and cannot be waived.', next: 'standard_fee_pushback' },
-        { label: 'Offer to waive the fee immediately to calm them down.', next: 'immediate_waive' }
-      ]
-    },
-    pull_account: {
-      text: 'You pull up the account. The name on the call matches a customer in the system, but the appointment reference number they read out does not look like the usual format for that client.',
-      choices: [
-        { label: 'Ask which company actually scheduled the original appointment.', next: 'confirm_client' },
-        { label: 'The name matches, so proceed as if it is the obvious client.', next: 'wrong_client' }
-      ]
-    },
-    standard_fee_pushback: {
-      text: 'The customer\'s voice jumps a register. "That is NOT what I was told at booking. Get me a supervisor. Now."',
-      choices: [
-        { label: 'Apologize, and offer to check the account before escalating.', next: 'pull_account' },
-        { label: 'Tell them a supervisor will just say the same thing.', next: 'customer_hung_up' }
-      ]
-    },
-    immediate_waive: {
-      text: 'You tell them the fee is waived, right now, before checking which client this even is or what the actual policy says.',
-      choices: [
-        { label: 'Catch yourself. Check the account before confirming anything further.', next: 'pull_account' },
-        { label: 'Put it in writing by email immediately, since you already said it out loud.', next: 'accidental_promise' }
-      ]
-    },
-    confirm_client: {
-      text: '"It was Northgate. I am positive," the customer says. The reference number still does not match Northgate\'s usual format, and this is their second cancellation on file this year.',
-      choices: [
-        { label: 'Check Northgate\'s rule specifically for a second cancellation in the same year.', next: 'northgate_second_time' },
-        { label: 'Take their word for it and apply the standard rule without checking the second-time detail.', next: 'compliance_disaster' }
-      ]
-    },
-    northgate_second_time: {
-      text: 'Northgate\'s actual rule: cancellations within 48 hours are free, but only twice per year, and this is their second. The fee is technically correct, but nothing in their booking confirmation ever mentioned a twice-per-year limit.',
-      choices: [
-        { label: 'Explain the limit clearly, apologize that it was never disclosed, and flag the gap on the account.', next: 'clean_explain' },
-        { label: 'Just say the fee is correct and move on without explaining why.', next: 'customer_hung_up' }
-      ]
-    },
-    clean_explain: {
-      text: 'The customer exhales. "Okay. I get it. I just wish someone had told me that the first time."',
-      choices: [
-        { label: 'Note the account so the limit is disclosed clearly at every future booking, and close the call resolved.', next: 'clean_resolution' },
-        { label: 'Offer a one-time goodwill waiver, since the limit was never disclosed. That kind of exception needs supervisor sign-off first.', next: 'goodwill_escalation' }
-      ]
-    },
-    goodwill_escalation: {
-      text: 'You believe a goodwill waiver is fair here. Northgate\'s rules require supervisor sign-off for any fee exception outside the standard policy. Do you get sign-off, or apply it yourself since you are confident it is the right call?',
-      choices: [
-        { label: 'Get supervisor sign-off before applying the waiver.', next: 'supervisor_rescue' },
-        { label: 'Apply it yourself. You are confident, and it saves time.', next: 'compliance_disaster' }
-      ]
-    }
+  var K = window.AFArcade, $ = function (id) { return document.getElementById(id); };
+  var STORE_KEY = 'afArcade.cfh.endings';
+  var RULES = {
+    both: { title: 'Loaner rules, both stores', lines: ['Crestline Toyota: free loaner for repairs over 4 hours and over $200.', 'Marlowe Ford: loaners need Service approval. Routine advisor follow up goes by alert. Transfers are for emergencies and escalations only.', 'Both stores: verify ID before discussing account details.'] },
+    crestline: { title: 'Crestline Toyota', lines: ['Free loaner for repairs over 4 hours and over $200.', 'Verify ID before discussing account details.', 'Agents never waive charges. Billing fixes go to a service advisor.'] },
+    marlowe: { title: 'Marlowe Ford', lines: ['Loaners need Service approval. Warranty loaners are no charge.', 'Routine advisor follow up goes by alert. Do not transfer to advisors.', 'Escalations go to Tasha Green, Service Manager. Agents never waive charges.'] }
   };
-
   var ENDINGS = {
-    clean_resolution: {
-      tag: 'pill-green',
-      title: 'Clean Resolution',
-      body: 'You verified the account, found the real rule, and explained it clearly instead of guessing or caving. The customer was not thrilled about the fee, but they left the call understanding exactly why it applied.',
-      angle: 'This is the version without any dramatic stakes: the right client and the right rule were already sitting in front of you, so nothing else had room to go wrong.'
-    },
-    supervisor_rescue: {
-      tag: 'pill-violet',
-      title: 'Supervisor Rescue',
-      body: 'You spotted a fair exception, a disclosure gap that was not the customer\'s fault, and instead of guessing at your own authority, you got sign-off before applying it.',
-      angle: 'Agent First flags the moment a decision needs a human sign-off instead of leaving that judgment call to whoever happens to be on the phone under pressure.'
-    },
-    compliance_disaster: {
-      tag: 'pill-danger',
-      title: 'Compliance Disaster',
-      body: 'You applied an exception, or another client\'s policy, without the sign-off it actually required. Nobody says anything about it today. It surfaces quietly, during the next audit, attached to your name.',
-      angle: 'A required sign-off is not a suggestion. Agent First will not let that kind of exception through without it, no matter how confident the agent feels in the moment.'
-    },
-    accidental_promise: {
-      tag: 'pill-amber',
-      title: 'Accidental Promise',
-      body: 'You told the customer something was already handled before you had actually confirmed the client, the rule, or your own authority to approve it. Now it has to be walked back, or honored anyway.',
-      angle: 'Nothing gets confirmed to a customer before the rule and the authorization behind it are both checked. Confidence is not the same thing as being right.'
-    },
-    wrong_client: {
-      tag: 'pill-danger',
-      title: 'Wrong Client',
-      body: 'The name matched, so you proceeded, but the account belonged to a different client with a different rule entirely. Everything you told this customer was confidently, fluently wrong.',
-      angle: 'This is the exact mixup Client Roulette is built around. A Client Profile scoped to the actual account, not assumed from a name match, is what closes this gap.'
-    },
-    customer_hung_up: {
-      tag: 'pill-amber',
-      title: 'Customer Hung Up',
-      body: 'Frustration outran the resolution. The call ended before the actual rule, or the actual reason behind it, ever reached the customer.',
-      angle: 'An angry customer is not calmed by an apology loop. They are calmed by a correct answer, delivered fast enough that they are still on the line to hear it.'
-    }
+    legendary: { title: 'Legendary Save', badge: 'Secret ending', body: 'Dennis takes a breath, thanks you by name, and asks how to leave a review. Michael calls him back by 2:40 with the charge reversed.', angle: 'You verified him, confirmed the store, checked the rule, and used the right path for that client. That’s the whole job, and Agent First puts every one of those steps on the screen.' },
+    clean: { title: 'Clean Resolution', badge: 'Good ending', body: 'Dennis isn’t happy, but he knows exactly what happens next and when. Michael fixes the billing that afternoon.', angle: 'Right store, right path, a clear next step. Check the rule and keep his mood up for the secret ending.' },
+    rescue: { title: 'Supervisor Rescue', badge: 'Okay ending', body: 'Tasha, the Service Manager, takes the call and fixes it. It worked, but a routine billing fix just ate a manager’s time.', angle: 'At Marlowe, routine advisor follow up goes by alert. When agents can see that rule, managers only get the calls that need them.' },
+    promise: { title: 'Accidental Promise', badge: 'Bad ending', body: 'You told Dennis the charge was gone. Agents can’t waive charges, so billing put it right back. Now he has a broken promise in writing.', angle: 'The quickest way to calm a caller is a promise you can’t keep. Agent First shows what an agent is and isn’t allowed to do, before the words come out.' },
+    wrong_client: { title: 'Wrong Client', badge: 'Bad ending', body: 'You applied Crestline Toyota’s loaner rule. Dennis’s repair was at Marlowe Ford, where the rule is different. Everything you said was confident and wrong.', angle: 'Same dealer group, same phone line, two different rulebooks. Agent First opens the profile for the store the call belongs to, not the first name match.' },
+    compliance: { title: 'Compliance Disaster', badge: 'Bad ending', body: 'You read account charges out loud before verifying who you were talking to. Dennis was legit this time, but QA flagged the call.', angle: 'Verification steps get skipped when an agent is rushing an angry caller. Agent First keeps the required checks in front of the agent, every call.' },
+    hung_up: { title: 'Customer Hung Up', badge: 'Bad ending', body: 'Dennis had enough and hung up. He’ll call back angrier, or post about it.', angle: 'Most hang-ups come from dead air and from reading policy at someone. Fast, right answers keep the caller on the line.' }
+  };
+  var ORDER = ['legendary', 'clean', 'rescue', 'promise', 'wrong_client', 'compliance', 'hung_up'];
+
+  /* Each node: what Dennis (or the system) says, which rule card applies, and the choices. */
+  var NODES = {
+    start: { rule: 'both', lines: [['them', 'I was told my loaner was FREE. Now there’s a $45-a-day charge on my bill. Three days! I want it fixed. Right now.']],
+      choices: [
+        ['I’m sorry about that, Mr. Park. Let me pull up your visit and see exactly what happened.', 'lookup', 12],
+        ['Loaners have eligibility rules, sir. You may not have qualified.', 'defensive', -18],
+        ['I’ll take that charge off for you right now.', 'promised', 14, { promise: 1 }] ] },
+    defensive: { rule: 'both', lines: [['them', 'Don’t lecture me. Someone at your store PROMISED me.']],
+      choices: [
+        ['You’re right, and I’m sorry. Let me look at exactly what happened.', 'lookup', 8],
+        ['I can only go by the policy, sir.', 'lookup', -22] ] },
+    promised: { rule: 'both', lines: [['them', 'Good. Do it while I’m on the phone.'], ['sys', 'You search for <b>Dennis Park</b>. Two matches: one at <b>Crestline Toyota</b>, one at <b>Marlowe Ford</b>. Same dealer group, same phone line.']],
+      choices: [
+        ['Remove the loaner charge on the first account.', 'END:promise', 0],
+        ['Actually, before I change anything, which store did your repair?', 'store', -4, { store: 1 }] ] },
+    lookup: { rule: 'both', lines: [['sys', 'You search for <b>Dennis Park</b>. Two matches: one at <b>Crestline Toyota</b>, one at <b>Marlowe Ford</b>. Same dealer group, same phone line.']],
+      choices: [
+        ['Which of our stores did the repair, Crestline Toyota or Marlowe Ford?', 'store', 2, { store: 1 }],
+        ['Go with the first match, Crestline Toyota, and verify him there.', 'crestline', 0, { verify: 1 }],
+        ['Read him the charges on the first account so he knows you’re on it.', 'END:compliance', 0] ] },
+    store: { rule: 'both', lines: [['them', 'Marlowe Ford. Obviously.']],
+      choices: [
+        ['Thank you. Can you confirm your phone number and date of birth for me?', 'marlowe', -2, { verify: 1 }],
+        ['He’s already upset. Skip verification and open the Marlowe account.', 'END:compliance', 0] ] },
+    crestline: { rule: 'crestline', lines: [['them', 'Fine. Date of birth is March 3rd.'], ['sys', 'The Crestline account shows a 6-hour, $640 repair last spring. <b>No loaner charge on this account.</b>']],
+      choices: [
+        ['Good news: that repair qualifies for a free loaner. I’ll get the charge removed.', 'END:wrong_client', 0],
+        ['Wait, the charge isn’t here. Which store charged you?', 'store', -6, { store: 1 }] ] },
+    marlowe: { rule: 'marlowe', lines: [['them', '555-0142. June 9th. Can we get on with it?'], ['sys', 'Marlowe Ford account. Note from advisor <b>Michael Chen</b>: “Loaner approved, warranty repair, no charge.” Billing shows <b>$45 × 3 days</b>.'], ['them', 'So? Are you fixing it or not?']],
+      choices: [
+        ['Send Michael an alert with the warranty note and the charge, and tell Dennis when he’ll hear back.', 'callback', 6],
+        ['Transfer him straight to Michael Chen.', 'END:rescue', -6],
+        ['Take the charge off myself. The note says no charge.', 'END:promise', 0],
+        ['Escalate to Tasha Green, the Service Manager.', 'END:rescue', 0] ] },
+    callback: { rule: 'marlowe', lines: [['them', 'A callback? I want this fixed NOW, not “someone will call me.”']],
+      choices: [
+        ['I hear you. Michael has the warranty note and the charge. He’ll call you by 3 PM today, and you won’t pay that charge while it’s fixed. Your reference is MF-2291.', 'END:clean', 14],
+        ['Let me read you our loaner policy so you understand.', 'END:hung_up', -40],
+        ['Fine. I’ll just take it off myself.', 'END:promise', 0],
+        ['Since you’re this upset, let me get the Service Manager.', 'END:rescue', 0] ] }
   };
 
-  function escapeHtml(s) {
-    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
-    });
+  var state = null, timer = null, timeouts = 0;
+
+  function moodUI() {
+    var m = Math.max(0, Math.min(100, state.mood));
+    var label = m < 15 ? 'About to hang up' : m < 35 ? 'Furious' : m < 55 ? 'Annoyed' : m < 75 ? 'Calming down' : 'Satisfied';
+    var face = m < 15 ? '🤬' : m < 35 ? '😡' : m < 55 ? '😠' : m < 75 ? '😐' : '🙂';
+    $('moodLabel').textContent = label; $('moodFace').textContent = face;
+    $('moodFill').style.width = m + '%'; $('moodFill').style.background = m < 35 ? '#c5364a' : m < 55 ? '#ff9f1c' : m < 75 ? '#e0c341' : '#2fbf8f';
+    K.pop($('moodFace'));
+  }
+  function flags() {
+    $('flagVerify').classList.toggle('on', !!state.verify);
+    $('flagStore').classList.toggle('on', !!state.store);
+    $('flagRule').classList.toggle('on', !!state.rule);
+  }
+  function add(kind, html) {
+    var d = document.createElement('div');
+    d.className = 'ch-msg ' + (kind === 'them' ? 'ch-them' : kind === 'you' ? 'ch-you' : 'ch-sys');
+    d.innerHTML = (kind === 'them' ? '<small>Dennis</small>' : kind === 'you' ? '<small>You</small>' : '') + html;
+    $('feed').appendChild(d); $('feed').scrollTop = $('feed').scrollHeight;
   }
 
-  var introStage = $('introStage'), gameStage = $('gameStage'), resultsStage = $('resultsStage');
-  var feed = $('feed'), choicesWrap = $('choicesWrap');
-  var state = null;
-
-  function startGame() {
-    state = { path: [] };
-    feed.innerHTML = '';
-    choicesWrap.innerHTML = '';
-    introStage.style.display = 'none';
-    resultsStage.style.display = 'none';
-    gameStage.style.display = 'flex';
-    renderNode('start');
+  function start() {
+    state = { node: 'start', mood: 30, path: [], verify: 0, store: 0, rule: 0, promise: 0, over: false };
+    timeouts = 0;
+    $('feed').innerHTML = ''; $('choices').innerHTML = ''; $('ruleCard').style.display = 'none';
+    $('introStage').style.display = 'none'; $('resultsStage').style.display = 'none'; $('gameStage').style.display = 'flex';
+    moodUI(); flags();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    K.sfx.ring();
+    setTimeout(function () { go('start'); }, 500);
   }
 
-  function appendFeedEntry(who, text) {
-    var row = document.createElement('div');
-    row.className = 'cfh-feed-entry ' + who;
-    var label = who === 'you' ? 'You' : 'The call';
-    row.innerHTML = '<span class="cfh-feed-label">' + label + '</span>' + escapeHtml(text);
-    feed.appendChild(row);
-    feed.scrollTop = feed.scrollHeight;
+  function go(id) {
+    if (state.over) return;
+    if (id.indexOf('END:') === 0) return end(id.slice(4));
+    state.node = id;
+    var node = NODES[id], i = 0;
+    $('choices').innerHTML = ''; $('ruleBtn').disabled = false; $('ruleCard').style.display = 'none'; $('ruleBtn').dataset.used = '';
+    stopTimer();
+    (function nextLine() {
+      if (i >= node.lines.length) return showChoices(node);
+      var l = node.lines[i++];
+      if (l[0] === 'them') {
+        $('typing').style.display = 'inline-block';
+        setTimeout(function () { $('typing').style.display = 'none'; add('them', K.esc(l[1])); nextLine(); }, 650);
+      } else { add('sys', l[1]); setTimeout(nextLine, 350); }
+    })();
   }
 
-  function renderNode(nodeId) {
-    var node = NODES[nodeId];
-    appendFeedEntry('call', node.text);
-    renderChoices(node.choices);
-  }
-
-  function renderChoices(choices) {
-    choicesWrap.innerHTML = '';
-    choices.forEach(function (choice) {
-      var btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'cfh-choice-btn';
-      btn.textContent = choice.label;
-      btn.addEventListener('click', function () { handleChoice(choice); });
-      choicesWrap.appendChild(btn);
+  function showChoices(node) {
+    var wrap = $('choices');
+    K.shuffle(node.choices).forEach(function (c) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'ch-choice'; b.textContent = c[0];
+      b.addEventListener('click', function () { choose(c); });
+      wrap.appendChild(b);
     });
+    startTimer();
   }
 
-  function handleChoice(choice) {
-    choicesWrap.innerHTML = '';
-    state.path.push(choice.label);
-    appendFeedEntry('you', choice.label);
-    var next = choice.next;
+  function startTimer() {
+    var secs = 14, fill = $('timerFill');
+    fill.style.transition = 'none'; fill.style.width = '100%'; void fill.offsetWidth;
+    fill.style.transition = 'width ' + secs + 's linear'; fill.style.width = '0%';
+    clearTimeout(timer); timer = setTimeout(timeout, secs * 1000);
+  }
+  function stopTimer() { clearTimeout(timer); $('timerFill').style.transition = 'none'; }
+
+  function timeout() {
+    if (state.over) return;
+    timeouts++;
+    state.mood -= 14; moodUI(); K.sfx.bad(); K.shake($('feed'));
+    add('them', timeouts > 1 ? 'HELLO?? Is anyone there?!' : 'Hello? Are you still there?');
+    state.path.push('(Dead air while you decided.)');
+    if (state.mood <= 0) return end('hung_up');
+    startTimer();
+  }
+
+  function choose(c) {
+    if (state.over) return;
+    stopTimer(); K.sfx.click();
+    $('choices').innerHTML = '';
+    add('you', K.esc(c[0])); state.path.push(c[0]);
+    state.mood += c[2];
+    if (c[3]) Object.keys(c[3]).forEach(function (k) { state[k] = 1; });
+    moodUI(); flags();
+    if (c[2] < -10) { K.sfx.bad(); K.flash('bad'); } else if (c[2] > 5) { K.sfx.good(); }
+    if (state.mood <= 0) return setTimeout(function () { end('hung_up'); }, 600);
+    setTimeout(function () { go(c[1]); }, 450);
+  }
+
+  $('ruleBtn').addEventListener('click', function () {
+    if (!state || state.over || $('ruleBtn').dataset.used) return;
+    var r = RULES[NODES[state.node].rule];
+    $('ruleBtn').dataset.used = '1'; $('ruleBtn').disabled = true;
+    state.rule = 1; state.mood -= 5; moodUI(); flags();
+    add('sys', '🎵 Dennis is on hold while you check the rule…');
+    $('ruleCard').innerHTML = '<b>' + K.esc(r.title) + '</b>' + r.lines.map(function (l) { return '• ' + K.esc(l); }).join('<br>');
+    $('ruleCard').style.display = 'block';
+    K.sfx.tick();
+    if (state.mood <= 0) end('hung_up');
+  });
+
+  function end(key) {
+    if (state.over) return;
+    if (key === 'clean' && state.verify && state.store && state.rule && state.mood >= 45) key = 'legendary';
+    state.over = true; stopTimer();
+    var found = {};
+    try { found = JSON.parse(localStorage.getItem(STORE_KEY) || '{}') || {}; } catch (e) { found = {}; }
+    var isNew = !found[key]; found[key] = 1;
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(found)); } catch (e) { /* ignore */ }
+    var e = ENDINGS[key];
     setTimeout(function () {
-      if (ENDINGS[next]) {
-        showEnding(next);
-      } else {
-        renderNode(next);
-      }
-    }, 450);
+      $('gameStage').style.display = 'none'; $('resultsStage').style.display = 'flex';
+      $('rBadge').textContent = e.badge + (isNew ? ' · new' : '');
+      $('endingTitle').textContent = e.title; $('endingBody').textContent = e.body; $('endingAngle').textContent = e.angle;
+      var n = ORDER.filter(function (k) { return found[k]; }).length;
+      $('endCount').textContent = n + ' of ' + ORDER.length;
+      $('endingsGrid').innerHTML = ORDER.map(function (k) {
+        var x = ENDINGS[k], has = found[k];
+        return '<div class="ch-end' + (has ? '' : ' locked') + (k === key ? ' now' : '') + '"><b>' + (has ? K.esc(x.title) : '???') + '</b>' + (has ? K.esc(x.badge) : (k === 'legendary' ? 'Secret ending' : 'Not found yet')) + '</div>';
+      }).join('');
+      $('pathList').innerHTML = state.path.map(function (p) { return '<li>' + K.esc(p) + '</li>'; }).join('');
+      if (key === 'legendary' || key === 'clean') { K.confetti(); K.sfx.end(); } else K.sfx.hangup();
+      var share = 'I got the "' + e.title + '" ending in Call From Hell (' + n + ' of 7 endings found). Try it: myagentfirst.com/call-from-hell.html';
+      K.results({ tool: 'Call From Hell', share: share, question: 'What’s the call your agents dread most, the one that has a dozen ways to go wrong?' });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, key === 'hung_up' ? 900 : 500);
   }
 
-  function showEnding(endingId) {
-    var ending = ENDINGS[endingId];
-    gameStage.style.display = 'none';
-    resultsStage.style.display = 'flex';
-
-    $('endingBadgeRow').innerHTML = '<div class="pill ' + ending.tag + '">' + escapeHtml(ending.title) + '</div>';
-    $('endingTitle').textContent = ending.title;
-    $('endingBody').textContent = ending.body;
-    $('endingAngle').textContent = ending.angle;
-
-    $('pathList').innerHTML = state.path.map(function (step, i) {
-      return '<div class="cfh-path-item"><span class="cfh-path-num">' + (i + 1) + '.</span><span>' + escapeHtml(step) + '</span></div>';
-    }).join('');
-
-    var shareLine = 'I just survived a Call From Hell and landed on: ' + ending.title + '. Try it yourself: myagentfirst.com/call-from-hell.html';
-    $('shareText').value = shareLine;
-    $('resultSummaryField').value = shareLine;
-
-    if (window.AFLabs) {
-      window.AFLabs.mount('afIdea', {
-        tool: 'Call From Hell',
-        question: 'That call could have gone a few different ways. What\'s the one thing a system would need to do, right at the worst moment of a call, to keep it from going sideways?',
-        context: { result: shareLine }
-      });
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  $('startBtn').addEventListener('click', startGame);
-  $('playAgainBtn').addEventListener('click', startGame);
-
-  $('copyBtn').addEventListener('click', function () {
-    var field = $('shareText');
-    field.select();
-    var done = function () {
-      $('copyStatus').style.display = 'block';
-      setTimeout(function () { $('copyStatus').style.display = 'none'; }, 1800);
-    };
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard.writeText(field.value).then(done).catch(function () {
-        try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-      });
-    } else {
-      try { document.execCommand('copy'); done(); } catch (e) { /* clipboard unavailable */ }
-    }
-  });
-
-  var emailForm = $('emailForm');
-  emailForm.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var btn = emailForm.querySelector('button[type="submit"]');
-    var status = $('emailStatus');
-    var original = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'Sending...';
-    fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: new FormData(emailForm)
-    }).then(function (r) { return r.json(); }).then(function (data) {
-      if (data && data.success) {
-        if (window.AFLabs) window.AFLabs.linkEmail('Call From Hell', emailForm.querySelector('[name="email"]').value);
-        emailForm.style.display = 'none';
-        status.style.color = '#1f5c42';
-        status.textContent = "Sent. I'll follow up directly too.";
-        status.style.display = 'block';
-      } else {
-        btn.disabled = false;
-        btn.textContent = original;
-        status.style.color = '#c53636';
-        status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-        status.style.display = 'block';
-      }
-    }).catch(function () {
-      btn.disabled = false;
-      btn.textContent = original;
-      status.style.color = '#c53636';
-      status.textContent = 'Something went wrong. Please try again, or email info@myagentfirst.com directly.';
-      status.style.display = 'block';
-    });
-  });
+  $('startBtn').addEventListener('click', start);
+  $('playAgainBtn').addEventListener('click', start);
+  K.wireCommon('Call From Hell');
+  window.__hell = function () { return state; };
 })();
 </script>
 
