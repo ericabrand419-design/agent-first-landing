@@ -133,11 +133,22 @@
   .sw-rank{font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--violet)}
   .sw-best{display:inline-block;margin-left:8px;padding:3px 9px;border-radius:999px;background:#fff1c9;color:#8a5a00;font-size:11px;font-weight:900;letter-spacing:.05em}
   .sw-insight{padding:14px 16px;border-radius:12px;background:var(--purplebg);color:#3d2580;font-size:15px;line-height:1.55;font-weight:650}
+  .sw-mobileq{display:none}
   @media (max-width:980px){
+    .sw-mobileq{display:block;padding:10px 12px;border-radius:10px;background:var(--purplebg);font-size:14px;font-weight:750;line-height:1.4;margin-bottom:4px}
     .sw-grid{grid-template-columns:1fr}
     .sw-howto{grid-template-columns:1fr}
     .sw-rule{grid-template-columns:1fr;gap:4px}
     .section{padding:40px 16px}
+  }
+
+  /* Mobile top menu: one swipeable row instead of overflowing the screen */
+  @media (max-width:760px){
+    .af-nav{padding:10px 16px!important;flex-wrap:wrap;row-gap:8px}
+    .af-nav > div{width:100%;gap:16px!important;overflow-x:auto;flex-wrap:nowrap!important;justify-content:flex-start!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+    .af-nav > div::-webkit-scrollbar{display:none}
+    .af-nav .nav-link{white-space:nowrap;font-size:13.5px}
+    .af-nav .btn{padding:7px 12px!important;font-size:12.5px!important;white-space:nowrap;position:absolute;top:10px;right:16px}
   }
 
 </style>
@@ -147,7 +158,7 @@
 <div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
 
   <!-- NAV -->
-  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+  <div class="af-nav" style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
     <a href="index.html" class="brand-row">
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
@@ -383,6 +394,7 @@
     var l = state.lines[i]; if (!l.call || state.active) return;
     state.active = l.call; l.call.talkLeft = l.call.talkMax = talkPatience(); l.call.pickedAt = performance.now();
     K.sfx.click(); renderCall(); renderLines(); renderPage();
+    if (window.innerWidth < 980) $('binder').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function renderCall() {
@@ -408,7 +420,8 @@
     var rows = Object.keys(c.rules).map(function (t) {
       return '<button type="button" class="sw-rule" data-t="' + t + '"' + (state.active ? '' : ' disabled') + '><b>' + K.esc(K.TOPICS[t].label) + '</b><span>' + K.esc(c.rules[t]) + '</span></button>';
     }).join('');
-    $('page').innerHTML = '<div class="sw-page-title"><div><div class="ds-label" style="color:' + c.color + ';">Client Profile</div><div class="ds-heading">' + K.esc(c.name) + '</div></div><span class="pill pill-violet">' + K.esc(c.industry) + '</span></div>' + rows;
+    var mq = state.active ? '<div class="sw-mobileq">Caller for <span style="color:' + state.active.client.color + '">' + K.esc(state.active.client.name) + '</span>: “' + K.esc(state.active.ask) + '”</div>' : '';
+    $('page').innerHTML = mq + '<div class="sw-page-title"><div><div class="ds-label" style="color:' + c.color + ';">Client Profile</div><div class="ds-heading">' + K.esc(c.name) + '</div></div><span class="pill pill-violet">' + K.esc(c.industry) + '</span></div>' + rows;
     [].forEach.call($('page').querySelectorAll('.sw-rule'), function (b) { b.addEventListener('click', function () { choose(b.dataset.t, b); }); });
   }
 
@@ -439,6 +452,7 @@
     if (idx > -1) state.lines[idx].call = null;
     state.active = null;
     renderCall(); renderLines(); renderPage(); hud();
+    if (window.innerWidth < 980) setTimeout(function () { $('lines').scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 500);
   }
 
   function hud() {

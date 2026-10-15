@@ -80,6 +80,15 @@
     .ds-display{font-size:32px}
     .ds-hero{font-size:24px}
   }
+
+  /* Mobile top menu: one swipeable row instead of overflowing the screen */
+  @media (max-width:760px){
+    .af-nav{padding:10px 16px!important;flex-wrap:wrap;row-gap:8px}
+    .af-nav > div{width:100%;gap:16px!important;overflow-x:auto;flex-wrap:nowrap!important;justify-content:flex-start!important;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+    .af-nav > div::-webkit-scrollbar{display:none}
+    .af-nav .nav-link{white-space:nowrap;font-size:13.5px}
+    .af-nav .btn{padding:7px 12px!important;font-size:12.5px!important;white-space:nowrap;position:absolute;top:10px;right:16px}
+  }
 </style>
 </head>
 <body>
@@ -87,7 +96,7 @@
 <div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
 
   <!-- NAV -->
-  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+  <div class="af-nav" style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
     <a href="index.html" class="brand-row">
       <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
