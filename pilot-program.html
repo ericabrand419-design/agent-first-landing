@@ -1,21 +1,388 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agent First: Pilot Program</title>
-<meta name="description" content="A bounded Agent First pilot that begins by observing how work actually happens, maps the decisions and governing knowledge, then configures and measures Agent First in a controlled live evaluation.">
+<meta name="description" content="A bounded Agent First pilot that begins by observing how work actually happens, maps the decisions and governing knowledge, then configures and measures Agent First in a controlled live evaluation. $69 per pilot agent per month, 10-seat minimum.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Agent First: Pilot Program">
+<meta property="og:description" content="A bounded Agent First pilot that begins by observing how work actually happens, maps the decisions and governing knowledge, then configures and measures Agent First in a controlled live evaluation. $69 per pilot agent per month, 10-seat minimum.">
+<meta property="og:image" content="https://myagentfirst.com/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;650;700;750;900&display=swap" rel="stylesheet">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TGQ8RPR5B1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TGQ8RPR5B1');
+</script>
 <style>
-:root{--ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--navy:#0b1025;--violet:#7c3aed;--coral:#ff7352;--pink:#e94ea7;--grad:linear-gradient(102deg,#ff7352,#e94ea7 47%,#8b37f4)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.wrap{max-width:1120px;margin:auto;padding:0 24px}.nav{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);z-index:2}.navin{height:64px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:11px;font-weight:900;letter-spacing:.18em;text-decoration:none;color:var(--ink)}.btn{display:inline-flex;border:1px solid var(--line);border-radius:10px;padding:10px 14px;text-decoration:none;color:var(--ink);font-weight:800}.primary{background:var(--grad);color:#fff;border:0}.hero{background:linear-gradient(105deg,#090e21,#0e1430 60%,#14103a);color:#fff;padding:70px 0}.ey{font-size:11px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#efa7e5}.hero h1{font-size:clamp(40px,6vw,68px);line-height:.96;letter-spacing:-.05em;margin:10px 0}.hero p{font-size:17px;color:#c8cde0;max-width:850px}.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.chip{border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:7px 10px;font-weight:850;font-size:11px;background:rgba(255,255,255,.07)}section{padding:58px 0}.white{background:#fff}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:20px;box-shadow:0 12px 34px rgba(64,47,112,.07)}.dark{background:var(--navy);color:#fff}.muted{color:var(--muted)}h2{font-size:32px;line-height:1.05;letter-spacing:-.03em;margin:6px 0 18px}.stat{font-size:28px;font-weight:900}.warn{background:#fff8e8;border:1px solid #efdfb4;border-radius:14px;padding:16px;color:#7a541c}li{margin:7px 0}.footer{background:#080c1b;color:#959db7;padding:28px 0}@media(max-width:850px){.grid{grid-template-columns:1fr}.nav .btn:not(.primary){display:none}}
-</style></head>
+  :root{
+    --ink:#171a2b;--muted:#6d728b;--line:#e5e4f1;--bg:#f7f6fc;--panel:rgba(255,255,255,.94);--soft:#faf9ff;
+    --navy:#0b1025;--violet:#7c3aed;--purplebg:#f4efff;--coral:#ff6b54;--pink:#e447d5;
+    --green:#177a55;--greenbg:#ecfbf4;
+    --radius-sm:9px;--radius-md:12px;--radius-lg:18px;--radius-full:999px;
+    --space-3:12px;--space-4:16px;--space-5:24px;
+    --shadow-panel:0 12px 34px rgba(64,47,112,.07),0 2px 6px rgba(20,22,45,.035);
+    --font-sans:'Inter',ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    --grad-primary:linear-gradient(102deg,var(--coral) 0%,var(--pink) 47%,var(--violet) 100%);
+    --grad-navy:linear-gradient(105deg,#090e21 0%,#0e1430 60%,#14103a 100%);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:var(--font-sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased}
+  h1,h2{margin:0}
+  a{text-decoration:none}
+  p{margin:0}
+
+  /* type scale: matches the Agent First design system's tokens.json exactly */
+  .ds-label{font-size:11px;line-height:1.4;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+  .ds-body-sm{font-size:14px;line-height:1.55;font-weight:400}
+  .ds-body{font-size:16px;line-height:1.55;font-weight:400}
+  .ds-heading{font-size:18px;line-height:1.4;font-weight:900}
+  .ds-stat{font-size:22px;line-height:1.15;font-weight:900}
+  .ds-score{font-size:28px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .ds-hero{font-size:30px;line-height:1.1;font-weight:900;letter-spacing:-.02em}
+  .ds-display{font-size:44px;line-height:1.08;font-weight:900;letter-spacing:-.015em}
+
+  .wrap{width:100%;max-width:1100px;margin:0 auto}
+  .section{width:100%;padding:80px 48px;display:flex;justify-content:center}
+  .eyebrow-v{color:var(--violet)}
+  .eyebrow-c{color:var(--coral)}
+  .grid{display:grid;gap:var(--space-4)}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--radius-lg);padding:24px;box-shadow:var(--shadow-panel)}
+  .card-dark{background:var(--navy);border-radius:var(--radius-lg);padding:24px;color:#fff}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:var(--radius-md);font-weight:750;font-size:15px;cursor:pointer;border:0;transition:transform .14s ease,filter .14s ease}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.03)}
+  .btn-primary{background:var(--grad-primary);color:#fff;box-shadow:0 8px 20px rgba(176,57,217,.22)}
+  .btn-ghost-dark{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.4)}
+  .btn-ghost-dark:hover{border-color:#fff}
+  .btn-ghost-light{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+
+  .field-row{display:flex;flex-direction:column;gap:6px;text-align:left;width:100%}
+  .field-label{font-size:13px;font-weight:650;color:#c7cce0}
+  .field-input,.field-textarea{width:100%;padding:12px 16px;border-radius:var(--radius-md);border:1.5px solid rgba(255,255,255,.25);background:#1b2346;background-image:none!important;color:#fff;font-family:var(--font-sans);font-size:15px;opacity:1;backdrop-filter:none;-webkit-backdrop-filter:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.035);transition:border-color .14s ease,background-color .14s ease,box-shadow .14s ease}
+  .field-input::placeholder,.field-textarea::placeholder{color:#9299b4}
+  .field-input:focus,.field-textarea:focus{outline:none;border-color:rgba(255,255,255,.72);background:#20294f;box-shadow:0 0 0 3px rgba(124,58,237,.14),inset 0 1px 0 rgba(255,255,255,.045)}
+  .field-textarea{resize:vertical;min-height:110px}
+
+  .logo-mark{display:block;flex:0 0 auto}
+  .brand-row{display:flex;align-items:center;gap:12px}
+  .brand-word{font-size:11px;font-weight:900;letter-spacing:.2em}
+
+  /* Product demo panel */
+  .demo-panel{background:#12172e;border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-lg);padding:22px;flex:1;min-width:280px;display:flex;flex-direction:column;gap:14px;}
+  .demo-panel .demo-client{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8890ab;}
+  .demo-panel .demo-q{color:#e7eaf3;font-size:15px;line-height:1.5;}
+  .demo-verdict{display:inline-flex;align-items:center;padding:6px 14px;border-radius:var(--radius-full);font-size:12px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;width:fit-content;}
+  .demo-outcome{display:inline-flex;align-items:center;padding:5px 12px;border-radius:var(--radius-full);background:rgba(124,58,237,.22);color:#d3b6ff;font-size:11px;font-weight:900;letter-spacing:.07em;text-transform:uppercase;width:fit-content;margin-bottom:8px;}
+  .demo-say{color:#c7cce0;font-size:14px;line-height:1.55;border-top:1px solid rgba(255,255,255,.08);padding-top:12px;}
+  .demo-source{color:#8890ab;font-size:12px;line-height:1.5;margin-top:8px;}
+  .demo-activeprofile{font-size:13px;line-height:1.5;margin-bottom:10px;color:#fff;font-weight:750;}
+  .demo-section-label{font-size:12px;font-weight:750;letter-spacing:.04em;text-transform:uppercase;color:#8890ab;}
+
+  /* Interactive homepage widget */
+  .demo-tab{padding:8px 14px;border-radius:var(--radius-full);border:1.5px solid rgba(255,255,255,.25);background:rgba(255,255,255,.05);color:#e7eaf3;font-size:13px;font-weight:650;cursor:pointer;transition:transform .14s ease,border-color .14s ease,background .14s ease;font-family:var(--font-sans);}
+  .demo-tab:hover{border-color:rgba(255,255,255,.55);background:rgba(255,255,255,.1);transform:translateY(-1px);}
+  .demo-tab.active{background:var(--grad-primary);border-color:transparent;color:#fff;}
+  #widgetAsk{padding:12px 18px;white-space:nowrap;}
+
+  /* Scroll-reveal */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .8s cubic-bezier(.16,.8,.3,1),transform .8s cubic-bezier(.16,.8,.3,1);}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+  .grid > .reveal:nth-child(1){transition-delay:0s}
+  .grid > .reveal:nth-child(2){transition-delay:.07s}
+  .grid > .reveal:nth-child(3){transition-delay:.14s}
+  .grid > .reveal:nth-child(4){transition-delay:.21s}
+  .grid > .reveal:nth-child(5){transition-delay:.28s}
+  .grid > .reveal:nth-child(6){transition-delay:.35s}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+  }
+
+  /* Hover polish */
+  .card{transition:transform .18s ease,box-shadow .18s ease;}
+  .card:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(64,47,112,.14),0 4px 10px rgba(20,22,45,.05);}
+  .card-dark{transition:transform .18s ease,box-shadow .18s ease;}
+  .card-dark:hover{transform:translateY(-3px);box-shadow:0 18px 40px rgba(0,0,0,.28);}
+  .nav-link{position:relative;}
+  .nav-link::after{content:'';position:absolute;left:0;right:100%;bottom:-4px;height:2px;background:var(--grad-primary);transition:right .18s ease;}
+  .nav-link:hover::after{right:0;}
+
+  /* Subtle background texture */
+  .bg-texture-light{background-image:radial-gradient(rgba(23,26,43,.12) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-tint{background-image:radial-gradient(rgba(124,58,237,.14) 1.1px,transparent 1.1px)!important;background-size:20px 20px!important;}
+  .bg-texture-dark{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px)!important;background-size:22px 22px!important;background-color:var(--navy)!important;}
+  .bg-texture-darkgrad{background-image:radial-gradient(rgba(255,255,255,.1) 1.1px,transparent 1.1px),var(--grad-navy)!important;background-size:22px 22px,auto!important;}
+
+  @media (max-width:900px){
+    html,body{min-height:100%;overflow-x:hidden;overflow-y:auto;-webkit-overflow-scrolling:touch;touch-action:pan-y}
+    body{position:static!important}
+    .section{padding:56px 24px}
+    .ds-display{font-size:34px}
+    .ds-hero{font-size:26px}
+  }
+</style>
+<style>
+  .chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+  .chip{display:inline-flex;align-items:center;padding:7px 14px;border-radius:var(--radius-full);border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.07);color:#fff;font-size:12px;font-weight:750;letter-spacing:.02em}
+  .price{font-size:40px;line-height:1;font-weight:900;letter-spacing:-.03em}
+  .warn{background:#fff8e8;border:1px solid #efdfb4;border-radius:var(--radius-md);padding:16px 18px;color:#78551d}
+  .card ul,.card-dark ul{margin:8px 0 0;padding-left:18px}
+  .card li,.card-dark li{margin:6px 0}
+  .muted{color:var(--muted)}
+  .step-num{font-size:12px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--violet);margin-bottom:6px}
+  .card-dark .step-num{color:#f0a6ea}
+</style>
+</head>
 <body>
-<!-- Observation-first pilot methodology synchronized across public, Deal Room, operations, and security materials. -->
-<nav class="nav"><div class="wrap navin"><a class="brand" href="/">AGENT FIRST</a><div><a class="btn" href="pricing.html">Pricing</a> <a class="btn" href="/deal-room/pilot">Existing Pilot Partner</a> <a class="btn primary" href="index.html#contact">Apply for Pilot</a></div></div></nav>
-<header class="hero"><div class="wrap"><div class="ey">Pilot Program · v1.3</div><h1>Controlled evaluation first. Production data only after the security gate.</h1><p>Agent First pilots begin by observing a bounded slice of how work actually happens before anything is configured. We map the decisions, searches, handoffs, exceptions, and governing knowledge; establish the baseline; then build and test Agent First around that reality. Evaluation can start with fictional or de-identified material. Proprietary production client information waits for Security Readiness sign-off.</p><div class="chips"><span class="chip">Up to 90 days</span><span class="chip">$69 / pilot agent / month</span><span class="chip">$2,500 Profile fee waived</span><span class="chip">$500 conversion credit</span></div></div></header>
-<section class="white"><div class="wrap"><div class="ey" style="color:var(--violet)">The pilot</div><h2>Use the smallest real workflow that can produce useful evidence.</h2><div class="grid"><div class="card"><div class="stat">1 workflow</div><p class="muted">One bounded workflow family and one primary Client Profile by default. Additional Profiles or integrations are separately scoped.</p></div><div class="card"><div class="stat">Up to 90 days</div><p class="muted">The live production pilot clock starts only after operational readiness and, where proprietary production data is involved, Security Readiness Gate sign-off.</p></div><div class="card"><div class="stat">$69</div><p class="muted">Per pilot agent per month at the Starter rate. No Growth-tier discount during the pilot. No automatic renewal.</p></div></div></div></section>
-<section class="white"><div class="wrap"><div class="ey" style="color:var(--violet)">Security diligence available now</div><h2>Buyers can review the current state before the production gate.</h2><p>Agent First now maintains a current-state Security / Data / Governance Package covering system/data flow, data inventory, preliminary vendors, role/client separation, rule governance, security-questionnaire responses and the production verification backlog.</p><p><a class="btn" href="security-data-governance.html">Open Security / Data / Governance</a></p></div></section><section><div class="wrap"><div class="ey" style="color:var(--violet)">Security Readiness Gate</div><h2>Before production data enters Agent First, the environment must earn it.</h2><div class="card"><p>Agent First can be demonstrated, configured, benchmarked, and tested with fictional or appropriately de-identified material. Before proprietary production procedures, client-specific operating material, sensitive production context, or regulated information enters a live pilot, Agent First completes a focused security architecture/application-security review with an experienced security-minded SaaS engineer or appsec consultant.</p><ul><li>Threat model and architecture/data-flow map.</li><li>Server-side Agent/Supervisor/Admin authorization plus company/tenant and Client Profile isolation testing.</li><li>Review of authentication, sessions, APIs/database, secrets, uploads, AI/model-provider data flow, logs, backups, retention/deletion, dependencies, and incident response.</li><li>OWASP ASVS 5.0 mapping, critical/high finding remediation, retest, and signed data boundary.</li></ul><div class="warn"><strong>Not SOC 2 tomorrow:</strong> the sequence is prototype/demo → security architecture review → critical remediation → hardened pilot environment → real production pilots → formal compliance when buyers actually require it.</div></div></div></section>
-<section class="white"><div class="wrap"><div class="ey" style="color:var(--violet)">What happens</div><h2>Nine steps from interest to operating decision.</h2><div class="grid"><div class="card"><h3>1. Scope the observation</h3><p>Choose the bounded workflow, sponsor, representative users, permissions, and the question the pilot needs to answer.</p></div><div class="card"><h3>2. Observe real work</h3><p>Watch a representative slice of the workflow before configuration. With approval, workflow-capture tooling can document systems, searches, handoffs, delays, workarounds, and decision points.</p></div><div class="card"><h3>3. Map decisions + sources</h3><p>Connect each material decision to required context, exceptions, authority, approved sources, next actions, and escalation. Resolve differences between documented, observed, and required work.</p></div><div class="card"><h3>4. Lock the baseline</h3><p>Measure the pre-intervention workflow using an agreed method before Agent First results are visible.</p></div><div class="card"><h3>5. Controlled configuration</h3><p>Build Agent First around the observed decision moments using approved, fictional or de-identified material where appropriate.</p></div><div class="card"><h3>6. Validation + Security Gate</h3><p>Rule owners validate the guidance; required security/data gates pass before proprietary production use.</p></div><div class="card"><h3>7. Live pilot</h3><p>Bounded use, weekly review, issue tracking, rule governance, and measurement.</p></div><div class="card"><h3>8. Final readout</h3><p>Compare the baseline with results, limitations, issues, and what the workflow taught us.</p></div><div class="card dark"><h3>9. Decision</h3><p>Continue, expand, revise and retest, or stop.</p></div></div></div></section>
-<section class="white"><div class="wrap"><div class="ey" style="color:var(--violet)">What gets measured</div><h2>Five numbers, tracked before and after.</h2><p class="muted" style="max-width:850px">The baseline locked in step 4 and the readout in step 8 are built from the same five measures every Agent First pilot reports on — not a different scorecard per customer.</p><div class="grid"><div class="card"><h3>Decision resolution time</h3><p class="muted">How long it takes to go from a question arriving to the correct, client-specific answer being given. Timestamped at the decision moment, before and after configuration.</p></div><div class="card"><h3>Correct-client rule application</h3><p class="muted">Whether the rule actually applied matches the rule that governs that specific client, account, or location — sampled and checked against the source policy, not self-reported.</p></div><div class="card"><h3>First-contact accuracy</h3><p class="muted">Whether the first answer given was the right one, versus one that had to be corrected, escalated, or redone on a follow-up contact.</p></div><div class="card"><h3>Supervisor pull-ins</h3><p class="muted">How often a frontline worker needed a supervisor or senior teammate to resolve something a correct, available answer could have handled directly.</p></div><div class="card"><h3>New-hire ramp time</h3><p class="muted">How long it takes a new or reassigned worker to reach full independent accuracy on the piloted workflow, compared to the pre-pilot baseline.</p></div><div class="card dark"><h3>How it's collected</h3><p>A rotating sample of sessions each week, not continuous monitoring of every worker — live shadowing, recorded-interaction review, supervisor pull-in logs, and Agent First's own decision/audit trail, cross-checked against each other.</p></div></div></div></section>
-<section><div class="wrap"><h2>Commercial terms</h2><div class="grid"><div class="card"><h3>Pilot</h3><ul><li>Up to 90 days live after operational readiness and, where proprietary production information is involved, Security Readiness Gate sign-off.</li><li>$69 per pilot agent per month.</li><li>$2,500 Client Profile implementation fee waived.</li><li>No Growth discount during the pilot.</li><li>One bounded workflow family and one primary Client Profile by default; additional Profiles, major integrations, or expanded scope are separately scoped.</li></ul></div><div class="card"><h3>After pilot</h3><ul><li>$500 credit on the first post-pilot invoice.</li><li>Validated Profile carries forward.</li><li>Starter $69, qualifying Growth $49, Enterprise custom.</li><li>No automatic renewal.</li></ul></div><div class="card"><h3>Who fits</h3><p>Rules-heavy, source-ready, measurable, sponsored, and bounded operations where the correct answer changes by client, location, account, product, service or exception.</p></div></div></div></section>
-<section class="white"><div class="wrap"><div class="card dark"><h2 style="margin-top:0">Accepted pilot partner?</h2><p>Use the same private account from the Deal Room and demo to complete onboarding, lock the baseline, record weekly measurements, and finish the readout.</p><p><a class="btn primary" href="/deal-room/pilot">Open the private Pilot System →</a></p></div></div></section>
-<footer class="footer"><div class="wrap"><strong>AGENT FIRST</strong><br>Right information. Right client. Right moment. Right person.</div></footer>
-</body></html>
+<!-- Canonical pilot offer: up to 90 days · $69 per pilot agent/month · 10-seat minimum ($690/month) · $2,500 Client Profile implementation fee waived for accepted pilot partners · $500 first post-pilot invoice credit on conversion · no automatic renewal · production-data pilot use requires Security Readiness Gate sign-off. -->
+<div style="width:100%;min-height:100vh;display:flex;flex-direction:column;">
+
+  <!-- NAV -->
+  <div style="width:100%;padding:18px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;">
+    <a href="index.html" class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="24" height="29" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopNav" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomNav" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomNav)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink)">AGENT FIRST</div>
+    </a>
+    <div style="display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:flex-end;">
+      <a href="how-it-works.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">How It Works</a>
+      <a href="industries.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Industries</a>
+      <a href="labs.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Free Tools</a>
+      <a href="agent-challenge.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent Challenge</a>
+      <a href="/deal-room-v1.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Deal Room</a>
+      <a href="pricing.html" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Pricing</a>
+      <a href="index.html#contact" class="btn btn-primary" style="padding:9px 20px;font-size:14px;">Apply for the pilot program</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div style="width:100%;background:var(--grad-navy);padding:88px 48px 72px;display:flex;justify-content:center;">
+    <div class="reveal" style="width:100%;max-width:860px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:20px;">
+      <div class="ds-label eyebrow-c">Pilot program</div>
+      <h1 class="ds-display" style="color:#fff;">Controlled evaluation first.<br>Production data only after the security gate.</h1>
+      <p class="ds-body" style="color:#c7cce0;max-width:720px;">Agent First pilots begin by observing a bounded slice of how work actually happens before anything is configured. We map the decisions, searches, handoffs, exceptions, and governing knowledge; establish the baseline; then build and test Agent First around that reality. Evaluation can start with fictional or de-identified material. Proprietary production client information waits for Security Readiness sign-off.</p>
+      <p class="ds-body" style="color:#c7cce0;max-width:720px;">This is a paid operational pilot, not a free trial: you use Agent First at the standard seat rate while we measure it together on your real rules and real calls.</p>
+      <div class="chips"><span class="chip">Up to 90 days</span><span class="chip">$69 per pilot agent per month</span><span class="chip">10-seat minimum ($690/month)</span><span class="chip">$2,500 Profile fee waived</span><span class="chip">$500 conversion credit</span></div>
+      <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px;">
+        <a href="index.html#contact" class="btn btn-primary">Apply for the pilot program</a>
+        <a href="/deal-room/pilot" class="btn btn-ghost-dark">Existing pilot partner? Sign in</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">The pilot</div>
+        <h2 class="ds-hero">Use the smallest real workflow that can produce useful evidence.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:10px;">
+          
+          <div class="price" style="color:var(--ink);">1 workflow</div>
+          <div class="ds-body-sm" style="color:var(--muted);">One bounded workflow family and one primary Client Profile by default. Additional Profiles or integrations are separately scoped.</div>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:10px;">
+          
+          <div class="price" style="color:var(--ink);">Up to 90 days</div>
+          <div class="ds-body-sm" style="color:var(--muted);">The live production pilot clock starts only after operational readiness and, where proprietary production data is involved, Security Readiness Gate sign-off.</div>
+        </div>
+        <div class="card reveal" style="display:flex;flex-direction:column;gap:10px;">
+          
+          <div class="price" style="color:var(--ink);">$69</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Per pilot agent per month at the Starter rate, with a 10-seat minimum ($690 per month). No Growth-tier discount during the pilot. No automatic renewal.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">Security diligence available now</div>
+        <h2 class="ds-hero">Buyers can review the current state before the production gate.</h2>
+      </div>
+      <p class="ds-body muted" style="max-width:760px;">Agent First maintains a current-state Security, Data, and Governance package covering system and data flow, data inventory, preliminary vendors, role and client separation, rule governance, security-questionnaire responses, and the production verification backlog. It is shared through the private Deal Room.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <a href="security-data-governance.html" class="btn btn-ghost-light">Open the Security, Data, and Governance package (Deal Room sign-in)</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">Security Readiness Gate</div>
+        <h2 class="ds-hero">Before production data enters Agent First, the environment must earn it.</h2>
+      </div>
+      <div class="card reveal">
+        <p class="ds-body-sm muted">Agent First can be demonstrated, configured, benchmarked, and tested with fictional or appropriately de-identified material. Before proprietary production procedures, client-specific operating material, sensitive production context, or regulated information enters a live pilot, Agent First completes a focused security architecture and application-security review with an experienced security-minded SaaS engineer or appsec consultant.</p>
+        <ul class="ds-body-sm muted">
+          <li>Threat model and architecture/data-flow map.</li>
+          <li>Server-side Agent, Supervisor, and Admin authorization, plus company/tenant and Client Profile isolation testing.</li>
+          <li>Review of authentication, sessions, APIs and database, secrets, uploads, AI/model-provider data flow, logs, backups, retention and deletion, dependencies, and incident response.</li>
+          <li>OWASP ASVS 5.0 mapping, critical and high finding remediation, retest, and a signed data boundary.</li>
+        </ul>
+      </div>
+      <div class="warn ds-body-sm reveal"><b>Not SOC 2 tomorrow:</b> the sequence is prototype and demo, then security architecture review, then critical remediation, then a hardened pilot environment, then real production pilots, then formal compliance when buyers actually require it.</div>
+    </div>
+  </div>
+
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">What happens</div>
+        <h2 class="ds-hero">Nine steps from interest to operating decision.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div class="card reveal"><div class="step-num">Step 1</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Scope the observation</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Choose the bounded workflow, sponsor, representative users, permissions, and the question the pilot needs to answer.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 2</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Observe real work</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Watch a representative slice of the workflow before configuration. With approval, workflow-capture tooling can document systems, searches, handoffs, delays, workarounds, and decision points.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 3</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Map decisions and sources</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Connect each material decision to required context, exceptions, authority, approved sources, next actions, and escalation. Resolve differences between documented, observed, and required work.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 4</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Lock the baseline</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Measure the pre-intervention workflow using an agreed method before Agent First results are visible.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 5</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Controlled configuration</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Build Agent First around the observed decision moments using approved, fictional, or de-identified material where appropriate.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 6</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Validation and Security Gate</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Rule owners validate the guidance; required security and data gates pass before proprietary production use.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 7</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Live pilot</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Bounded use, weekly review, issue tracking, rule governance, and measurement.</div>
+        </div>
+        <div class="card reveal"><div class="step-num">Step 8</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Final readout</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Compare the baseline with results, limitations, issues, and what the workflow taught us.</div>
+        </div>
+        <div class="card-dark reveal"><div class="step-num">Step 9</div>
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:#fff;">Decision</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">Continue, expand, revise and retest, or stop.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#fff;">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">What gets measured</div>
+        <h2 class="ds-hero">Five numbers, tracked before and after.</h2>
+        <p class="ds-body muted">The baseline locked in step 4 and the readout in step 8 are built from the same five measures every Agent First pilot reports on, not a different scorecard per customer.</p>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Decision resolution time</div>
+          <div class="ds-body-sm" style="color:var(--muted);">How long it takes to go from a question arriving to the correct, client-specific answer being given. Timestamped at the decision moment, before and after configuration.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Correct-client rule application</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Whether the rule actually applied matches the rule that governs that specific client, account, or location. Sampled and checked against the source policy, not self-reported.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">First-contact accuracy</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Whether the first answer given was the right one, versus one that had to be corrected, escalated, or redone on a follow-up contact.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Supervisor pull-ins</div>
+          <div class="ds-body-sm" style="color:var(--muted);">How often a frontline worker needed a supervisor or senior teammate to resolve something a correct, available answer could have handled directly.</div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">New-hire ramp time</div>
+          <div class="ds-body-sm" style="color:var(--muted);">How long it takes a new or reassigned worker to reach full independent accuracy on the piloted workflow, compared to the pre-pilot baseline.</div>
+        </div>
+        <div class="card-dark reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:#fff;">How it's collected</div>
+          <div class="ds-body-sm" style="color:#c7cce0;">A rotating sample of sessions each week, not continuous monitoring of every worker: live shadowing, recorded-interaction review, supervisor pull-in logs, and Agent First's own decision and audit trail, cross-checked against each other.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section bg-texture-light" style="background:var(--soft);">
+    <div class="wrap reveal" style="display:flex;flex-direction:column;gap:28px;">
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:760px;">
+        <div class="ds-label eyebrow-v">Commercial terms</div>
+        <h2 class="ds-hero">What you sign up for, and what happens after.</h2>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Pilot</div>
+          <div class="ds-body-sm" style="color:var(--muted);"><ul><li>Up to 90 days live after operational readiness and, where proprietary production information is involved, Security Readiness Gate sign-off.</li><li>$69 per pilot agent per month, 10-seat minimum ($690 per month).</li><li>$2,500 Client Profile implementation fee waived.</li><li>No Growth discount during the pilot.</li><li>One bounded workflow family and one primary Client Profile by default; additional Profiles, major integrations, or expanded scope are separately scoped.</li></ul></div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">After the pilot</div>
+          <div class="ds-body-sm" style="color:var(--muted);"><ul><li>$500 credit on the first post-pilot invoice.</li><li>Validated Profile carries forward.</li><li>Starter $69, qualifying Growth $49, Enterprise custom.</li><li>Tier is assigned based on deployment scope, not self-selected.</li><li>No automatic renewal.</li></ul></div>
+        </div>
+        <div class="card reveal">
+          <div class="ds-body" style="font-weight:750;margin-bottom:8px;color:var(--ink);">Who fits</div>
+          <div class="ds-body-sm" style="color:var(--muted);">Rules-heavy, source-ready, measurable, sponsored, and bounded operations where the correct answer changes by client, location, account, product, service, or exception.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILOT PARTNERS -->
+  <div class="section" style="background:var(--grad-navy);padding:72px 48px;">
+    <div class="reveal" style="width:100%;max-width:720px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:18px;">
+      <div class="ds-label eyebrow-c">Accepted pilot partner?</div>
+      <div class="ds-stat" style="color:#fff;line-height:1.45;">Use the same private account from the Deal Room and demo to complete onboarding, lock the baseline, record weekly measurements, and finish the readout.</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;justify-content:center;">
+        <a href="/deal-room/pilot" class="btn btn-ghost-dark">Open the private Pilot System &rarr;</a>
+        <a href="index.html#contact" class="btn btn-primary">Apply for the pilot program</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%;padding:28px 48px;display:flex;align-items:center;justify-content:space-between;background:#fff;border-top:1px solid var(--line);flex-wrap:wrap;gap:12px;">
+    <div class="brand-row">
+      <svg class="logo-mark" viewBox="0 0 40 48" width="18" height="22" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="afTopFoot" x1="3" y1="18" x2="36" y2="3" gradientUnits="userSpaceOnUse"><stop stop-color="#FF8A3D"/><stop offset=".50" stop-color="#FF5B67"/><stop offset="1" stop-color="#F43BA5"/></linearGradient><linearGradient id="afBottomFoot" x1="3" y1="45" x2="36" y2="27" gradientUnits="userSpaceOnUse"><stop stop-color="#6731F2"/><stop offset=".60" stop-color="#7C4DFF"/><stop offset="1" stop-color="#A345F0"/></linearGradient></defs><path d="M5 18.5 20 4.5 35 18.5" fill="none" stroke="url(#afTopFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 43 20 29 35 43" fill="none" stroke="url(#afBottomFoot)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="brand-word" style="color:var(--ink);font-size:12px;">AGENT FIRST</div>
+    </div>
+    <div class="ds-body-sm" style="color:var(--muted);">Keep the human. Upgrade the agent.</div>
+    <a href="https://agent1stconsulting.com/" class="ds-body-sm nav-link" style="color:var(--ink);font-weight:650;">Agent First Consulting &rarr;</a>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function(el){ el.classList.add('visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
