@@ -2,12 +2,12 @@
   "redirects": [
     {
       "source": "/demo",
-      "destination": "https://agent-first-gamma.vercel.app/portal.html",
+      "destination": "https://demo.myagentfirst.com/portal.html",
       "permanent": false
     },
     {
       "source": "/demo/",
-      "destination": "https://agent-first-gamma.vercel.app/portal.html",
+      "destination": "https://demo.myagentfirst.com/portal.html",
       "permanent": false
     },
     {
