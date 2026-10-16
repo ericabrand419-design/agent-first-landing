@@ -67,7 +67,7 @@ button{cursor:pointer}
 .role-btn{min-height:58px;text-align:left;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.055);color:#eef0f8;font-weight:750}
 .role-btn span{display:block;font-size:11px;font-weight:600;color:#929ab6;margin-top:4px;line-height:1.35}
 .role-btn.active{border-color:#f094e7;background:rgba(228,71,213,.13)}
-.role-note{margin-top:14px;padding:13px;border-radius:12px;background:#fff;color:var(--ink);font-size:13px;line-height:1.5}
+.role-note{margin-top:14px;padding:13px;border-radius:12px;background:#fff;color:var(--ink);font-size:13px;line-height:1.5}.role-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.role-actions a{display:inline-flex;align-items:center;min-height:36px;padding:8px 11px;background:#21194b;color:#fff;border-radius:9px;font-weight:800;font-size:12px}.role-actions a:hover,.role-actions a:focus-visible{background:#6939bd}.role-hint{display:block;margin-top:10px;color:#62637a;font-size:12px}
 .section{padding:76px 0}
 .section.alt{background:#fff}
 .section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px;margin-bottom:30px}
@@ -215,7 +215,7 @@ button{cursor:pointer}
       <div class="access-copy">
         <div class="label gradient-text">Private material access</div>
         <h2 id="accessTitle">Open the material you were invited to review.</h2>
-        <p id="accessCopy">Use the approved email attached to your invitation. If you are Erica Love, owner access uses your approved owner account and returns you directly to the requested material.</p>
+        <p id="accessCopy">This document is private, not missing. Sign in with your approved email to open it. For Erica Love, choose owner access below and use the owner approval code. You will return to the document after verification.</p>
       </div>
       <form id="accessForm" class="access-form">
         <input id="accessEmail" type="email" autocomplete="email" placeholder="Approved email" required>
@@ -257,7 +257,7 @@ button{cursor:pointer}
         <button class="role-btn" type="button" data-role="partner">Partner / advisor<span>Strategy, product, roadmap, collaboration</span></button>
         <button class="role-btn" type="button" data-role="all">Explore everything<span>No prescribed path</span></button>
       </div>
-      <div class="role-note" id="roleNote"><strong>Recommended path:</strong> Product → Pilot → Measurement → Pricing. About 7 minutes.</div>
+      <div class="role-note" id="roleNote" aria-live="polite"><strong>Recommended path:</strong> Product → Pilot → Measurement → Pricing. Choose a role to see links here.</div>
     </aside>
   </div>
 </header>
@@ -379,7 +379,7 @@ button{cursor:pointer}
       <div class="section-head-copy">
         <div class="label gradient-text">All materials</div>
         <h2 class="hero">One canonical place for every serious conversation.</h2>
-        <p class="body muted">Client, investor, pilot, company, diligence, and operating materials live here. Completed work opens now; only evidence that truly depends on live pilot results remains marked as pending.</p>
+        <p class="body muted">Client, investor and company resources live here. Public pages open immediately. Business plans, financials and investor documents require approved access; selecting one will bring you to sign-in and return you to that document. Live pilot results remain pending.</p>
       </div>
     </div>
 
@@ -572,6 +572,9 @@ button{cursor:pointer}
   }
   if(accessPanel&&(accessMode==='required'||inviteEmail&&inviteToken)){
     accessPanel.classList.remove('hidden');
+    if(accessMode==='required'&&returnTo){
+      document.getElementById('accessTitle').textContent='Sign in to open '+returnTo.split('/').pop().replace(/\.html$/,'').replace(/[-_]/g,' ');
+    }
   }
   if(inviteEmail&&inviteToken){
     document.getElementById('accessTitle').textContent='Activating private access…';
@@ -793,20 +796,37 @@ button{cursor:pointer}
   var currentRole = 'client';
   var step = 0;
   var roleButtons = Array.prototype.slice.call(document.querySelectorAll('.role-btn'));
+  var roleActionLinks={
+    client:[['Product overview','/customer-overview.html#product'],['Pilot program','/pilot-program.html'],['Pricing','/pricing.html']],
+    investor:[['Investor deck','/investor-deck.html'],['Business plan','/business-plan.html'],['Financial model','/financial-model.html']],
+    partner:[['Company vision','#briefing'],['Pilot program','/pilot-program.html'],['Roadmap','/roadmap-milestones.html']],
+    all:[['All materials','#materials'],['Marketing plan','/marketing-plan.html'],['Investor deck','/investor-deck.html']]
+  };
   var stepList = document.getElementById('stepList');
   var pathTrack = document.getElementById('pathTrack');
 
   function renderRole(role){
     currentRole = role;
-    roleButtons.forEach(function(btn){btn.classList.toggle('active',btn.getAttribute('data-role')===role);});
-    document.getElementById('roleNote').innerHTML = roles[role].note;
+    roleButtons.forEach(function(btn){
+      var selected=btn.getAttribute('data-role')===role;
+      btn.classList.toggle('active',selected);
+      btn.setAttribute('aria-pressed',selected?'true':'false');
+    });
+    var shortcuts=(roleActionLinks[role]||[]).map(function(a){
+      return '<a href="'+a[1]+'">'+a[0]+' →</a>';
+    }).join('');
+    document.getElementById('roleNote').innerHTML=roles[role].note+'<div class="role-actions">'+shortcuts+'</div><span class="role-hint">Open a link here. Protected documents require approved sign-in, then return you directly to the selected document.</span>';
     document.getElementById('pathTitle').textContent = roles[role].title;
     document.getElementById('pathIntro').textContent = roles[role].intro;
     pathTrack.innerHTML = roles[role].path.map(function(item){
       return '<div class="path-item"><div class="n">'+item[0]+'</div><strong>'+item[1]+'</strong><span>'+item[2]+'</span></div>';
     }).join('');
   }
-  roleButtons.forEach(function(btn){btn.addEventListener('click',function(){renderRole(btn.getAttribute('data-role'));});});
+  roleButtons.forEach(function(btn){btn.addEventListener('click',function(){
+    var role=btn.getAttribute('data-role');
+    renderRole(role);
+    filterMaterials(role==='investor'?'investor':role==='client'?'client':'all');
+  });});
 
   function buildSteps(){
     stepList.innerHTML = brief.map(function(s,i){
