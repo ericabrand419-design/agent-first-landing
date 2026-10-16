@@ -26,10 +26,11 @@
       #af-global-nav *{box-sizing:border-box}
       #af-global-nav .af-site-brand{display:flex;align-items:center;flex-shrink:0;gap:10px;text-decoration:none;color:#15172a!important;font-size:13px;font-weight:900;letter-spacing:.16em;white-space:nowrap}
       #af-global-nav .af-site-brand svg{width:23px;height:29px}
+      #af-global-nav .af-site-brand[aria-current="page"] span{border-bottom:2px solid #7138d8;padding-bottom:3px}
       #af-global-nav .af-site-links{display:flex;align-items:center;justify-content:flex-end;gap:clamp(9px,1.12vw,18px);min-width:0}
       #af-global-nav .af-site-link{position:relative;font-size:12.5px;line-height:1.25;font-weight:700;text-decoration:none;color:#33384e!important;white-space:nowrap;border-radius:7px;padding:9px 1px}
       #af-global-nav .af-site-link:hover,#af-global-nav .af-site-link:focus-visible{color:#7138d8!important}
-      #af-global-nav .af-site-link[aria-current="page"]{color:#7138d8!important}
+      #af-global-nav .af-site-link[aria-current="page"]{color:#5f2bbb!important;background:#f1eaff;padding-left:9px;padding-right:9px}
       #af-global-nav .af-site-link[aria-current="page"]:after{content:"";position:absolute;bottom:2px;left:0;right:0;height:2px;border-radius:2px;background:#7138d8}
       #af-global-nav .af-site-cta{display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;min-height:40px;border-radius:10px;text-decoration:none;font-size:12px;font-weight:850;white-space:nowrap;color:#fff!important;background:linear-gradient(110deg,#ff7352,#e94ea7 48%,#7c3aed)}
       #af-global-nav .af-site-cta:hover{filter:brightness(.94)}
@@ -58,7 +59,7 @@
     nav.id='af-global-nav';
     nav.setAttribute('role','navigation');
     nav.setAttribute('aria-label','Primary navigation');
-    nav.innerHTML='<a class="af-site-brand" href="/index.html" aria-label="Agent First home">'+logo+'<span>AGENT FIRST</span></a>'+
+    nav.innerHTML='<a class="af-site-brand" href="/index.html" aria-label="Agent First home"'+((path==='/'||path==='/index.html')?' aria-current="page"':'')+'>'+logo+'<span>AGENT FIRST</span></a>'+
       '<button type="button" class="af-site-toggle" id="af-nav-toggle" aria-expanded="false" aria-controls="af-nav-links">☰ <span>Menu</span></button>'+
       '<div class="af-site-links" id="af-nav-links">'+pages.map(function(p){
         return '<a class="af-site-link" href="'+p.href+'"'+(p.active?' aria-current="page"':'')+'>'+p.name+'</a>';
