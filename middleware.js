@@ -1,8 +1,7 @@
 const AUTH_ORIGIN='https://agent-first-gamma.vercel.app';
-function readCookie(request,name){
+function readCookies(request,name){
   const raw=request.headers.get('cookie')||'';
-  const pair=raw.split(';').map(v=>v.trim()).find(v=>v.startsWith(name+'='));
-  return pair?decodeURIComponent(pair.slice(name.length+1)):'';
+  return raw.split(';').map(v=>v.trim()).filter(v=>v.startsWith(name+'=')).map(v=>decodeURIComponent(v.slice(name.length+1))).filter(Boolean);
 }
 async function valid(token){
   if(!token)return false;
@@ -17,8 +16,9 @@ async function valid(token){
   }catch(e){return false;}
 }
 export default async function middleware(request){
-  const ok=await valid(readCookie(request,'af_private_access'));
-  if(ok)return;
+  for(const token of readCookies(request,'af_private_access')){
+    if(await valid(token))return;
+  }
   const url=new URL('/deal-room-v1.html',request.url);
   url.searchParams.set('access','required');
   url.searchParams.set('returnTo',new URL(request.url).pathname);

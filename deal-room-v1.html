@@ -158,7 +158,7 @@ button{cursor:pointer}
 .owner-toggle{border:0;background:none;padding:0;cursor:pointer}
 .owner-fields{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;gap:9px;margin-top:2px}
 .owner-fields input{min-height:44px;border:1px solid #d9d5e5;border-radius:10px;padding:10px 12px}
-.hidden{display:none!important}
+.hidden{display:none!important}.session-bar{background:#140f33;color:#e9e6f7;font-size:13px;border-bottom:1px solid rgba(255,255,255,.08)}.session-in{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;flex-wrap:wrap}.session-in b{color:#fff}.session-bar.signed .dotok{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3ddc97;margin-right:8px;vertical-align:1px}.session-actions{display:flex;gap:8px}.session-btn{border:0;border-radius:9px;padding:7px 13px;font-weight:800;font-size:12px;background:linear-gradient(102deg,#ff7352,#e94ea7 47%,#8b37f4);color:#fff}.session-btn.ghost{background:rgba(255,255,255,.1);color:#fff}.lock-tag{display:inline-block;margin-left:6px;padding:2px 7px;border-radius:999px;background:#f3eefe;color:#6330cc;font-size:10px;font-weight:850;letter-spacing:.03em;vertical-align:1px}.role-actions a .lock-tag{background:rgba(255,255,255,.16);color:#fff}.role-more{display:inline-block;margin-top:8px;color:#6330cc;font-weight:800;font-size:12px}
 @media(max-width:900px){
   .wrap{width:min(100% - 32px,1160px)}
   .nav-links .nav-link{display:none}
@@ -230,6 +230,13 @@ button{cursor:pointer}
     </div>
   </div>
 </section>
+
+<div class="session-bar" id="sessionBar" hidden>
+  <div class="wrap session-in">
+    <span id="sessionText">Checking private access…</span>
+    <span class="session-actions"><button type="button" class="session-btn" id="sessionSignIn" hidden>Sign in</button><button type="button" class="session-btn ghost" id="sessionSignOut" hidden>Sign out</button></span>
+  </div>
+</div>
 
 <header class="hero-shell">
   <div class="wrap hero-inner">
@@ -357,7 +364,7 @@ button{cursor:pointer}
   </div>
 </section>
 
-<section class="section">
+<section class="section" id="rolePath">
   <div class="wrap">
     <div class="path-shell">
       <div class="path-head">
@@ -815,7 +822,8 @@ button{cursor:pointer}
     var shortcuts=(roleActionLinks[role]||[]).map(function(a){
       return '<a href="'+a[1]+'">'+a[0]+' →</a>';
     }).join('');
-    document.getElementById('roleNote').innerHTML=roles[role].note+'<div class="role-actions">'+shortcuts+'</div><span class="role-hint">Open a link here. Protected documents require approved sign-in, then return you directly to the selected document.</span>';
+    document.getElementById('roleNote').innerHTML=roles[role].note+'<div class="role-actions">'+shortcuts+'</div><a class="role-more" href="#rolePath">Your '+roles[role].path.length+'-step path and the matching materials are updated below ↓</a>';
+    markLocks(document.getElementById('roleNote'));
     document.getElementById('pathTitle').textContent = roles[role].title;
     document.getElementById('pathIntro').textContent = roles[role].intro;
     pathTrack.innerHTML = roles[role].path.map(function(item){
@@ -886,6 +894,57 @@ button{cursor:pointer}
     filterBtns.forEach(function(btn){btn.classList.toggle('active',btn.getAttribute('data-filter')===filter);});
   }
   filterBtns.forEach(function(btn){btn.addEventListener('click',function(){filterMaterials(btn.getAttribute('data-filter'));});});
+
+  var PROTECTED=['/deal-room-workspace.html','/pilot-system.html','/evidence-register.html','/company-operations.html','/roadmap-milestones.html','/media-library.html','/business-plan.html','/marketing-plan.html','/financial-model.html','/investment-ask.html','/investor-deck.html','/investor-brief.html','/financial-summary.html','/founder-story.html','/investor-faq.html','/due-diligence.html','/security-readiness.html','/security-data-governance.html','/customer-overview.html','/customer-product-video.html','/roi-calculator.html','/industry-use-cases.html','/customer-faq.html','/execution-readiness.html','/pilot-operations-manual.html','/security-buyer-pack.html','/founder-sales-system.html','/recallya-crm-spec.html','/evidence-standard.html','/founder-investor-narrative.html','/deal-room-audit.html','/readiness-control-center.html','/deal-room/pilot','/deal-room/evidence','/deal-room/company-operations','/deal-room/roadmap','/deal-room/media','/deal-room/execution-readiness','/deal-room/pilot-operations-manual','/deal-room/security-buyer-pack','/deal-room/founder-sales-system','/deal-room/recallya-crm','/deal-room/evidence-standard','/deal-room/founder-narrative','/deal-room/audit','/deal-room/readiness-control-center'];
+  var signedIn=null;
+  function protectedPath(href){
+    if(!href||href.charAt(0)==='#')return '';
+    try{var u=new URL(href,location.href);if(u.origin!==location.origin)return '';return PROTECTED.indexOf(u.pathname)>-1?u.pathname:'';}catch(e){return '';}
+  }
+  function docName(path){return path.split('/').pop().replace(/\.html$/,'').replace(/[-_]/g,' ');}
+  function markLocks(root){
+    if(signedIn!==false)return;
+    Array.prototype.slice.call((root||document).querySelectorAll('a[href]')).forEach(function(a){
+      if(protectedPath(a.getAttribute('href'))&&!a.querySelector('.lock-tag')){var t=document.createElement('span');t.className='lock-tag';t.textContent='SIGN IN';a.appendChild(t);}
+    });
+  }
+  function openAccess(path){
+    if(path)returnTo=path;
+    accessPanel.classList.remove('hidden');
+    document.getElementById('accessTitle').textContent=path?'Sign in to open the '+docName(path):'Sign in to open private materials';
+    document.getElementById('accessCopy').textContent='Plans, financials and investor documents are private. Sign in once with your approved email and they open directly for the rest of your visit. Erica Love: choose owner access and use your owner approval code.';
+    window.scrollTo({top:0,behavior:'smooth'});
+    setTimeout(function(){var e=document.getElementById('accessEmail');if(e)e.focus({preventScroll:true});},350);
+  }
+  document.addEventListener('click',function(e){
+    var a=e.target.closest&&e.target.closest('a[href]');
+    if(!a||signedIn!==false)return;
+    var path=protectedPath(a.getAttribute('href'));
+    if(!path)return;
+    e.preventDefault();
+    openAccess(path+(a.hash||''));
+  });
+  var sessionBar=document.getElementById('sessionBar'),sessionText=document.getElementById('sessionText');
+  var signInBtn=document.getElementById('sessionSignIn'),signOutBtn=document.getElementById('sessionSignOut');
+  if(signInBtn)signInBtn.addEventListener('click',function(){openAccess('');});
+  if(signOutBtn)signOutBtn.addEventListener('click',function(){
+    fetch('/api/deal-room-logout',{method:'POST',credentials:'same-origin'}).then(function(){location.replace('/deal-room-v1.html');});
+  });
+  fetch('/api/deal-room-session',{credentials:'same-origin',cache:'no-store'}).then(function(r){return r.json();}).then(function(s){
+    signedIn=!!(s&&s.authenticated);
+    sessionBar.hidden=false;
+    if(signedIn){
+      sessionBar.classList.add('signed');
+      sessionText.innerHTML='<span class="dotok"></span>Signed in as <b></b>. Every document below opens directly.';
+      sessionText.querySelector('b').textContent=s.email||'an approved account';
+      signOutBtn.hidden=false;
+      if(accessMode==='required'&&returnTo&&Array.isArray(s.permissions)&&s.permissions.indexOf('deal_room')>-1){location.replace(returnTo);}
+    }else{
+      sessionText.textContent='Plans, financials and the investor deck are private. Sign in once to open them.';
+      signInBtn.hidden=false;
+      markLocks(document);
+    }
+  }).catch(function(){signedIn=null;});
 
   renderRole('client');
   renderBrief();

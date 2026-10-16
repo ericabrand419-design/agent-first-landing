@@ -5,7 +5,7 @@ module.exports=async function handler(req,res){
   try{
     if(token) await fetch(AUTH_ORIGIN+'/api/auth',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+token},body:JSON.stringify({action:'logout'})});
   }catch(e){}
-  res.setHeader('Set-Cookie','af_private_access=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
+  res.setHeader('Set-Cookie',['af_private_access=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0','af_private_access=; Domain=myagentfirst.com; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0']);
   res.setHeader('Cache-Control','no-store');
   return res.status(200).json({ok:true});
 };
